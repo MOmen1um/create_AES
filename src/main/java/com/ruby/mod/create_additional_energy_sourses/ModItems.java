@@ -1,5 +1,6 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
+import com.ruby.mod.create_additional_energy_sourses.item.ModToolTiers;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
 import net.neoforged.neoforge.registries.DeferredItem;
