@@ -9,13 +9,80 @@
     "criteria": {
       "minecraft:old_growth_pine_taiga": "2026-05-02 12:12:36 +0500",
       "minecraft:taiga": "2026-05-02 00:53:49 +0500",
-      "minecraft:river": "2026-05-02 12:12:34 +0500"
+      "minecraft:river": "2026-05-02 12:12:34 +0500",
+      "minecraft:old_growth_spruce_taiga": "2026-05-02 12:48:39 +0500"
     },
     "done": false
   },
   "create:root": {
     "criteria": {
       "0": "2026-05-02 12:13:45 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/appliances/crafting_blueprint": {
+    "criteria": {
+      "has_item": "2026-05-02 12:40:45 +0500"
+    },
+    "done": true
+  },
+  "minecraft:story/root": {
+    "criteria": {
+      "crafting_table": "2026-05-02 12:40:45 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/cherry_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/bamboo_raft": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/mangrove_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "in_water": "2026-05-02 12:48:26 +0500"
     },
     "done": true
   },

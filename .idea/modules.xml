@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Create_additional_energy_sourses.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Create_additional_energy_sourses.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Create_additional_energy_sourses.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Create_additional_energy_sourses.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_AES.main.iml" filepath="$PROJECT_DIR$/.idea/modules/create_AES.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/create_AES.test.iml" filepath="$PROJECT_DIR$/.idea/modules/create_AES.test.iml" />
     </modules>
   </component>
 </project>
