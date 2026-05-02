@@ -26,6 +26,7 @@ public class Create_additional_energy_sourses {
                     .displayItems((parameters, output) -> {
                         output.accept(ModBlocks.THERMO_GENERATOR_ITEM.get());
                         output.accept(ModBlocks.ADVANCED_PRECISION_MECHANISM.get());
+                        output.accept(ModItems.ADVANCED_PICKAXE.get());
                     }).build());
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
@@ -33,6 +34,7 @@ public class Create_additional_energy_sourses {
         ModBlocks.register(modEventBus);
         // Регистрируем вкладки
         CREATIVE_MODE_TABS.register(modEventBus);
+
 
         // ВНИМАНИЕ: Строка NeoForge.EVENT_BUS.register(this) удалена, чтобы не было ошибки!
     }
