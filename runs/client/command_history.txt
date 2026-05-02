@@ -37,3 +37,4 @@
 /give Dev create_additional_energy_sourses:advanced_pickaxe
 /give Dev create_additional_energy_sourses:pickaxe_core
 /reload
+/enchant Dev minecraft:efficiency 5
