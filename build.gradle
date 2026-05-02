@@ -25,7 +25,8 @@ runs {
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
         systemProperty 'forge.logging.console.level', 'debug'
-        // Добавь эту строку обратно:
+
+        // Самый надежный способ для версии 7.1.25
         modSource project.sourceSets.main
     }
 
@@ -41,20 +42,20 @@ runs {
 
 sourceSets {
     main {
+        java {
+            srcDirs = ['src/main/java']
+        }
         resources {
-            srcDir 'src/main/resources'
+            srcDirs = ['src/main/resources']
         }
     }
 }
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-
-    // Подключаем Create и другие моды из папки libs
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-// Задача по копированию ресурсов (рецептов, текстур)
 tasks.withType(ProcessResources).configureEach {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 
@@ -78,7 +79,6 @@ tasks.withType(ProcessResources).configureEach {
     }
 }
 
-// Чтобы IDEA видела изменения в ресурсах без полной пересборки
 idea {
     module {
         downloadSources = true
