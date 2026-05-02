@@ -91,3 +91,196 @@
 [02мая2026 19:36:11.611] [Render thread/INFO] [com.simibubi.create.Create/]: Loaded 58 train hat configurations.
 [02мая2026 19:36:11.612] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
 [02мая2026 19:36:11.612] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[02мая2026 19:37:17.325] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
+[02мая2026 19:37:17.328] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
+[02мая2026 19:37:17.761] [Worker-Main-6/ERROR] [net.minecraft.Util/]: Invalid path in pack: create_additional_energy_sourses:recipe/Heavy_Tip.json, ignoring
+[02мая2026 19:37:17.879] [Render thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:heavy_handle
+com.google.gson.JsonParseException: Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: minecraft:heavy_handle
+	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.loadWorldDataBlocking(WorldOpenFlows.java:201) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.loadWorldStem(WorldOpenFlows.java:142) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldLoadLevelStem(WorldOpenFlows.java:346) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldCheckVersionCompatibility(WorldOpenFlows.java:335) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldLoadLevelData(WorldOpenFlows.java:297) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorld(WorldOpenFlows.java:261) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry.joinWorld(WorldSelectionList.java:498) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry.mouseClicked(WorldSelectionList.java:481) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractSelectionList.mouseClicked(AbstractSelectionList.java:303) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.events.ContainerEventHandler.mouseClicked(ContainerEventHandler.java:40) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$onPress$0(MouseHandler.java:98) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.wrapScreenError(Screen.java:451) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.onPress(MouseHandler.java:95) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$4(MouseHandler.java:202) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.execute(BlockableEventLoop.java:98) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$5(MouseHandler.java:202) ~[neoforge-21.1.227.jar%23196!/:?]
+	at MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFWMouseButtonCallbackI.callback(GLFWMouseButtonCallbackI.java:43) ~[lwjgl-glfw-3.3.3.jar%23177!/:build 5]
+	at MC-BOOTSTRAP/org.lwjgl@3.3.3+5/org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.3.3.jar%23188!/:build 5]
+	at MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFW.glfwWaitEventsTimeout(GLFW.java:3509) ~[lwjgl-glfw-3.3.3.jar%23177!/:build 5]
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.systems.RenderSystem.limitDisplayFPS(RenderSystem.java:162) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1220) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.227.jar%23196!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23132!/:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
+[02мая2026 19:37:17.882] [Render thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:advanced_pickaxe
+com.google.gson.JsonParseException: Unknown registry key in ResourceKey[minecraft:root / minecraft:item]: minecraft:pickaxe_core
+	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
+	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
+	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.loadWorldDataBlocking(WorldOpenFlows.java:201) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.loadWorldStem(WorldOpenFlows.java:142) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldLoadLevelStem(WorldOpenFlows.java:346) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldCheckVersionCompatibility(WorldOpenFlows.java:335) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldLoadLevelData(WorldOpenFlows.java:297) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorld(WorldOpenFlows.java:261) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry.joinWorld(WorldSelectionList.java:498) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry.mouseClicked(WorldSelectionList.java:481) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractSelectionList.mouseClicked(AbstractSelectionList.java:303) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.events.ContainerEventHandler.mouseClicked(ContainerEventHandler.java:40) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$onPress$0(MouseHandler.java:98) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.wrapScreenError(Screen.java:451) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.onPress(MouseHandler.java:95) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$4(MouseHandler.java:202) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.execute(BlockableEventLoop.java:98) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$5(MouseHandler.java:202) ~[neoforge-21.1.227.jar%23196!/:?]
+	at MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFWMouseButtonCallbackI.callback(GLFWMouseButtonCallbackI.java:43) ~[lwjgl-glfw-3.3.3.jar%23177!/:build 5]
+	at MC-BOOTSTRAP/org.lwjgl@3.3.3+5/org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.3.3.jar%23188!/:build 5]
+	at MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFW.glfwWaitEventsTimeout(GLFW.java:3509) ~[lwjgl-glfw-3.3.3.jar%23177!/:build 5]
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.systems.RenderSystem.limitDisplayFPS(RenderSystem.java:162) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1220) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.227.jar%23196!/:?]
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.227.jar%23196!/:?]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.42.jar%23150!/:4.0]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23132!/:?]
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23132!/:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
+[02мая2026 19:37:17.887] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2819 recipes
+[02мая2026 19:37:17.969] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
+[02мая2026 19:37:18.483] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
+[02мая2026 19:37:18.483] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[02мая2026 19:37:19.020] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[02мая2026 19:37:19.161] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Подготовка области возрождения: 0%
+[02мая2026 19:37:19.212] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[02мая2026 19:37:19.215] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 182 ms
+[02мая2026 19:37:19.258] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[02мая2026 19:37:19.258] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[02мая2026 19:37:19.559] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
+[02мая2026 19:37:19.559] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
+[02мая2026 19:37:19.707] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:8c411705] logged in with entity id 7 at (27.527287800805134, 102.24787645723364, -180.96830042652905)
+[02мая2026 19:37:19.752] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev присоединился к игре
+[02мая2026 19:37:19.985] [Render thread/INFO] [flywheel/]: Started 10 worker threads
+[02мая2026 19:37:20.022] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
+[02мая2026 19:37:20.034] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
+[02мая2026 19:37:20.043] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 9.440 milliseconds
+[02мая2026 19:37:20.044] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
+[02мая2026 19:37:20.047] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 3.098 milliseconds
+[02мая2026 19:37:20.051] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
+[02мая2026 19:37:20.175] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 123.8 milliseconds
+[02мая2026 19:37:20.175] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 124.5 milliseconds
+[02мая2026 19:37:20.175] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
+[02мая2026 19:37:20.180] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 4.280 milliseconds
+[02мая2026 19:37:20.180] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
+[02мая2026 19:37:20.182] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 703.3 microseconds
+[02мая2026 19:37:20.204] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
+[02мая2026 19:37:20.205] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 448.8 microseconds
+[02мая2026 19:37:20.228] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
+[02мая2026 19:37:20.254] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 23.99 milliseconds
+[02мая2026 19:37:20.310] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: create:jei_plugin took 56.80 milliseconds
+[02мая2026 19:37:20.315] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 86.16 milliseconds
+[02мая2026 19:37:20.316] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
+[02мая2026 19:37:20.319] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 2.165 milliseconds
+[02мая2026 19:37:20.320] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
+[02мая2026 19:37:20.322] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 1.685 milliseconds
+[02мая2026 19:37:20.322] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
+[02мая2026 19:37:20.338] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 15.80 milliseconds
+[02мая2026 19:37:20.339] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
+[02мая2026 19:37:20.340] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 483.8 microseconds
+[02мая2026 19:37:20.341] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
+[02мая2026 19:37:20.454] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 112.3 milliseconds
+[02мая2026 19:37:20.543] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 87.87 milliseconds
+[02мая2026 19:37:20.564] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 21.72 milliseconds
+[02мая2026 19:37:20.564] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 222.6 milliseconds
+[02мая2026 19:37:20.573] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
+[02мая2026 19:37:20.580] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 7.175 milliseconds
+[02мая2026 19:37:20.588] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
+[02мая2026 19:37:20.596] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
+[02мая2026 19:37:20.609] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 13.03 milliseconds
+[02мая2026 19:37:20.615] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
+[02мая2026 19:37:20.616] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
+[02мая2026 19:37:20.618] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
+[02мая2026 19:37:20.638] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 20.18 milliseconds
+[02мая2026 19:37:20.638] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
+[02мая2026 19:37:20.670] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2386 ingredients
+[02мая2026 19:37:20.841] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2386 ingredients
+[02мая2026 19:37:20.841] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 203.0 milliseconds
+[02мая2026 19:37:20.945] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 329.4 milliseconds
+[02мая2026 19:37:20.945] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 329.9 milliseconds
+[02мая2026 19:37:20.946] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 357.4 milliseconds
+[02мая2026 19:37:20.946] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
+[02мая2026 19:37:20.946] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 229.7 microseconds
+[02мая2026 19:37:20.946] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 924.4 milliseconds
+[02мая2026 19:37:20.955] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 121 advancements
+[02мая2026 19:37:33.163] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[02мая2026 19:37:33.175] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
+[02мая2026 19:37:33.190] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
+[02мая2026 19:37:33.190] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
+[02мая2026 19:37:59.628] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
+[02мая2026 19:37:59.631] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
+[02мая2026 19:37:59.631] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
+[02мая2026 19:37:59.631] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
+[02мая2026 19:37:59.633] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 1.445 milliseconds
+[02мая2026 19:37:59.681] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Отключение
+[02мая2026 19:37:59.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev покинул игру
+[02мая2026 19:37:59.691] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[02мая2026 19:37:59.720] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[02мая2026 19:37:59.720] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[02мая2026 19:37:59.720] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[02мая2026 19:37:59.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
+[02мая2026 19:37:59.812] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
+[02мая2026 19:37:59.815] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
+[02мая2026 19:37:59.819] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (Новый мир (1)): All chunks are saved
+[02мая2026 19:37:59.819] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02мая2026 19:37:59.819] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02мая2026 19:37:59.819] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
