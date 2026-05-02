@@ -1,0 +1,24 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "       O ",
+    "      OSO",
+    "     OSO ",
+    "    OSO  ",
+    "   ONO   ",
+    "  ONO    ",
+    " ONO     ",
+    "OSO      ",
+    "OO       "
+  ],
+  "key": {
+    "N": { "item": "minecraft:netherite_ingot" },
+    "O": { "item": "minecraft:obsidian" },
+    "S": { "item": "minecraft:netherite_scrap" }
+  },
+  "result": {
+    "count": 1,
+    "id": "heavy_handle"
+  },
+  "accept_mirrored": false
+}

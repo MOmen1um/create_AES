@@ -1,0 +1,60 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "id": "create_additional_energy_sourses:heavy_handle",
+    "item": "create_additional_energy_sourses:heavy_handle"
+  },
+  "transitional_item": {
+    "id": "create:incomplete_precision_mechanism",
+    "item": "create:incomplete_precision_mechanism"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" },
+        { "id": "create_additional_energy_sourses:pickaxe_core", "item": "create_additional_energy_sourses:pickaxe_core" }
+      ],
+      "results": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" },
+        { "id": "create_additional_energy_sourses:heavy_tip", "item": "create_additional_energy_sourses:heavy_tip" }
+      ],
+      "results": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" },
+        { "id": "create_additional_energy_sourses:heavy_tip", "item": "create_additional_energy_sourses:heavy_tip" }
+      ],
+      "results": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" }
+      ],
+      "results": [
+        { "id": "create:incomplete_precision_mechanism", "item": "create:incomplete_precision_mechanism" }
+      ]
+    }
+  ],
+  "loops": 1,
+  "results": [
+    {
+      "id": "create_additional_energy_sourses:advanced_pickaxe",
+      "item": "create_additional_energy_sourses:advanced_pickaxe",
+      "chance": 1.0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " N ",
+    "NNN",
+    "NNN",
+    "N N"
+  ],
+  "key": {
+    "N": { "item": "minecraft:netherite_ingot" },
+    "B": { "item": "create:brass_ingot" },
+    "P": { "item": "create_additional_energy_sourses:advanced_precision_mechanism" },
+    "O": { "item": "minecraft:obsidian" },
+    "S": { "item": "minecraft:stick" }
+  },
+  "result": {
+    "count": 1,
+    "id": "heavy_tip"
+  },
+  "accept_mirrored": false
+}

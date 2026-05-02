@@ -1,0 +1,22 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    " AA    ",
+    "AAAAAA ",
+    " AAPNA ",
+    "   APA ",
+    "    AAA",
+    "    AAA",
+    "     A "
+  ],
+  "key": {
+    "N": { "item": "minecraft:netherite_ingot" },
+    "A": { "item": "create:brass_block" },
+    "P": { "item": "create_additional_energy_sourses:advanced_precision_mechanism" }
+  },
+  "result": {
+    "count": 1,
+    "id": "pickaxe_core"
+  },
+  "accept_mirrored": false
+}

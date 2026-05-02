@@ -27,11 +27,15 @@ public class Create_additional_energy_sourses {
                         output.accept(ModBlocks.THERMO_GENERATOR_ITEM.get());
                         output.accept(ModBlocks.ADVANCED_PRECISION_MECHANISM.get());
                         output.accept(ModItems.ADVANCED_PICKAXE.get());
+                        output.accept(ModItems.HEAVY_HANDLE.get());
+                        output.accept(ModItems.PICKAXE_CORE.get());
+                        output.accept(ModItems.HEAVY_TIP.get());
                     }).build());
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
         // Регистрируем всё через ModBlocks (блоки, предметы, энтити)
         ModBlocks.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
         // Регистрируем вкладки
         CREATIVE_MODE_TABS.register(modEventBus);
 

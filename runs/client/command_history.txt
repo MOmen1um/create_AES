@@ -31,3 +31,9 @@
 /locate structure minecraft:village_plains
 /datapack list
 /reload
+/give Dev create_
+/give Dev create_additional_energy_sourses:heavy_handle
+/give Dev create_additional_energy_sourses:heavy_tip
+/give Dev create_additional_energy_sourses:advanced_pickaxe
+/give Dev create_additional_energy_sourses:pickaxe_core
+/reload
