@@ -13,8 +13,7 @@ public class ModItems {
     public static final DeferredItem<Item> ADVANCED_PICKAXE = ITEMS.register("advanced_pickaxe",
             () -> new AdvancedPickaxeItem(ModToolTiers.ADVANCED_TIER, new Item.Properties()
                     .attributes(PickaxeItem.createAttributes(ModToolTiers.ADVANCED_TIER, 1.5F, -2.8F))
-                    // Явно указываем уровень зачарования из нашего тира
-                    .enchantable(ModToolTiers.ADVANCED_TIER.getEnchantmentValue())
+                    // СТРОЧКУ .enchantable(...) ПРОСТО УДАЛЯЕМ
             ));
 
     public static final DeferredItem<Item> HEAVY_HANDLE = ITEMS.register("heavy_handle",
