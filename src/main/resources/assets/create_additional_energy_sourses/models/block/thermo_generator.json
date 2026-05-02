@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "particle": "create_additional_energy_sourses:block/example",
+    "up": "create_additional_energy_sourses:block/copper_upper",
+    "down": "create_additional_energy_sourses:block/copper_upper",
+    "north": "create_additional_energy_sourses:block/q",
+    "south": "create_additional_energy_sourses:block/q",
+    "east": "create_additional_energy_sourses:block/thermo_cold",
+    "west": "create_additional_energy_sourses:block/thermo_hot"
+  }
+}

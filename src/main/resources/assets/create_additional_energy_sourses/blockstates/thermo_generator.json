@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_additional_energy_sourses:block/thermo_generator" },
+    "facing=south": { "model": "create_additional_energy_sourses:block/thermo_generator", "y": 180 },
+    "facing=east": { "model": "create_additional_energy_sourses:block/thermo_generator", "y": 90 },
+    "facing=west": { "model": "create_additional_energy_sourses:block/thermo_generator", "y": 270 }
+  }
+}

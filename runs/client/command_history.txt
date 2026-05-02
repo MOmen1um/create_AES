@@ -1,0 +1,32 @@
+/recipe give Dev *
+/reload
+/recipe give Dev *
+/reload
+/recipe give Dev *
+/reload
+/recipe give Dev *
+/reload
+/recipe give Dev *
+/recipe give Dev
+/give Dev create_additional_energy_sourses:thermo_generator
+/recipe give Dev *
+/reload
+/recipe give @s create_additional_energy_sourses:thermo_generator
+/reload
+/recipe give Dev *
+/reload
+/recipe give Dev *
+/reload
+/recipe give Dev *
+/reload
+/recipe give Dev create_
+/reload
+/recipe give Dev create_
+/recipe give Dev *
+/reload
+/recipe give Dev create_additional_energy_sourses:thermo_generator
+/reload
+/datapack list
+/reload
+/locate structure minecraft:village_plains
+/datapack list
