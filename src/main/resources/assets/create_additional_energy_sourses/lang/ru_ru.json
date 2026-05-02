@@ -2,5 +2,9 @@
   "item.create_additional_energy_sourses.advanced_precision_mechanism": "Продвинутый механизм точности",
   "block.create_additional_energy_sourses.thermo_generator": "Термогенератор",
   "itemGroup.create_additional_energy_sourses": "Create: Дополнительная энергия!",
-  "item.create_additional_energy_sourses.advanced_pickaxe": "advanced_pickaxe"
+  "item.create_additional_energy_sourses.advanced_pickaxe": "Продвинутая кирка",
+  "item.create_additional_energy_sourses.heavy_handle":"Тяжёлое рукоять",
+  "item.create_additional_energy_sourses.heavy_tip":"Усиленый наконечник",
+  "item.create_additional_energy_sourses.heavy_pickaxe_core":"Основание наконечника"
+
 }
