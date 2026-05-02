@@ -1,0 +1,51 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": [
+    { "item": "create:precision_mechanism" }
+  ],
+  "transitional_item": {
+    "item": "create:incomplete_precision_mechanism"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        { "item": "create:incomplete_precision_mechanism" },
+        [ { "item": "minecraft:gold_ingot" } ]
+      ],
+      "results": [
+        { "item": "create:incomplete_precision_mechanism" }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        { "item": "create:incomplete_precision_mechanism" },
+        [ { "item": "minecraft:netherite_scrap" } ]
+      ],
+      "results": [
+        { "item": "create:incomplete_precision_mechanism" }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        { "item": "create:incomplete_precision_mechanism" }
+      ],
+      "results": [
+        { "item": "create:incomplete_precision_mechanism" }
+      ]
+    }
+  ],
+  "loops": 5,
+  "results": [
+    {
+      "item": "create_additional_energy_sourses:advanced_precision_mechanism",
+      "chance": 0.75
+    },
+    {
+      "item": "create:precision_mechanism",
+      "chance": 0.25
+    }
+  ]
+}

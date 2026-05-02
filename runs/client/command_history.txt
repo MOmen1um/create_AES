@@ -30,3 +30,4 @@
 /reload
 /locate structure minecraft:village_plains
 /datapack list
+/reload
