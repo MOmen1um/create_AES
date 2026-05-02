@@ -1,0 +1,21 @@
+{
+  "type": "create:mechanical_crafting",
+  "pattern": [
+    "SSSSS",
+    "SAPAS",
+    "SPBPS",
+    "SAPAS",
+    "SSSSS"
+  ],
+  "key": {
+    "S": { "item": "create:copper_sheet" },
+    "A": { "item": "create:andesite_alloy" },
+    "P": { "item": "create_additional_energy_sourses:advanced_precision_mechanism" },
+    "B": { "item": "create:brass_casing" }
+  },
+  "result": {
+    "count": 1,
+    "id": "create_additional_energy_sourses:thermo_generator"
+  },
+  "accept_mirrored": false
+}

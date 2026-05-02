@@ -1,26 +1,26 @@
-[02мая2026 13:23:41.746] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.227, --assetIndex, asset-index, --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --gameDir, ., --fml.fmlVersion, 4.0.42, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.227, --fml.neoFormVersion, 20240808.144430]
-[02мая2026 13:23:41.749] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.3+9-LTS
-[02мая2026 13:23:41.750] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.3 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
-[02мая2026 13:23:41.844] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
-[02мая2026 13:23:41.929] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
-[02мая2026 13:23:42.026] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
-[02мая2026 13:23:42.090] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Kostya/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23142!/ Service=ModLauncher Env=CLIENT
-[02мая2026 13:23:42.175] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
-[02мая2026 13:23:42.190] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
-[02мая2026 13:23:42.199] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jei-1.21.1-neoforge-19.27.0.340.jar" [locator: {mods folder locator at C:\Users\Kostya\Documents\GitHub\create_AES\runs\client\mods}, reader: mod manifest]
-[02мая2026 13:23:42.205] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" [locator: userdev mods and services, reader: mod manifest]
-[02мая2026 13:23:42.213] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "create-1.21.1-6.0.10 (1).jar" [locator: userdev mods and services, reader: mod manifest]
-[02мая2026 13:23:42.215] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ponder-neoforge-1.0.82+mc1.21.1.jar" [locator: userdev mods and services, reader: mod manifest]
-[02мая2026 13:23:42.228] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: userdev mods and services, reader: mod manifest]
-[02мая2026 13:23:42.231] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4060/PCIe/SSE2 GL version 4.6.0 NVIDIA 591.86, NVIDIA Corporation
-[02мая2026 13:23:42.261] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.3.jar" [locator: userdev mods and services, reader: mod manifest]
-[02мая2026 13:23:42.376] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using Mod File: C:\Users\Kostya\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-neoforge\0.5.3\a0919957808de97707c5fb4ce073e66aeef3e187\mixinextras-neoforge-0.5.3.jar
-[02мая2026 13:23:42.376] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ponder. Using Mod File: C:\Users\Kostya\Documents\GitHub\create_AES\libs\ponder-neoforge-1.0.82+mc1.21.1.jar
-[02мая2026 13:23:42.377] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 3 dependencies adding them to mods collection
-[02мая2026 13:23:42.377] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "Registrate-MC1.21-1.3.0+67.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
-[02мая2026 13:23:42.377] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "flywheel-neoforge-1.21.1-1.0.6.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
-[02мая2026 13:23:42.377] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.227.jar" [parent: neoforge-21.1.227.jar, locator: jarinjar, reader: mod manifest]
-[02мая2026 13:23:42.377] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+[02мая2026 14:03:44.042] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.227, --assetIndex, asset-index, --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --gameDir, ., --fml.fmlVersion, 4.0.42, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.227, --fml.neoFormVersion, 20240808.144430]
+[02мая2026 14:03:44.045] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.3+9-LTS
+[02мая2026 14:03:44.046] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.3 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[02мая2026 14:03:44.117] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[02мая2026 14:03:44.194] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[02мая2026 14:03:44.289] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[02мая2026 14:03:44.346] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Kostya/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23142!/ Service=ModLauncher Env=CLIENT
+[02мая2026 14:03:44.439] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
+[02мая2026 14:03:44.454] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
+[02мая2026 14:03:44.462] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jei-1.21.1-neoforge-19.27.0.340.jar" [locator: {mods folder locator at C:\Users\Kostya\Documents\GitHub\create_AES\runs\client\mods}, reader: mod manifest]
+[02мая2026 14:03:44.467] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" [locator: userdev mods and services, reader: mod manifest]
+[02мая2026 14:03:44.476] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "create-1.21.1-6.0.10 (1).jar" [locator: userdev mods and services, reader: mod manifest]
+[02мая2026 14:03:44.479] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ponder-neoforge-1.0.82+mc1.21.1.jar" [locator: userdev mods and services, reader: mod manifest]
+[02мая2026 14:03:44.492] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: userdev mods and services, reader: mod manifest]
+[02мая2026 14:03:44.501] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4060/PCIe/SSE2 GL version 4.6.0 NVIDIA 591.86, NVIDIA Corporation
+[02мая2026 14:03:44.528] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.3.jar" [locator: userdev mods and services, reader: mod manifest]
+[02мая2026 14:03:44.655] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using Mod File: C:\Users\Kostya\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-neoforge\0.5.3\a0919957808de97707c5fb4ce073e66aeef3e187\mixinextras-neoforge-0.5.3.jar
+[02мая2026 14:03:44.655] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ponder. Using Mod File: C:\Users\Kostya\Documents\GitHub\create_AES\libs\ponder-neoforge-1.0.82+mc1.21.1.jar
+[02мая2026 14:03:44.655] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 3 dependencies adding them to mods collection
+[02мая2026 14:03:44.655] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "Registrate-MC1.21-1.3.0+67.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
+[02мая2026 14:03:44.655] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "flywheel-neoforge-1.21.1-1.0.6.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
+[02мая2026 14:03:44.655] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.227.jar" [parent: neoforge-21.1.227.jar, locator: jarinjar, reader: mod manifest]
+[02мая2026 14:03:44.656] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
      Mod List:
 		Name Version (Mod Id)
 
@@ -31,928 +31,150 @@
 		Minecraft 1.21.1 (minecraft)
 		NeoForge 21.1.227 (neoforge)
 		Ponder 1.0.82+mc1.21.1 (ponder)
-[02мая2026 13:23:42.748] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
-[02мая2026 13:23:42.757] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.227, --gameDir, ., --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --assetIndex, asset-index]
-[02мая2026 13:23:42.816] [main/WARN] [mixin/]: Reference map 'ponder.refmap.json' for ponder-common.mixins.json could not be read. If this is a development environment you can ignore this message
-[02мая2026 13:23:43.157] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
-[02мая2026 13:23:45.277] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 1111 milliseconds
-[02мая2026 13:23:51.287] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02мая2026 13:23:51.287] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02мая2026 13:23:51.289] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[02мая2026 13:23:51.289] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[02мая2026 13:23:51.289] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[02мая2026 13:23:51.367] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/assets/.mcassetsroot' uses unexpected schema
-[02мая2026 13:23:51.367] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/data/.mcassetsroot' uses unexpected schema
-[02мая2026 13:23:51.382] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[02мая2026 13:23:51.387] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
-[02мая2026 13:23:51.440] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
-[02мая2026 13:23:51.567] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.227, for MC 1.21.1
-[02мая2026 13:23:51.595] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.10 initializing! Commit hash: ac0c444d9828da3453ae8cc65338e8de063286fb
-[02мая2026 13:23:51.606] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[02мая2026 13:23:51.607] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 1.419 milliseconds
-[02мая2026 13:23:53.406] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: [create_additional_energy_sourses]
-[02мая2026 13:23:53.559] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/create_additional_energy_sourses, mod/flywheel, mod/ponder, mod/create, mod/neoforge, mod/jei, file/Mini Items (4).zip
-[02мая2026 13:23:53.639] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Starting version check at https://api.modrinth.com/updates/create/forge_updates.json?neoforge=only
-[02мая2026 13:23:53.655] [Worker-Main-4/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
-[02мая2026 13:23:53.676] [Worker-Main-6/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
-[02мая2026 13:23:54.284] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Found status: OUTDATED Current: 6.0.10 Target: 6.0.10+mc1.21.1
-[02мая2026 13:23:54.669] [Worker-Main-3/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#inventory:
+[02мая2026 14:03:45.136] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[02мая2026 14:03:45.150] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.227, --gameDir, ., --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --assetIndex, asset-index]
+[02мая2026 14:03:45.204] [main/WARN] [mixin/]: Reference map 'ponder.refmap.json' for ponder-common.mixins.json could not be read. If this is a development environment you can ignore this message
+[02мая2026 14:03:45.544] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[02мая2026 14:03:46.598] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 225 milliseconds
+[02мая2026 14:03:49.481] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[02мая2026 14:03:49.481] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[02мая2026 14:03:49.482] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[02мая2026 14:03:49.484] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[02мая2026 14:03:49.484] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[02мая2026 14:03:49.559] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/assets/.mcassetsroot' uses unexpected schema
+[02мая2026 14:03:49.559] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/data/.mcassetsroot' uses unexpected schema
+[02мая2026 14:03:49.576] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[02мая2026 14:03:49.581] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[02мая2026 14:03:49.638] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[02мая2026 14:03:49.766] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.227, for MC 1.21.1
+[02мая2026 14:03:49.801] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.10 initializing! Commit hash: ac0c444d9828da3453ae8cc65338e8de063286fb
+[02мая2026 14:03:49.806] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[02мая2026 14:03:49.809] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 1.049 milliseconds
+[02мая2026 14:03:51.640] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: [create_additional_energy_sourses]
+[02мая2026 14:03:51.799] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/create_additional_energy_sourses, mod/flywheel, mod/ponder, mod/create, mod/neoforge, mod/jei, file/Mini Items (4).zip
+[02мая2026 14:03:51.869] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Starting version check at https://api.modrinth.com/updates/create/forge_updates.json?neoforge=only
+[02мая2026 14:03:51.904] [Worker-Main-12/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[02мая2026 14:03:51.917] [Worker-Main-9/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[02мая2026 14:03:52.514] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Found status: OUTDATED Current: 6.0.10 Target: 6.0.10+mc1.21.1
+[02мая2026 14:03:53.037] [Worker-Main-19/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#inventory:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[02мая2026 13:23:54.669] [Worker-Main-3/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=east:
+[02мая2026 14:03:53.037] [Worker-Main-19/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=east:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[02мая2026 13:23:54.669] [Worker-Main-3/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=west:
+[02мая2026 14:03:53.037] [Worker-Main-19/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=west:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[02мая2026 13:23:54.669] [Worker-Main-3/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=north:
+[02мая2026 14:03:53.037] [Worker-Main-19/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=north:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[02мая2026 13:23:54.669] [Worker-Main-3/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=south:
+[02мая2026 14:03:53.037] [Worker-Main-19/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=south:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[02мая2026 13:23:54.808] [Worker-Main-14/INFO] [PonderIndex/]: Registering Ponder Scenes took 49.33 ms
-[02мая2026 13:23:54.811] [Worker-Main-14/INFO] [PonderIndex/]: Registering Ponder Tags took 2.848 ms
-[02мая2026 13:23:54.905] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
-[02мая2026 13:23:54.905] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
-[02мая2026 13:23:54.924] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on FxSound Speakers (FxSound Audio Enhancer)
-[02мая2026 13:23:54.926] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
-[02мая2026 13:23:54.971] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
-[02мая2026 13:23:54.976] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
-[02мая2026 13:23:54.977] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[02мая2026 13:23:54.977] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[02мая2026 13:23:54.977] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
-[02мая2026 13:23:54.981] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
-[02мая2026 13:23:54.981] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[02мая2026 13:23:54.981] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[02мая2026 13:23:54.982] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[02мая2026 13:23:55.037] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
-[02мая2026 13:23:55.039] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
-[02мая2026 13:23:55.039] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[02мая2026 13:23:55.039] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
-[02мая2026 13:23:55.039] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
-[02мая2026 13:23:55.065] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
-[02мая2026 13:23:55.114] [Render thread/INFO] [flywheel/backend/shaders/]: Loaded 77 shader sources in 15,679 ms
-[02мая2026 13:23:55.134] [Render thread/INFO] [com.simibubi.create.Create/]: Loaded 58 train hat configurations.
-[02мая2026 13:23:55.134] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
-[02мая2026 13:23:55.134] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
-[02мая2026 13:24:11.952] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
-[02мая2026 13:24:11.954] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
-[02мая2026 13:24:12.467] [Render thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.loadWorldDataBlocking(WorldOpenFlows.java:201) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.loadWorldStem(WorldOpenFlows.java:142) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldLoadLevelStem(WorldOpenFlows.java:346) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldCheckVersionCompatibility(WorldOpenFlows.java:335) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorldLoadLevelData(WorldOpenFlows.java:297) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldOpenFlows.openWorld(WorldOpenFlows.java:261) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry.joinWorld(WorldSelectionList.java:498) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.worldselection.WorldSelectionList$WorldListEntry.mouseClicked(WorldSelectionList.java:481) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractSelectionList.mouseClicked(AbstractSelectionList.java:303) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.events.ContainerEventHandler.mouseClicked(ContainerEventHandler.java:40) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$onPress$0(MouseHandler.java:98) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.wrapScreenError(Screen.java:451) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.onPress(MouseHandler.java:95) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$4(MouseHandler.java:202) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.execute(BlockableEventLoop.java:98) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.MouseHandler.lambda$setup$5(MouseHandler.java:202) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFWMouseButtonCallbackI.callback(GLFWMouseButtonCallbackI.java:43) ~[lwjgl-glfw-3.3.3.jar%23177!/:build 5]
-	at MC-BOOTSTRAP/org.lwjgl@3.3.3+5/org.lwjgl.system.JNI.invokeV(Native Method) ~[lwjgl-3.3.3.jar%23188!/:build 5]
-	at MC-BOOTSTRAP/org.lwjgl.glfw@3.3.3+5/org.lwjgl.glfw.GLFW.glfwWaitEventsTimeout(GLFW.java:3509) ~[lwjgl-glfw-3.3.3.jar%23177!/:build 5]
-	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.systems.RenderSystem.limitDisplayFPS(RenderSystem.java:162) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1220) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?]
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?]
-	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.42.jar%23150!/:4.0]
-	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.42.jar%23150!/:4.0]
-	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.42.jar%23150!/:4.0]
-	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.42.jar%23150!/:4.0]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23132!/:?]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23132!/:?]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23132!/:?]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23132!/:?]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23132!/:?]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23132!/:?]
-	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23132!/:?]
-	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?]
-	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?]
-[02мая2026 13:24:12.481] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:24:12.592] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:24:13.131] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
-[02мая2026 13:24:13.131] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
-[02мая2026 13:24:13.665] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
-[02мая2026 13:24:13.806] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Подготовка области возрождения: 0%
-[02мая2026 13:24:13.862] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
-[02мая2026 13:24:13.878] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 195 ms
-[02мая2026 13:24:13.910] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
-[02мая2026 13:24:13.910] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
-[02мая2026 13:24:14.154] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
-[02мая2026 13:24:14.156] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
-[02мая2026 13:24:14.303] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:0b3d5c47] logged in with entity id 32 at (-8.995757433546567, 71.0, -97.05468266662622)
-[02мая2026 13:24:14.372] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev присоединился к игре
-[02мая2026 13:24:14.570] [Render thread/INFO] [flywheel/]: Started 10 worker threads
-[02мая2026 13:24:14.601] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:24:14.610] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:24:14.618] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 7.782 milliseconds
-[02мая2026 13:24:14.618] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:24:14.622] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.558 milliseconds
-[02мая2026 13:24:14.624] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:24:14.752] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 127.8 milliseconds
-[02мая2026 13:24:14.753] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 128.6 milliseconds
-[02мая2026 13:24:14.753] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:24:14.759] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 5.796 milliseconds
-[02мая2026 13:24:14.759] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:24:14.760] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 630.4 microseconds
-[02мая2026 13:24:14.783] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:24:14.783] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 459.0 microseconds
-[02мая2026 13:24:14.810] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:24:14.833] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 24.21 milliseconds
-[02мая2026 13:24:14.917] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: create:jei_plugin took 83.03 milliseconds
-[02мая2026 13:24:14.922] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 113.1 milliseconds
-[02мая2026 13:24:14.924] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:24:14.927] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 3.391 milliseconds
-[02мая2026 13:24:14.929] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:24:14.930] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 1.678 milliseconds
-[02мая2026 13:24:14.930] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:24:14.946] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 15.82 milliseconds
-[02мая2026 13:24:14.949] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:24:14.949] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 315.9 microseconds
-[02мая2026 13:24:14.950] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:24:15.067] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 115.9 milliseconds
-[02мая2026 13:24:15.135] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 68.02 milliseconds
-[02мая2026 13:24:15.158] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 23.31 milliseconds
-[02мая2026 13:24:15.158] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 207.9 milliseconds
-[02мая2026 13:24:15.166] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:24:15.169] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 3.063 milliseconds
-[02мая2026 13:24:15.177] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:24:15.182] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:24:15.189] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 7.197 milliseconds
-[02мая2026 13:24:15.192] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:24:15.193] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:24:15.193] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:24:15.209] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 14.83 milliseconds
-[02мая2026 13:24:15.209] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:24:15.232] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2382 ingredients
-[02мая2026 13:24:15.379] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2382 ingredients
-[02мая2026 13:24:15.379] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 171.1 milliseconds
-[02мая2026 13:24:15.458] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 266.8 milliseconds
-[02мая2026 13:24:15.459] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 267.2 milliseconds
-[02мая2026 13:24:15.459] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 282.0 milliseconds
-[02мая2026 13:24:15.459] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:24:15.459] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 232.0 microseconds
-[02мая2026 13:24:15.459] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 857.8 milliseconds
-[02мая2026 13:24:15.470] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:24:15.975] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:24:15.992] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:24:16.019] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:24:16.019] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:25:41.120] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:25:41.125] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:25:41.444] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:25:41.463] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:25:41.524] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:25:42.234] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:25:42.235] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:25:42.236] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:25:42.238] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 2.532 milliseconds
-[02мая2026 13:25:42.238] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:25:42.238] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:25:42.239] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 993.3 microseconds
-[02мая2026 13:25:42.239] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:25:42.241] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 1.007 milliseconds
-[02мая2026 13:25:42.242] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:25:42.269] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 28.19 milliseconds
-[02мая2026 13:25:42.270] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 28.99 milliseconds
-[02мая2026 13:25:42.270] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:25:42.272] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 939.8 microseconds
-[02мая2026 13:25:42.272] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:25:42.272] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 592.8 microseconds
-[02мая2026 13:25:42.273] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:25:42.273] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 474.3 microseconds
-[02мая2026 13:25:42.274] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:25:42.275] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 1.438 milliseconds
-[02мая2026 13:25:42.275] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:25:42.276] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 704.4 microseconds
-[02мая2026 13:25:42.276] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:25:42.277] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 652.7 microseconds
-[02мая2026 13:25:42.277] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:25:42.277] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 449.4 microseconds
-[02мая2026 13:25:42.277] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:25:42.279] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 721.8 microseconds
-[02мая2026 13:25:42.279] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:25:42.340] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 61.01 milliseconds
-[02мая2026 13:25:42.369] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 28.88 milliseconds
-[02мая2026 13:25:42.383] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 14.38 milliseconds
-[02мая2026 13:25:42.384] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 105.0 milliseconds
-[02мая2026 13:25:42.384] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:25:42.385] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 406.8 microseconds
-[02мая2026 13:25:42.385] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:25:42.385] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:25:42.385] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 336.5 microseconds
-[02мая2026 13:25:42.385] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:25:42.386] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:25:42.386] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:25:42.395] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 8.387 milliseconds
-[02мая2026 13:25:42.395] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:25:42.396] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:25:42.513] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:25:42.514] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 118.6 milliseconds
-[02мая2026 13:25:42.517] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 132.0 milliseconds
-[02мая2026 13:25:42.518] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 132.4 milliseconds
-[02мая2026 13:25:42.518] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 132.9 milliseconds
-[02мая2026 13:25:42.518] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:25:42.518] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 432.0 microseconds
-[02мая2026 13:25:42.518] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 280.3 milliseconds
-[02мая2026 13:25:42.522] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:25:44.015] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:25:44.020] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:25:44.031] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:25:44.031] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:26:47.704] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:26:47.706] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:26:48.136] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:26:48.154] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:26:48.235] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:26:48.915] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:26:48.915] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:26:48.916] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:26:48.919] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 2.859 milliseconds
-[02мая2026 13:26:48.919] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:26:48.919] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:26:48.921] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 974.3 microseconds
-[02мая2026 13:26:48.921] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:26:48.922] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 869.0 microseconds
-[02мая2026 13:26:48.922] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:26:48.946] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 24.31 milliseconds
-[02мая2026 13:26:48.946] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 25.00 milliseconds
-[02мая2026 13:26:48.946] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:26:48.948] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 1.035 milliseconds
-[02мая2026 13:26:48.948] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:26:48.949] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 421.8 microseconds
-[02мая2026 13:26:48.950] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:26:48.950] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 391.4 microseconds
-[02мая2026 13:26:48.950] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:26:48.952] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 1.835 milliseconds
-[02мая2026 13:26:48.952] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:26:48.953] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 472.8 microseconds
-[02мая2026 13:26:48.953] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:26:48.953] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 543.8 microseconds
-[02мая2026 13:26:48.954] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:26:48.954] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 509.7 microseconds
-[02мая2026 13:26:48.954] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:26:48.954] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 641.1 microseconds
-[02мая2026 13:26:48.955] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:26:49.015] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 60.60 milliseconds
-[02мая2026 13:26:49.045] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 29.40 milliseconds
-[02мая2026 13:26:49.059] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 13.71 milliseconds
-[02мая2026 13:26:49.059] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 104.5 milliseconds
-[02мая2026 13:26:49.061] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 509.2 microseconds
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 374.6 microseconds
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:26:49.062] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:26:49.073] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 10.01 milliseconds
-[02мая2026 13:26:49.073] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:26:49.075] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:26:49.165] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:26:49.166] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 92.42 milliseconds
-[02мая2026 13:26:49.170] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 107.5 milliseconds
-[02мая2026 13:26:49.170] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 108.0 milliseconds
-[02мая2026 13:26:49.170] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 108.6 milliseconds
-[02мая2026 13:26:49.170] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:26:49.171] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 509.3 microseconds
-[02мая2026 13:26:49.171] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 252.0 milliseconds
-[02мая2026 13:26:49.173] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:26:49.764] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:26:49.773] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:26:49.788] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:26:49.788] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:27:55.738] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:27:55.740] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:27:55.879] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:27:55.887] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:27:55.923] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:27:56.419] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:27:56.419] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:27:56.420] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:27:56.420] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 1.026 milliseconds
-[02мая2026 13:27:56.420] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:27:56.420] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:27:56.421] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 366.3 microseconds
-[02мая2026 13:27:56.421] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:27:56.421] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 478.6 microseconds
-[02мая2026 13:27:56.421] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:27:56.433] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 12.26 milliseconds
-[02мая2026 13:27:56.434] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 12.59 milliseconds
-[02мая2026 13:27:56.434] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:27:56.434] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 478.6 microseconds
-[02мая2026 13:27:56.434] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:27:56.434] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 269.7 microseconds
-[02мая2026 13:27:56.434] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:27:56.436] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 283.2 microseconds
-[02мая2026 13:27:56.436] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:27:56.437] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 830.2 microseconds
-[02мая2026 13:27:56.437] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:27:56.437] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 292.1 microseconds
-[02мая2026 13:27:56.437] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:27:56.437] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 273.7 microseconds
-[02мая2026 13:27:56.437] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:27:56.438] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 242.2 microseconds
-[02мая2026 13:27:56.438] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:27:56.438] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 279.1 microseconds
-[02мая2026 13:27:56.438] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:27:56.463] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 25.39 milliseconds
-[02мая2026 13:27:56.479] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 15.20 milliseconds
-[02мая2026 13:27:56.488] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 50.29 milliseconds
-[02мая2026 13:27:56.489] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 300.4 microseconds
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 230.3 microseconds
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:27:56.490] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:27:56.494] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 4.141 milliseconds
-[02мая2026 13:27:56.494] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:27:56.494] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:27:56.535] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:27:56.535] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 40.71 milliseconds
-[02мая2026 13:27:56.539] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 49.01 milliseconds
-[02мая2026 13:27:56.539] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 49.35 milliseconds
-[02мая2026 13:27:56.539] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 49.67 milliseconds
-[02мая2026 13:27:56.539] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:27:56.539] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 199.7 microseconds
-[02мая2026 13:27:56.539] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 119.4 milliseconds
-[02мая2026 13:27:56.541] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:27:57.814] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:27:57.818] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:27:57.824] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:27:57.824] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:28:07.596] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:28:07.598] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:28:07.726] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:28:07.733] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:28:07.756] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:28:08.287] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:28:08.287] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:28:08.287] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 578.1 microseconds
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 262.0 microseconds
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 221.3 microseconds
-[02мая2026 13:28:08.288] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:28:08.298] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 9.688 milliseconds
-[02мая2026 13:28:08.298] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:28:08.298] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 675.5 microseconds
-[02мая2026 13:28:08.298] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:28:08.299] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 425.5 microseconds
-[02мая2026 13:28:08.300] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:28:08.300] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 275.5 microseconds
-[02мая2026 13:28:08.300] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:28:08.301] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 867.5 microseconds
-[02мая2026 13:28:08.301] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:28:08.301] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 235.0 microseconds
-[02мая2026 13:28:08.301] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:28:08.302] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 265.6 microseconds
-[02мая2026 13:28:08.302] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:28:08.302] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 145.4 microseconds
-[02мая2026 13:28:08.302] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:28:08.302] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 180.4 microseconds
-[02мая2026 13:28:08.302] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:28:08.325] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 22.04 milliseconds
-[02мая2026 13:28:08.337] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 12.74 milliseconds
-[02мая2026 13:28:08.347] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 44.27 milliseconds
-[02мая2026 13:28:08.348] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:28:08.348] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 265.8 microseconds
-[02мая2026 13:28:08.348] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:28:08.348] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:28:08.349] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 244.7 microseconds
-[02мая2026 13:28:08.349] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:28:08.349] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:28:08.349] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:28:08.352] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 4.082 milliseconds
-[02мая2026 13:28:08.352] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:28:08.353] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:28:08.397] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:28:08.398] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 44.56 milliseconds
-[02мая2026 13:28:08.401] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 52.82 milliseconds
-[02мая2026 13:28:08.401] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 53.24 milliseconds
-[02мая2026 13:28:08.401] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 53.66 milliseconds
-[02мая2026 13:28:08.401] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:28:08.402] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 305.4 microseconds
-[02мая2026 13:28:08.402] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 114.2 milliseconds
-[02мая2026 13:28:08.404] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:28:08.864] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:28:08.869] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:28:08.874] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:28:08.875] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:28:55.127] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:28:55.129] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:28:55.257] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:28:55.263] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:28:55.291] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 670.9 microseconds
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 207.0 microseconds
-[02мая2026 13:28:55.807] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:28:55.809] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 200.1 microseconds
-[02мая2026 13:28:55.809] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:28:55.819] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 11.21 milliseconds
-[02мая2026 13:28:55.819] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:28:55.821] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 532.7 microseconds
-[02мая2026 13:28:55.821] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:28:55.822] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 555.3 microseconds
-[02мая2026 13:28:55.822] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:28:55.823] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 223.2 microseconds
-[02мая2026 13:28:55.823] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:28:55.824] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 1.032 milliseconds
-[02мая2026 13:28:55.824] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:28:55.824] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 289.0 microseconds
-[02мая2026 13:28:55.824] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:28:55.825] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 300.1 microseconds
-[02мая2026 13:28:55.825] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:28:55.825] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 351.2 microseconds
-[02мая2026 13:28:55.825] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:28:55.825] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 185.9 microseconds
-[02мая2026 13:28:55.825] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:28:55.852] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 27.44 milliseconds
-[02мая2026 13:28:55.864] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 11.65 milliseconds
-[02мая2026 13:28:55.872] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 47.82 milliseconds
-[02мая2026 13:28:55.873] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:28:55.873] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 256.7 microseconds
-[02мая2026 13:28:55.873] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:28:55.873] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:28:55.874] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 255.6 microseconds
-[02мая2026 13:28:55.874] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:28:55.874] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:28:55.874] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:28:55.878] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 2.896 milliseconds
-[02мая2026 13:28:55.878] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:28:55.878] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:28:55.917] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:28:55.917] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 39.08 milliseconds
-[02мая2026 13:28:55.919] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 45.01 milliseconds
-[02мая2026 13:28:55.919] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 45.29 milliseconds
-[02мая2026 13:28:55.919] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 45.67 milliseconds
-[02мая2026 13:28:55.919] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:28:55.920] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 230.4 microseconds
-[02мая2026 13:28:55.920] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 111.8 milliseconds
-[02мая2026 13:28:55.920] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:28:57.614] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:28:57.619] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:28:57.622] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:28:57.622] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:29:43.048] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:29:43.049] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:29:43.168] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:29:43.172] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:29:43.196] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:29:43.699] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:29:43.699] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:29:43.699] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 525.2 microseconds
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 273.0 microseconds
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 131.0 microseconds
-[02мая2026 13:29:43.700] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:29:43.710] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 8.520 milliseconds
-[02мая2026 13:29:43.710] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:29:43.710] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 359.8 microseconds
-[02мая2026 13:29:43.710] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:29:43.711] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 213.7 microseconds
-[02мая2026 13:29:43.711] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:29:43.711] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 125.5 microseconds
-[02мая2026 13:29:43.711] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 649.1 microseconds
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 132.7 microseconds
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 231.3 microseconds
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 152.2 microseconds
-[02мая2026 13:29:43.712] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:29:43.713] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 205.2 microseconds
-[02мая2026 13:29:43.713] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:29:43.732] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 19.25 milliseconds
-[02мая2026 13:29:43.744] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 11.90 milliseconds
-[02мая2026 13:29:43.753] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 40.07 milliseconds
-[02мая2026 13:29:43.753] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 288.3 microseconds
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 273.0 microseconds
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:29:43.754] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:29:43.757] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 2.724 milliseconds
-[02мая2026 13:29:43.757] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:29:43.757] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:29:43.790] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:29:43.790] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 33.58 milliseconds
-[02мая2026 13:29:43.793] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 39.18 milliseconds
-[02мая2026 13:29:43.793] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 39.49 milliseconds
-[02мая2026 13:29:43.793] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 39.90 milliseconds
-[02мая2026 13:29:43.793] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:29:43.793] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 164.9 microseconds
-[02мая2026 13:29:43.794] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 93.66 milliseconds
-[02мая2026 13:29:43.794] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
-[02мая2026 13:29:43.914] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:29:43.918] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:29:43.922] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:29:43.922] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:29:58.614] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[02мая2026 13:29:58.619] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
-[02мая2026 13:29:58.622] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
-[02мая2026 13:29:58.622] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
-[02мая2026 13:31:35.429] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: [Dev: Перезагрузка!]
-[02мая2026 13:31:35.429] [Render thread/INFO] [net.minecraft.client.gui.components.ChatComponent/]: [System] [CHAT] Перезагрузка!
-[02мая2026 13:31:35.716] [Server thread/ERROR] [net.minecraft.world.item.crafting.RecipeManager/]: Parsing error loading recipe create_additional_energy_sourses:adv_mechanism
-com.google.gson.JsonParseException: Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: No key amount in MapLike[{"id":"minecraft:netherite_scrap"}]; No key fluid_tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key type in MapLike[{"id":"minecraft:netherite_scrap"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:netherite_scrap"}; Second: No key tag in MapLike[{"id":"minecraft:netherite_scrap"}]; No key item in MapLike[{"id":"minecraft:netherite_scrap"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: No key amount in MapLike[{"id":"minecraft:gold_ingot"}]; No key fluid_tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key type in MapLike[{"id":"minecraft:gold_ingot"}]; Second: Failed to parse either. First: Not a json array: {"id":"minecraft:gold_ingot"}; Second: No key tag in MapLike[{"id":"minecraft:gold_ingot"}]; No key item in MapLike[{"id":"minecraft:gold_ingot"}]; Failed to parse either. First: Failed to parse either. First: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: No key amount in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key fluid_tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key type in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Second: Failed to parse either. First: Not a json array: {"id":"create:incomplete_precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:incomplete_precision_mechanism"}]; No key item in MapLike[{"id":"create:incomplete_precision_mechanism"}]; Failed to parse either. First: Not a json array: {"id":"create:precision_mechanism"}; Second: No key tag in MapLike[{"id":"create:precision_mechanism"}]; No key item in MapLike[{"id":"create:precision_mechanism"}]
-	at MC-BOOTSTRAP/datafixerupper@8.0.16/com.mojang.serialization.DataResult$Error.getOrThrow(DataResult.java:287) ~[datafixerupper-8.0.16.jar%23125!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:60) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.crafting.RecipeManager.apply(RecipeManager.java:36) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimplePreparableReloadListener.lambda$reload$1(SimplePreparableReloadListener.java:19) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.util.concurrent.CompletableFuture$UniAccept.tryFire(CompletableFuture.java:718) ~[?:?]
-	at java.base/java.util.concurrent.CompletableFuture$Completion.run(CompletableFuture.java:482) ~[?:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.packs.resources.SimpleReloadInstance.lambda$new$3(SimpleReloadInstance.java:86) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.reloadResources(MinecraftServer.java:1521) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.reloadPacks(ReloadCommand.java:20) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.commands.ReloadCommand.lambda$register$3(ReloadCommand.java:51) ~[neoforge-21.1.227.jar%23196!/:?]
-	at MC-BOOTSTRAP/brigadier@1.3.10/com.mojang.brigadier.context.ContextChain.runExecutable(ContextChain.java:73) ~[brigadier-1.3.10.jar%23124!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:29) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.tasks.ExecuteCommand.execute(ExecuteCommand.java:13) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.UnboundEntryAction.lambda$bind$0(UnboundEntryAction.java:8) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.CommandQueueEntry.execute(CommandQueueEntry.java:5) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.execution.ExecutionContext.runCommandQueue(ExecutionContext.java:103) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.executeCommandInContext(Commands.java:363) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.commands.Commands.performCommand(Commands.java:284) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.performUnsignedChatCommand(ServerGamePacketListenerImpl.java:1282) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.network.ServerGamePacketListenerImpl.lambda$handleChatCommand$7(ServerGamePacketListenerImpl.java:1269) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.TickTask.run(TickTask.java:18) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.doRunTask(BlockableEventLoop.java:148) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.ReentrantBlockableEventLoop.doRunTask(ReentrantBlockableEventLoop.java:24) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:872) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.doRunTask(MinecraftServer.java:170) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.pollTask(BlockableEventLoop.java:122) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTaskInternal(MinecraftServer.java:855) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.pollTask(MinecraftServer.java:849) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.thread.BlockableEventLoop.managedBlock(BlockableEventLoop.java:132) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.managedBlock(MinecraftServer.java:821) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.waitUntilNextTick(MinecraftServer.java:826) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:712) ~[neoforge-21.1.227.jar%23196!/:?]
-	at TRANSFORMER/minecraft@1.21.1/net.minecraft.server.MinecraftServer.lambda$spin$2(MinecraftServer.java:267) ~[neoforge-21.1.227.jar%23196!/:?]
-	at java.base/java.lang.Thread.run(Thread.java:1583) [?:?]
-[02мая2026 13:31:35.732] [Server thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2817 recipes
-[02мая2026 13:31:35.798] [Server thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
-[02мая2026 13:31:36.389] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[02мая2026 13:31:36.389] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[02мая2026 13:31:36.390] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[02мая2026 13:31:36.392] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 2.491 milliseconds
-[02мая2026 13:31:36.392] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[02мая2026 13:31:36.392] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[02мая2026 13:31:36.392] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 231.2 microseconds
-[02мая2026 13:31:36.392] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[02мая2026 13:31:36.393] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 245.0 microseconds
-[02мая2026 13:31:36.393] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[02мая2026 13:31:36.407] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 14.83 milliseconds
-[02мая2026 13:31:36.409] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 15.28 milliseconds
-[02мая2026 13:31:36.409] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[02мая2026 13:31:36.409] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 487.1 microseconds
-[02мая2026 13:31:36.409] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[02мая2026 13:31:36.410] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 275.1 microseconds
-[02мая2026 13:31:36.410] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[02мая2026 13:31:36.410] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 218.2 microseconds
-[02мая2026 13:31:36.410] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[02мая2026 13:31:36.412] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 1.862 milliseconds
-[02мая2026 13:31:36.412] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[02мая2026 13:31:36.413] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 387.5 microseconds
-[02мая2026 13:31:36.413] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[02мая2026 13:31:36.413] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 374.9 microseconds
-[02мая2026 13:31:36.414] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[02мая2026 13:31:36.414] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 529.0 microseconds
-[02мая2026 13:31:36.414] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[02мая2026 13:31:36.415] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 297.2 microseconds
-[02мая2026 13:31:36.415] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[02мая2026 13:31:36.472] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 57.47 milliseconds
-[02мая2026 13:31:36.499] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 27.85 milliseconds
-[02мая2026 13:31:36.513] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 13.15 milliseconds
-[02мая2026 13:31:36.513] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 99.18 milliseconds
-[02мая2026 13:31:36.516] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[02мая2026 13:31:36.516] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 367.3 microseconds
-[02мая2026 13:31:36.516] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[02мая2026 13:31:36.516] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[02мая2026 13:31:36.517] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 585.3 microseconds
-[02мая2026 13:31:36.517] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[02мая2026 13:31:36.517] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[02мая2026 13:31:36.517] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[02мая2026 13:31:36.524] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 6.656 milliseconds
-[02мая2026 13:31:36.524] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[02мая2026 13:31:36.526] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2411 ingredients
-[02мая2026 13:31:36.641] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2411 ingredients
-[02мая2026 13:31:36.641] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 116.5 milliseconds
-[02мая2026 13:31:36.645] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 128.4 milliseconds
-[02мая2026 13:31:36.645] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 128.8 milliseconds
-[02мая2026 13:31:36.645] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 129.5 milliseconds
-[02мая2026 13:31:36.645] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[02мая2026 13:31:36.647] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 250.7 microseconds
-[02мая2026 13:31:36.647] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 253.8 milliseconds
-[02мая2026 13:31:36.649] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 20 advancements
+[02мая2026 14:03:53.157] [Worker-Main-19/INFO] [PonderIndex/]: Registering Ponder Scenes took 40.28 ms
+[02мая2026 14:03:53.159] [Worker-Main-19/INFO] [PonderIndex/]: Registering Ponder Tags took 2.162 ms
+[02мая2026 14:03:53.241] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[02мая2026 14:03:53.241] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[02мая2026 14:03:53.261] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on FxSound Speakers (FxSound Audio Enhancer)
+[02мая2026 14:03:53.262] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[02мая2026 14:03:53.310] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/blocks.png-atlas
+[02мая2026 14:03:53.316] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[02мая2026 14:03:53.316] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[02мая2026 14:03:53.316] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[02мая2026 14:03:53.316] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[02мая2026 14:03:53.318] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[02мая2026 14:03:53.318] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[02мая2026 14:03:53.320] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[02мая2026 14:03:53.320] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[02мая2026 14:03:53.360] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/particles.png-atlas
+[02мая2026 14:03:53.360] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[02мая2026 14:03:53.361] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[02мая2026 14:03:53.361] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[02мая2026 14:03:53.361] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[02мая2026 14:03:53.373] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[02мая2026 14:03:53.412] [Render thread/INFO] [flywheel/backend/shaders/]: Loaded 77 shader sources in 9,048 ms
+[02мая2026 14:03:53.424] [Render thread/INFO] [com.simibubi.create.Create/]: Loaded 58 train hat configurations.
+[02мая2026 14:03:53.425] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[02мая2026 14:03:53.425] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[02мая2026 14:03:57.064] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
+[02мая2026 14:03:57.067] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
+[02мая2026 14:03:57.588] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 2818 recipes
+[02мая2026 14:03:57.665] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2506 advancements
+[02мая2026 14:03:58.232] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
+[02мая2026 14:03:58.232] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[02мая2026 14:03:58.789] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[02мая2026 14:03:58.931] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Подготовка области возрождения: 0%
+[02мая2026 14:03:58.986] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[02мая2026 14:03:58.987] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 196 ms
+[02мая2026 14:03:59.028] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[02мая2026 14:03:59.028] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[02мая2026 14:03:59.343] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
+[02мая2026 14:03:59.346] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
+[02мая2026 14:03:59.513] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:73f231ba] logged in with entity id 21 at (-8.87564219332594, 71.02442408821369, -98.5128317338632)
+[02мая2026 14:03:59.559] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev присоединился к игре
+[02мая2026 14:03:59.783] [Render thread/INFO] [flywheel/]: Started 10 worker threads
+[02мая2026 14:03:59.816] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
+[02мая2026 14:03:59.822] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
+[02мая2026 14:03:59.828] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 5.434 milliseconds
+[02мая2026 14:03:59.829] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
+[02мая2026 14:03:59.831] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.293 milliseconds
+[02мая2026 14:03:59.833] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
+[02мая2026 14:03:59.938] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 103.4 milliseconds
+[02мая2026 14:03:59.938] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 104.0 milliseconds
+[02мая2026 14:03:59.938] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
+[02мая2026 14:03:59.942] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 4.123 milliseconds
+[02мая2026 14:03:59.942] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
+[02мая2026 14:03:59.944] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 504.5 microseconds
+[02мая2026 14:03:59.963] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
+[02мая2026 14:03:59.963] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 358.2 microseconds
+[02мая2026 14:03:59.979] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
+[02мая2026 14:03:59.997] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 17.34 milliseconds
+[02мая2026 14:04:00.044] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: create:jei_plugin took 46.21 milliseconds
+[02мая2026 14:04:00.046] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 67.08 milliseconds
+[02мая2026 14:04:00.047] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
+[02мая2026 14:04:00.051] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 3.619 milliseconds
+[02мая2026 14:04:00.053] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
+[02мая2026 14:04:00.054] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 1.360 milliseconds
+[02мая2026 14:04:00.055] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
+[02мая2026 14:04:00.068] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 13.50 milliseconds
+[02мая2026 14:04:00.070] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
+[02мая2026 14:04:00.070] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 351.1 microseconds
+[02мая2026 14:04:00.071] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
+[02мая2026 14:04:00.207] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 135.3 milliseconds
+[02мая2026 14:04:00.274] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 66.63 milliseconds
+[02мая2026 14:04:00.291] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 17.48 milliseconds
+[02мая2026 14:04:00.291] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 220.1 milliseconds
+[02мая2026 14:04:00.300] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
+[02мая2026 14:04:00.307] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 6.614 milliseconds
+[02мая2026 14:04:00.317] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
+[02мая2026 14:04:00.322] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
+[02мая2026 14:04:00.334] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 11.63 milliseconds
+[02мая2026 14:04:00.340] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
+[02мая2026 14:04:00.342] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
+[02мая2026 14:04:00.343] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
+[02мая2026 14:04:00.359] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 16.36 milliseconds
+[02мая2026 14:04:00.359] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
+[02мая2026 14:04:00.395] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2382 ingredients
+[02мая2026 14:04:00.561] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2382 ingredients
+[02мая2026 14:04:00.562] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 202.8 milliseconds
+[02мая2026 14:04:00.657] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 316.2 milliseconds
+[02мая2026 14:04:00.657] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 316.9 milliseconds
+[02мая2026 14:04:00.658] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 341.6 milliseconds
+[02мая2026 14:04:00.659] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
+[02мая2026 14:04:00.659] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 427.3 microseconds
+[02мая2026 14:04:00.659] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 842.4 milliseconds
+[02мая2026 14:04:00.677] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 36 advancements
+[02мая2026 14:04:07.996] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Unable to play empty soundEvent: minecraft:entity.salmon.ambient
+[02мая2026 14:04:52.594] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
+[02мая2026 14:04:52.597] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
+[02мая2026 14:04:52.597] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
+[02мая2026 14:04:52.597] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
+[02мая2026 14:04:52.597] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 516.9 microseconds
+[02мая2026 14:04:52.640] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Отключение
+[02мая2026 14:04:52.640] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev покинул игру
+[02мая2026 14:04:52.650] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[02мая2026 14:04:52.700] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[02мая2026 14:04:52.700] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[02мая2026 14:04:52.700] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[02мая2026 14:04:52.756] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:overworld
+[02мая2026 14:04:52.851] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_nether
+[02мая2026 14:04:52.858] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[Новый мир]'/minecraft:the_end
+[02мая2026 14:04:52.866] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (Новый мир (1)): All chunks are saved
+[02мая2026 14:04:52.866] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[02мая2026 14:04:52.866] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[02мая2026 14:04:52.866] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
