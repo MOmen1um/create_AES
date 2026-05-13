@@ -39,3 +39,4 @@
 /reload
 /enchant Dev minecraft:efficiency 5
 /enchant Dev minecraft:efficiency 10
+/reload

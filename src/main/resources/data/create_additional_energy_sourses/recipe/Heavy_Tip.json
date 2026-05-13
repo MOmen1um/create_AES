@@ -7,15 +7,13 @@
     "N N"
   ],
   "key": {
-    "N": { "item": "minecraft:netherite_ingot" },
-    "B": { "item": "create:brass_ingot" },
-    "P": { "item": "create_additional_energy_sourses:advanced_precision_mechanism" },
-    "O": { "item": "minecraft:obsidian" },
-    "S": { "item": "minecraft:stick" }
+    "N": {
+      "item": "minecraft:netherite_ingot"
+    }
   },
   "result": {
     "count": 1,
-    "id": "heavy_tip"
+    "id": "create_additional_energy_sourses:heavy_tip"
   },
   "accept_mirrored": false
 }
