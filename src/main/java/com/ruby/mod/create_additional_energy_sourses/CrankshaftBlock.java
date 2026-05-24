@@ -20,6 +20,7 @@ public class CrankshaftBlock extends HorizontalKineticBlock implements IBE<Crank
         return this.defaultBlockState().setValue(HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
     }
 
+
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(HORIZONTAL_FACING).getAxis();
@@ -37,6 +38,6 @@ public class CrankshaftBlock extends HorizontalKineticBlock implements IBE<Crank
 
     @Override
     public BlockEntityType<? extends CrankshaftBlockEntity> getBlockEntityType() {
-        return ModBlocks.CRANKSHAFT_ENTITY.get();
+        return (BlockEntityType<? extends CrankshaftBlockEntity>) ModBlocks.CRANKSHAFT_ENTITY.get();
     }
 }

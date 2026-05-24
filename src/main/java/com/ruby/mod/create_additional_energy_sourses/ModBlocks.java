@@ -63,6 +63,36 @@ public class ModBlocks {
 
     public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> CRANKSHAFT = BLOCKS.register("crankshaft",
             () -> new CrankshaftBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(5.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+    // Предметы для алюминиевого набора
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> ALUMINUM_BLOCK_ITEM = ITEMS.register("aluminum_block",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ALUMINUM_BLOCK.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> ALUMINUM_STAIRS_ITEM = ITEMS.register("aluminum_stairs",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ALUMINUM_STAIRS.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> ALUMINUM_SLAB_ITEM = ITEMS.register("aluminum_slab",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ALUMINUM_SLAB.get(), new net.minecraft.world.item.Item.Properties()));
+
+    // Предметы для титанового набора
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> TITANIUM_BLOCK_ITEM = ITEMS.register("titanium_block",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.TITANIUM_BLOCK.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> TITANIUM_STAIRS_ITEM = ITEMS.register("titanium_stairs",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.TITANIUM_STAIRS.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> TITANIUM_SLAB_ITEM = ITEMS.register("titanium_slab",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.TITANIUM_SLAB.get(), new net.minecraft.world.item.Item.Properties()));
+
+    // Предметы для механизмов ДВС
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> ENGINE_VALVE_ITEM = ITEMS.register("engine_valve",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ENGINE_VALVE.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> TURBOCHARGER_ITEM = ITEMS.register("turbocharger",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.TURBOCHARGER.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final java.util.function.Supplier<net.minecraft.world.item.Item> CRANKSHAFT_ITEM = ITEMS.register("crankshaft",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.CRANKSHAFT.get(), new net.minecraft.world.item.Item.Properties()));
+
 
     // 4. Регистрируем Блок-предмет (чтобы блок можно было держать в руках)
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
@@ -78,7 +108,7 @@ public class ModBlocks {
 
     public static final java.util.function.Supplier CRANKSHAFT_ENTITY =
             BLOCK_ENTITIES.register("crankshaft_entity", () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
-                    CrankshaftBlockEntity::new, // Теперь это сработает идеально!
+                    (pos, state) -> new CrankshaftBlockEntity((net.minecraft.world.level.block.entity.BlockEntityType<?>) ModBlocks.CRANKSHAFT_ENTITY.get(), pos, state),
                     CRANKSHAFT.get()
             ).build(null));
 

@@ -42,3 +42,5 @@
 /reload
 /time set day'
 /time set day
+/setblock ~ ~ ~ create_additional_energy_sourses:titanium_slab
+/give Dev create_additional_energy_sourses:aluminum_block
