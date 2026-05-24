@@ -10,8 +10,10 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity
 
+// Явные и точные импорты термогенератора из его реальной папки на твоем GitHub:
+import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.ThermoGeneratorBlock;
+import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity;
 
 import java.util.function.Supplier;
 
@@ -34,7 +36,7 @@ public class ModBlocks {
             () -> new StairBlock(ALUMINUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
 
     public static final Supplier<Block> ALUMINUM_SLAB = BLOCKS.register("aluminum_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
+            () -> new SlabBlock(ALUMINUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
 
     // Титан
     public static final Supplier<Block> TITANIUM_BLOCK = BLOCKS.register("titanium_block",
@@ -44,7 +46,7 @@ public class ModBlocks {
             () -> new StairBlock(TITANIUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 12.0F).sound(SoundType.METAL)));
 
     public static final Supplier<Block> TITANIUM_SLAB = BLOCKS.register("titanium_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 12.0F).sound(SoundType.METAL)));
+            () -> new SlabBlock(TITANIUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 12.0F).sound(SoundType.METAL)));
 
     // ДВС Детали
     public static final Supplier<Block> ENGINE_VALVE = BLOCKS.register("engine_valve",
@@ -61,4 +63,3 @@ public class ModBlocks {
     public static final Supplier<BlockEntityType<CrankshaftBlockEntity>> CRANKSHAFT_ENTITY = BLOCK_ENTITIES.register("crankshaft_entity",
             () -> BlockEntityType.Builder.of(CrankshaftBlockEntity::new, CRANKSHAFT.get()).build(null));
 }
-
