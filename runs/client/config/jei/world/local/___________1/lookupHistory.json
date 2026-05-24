@@ -1,6 +1,7 @@
 [
   {"version":1},
   {"ingredient":{"id":"create_additional_energy_sourses:heavy_tip"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:advanced_pickaxe","components":{"minecraft:enchantments":{"levels":{"minecraft:efficiency":5}},"minecraft:damage":172}},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:pickaxe_core"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:heavy_handle"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:advanced_pickaxe","components":{"minecraft:damage":3750}},"type":"item_stack","bookmarkType":"INGREDIENT"},

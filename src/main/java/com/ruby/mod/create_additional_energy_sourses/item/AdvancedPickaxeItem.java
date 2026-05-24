@@ -9,6 +9,7 @@ import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
@@ -17,37 +18,44 @@ public class AdvancedPickaxeItem extends PickaxeItem {
         super(tier, properties);
     }
 
-    // Метод, который вызывается при разрушении блока
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
         if (!level.isClientSide && entity instanceof ServerPlayer player) {
-            // Проверяем, на какую сторону блока смотрит игрок
+
+            if (!player.isCrouching()) {
+                return super.mineBlock(stack, level, state, pos, entity);
+            }
+
             HitResult rayTrace = player.pick(20.0D, 0.0F, false);
             if (rayTrace.getType() == HitResult.Type.BLOCK) {
                 Direction side = ((BlockHitResult) rayTrace).getDirection();
 
-                // Проходим циклом по соседним блокам в зависимости от стороны
-                for (int x = -1; x <= 1; x++) {
-                    for (int y = -1; y <= 1; y++) {
-                        if (x == 0 && y == 0) continue; // Пропускаем центральный (уже сломанный) блок
+                for (int a = -2; a <= 2; a++) {
+                    for (int b = -1; b <= 3; b++) {
+                        if (a == 0 && b == 0) continue;
 
                         BlockPos extraPos;
-                        // Если смотрим вверх/вниз, расширяем по X и Z
                         if (side == Direction.UP || side == Direction.DOWN) {
-                            extraPos = pos.offset(x, 0, y);
+                            extraPos = pos.offset(a, 0, b);
                         } else if (side == Direction.NORTH || side == Direction.SOUTH) {
-                            // Если смотрим на север/юг, расширяем по X и Y
-                            extraPos = pos.offset(x, y, 0);
+                            extraPos = pos.offset(a, b, 0);
                         } else {
-                            // Если смотрим на запад/восток, расширяем по Z и Y
-                            extraPos = pos.offset(0, x, y);
+                            extraPos = pos.offset(0, b, a);
+                        }
+                        BlockState extraState = level.getBlockState(extraPos);
+                        boolean isBedrock = extraState.getBlock() == Blocks.BEDROCK;
+
+                        if (this.isCorrectToolForDrops(stack, extraState) || isBedrock) {
+                            // 1. Сначала ломаем сам блок в мире
+                            level.destroyBlock(extraPos, false, player); // Ставим false, чтобы игра не пыталась безуспешно искать стандартный лут
+
+                            // 2. Если это был бедрок — принудительно спавним предмет бедрока на его координатах!
+                            if (isBedrock) {
+                                ItemStack bedrockDrop = new ItemStack(Blocks.BEDROCK, 1);
+                                net.minecraft.world.level.block.Block.popResource(level, extraPos, bedrockDrop);
+                            }
                         }
 
-                        // Ломаем блок, если кирка может его добыть
-                        BlockState extraState = level.getBlockState(extraPos);
-                        if (this.isCorrectToolForDrops(stack, extraState)) {
-                            level.destroyBlock(extraPos, true, player);
-                        }
                     }
                 }
             }
