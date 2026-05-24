@@ -30,6 +30,15 @@ public class Create_additional_energy_sourses {
                         output.accept(ModItems.HEAVY_HANDLE.get());
                         output.accept(ModItems.PICKAXE_CORE.get());
                         output.accept(ModItems.HEAVY_TIP.get());
+                        output.accept(ModItems.ALUMINUM_BLOCK_ITEM.get());
+                        output.accept(ModItems.ALUMINUM_STAIRS_ITEM.get());
+                        output.accept(ModItems.ALUMINUM_SLAB_ITEM.get());
+                        output.accept(ModItems.TITANIUM_BLOCK_ITEM.get());
+                        output.accept(ModItems.TITANIUM_STAIRS_ITEM.get());
+                        output.accept(ModItems.TITANIUM_SLAB_ITEM.get());
+                        output.accept(ModItems.ENGINE_VALVE_ITEM.get());
+                        output.accept(ModItems.TURBOCHARGER_ITEM.get());
+                        output.accept(ModItems.CRANKSHAFT_ITEM.get());
                     }).build());
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
