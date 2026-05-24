@@ -22,37 +22,19 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
     public void scanEngineStructure() {
         if (level == null || level.isClientSide || getBlockState() == null) return;
 
-        // Сбрасываем старые значения перед новым сканированием
+        // Сбрасываем старые значения
         cylinderCount = 0;
         isTitaniumEngine = false;
         isAluminumEngine = false;
 
-        // Узнаем, куда повернут коленвал (вдоль какой оси он лежит)
         Direction facing = getBlockState().getValue(CrankshaftBlock.HORIZONTAL_FACING);
 
-        System.out.println(">>> НАЧАЛО СКАНРИОВАНИЯ ДВС <<<");
-
-        // 3D-МАТРИЦА СКАНИРОВАНИЯ:
-        // Перебираем блоки над коленвалом.
-        // Ось Y (высота): смотрим на 4 блока вверх над валом
+        // 3D-МАТРИЦА СКАНИРОВАНИЯ
         for (int yOffset = 1; yOffset <= 4; yOffset++) {
-            // Ось X/Z (ширина): заглядываем на 2 блока влево и вправо
             for (int widthOffset = -2; widthOffset <= 2; widthOffset++) {
-
-                // Считаем точную координату проверяемой точки в 3D-пространстве
-                BlockPos targetPos;
-                if (facing.getAxis() == Direction.Axis.X) {
-                    // Если вал лежит вдоль X, то ширина двигателя расширяется по оси Z
-                    targetPos = worldPosition.above(yOffset).relative(facing.getClockWise(), widthOffset);
-                } else {
-                    // If вал лежит вдоль Z, ширина расширяется по оси X
-                    targetPos = worldPosition.above(yOffset).relative(facing.getClockWise(), widthOffset);
-                }
-
-                // Читаем блок по этому адресу
+                BlockPos targetPos = worldPosition.above(yOffset).relative(facing.getClockWise(), widthOffset);
                 BlockState checkState = level.getBlockState(targetPos);
 
-                // ПРОВЕРКА МАТЕРИАЛА: Ищем наши универсальные блоки
                 if (checkState.is(ModBlocks.TITANIUM_BLOCK.get())) {
                     cylinderCount++;
                     isTitaniumEngine = true;
@@ -63,11 +45,19 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
             }
         }
 
-        System.out.println(">>> СКАН ЗАВЕРШЕН! Найдено блоков ДВС: " + cylinderCount);
-        if (isTitaniumEngine) System.out.println(">>> Тип мотора: Тяжелый Титановый");
-        if (isAluminumEngine) System.out.println(">>> Тип мотора: Легкий Алюминиевый");
+        // ВЫВОД РЕЗУЛЬТАТОВ ПРЯМО В ЧАТ ИГРЫ!
+        if (cylinderCount > 0) {
+            String motorType = isTitaniumEngine ? "§6Тяжелый Титановый" : "§bЛегкий Алюминиевый";
 
-        // Обновляем вращение в сети Create на основе собранной структуры
+            level.players().forEach(player -> player.sendSystemMessage(
+                    net.minecraft.network.chat.Component.literal("§e[ДВС] §aСтруктура обнаружена! Тип: " + motorType + "§a, Мощность блоков: §e" + cylinderCount)
+            ));
+        } else {
+            level.players().forEach(player -> player.sendSystemMessage(
+                    net.minecraft.network.chat.Component.literal("§e[ДВС] §cДвигатель не собран! Поставьте поршни сверху.")
+            ));
+        }
+
         updateGeneratedRotation();
     }
 
