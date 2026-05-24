@@ -18,36 +18,34 @@ public class Create_additional_energy_sourses {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB =
+    public static final net.neoforged.neoforge.registries.DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB =
             CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.create_additional_energy_sourses"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .icon(() -> new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR.get()))
                     .displayItems((parameters, output) -> {
-                        // Твой термогенератор (Берем из ModItems, имя переменной THERMO_GENERATOR)
                         output.accept(ModBlocks.THERMO_GENERATOR.get());
-
-                        // Твои инструменты и материалы
                         output.accept(ModItems.ADVANCED_PICKAXE.get());
                         output.accept(ModItems.HEAVY_HANDLE.get());
                         output.accept(ModItems.PICKAXE_CORE.get());
                         output.accept(ModItems.HEAVY_TIP.get());
 
-                        // Алюминиевый набор
+                        // Алюминий
                         output.accept(ModItems.ALUMINUM_BLOCK_ITEM.get());
                         output.accept(ModItems.ALUMINUM_STAIRS_ITEM.get());
                         output.accept(ModItems.ALUMINUM_SLAB_ITEM.get());
 
-                        // Титановый набор
+                        // Титан
                         output.accept(ModItems.TITANIUM_BLOCK_ITEM.get());
                         output.accept(ModItems.TITANIUM_STAIRS_ITEM.get());
                         output.accept(ModItems.TITANIUM_SLAB_ITEM.get());
 
-                        // Детали ДВС
+                        // ДВС органы
                         output.accept(ModItems.ENGINE_VALVE_ITEM.get());
                         output.accept(ModItems.TURBOCHARGER_ITEM.get());
                         output.accept(ModItems.CRANKSHAFT_ITEM.get());
                     }).build()
+            );
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
         // Регистрируем всё через ModBlocks (блоки, предметы, энтити)

@@ -72,8 +72,10 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
 
     @Override
     public net.minecraft.world.level.block.entity.BlockEntityType<? extends ThermoGeneratorBlockEntity> getBlockEntityType() {
-        return (net.minecraft.world.level.block.entity.BlockEntityType<? extends ThermoGeneratorBlockEntity>) ModBlocks.THERMO_GEN_ENTITY.get();
+        // Просто возвращаем объект без каких-либо кастов в скобках!
+        return ModBlocks.THERMO_GEN_ENTITY.get();
     }
+
     @Override
     public void animateTick(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos, net.minecraft.util.RandomSource random) {
         // 1. Узнаем, куда повернут генератор

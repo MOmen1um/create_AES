@@ -8,12 +8,10 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
 
 public class CrankshaftBlock extends HorizontalKineticBlock implements IBE<CrankshaftBlockEntity> {
 
@@ -64,4 +62,3 @@ public class CrankshaftBlock extends HorizontalKineticBlock implements IBE<Crank
         return new CrankshaftBlockEntity(getBlockEntityType(), pos, state);
     }
 }
-
