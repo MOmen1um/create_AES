@@ -22,8 +22,9 @@ public class ModBlocks {
     public static final Supplier<Block> THERMO_GENERATOR = BLOCKS.register("thermo_generator",
             () -> new ThermoGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5F).sound(SoundType.METAL)));
 
-    public static final Supplier<BlockEntityType<com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY = BLOCK_ENTITIES.register("thermo_gen_entity",
-            () -> BlockEntityType.Builder.of(com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity::new, THERMO_GENERATOR.get()).build(null));
+    public static final Supplier<BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY = BLOCK_ENTITIES.register("thermo_gen_entity",
+            () -> BlockEntityType.Builder.of(ThermoGeneratorBlockEntity::new, THERMO_GENERATOR.get()).build(null));
+
 
 
     // ================== АЛЮМИНИЙ (ALUMINUM) ==================

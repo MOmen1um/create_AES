@@ -13,7 +13,7 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
     private boolean isTitaniumEngine = false;
     private boolean isAluminumEngine = false;
 
-    public CrankshaftBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    public ThermoGeneratorBlockEntity(net.minecraft.world.level.block.entity.BlockEntityType<?> type, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
         super(type, pos, state);
     }
 
