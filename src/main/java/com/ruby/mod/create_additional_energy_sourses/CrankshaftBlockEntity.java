@@ -14,10 +14,10 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
     private boolean isAluminumEngine = false;
 
     // Изменили конструктор: теперь он принимает только позицию и блокстейт!
-    public CrankshaftBlockEntity(net.minecraft.world.level.block.entity.BlockEntityType<?> type, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
-        super(type, pos, state);
+    public CrankshaftBlockEntity(net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+        // Передаем тип сущности напрямую из ModBlocks
+        super(ModBlocks.CRANKSHAFT_ENTITY.get(), pos, state);
     }
-
     // Метод, который принудительно пересчитывает структуру двигателя
     public void scanEngineStructure() {
         if (level == null || level.isClientSide || getBlockState() == null) return;

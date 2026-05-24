@@ -40,4 +40,8 @@ public class CrankshaftBlock extends HorizontalKineticBlock implements IBE<Crank
     public BlockEntityType<? extends CrankshaftBlockEntity> getBlockEntityType() {
         return (BlockEntityType<? extends CrankshaftBlockEntity>) ModBlocks.CRANKSHAFT_ENTITY.get();
     }
+    @Override
+    public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new CrankshaftBlockEntity(pos, state);
+    }
 }

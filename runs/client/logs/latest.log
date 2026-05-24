@@ -490,3 +490,4 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 [24мая2026 15:05:50.862] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
 [24мая2026 15:05:50.862] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
 [24мая2026 15:05:50.862] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[24мая2026 15:07:02.167] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

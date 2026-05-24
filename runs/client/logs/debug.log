@@ -4865,3 +4865,4 @@ C:\Users\Kostya\Documents\GitHub\create_AES\runs\client\config\jei\jei-mod-id-fo
 [24мая2026 15:05:50.871] [Server thread/DEBUG] [com.simibubi.create.Create/]: Removed Redstone Network Space for minecraft:the_end
 [24мая2026 15:05:50.871] [Server thread/DEBUG] [com.simibubi.create.Create/]: Removed Kinetic Network Space for minecraft:the_end
 [24мая2026 15:05:50.871] [Server thread/DEBUG] [net.neoforged.fml.config.ConfigTracker/CONFIG]: Unloading configs type SERVER
+[24мая2026 15:07:02.167] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
