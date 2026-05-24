@@ -24,23 +24,26 @@ public class Create_additional_energy_sourses {
                     .withTabsBefore(CreativeModeTabs.COMBAT)
                     .icon(() -> new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR.get()))
                     .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.THERMO_GENERATOR.get());
+                        // ПОДМЕНИЛ НА ПРЕДМЕТ: термогенератор берем из ModItems!
+                        output.accept(ModItems.THERMO_GENERATOR_ITEM.get());
+
+                        // Инструменты
                         output.accept(ModItems.ADVANCED_PICKAXE.get());
                         output.accept(ModItems.HEAVY_HANDLE.get());
                         output.accept(ModItems.PICKAXE_CORE.get());
                         output.accept(ModItems.HEAVY_TIP.get());
 
-                        // Алюминий
+                        // Алюминиевый набор
                         output.accept(ModItems.ALUMINUM_BLOCK_ITEM.get());
                         output.accept(ModItems.ALUMINUM_STAIRS_ITEM.get());
                         output.accept(ModItems.ALUMINUM_SLAB_ITEM.get());
 
-                        // Титан
+                        // Титановый набор
                         output.accept(ModItems.TITANIUM_BLOCK_ITEM.get());
                         output.accept(ModItems.TITANIUM_STAIRS_ITEM.get());
                         output.accept(ModItems.TITANIUM_SLAB_ITEM.get());
 
-                        // ДВС органы
+                        // Органы ДВС
                         output.accept(ModItems.ENGINE_VALVE_ITEM.get());
                         output.accept(ModItems.TURBOCHARGER_ITEM.get());
                         output.accept(ModItems.CRANKSHAFT_ITEM.get());

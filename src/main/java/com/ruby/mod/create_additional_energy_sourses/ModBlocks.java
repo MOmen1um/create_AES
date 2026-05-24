@@ -10,7 +10,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity;
+
+
 
 
 import java.util.function.Supplier;
@@ -23,9 +24,11 @@ public class ModBlocks {
     public static final Supplier<Block> THERMO_GENERATOR = BLOCKS.register("thermo_generator",
             () -> new ThermoGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5F).sound(SoundType.METAL)));
 
-    public static final Supplier<BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY = BLOCK_ENTITIES.register("thermo_gen_entity",
-            () -> BlockEntityType.Builder.of(ThermoGeneratorBlockEntity::new, THERMO_GENERATOR.get()).build(null));
-
+    public static final java.util.function.Supplier THERMO_GEN_ENTITY = BLOCK_ENTITIES.register("thermo_gen_entity",
+            () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
+                    (pos, state) -> new ThermoGeneratorBlockEntity((net.minecraft.world.level.block.entity.BlockEntityType<?>) ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
+                    THERMO_GENERATOR.get()
+            ).build(null));
 
     // Алюминий
     public static final Supplier<Block> ALUMINUM_BLOCK = BLOCKS.register("aluminum_block",
@@ -59,8 +62,10 @@ public class ModBlocks {
             () -> new CrankshaftBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(5.0F).sound(SoundType.METAL)));
 
     public static final Supplier<BlockEntityType<CrankshaftBlockEntity>> CRANKSHAFT_ENTITY = BLOCK_ENTITIES.register("crankshaft_entity",
-            () -> BlockEntityType.Builder.of(CrankshaftBlockEntity::new, CRANKSHAFT.get()).build(null));
-
+            () -> BlockEntityType.Builder.of(
+                    (pos, state) -> new CrankshaftBlockEntity((BlockEntityType<?>) ModBlocks.CRANKSHAFT_ENTITY.get(), pos, state),
+                    CRANKSHAFT.get()
+            ).build(null));
     // Тот самый метод, который требовал главный файл мода!
     public static void register(IEventBus modEventBus) {
         BLOCKS.register(modEventBus);

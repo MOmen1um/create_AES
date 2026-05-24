@@ -1,4 +1,4 @@
-package com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity;
+package com.ruby.mod.create_additional_energy_sourses;
 
 import com.ruby.mod.create_additional_energy_sourses.ThermoGeneratorBlock;
 import net.minecraft.core.BlockPos;

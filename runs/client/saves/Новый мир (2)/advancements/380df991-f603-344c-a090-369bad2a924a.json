@@ -437,5 +437,257 @@
     },
     "done": true
   },
+  "simulated:recipes/misc/torsion_spring": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/large_tire": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/physics_assembler": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/steering_wheel": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/directional_gearshift": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/monstrous_tire": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:root": {
+    "criteria": {
+      "0": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/velocity_sensor": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/laser_pointer": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/tire": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/wheel_mount": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/laser_sensor": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:root": {
+    "criteria": {
+      "0": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/small_tire": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/altitude_sensor": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/swivel_bearing": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:17:04 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/light_blue_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/magenta_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/yellow_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/orange_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "simulated:not_gonna_sugarcoat_it": {
+    "criteria": {
+      "0": "2026-05-24 17:35:02 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/blue_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2026-05-24 17:35:37 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/green_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/black_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gearbox": {
+    "criteria": {
+      "has_item": "2026-05-24 17:43:42 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/cyan_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/purple_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/tools/lead": {
+    "criteria": {
+      "has_slime_ball": "2026-05-24 17:41:01 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/gray_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/red_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/brown_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/sticky_piston": {
+    "criteria": {
+      "has_slime_ball": "2026-05-24 17:41:01 +0500"
+    },
+    "done": true
+  },
+  "simulated:applied_kinematics": {
+    "criteria": {
+      "0": "2026-05-24 17:41:26 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/contraption_diagram": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:41:26 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/light_gray_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/redstone/slime_block": {
+    "criteria": {
+      "has_slime_ball": "2026-05-24 17:41:01 +0500"
+    },
+    "done": true
+  },
+  "simulated:you_spin_me_right_round": {
+    "criteria": {
+      "0": "2026-05-24 17:40:23 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
+    "criteria": {
+      "has_item": "2026-05-24 17:43:42 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/lime_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/pink_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/white_envelope": {
+    "criteria": {
+      "has_ingredient": "2026-05-24 17:37:25 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

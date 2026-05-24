@@ -18,6 +18,7 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     public void scanEngineStructure() {
+        // Добавили жесткую проверку безопасности: если мира нет или он пустой — выходим!
         if (level == null || level.isClientSide || getBlockState() == null) return;
 
         cylinderCount = 0;
@@ -26,6 +27,7 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
 
         Direction facing = getBlockState().getValue(CrankshaftBlock.HORIZONTAL_FACING);
 
+        // 3D-МАТРИЦА СКАНИРОВАНИЯ
         for (int yOffset = 1; yOffset <= 4; yOffset++) {
             for (int widthOffset = -2; widthOffset <= 2; widthOffset++) {
                 BlockPos targetPos = worldPosition.above(yOffset).relative(facing.getClockWise(), widthOffset);
@@ -41,33 +43,21 @@ public class CrankshaftBlockEntity extends GeneratingKineticBlockEntity {
             }
         }
 
-        if (cylinderCount > 0) {
-            String motorType = isTitaniumEngine ? "§6Тяжелый Титановый" : "§bЛегкий Алюминиевый";
-            level.players().forEach(player -> player.sendSystemMessage(
-                    Component.literal("§e[ДВС] §aСтруктура обнаружена! Тип: " + motorType + "§a, Мощность блоков: §e" + cylinderCount)
-            ));
-        } else {
-            level.players().forEach(player -> player.sendSystemMessage(
-                    Component.literal("§e[ДВС] §cДвигатель не собран! Поставьте поршни сверху.")
-            ));
+        // БЕЗОПАСНЫЙ ВЫВОД: отправляем сообщения, только если в мире РЕАЛЬНО есть игроки!
+        if (!level.players().isEmpty()) {
+            if (cylinderCount > 0) {
+                String motorType = isTitaniumEngine ? "§6Тяжелый Титановый" : "§bЛегкий Алюминиевый";
+                level.players().forEach(player -> player.sendSystemMessage(
+                        Component.literal("§e[ДВС] §aСтруктура обнаружена! Тип: " + motorType + "§a, Мощность блоков: §e" + cylinderCount)
+                ));
+            } else {
+                level.players().forEach(player -> player.sendSystemMessage(
+                        Component.literal("§e[ДВС] §cДвигатель не собран! Поставьте поршни сверху.")
+                ));
+            }
         }
 
+        // Метод Create, который обновляет вращение валов в сети
         updateGeneratedRotation();
-    }
-
-    @Override
-    public float getGeneratedSpeed() {
-        if (cylinderCount <= 0) return 0;
-        if (isAluminumEngine) return 256.0f;
-        if (isTitaniumEngine) return 64.0f;
-        return 0;
-    }
-
-    @Override
-    public float calculateAddedStressCapacity() {
-        if (cylinderCount <= 0) return 0;
-        if (isTitaniumEngine) return cylinderCount * 512.0f;
-        if (isAluminumEngine) return cylinderCount * 128.0f;
-        return 0;
     }
 }
