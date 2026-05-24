@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import com.ruby.mod.create_additional_energy_sourses.ThermoGeneratorBlockEntity;
+import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity
 
 
 import java.util.function.Supplier;
