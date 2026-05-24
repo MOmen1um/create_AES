@@ -10,6 +10,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
+import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity;
 
 public class ModBlocks {
     // 1. Сначала создаем регистраторы (базы)
@@ -34,6 +35,34 @@ public class ModBlocks {
                             .strength(3.0f)
                             .requiresCorrectToolForDrops()
                             .noOcclusion()));
+    // ==================== НАБОР ДЕТАЛЕЙ ДЛЯ ТВОЕГО ДВС ====================
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> ALUMINUM_BLOCK = BLOCKS.register("aluminum_block",
+            () -> new net.minecraft.world.level.block.Block(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(3.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> ALUMINUM_STAIRS = BLOCKS.register("aluminum_stairs",
+            () -> new net.minecraft.world.level.block.StairBlock(ALUMINUM_BLOCK.get().defaultBlockState(), net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(3.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> ALUMINUM_SLAB = BLOCKS.register("aluminum_slab",
+            () -> new net.minecraft.world.level.block.SlabBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(3.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> TITANIUM_BLOCK = BLOCKS.register("titanium_block",
+            () -> new net.minecraft.world.level.block.Block(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(6.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> TITANIUM_STAIRS = BLOCKS.register("titanium_stairs",
+            () -> new net.minecraft.world.level.block.StairBlock(TITANIUM_BLOCK.get().defaultBlockState(), net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(6.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> TITANIUM_SLAB = BLOCKS.register("titanium_slab",
+            () -> new net.minecraft.world.level.block.SlabBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(6.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> ENGINE_VALVE = BLOCKS.register("engine_valve",
+            () -> new net.minecraft.world.level.block.Block(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(3.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> TURBOCHARGER = BLOCKS.register("turbocharger",
+            () -> new net.minecraft.world.level.block.Block(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(4.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
+
+    public static final java.util.function.Supplier<net.minecraft.world.level.block.Block> CRANKSHAFT = BLOCKS.register("crankshaft",
+            () -> new CrankshaftBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(5.0F).sound(net.minecraft.world.level.block.SoundType.METAL)));
 
     // 4. Регистрируем Блок-предмет (чтобы блок можно было держать в руках)
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
@@ -46,6 +75,12 @@ public class ModBlocks {
                             (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
                             THERMO_GENERATOR.get()
                     ).build(null));
+
+    public static final java.util.function.Supplier CRANKSHAFT_ENTITY =
+            BLOCK_ENTITIES.register("crankshaft_entity", () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
+                    CrankshaftBlockEntity::new, // Теперь это сработает идеально!
+                    CRANKSHAFT.get()
+            ).build(null));
 
     // Метод, который всё это "включает" при запуске мода
     public static void register(IEventBus eventBus) {
