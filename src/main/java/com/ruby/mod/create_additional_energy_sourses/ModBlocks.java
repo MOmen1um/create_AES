@@ -9,7 +9,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import com.ruby.mod.create_additional_energy_sourses.item.thermoGeneratorblock.blockentity.ThermoGeneratorBlockEntity
 
 import java.util.function.Supplier;
 
@@ -67,4 +69,7 @@ public class ModBlocks {
                     (pos, state) -> new CrankshaftBlockEntity((BlockEntityType<?>) ModBlocks.CRANKSHAFT_ENTITY.get(), pos, state),
                     CRANKSHAFT.get()
             ).build(null));
+
+    public static void register(IEventBus modEventBus) {
+    }
 }

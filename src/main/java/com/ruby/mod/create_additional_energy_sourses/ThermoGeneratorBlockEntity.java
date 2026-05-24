@@ -53,7 +53,4 @@ public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         // Полная защита от дюпа: мощность зависит ТОЛЬКО от тепла и холода!
         return internalSpeed * 2.0f;
     }
-    public boolean isRunning() {
-        return getGeneratedSpeed() > 0;
-    }
 }

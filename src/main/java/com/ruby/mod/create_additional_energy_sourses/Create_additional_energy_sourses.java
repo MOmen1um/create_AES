@@ -22,24 +22,32 @@ public class Create_additional_energy_sourses {
             CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.create_additional_energy_sourses"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(() -> ModBlocks.THERMO_GENERATOR_ITEM.get().getDefaultInstance())
+                    .icon(() -> new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR.get()))
                     .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.THERMO_GENERATOR_ITEM.get());
-                        output.accept(ModBlocks.ADVANCED_PRECISION_MECHANISM.get());
+                        // Твой термогенератор (Берем из ModItems, имя переменной THERMO_GENERATOR)
+                        output.accept(ModBlocks.THERMO_GENERATOR.get());
+
+                        // Твои инструменты и материалы
                         output.accept(ModItems.ADVANCED_PICKAXE.get());
                         output.accept(ModItems.HEAVY_HANDLE.get());
                         output.accept(ModItems.PICKAXE_CORE.get());
                         output.accept(ModItems.HEAVY_TIP.get());
+
+                        // Алюминиевый набор
                         output.accept(ModItems.ALUMINUM_BLOCK_ITEM.get());
                         output.accept(ModItems.ALUMINUM_STAIRS_ITEM.get());
                         output.accept(ModItems.ALUMINUM_SLAB_ITEM.get());
+
+                        // Титановый набор
                         output.accept(ModItems.TITANIUM_BLOCK_ITEM.get());
                         output.accept(ModItems.TITANIUM_STAIRS_ITEM.get());
                         output.accept(ModItems.TITANIUM_SLAB_ITEM.get());
+
+                        // Детали ДВС
                         output.accept(ModItems.ENGINE_VALVE_ITEM.get());
                         output.accept(ModItems.TURBOCHARGER_ITEM.get());
                         output.accept(ModItems.CRANKSHAFT_ITEM.get());
-                    }).build());
+                    }).build()
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
         // Регистрируем всё через ModBlocks (блоки, предметы, энтити)

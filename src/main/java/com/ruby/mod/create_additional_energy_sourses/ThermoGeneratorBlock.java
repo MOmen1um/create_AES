@@ -71,8 +71,8 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
     }
 
     @Override
-    public BlockEntityType<? extends ThermoGeneratorBlockEntity> getBlockEntityType() {
-        return ModBlocks.THERMO_GEN_ENTITY.get();
+    public net.minecraft.world.level.block.entity.BlockEntityType<? extends ThermoGeneratorBlockEntity> getBlockEntityType() {
+        return (net.minecraft.world.level.block.entity.BlockEntityType<? extends ThermoGeneratorBlockEntity>) ModBlocks.THERMO_GEN_ENTITY.get();
     }
     @Override
     public void animateTick(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos, net.minecraft.util.RandomSource random) {
@@ -126,4 +126,10 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
             }
         }
     }
+    @Override
+    public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        // Вызываем конструктор через 3 аргумента, передавая тип сущности!
+        return new ThermoGeneratorBlockEntity(getBlockEntityType(), pos, state);
+    }
+
 }
