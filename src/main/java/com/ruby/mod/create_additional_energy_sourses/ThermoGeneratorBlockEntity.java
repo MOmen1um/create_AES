@@ -51,4 +51,36 @@ public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         if (internalSpeed <= 0) return 0;
         return internalSpeed * 2.0f;
     }
+    @Override
+    public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        // Заголовок от Create: очки автоматически напишут "Генератор кинетической энергии"
+        super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        if (level == null || getBlockState() == null) return true;
+
+        Direction facing = getBlockState().getValue(ThermoGeneratorBlock.HORIZONTAL_FACING);
+        BlockState left = level.getBlockState(worldPosition.relative(facing.getClockWise()));
+        BlockState right = level.getBlockState(worldPosition.relative(facing.getCounterClockWise()));
+
+        float heatPower = getHeatValue(right);  // Справа тепло
+        float coldPower = getColdValue(left);   // Слева холод
+
+        // Добавляем пустую строку для красоты
+        tooltip.add(net.minecraft.network.chat.Component.literal(""));
+
+        // Показываем телеметрию факторов
+        tooltip.add(net.minecraft.network.chat.Component.literal("§6Показатели датчиков:"));
+        tooltip.add(net.minecraft.network.chat.Component.literal(" §eСила жара (Справа): §7" + heatPower));
+        tooltip.add(net.minecraft.network.chat.Component.literal(" §bСила холода (Слева): §7" + coldPower));
+
+        // Описание формулы
+        tooltip.add(net.minecraft.network.chat.Component.literal(" §fФормула скорости: §7Жар + Холод"));
+
+        if (heatPower <= 0 || coldPower <= 0) {
+            tooltip.add(net.minecraft.network.chat.Component.literal(" §c⚠ Нет разницы температур!"));
+        }
+
+        return true;
+    }
+
 }

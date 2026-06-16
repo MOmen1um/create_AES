@@ -85,4 +85,36 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         if (currentSpeed <= 0) return 0;
         return currentSpeed * 8.0f;
     }
+    @Override
+    public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        // Базовый заголовок Create
+        super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+        tooltip.add(net.minecraft.network.chat.Component.literal(""));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§6Состояние ДВС V8:"));
+
+        // Проверяем, есть ли жидкость в баке
+        if (fuelTank.isEmpty()) {
+            tooltip.add(net.minecraft.network.chat.Component.literal(" §cТопливный бак пуст!"));
+        } else {
+            // ИСПРАВЛЕНИЕ: Берем красивое имя жидкости через getHoverName().getString()
+            String fuelName = fuelTank.getFluid().getHoverName().getString();
+            int amount = fuelTank.getFluidAmount();
+            int max = fuelTank.getCapacity();
+
+            // Выводим объем бака и название солярки
+            tooltip.add(net.minecraft.network.chat.Component.literal(" §eТопливо: §7" + fuelName));
+            tooltip.add(net.minecraft.network.chat.Component.literal(" §eОбъем: §7" + amount + " / " + max + " mB"));
+
+
+            // Расход топлива (если горит)
+            if (getGeneratedSpeed() > 0) {
+                tooltip.add(net.minecraft.network.chat.Component.literal(" §6Расход: §7100 mB за цикл"));
+            } else {
+                tooltip.add(net.minecraft.network.chat.Component.literal(" §7Двигатель заглушен"));
+            }
+        }
+
+        return true;
+    }
 }
