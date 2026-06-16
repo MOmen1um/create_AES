@@ -1264,5 +1264,17 @@
     },
     "done": true
   },
+  "create:stressometer": {
+    "criteria": {
+      "0": "2026-06-16 20:05:53 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/speedometer_from_conversion": {
+    "criteria": {
+      "has_item": "2026-06-16 20:05:53 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

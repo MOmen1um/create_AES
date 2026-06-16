@@ -4,14 +4,15 @@ import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 
 public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
 
-    // Конструктор адаптирован под два параметра для NeoForge 1.21.1
-    public ThermoGeneratorBlockEntity(BlockPos pos, BlockState state) {
-        super(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state);
+    // Конструктор теперь строго принимает три аргумента, как и V8!
+    public ThermoGeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
     }
 
     @Override

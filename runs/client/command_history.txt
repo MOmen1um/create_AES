@@ -42,3 +42,4 @@
 /reload
 /flywheel backend off
 /give Dev create_additional_energy_sourses:heavy_handle
+/time set day

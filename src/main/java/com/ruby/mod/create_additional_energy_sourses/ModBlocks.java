@@ -25,7 +25,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
 
-    // 2. Предмет Термогенератора для инвентаря (РЕГИСТРИРУЕМ!)
+    // 2. Предмет Термогенератора
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
             ModItems.ITEMS.register("thermo_generator", () -> new BlockItem(THERMO_GENERATOR.get(), new Item.Properties()));
 
@@ -36,19 +36,21 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
 
-    // 4. Предмет Двигателя V8 для инвентаря (РЕГИСТРИРУЕМ!)
+    // 4. Предмет Двигателя V8
     public static final DeferredHolder<Item, BlockItem> V8_ENGINE_ITEM =
             ModItems.ITEMS.register("v8_engine", () -> new BlockItem(V8_ENGINE_BLOCK.get(), new Item.Properties()));
 
-    // 5. Энтити Термогенератора
+    // 5. Энтити Термогенератора (Явно передаем тип через .get() в лямбду)
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY =
             BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
-                    ThermoGeneratorBlockEntity::new, THERMO_GENERATOR.get()).build(null));
+                    (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
+                    THERMO_GENERATOR.get()).build(null));
 
-    // 6. Энтити V8
+    // 6. Энтити V8 (Точно так же передаем три параметра)
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
             BLOCK_ENTITIES.register("v8_engine_entity", () -> BlockEntityType.Builder.of(
-                    V8EngineBlockEntity::new, V8_ENGINE_BLOCK.get()).build(null));
+                    (pos, state) -> new V8EngineBlockEntity(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state),
+                    V8_ENGINE_BLOCK.get()).build(null));
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
