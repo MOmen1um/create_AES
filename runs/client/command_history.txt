@@ -41,3 +41,4 @@
 /enchant Dev minecraft:efficiency 10
 /reload
 /flywheel backend off
+/give Dev create_additional_energy_sourses:heavy_handle

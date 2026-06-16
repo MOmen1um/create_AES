@@ -1,12 +1,10 @@
 [
   {"version":1},
+  {"ingredient":{"id":"create_additional_energy_sourses:heavy_handle"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"createdieselgenerators:diesel_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:thermo_generator"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"minecraft:spruce_door"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:heavy_tip"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:pickaxe_core"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:heavy_handle"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:advanced_precision_mechanism"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:advanced_pickaxe"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:advanced_pickaxe","components":{"minecraft:enchantments":{"levels":{"minecraft:efficiency":5}},"minecraft:damage":172}},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:advanced_pickaxe","components":{"minecraft:damage":3750}},"type":"item_stack","bookmarkType":"INGREDIENT"},
