@@ -10,7 +10,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-@Mod(Create_additional_energy_sourses.MODID)
+@net.neoforged.fml.common.Mod(Create_additional_energy_sourses.MODID)
+@net.neoforged.fml.common.asm.XModFile.EventBusSubscriber(bus = net.neoforged.fml.common.asm.XModFile.EventBusSubscriber.Bus.MOD, value = net.neoforged.api.distmarker.Dist.CLIENT)
 public class Create_additional_energy_sourses {
     public static final String MODID = "create_additional_energy_sourses";
 
@@ -42,4 +43,12 @@ public class Create_additional_energy_sourses {
 
         // ВНИМАНИЕ: Строка NeoForge.EVENT_BUS.register(this) удалена, чтобы не было ошибки!
     }
+    @net.neoforged.bus.api.SubscribeEvent
+    public static void registerRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                com.ruby.mod.create_additional_energy_sourses.ModBlocks.THERMO_GEN_ENTITY.get(),
+                ctx -> new com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer(ctx)
+        );
+    }
+
 }

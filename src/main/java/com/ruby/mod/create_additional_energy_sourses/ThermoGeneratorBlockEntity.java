@@ -22,9 +22,9 @@ public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         BlockState right = level.getBlockState(worldPosition.relative(facing.getCounterClockWise()));
 
         // Считаем общую теплоту
-        float heatPower = getHeatValue(left) + getHeatValue(right);
+        float heatPower = getHeatValue(right);
         // Считаем общий холод
-        float coldPower = getColdValue(left) + getColdValue(right);
+        float coldPower = getColdValue(left);
 
         // Если нет одного из компонентов — энергии не будет
         if (heatPower <= 0 || coldPower <= 0) return 0;
@@ -65,6 +65,14 @@ public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         }
 
         return baseCapacity;
+    }
+    @Override
+    public BlockState getRenderedBlockState() {
+        // Говорим Create использовать модельку стандартного вала (Shaft)
+        // и разворачивать его вдоль оси нашего генератора
+        return com.simibubi.create.AllBlocks.SHAFT.getDefaultState()
+                .setValue(com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock.AXIS,
+                        getBlockState().getValue(ThermoGeneratorBlock.HORIZONTAL_FACING).getAxis());
     }
 
 

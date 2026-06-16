@@ -45,13 +45,17 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
     }
 
     @Override
-    public Direction.Axis getRotationAxis(BlockState state) {
-        return state.getValue(HORIZONTAL_FACING).getAxis();
+    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+        Direction facing = state.getValue(HORIZONTAL_FACING);
+        // Проверяем: совпадает ли запрашиваемая сторона с лицом ИЛИ с задней частью блока
+        return face == facing || face == facing.getOpposite();
     }
 
     @Override
-    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face.getAxis() == state.getValue(HORIZONTAL_FACING).getAxis();
+    public Direction.Axis getRotationAxis(BlockState state) {
+        // Говорим моду Create, вдоль какой оси вращается наш сквозной вал
+        // Если блок смотрит на Север/Юг — ось Z, если на Восток/Запад — ось X
+        return state.getValue(HORIZONTAL_FACING).getAxis();
     }
 
     @Override
@@ -62,5 +66,7 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
     @Override
     public BlockEntityType<? extends ThermoGeneratorBlockEntity> getBlockEntityType() {
         return ModBlocks.THERMO_GEN_ENTITY.get();
+
     }
+
 }
