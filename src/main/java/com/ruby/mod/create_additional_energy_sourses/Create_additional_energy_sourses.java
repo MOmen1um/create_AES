@@ -5,7 +5,10 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 
 @Mod(Create_additional_energy_sourses.MODID)
@@ -15,31 +18,29 @@ public class Create_additional_energy_sourses {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, MODID);
 
+    // Наша кастомная вкладка креатива
+    // Наша кастомная вкладка креатива
+    // Наша кастомная вкладка креатива
+    public static final net.neoforged.neoforge.registries.DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_TAB =
+            CREATIVE_MODE_TABS.register("create_aes_tab", () -> CreativeModeTab.builder()
+                    .icon(() -> new ItemStack(ModBlocks.THERMO_GENERATOR.get()))
+                    .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
+                    .displayItems((parameters, output) -> {
+                        // Кладем на витрину полноценные, зарегистрированные Блок-Предметы
+                        output.accept(new ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get(), 1));
+                        output.accept(new ItemStack(ModBlocks.V8_ENGINE_ITEM.get(), 1));
+                    })
+                    .build());
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
-        // Подключаем наши регистраторы к шине мода
         ModBlocks.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
-
-        // Регистрируем рендерер вала вручную — без ломающихся аннотаций
+        // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
-            event.registerBlockEntityRenderer(
-                    ModBlocks.THERMO_GEN_ENTITY.get(),
-                    KineticBlockEntityRenderer::new
-            );
+            event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), KineticBlockEntityRenderer::new);
         });
     }
-    public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.item.CreativeModeTab, net.minecraft.world.item.CreativeModeTab> CREATIVE_TAB =
-            CREATIVE_MODE_TABS.register("create_aes_tab", () -> net.minecraft.world.item.CreativeModeTab.builder()
-                    // Ставим иконку (наш термогенератор)
-                    .icon(() -> new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR.get()))
-                    .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
-                    // Наполняем её блоками:
-                    .displayItems((parameters, output) -> {
-                        output.accept(ModBlocks.THERMO_GENERATOR.get());
-                        output.accept(ModBlocks.V8_ENGINE_BLOCK.get());
-                    })
-                    .build());
 }

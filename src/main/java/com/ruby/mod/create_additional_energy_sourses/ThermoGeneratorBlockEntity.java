@@ -4,15 +4,14 @@ import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import com.simibubi.create.AllBlocks;
 
 public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
 
-    public ThermoGeneratorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
+    // Конструктор адаптирован под два параметра для NeoForge 1.21.1
+    public ThermoGeneratorBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state);
     }
 
     @Override
@@ -23,8 +22,8 @@ public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         BlockState left = level.getBlockState(worldPosition.relative(facing.getClockWise()));
         BlockState right = level.getBlockState(worldPosition.relative(facing.getCounterClockWise()));
 
-        float heatPower = getHeatValue(right);
-        float coldPower = getColdValue(left);
+        float heatPower = getHeatValue(right);  // Справа только тепло
+        float coldPower = getColdValue(left);   // Слева только холод
 
         if (heatPower <= 0 && coldPower <= 0) return 0;
 
@@ -52,5 +51,4 @@ public class ThermoGeneratorBlockEntity extends GeneratingKineticBlockEntity {
         if (internalSpeed <= 0) return 0;
         return internalSpeed * 2.0f;
     }
-
 }
