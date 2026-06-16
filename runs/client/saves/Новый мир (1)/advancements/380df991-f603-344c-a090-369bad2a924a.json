@@ -1228,12 +1228,6 @@
     },
     "done": true
   },
-  "create:recipes/misc/crafting/kinetics/stressometer_from_conversion": {
-    "criteria": {
-      "has_item": "2026-06-16 16:26:36 +0500"
-    },
-    "done": true
-  },
   "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
     "criteria": {
       "has_item": "2026-06-16 16:26:33 +0500"
@@ -1243,6 +1237,24 @@
   "create:shifting_gears": {
     "criteria": {
       "0": "2026-06-16 16:26:33 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/stressometer_from_conversion": {
+    "criteria": {
+      "has_item": "2026-06-16 16:26:36 +0500"
+    },
+    "done": true
+  },
+  "create:wrench_goggles": {
+    "criteria": {
+      "1": "2026-06-16 17:45:09 +0500"
+    },
+    "done": false
+  },
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox_from_conversion": {
+    "criteria": {
+      "has_item": "2026-06-16 17:23:43 +0500"
     },
     "done": true
   },

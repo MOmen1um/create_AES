@@ -10,17 +10,18 @@ import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 
 @Mod(Create_additional_energy_sourses.MODID)
 public class Create_additional_energy_sourses {
-    public static final String MODID = "create_aes";
+    public static final String MODID = "create_additional_energy_sourses";
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, MODID);
 
     public Create_additional_energy_sourses(IEventBus modEventBus, ModContainer modContainer) {
+        // Подключаем наши регистраторы к шине мода
         ModBlocks.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
-        // Ручной слушатель рендерера вала
+        // Регистрируем рендерер вала вручную — без ломающихся аннотаций
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(
                     ModBlocks.THERMO_GEN_ENTITY.get(),
