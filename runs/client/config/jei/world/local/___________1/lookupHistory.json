@@ -1,5 +1,6 @@
 [
   {"version":1},
+  {"ingredient":{"id":"createdieselgenerators:diesel_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:thermo_generator"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"minecraft:spruce_door"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:heavy_tip"},"type":"item_stack","bookmarkType":"INGREDIENT"},

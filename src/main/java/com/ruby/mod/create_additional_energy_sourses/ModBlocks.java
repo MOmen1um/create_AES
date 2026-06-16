@@ -34,6 +34,12 @@ public class ModBlocks {
                             .strength(3.0f)
                             .requiresCorrectToolForDrops()
                             .noOcclusion()));
+    public static final DeferredHolder<Block, V8EngineBlock> V8_ENGINE_BLOCK =
+            BLOCKS.register("v8_engine",
+                    () -> new V8EngineBlock(BlockBehaviour.Properties.of()
+                            .strength(3.0f)
+                            .requiresCorrectToolForDrops()
+                            .noOcclusion()));
 
     // 4. Регистрируем Блок-предмет (чтобы блок можно было держать в руках)
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
@@ -46,6 +52,13 @@ public class ModBlocks {
                             (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
                             THERMO_GENERATOR.get()
                     ).build(null));
+    public static final Supplier<BlockEntityType<ThermoGeneratorBlockEntity>> V8_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("v8_engine",
+                    () -> BlockEntityType.Builder.of(
+                            (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state),
+                            V8_ENGINE_BLOCK.get()
+                    ).build(null));
+
 
     // Метод, который всё это "включает" при запуске мода
     public static void register(IEventBus eventBus) {
