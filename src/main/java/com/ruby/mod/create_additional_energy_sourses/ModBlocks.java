@@ -47,17 +47,13 @@ public class ModBlocks {
 
     // 5. Регистрируем "Мозги" блока (Block Entity)
     public static final Supplier<BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY =
-            BLOCK_ENTITIES.register("thermo_generator",
-                    () -> BlockEntityType.Builder.of(
-                            (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
-                            THERMO_GENERATOR.get()
-                    ).build(null));
-    public static final Supplier<BlockEntityType<ThermoGeneratorBlockEntity>> V8_ENGINE_ENTITY =
-            BLOCK_ENTITIES.register("v8_engine",
-                    () -> BlockEntityType.Builder.of(
-                            (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state),
-                            V8_ENGINE_BLOCK.get()
-                    ).build(null));
+            BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
+                    ThermoGeneratorBlockEntity::new, THERMO_GENERATOR).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("v8_engine_entity", () -> BlockEntityType.Builder.of(
+                    V8EngineBlockEntity::new, V8_ENGINE).build(null));
+
 
 
     // Метод, который всё это "включает" при запуске мода
