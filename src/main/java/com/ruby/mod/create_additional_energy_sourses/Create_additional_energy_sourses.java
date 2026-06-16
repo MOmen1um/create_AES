@@ -40,8 +40,13 @@ public class Create_additional_energy_sourses {
         // Регистрируем вкладки
         CREATIVE_MODE_TABS.register(modEventBus);
 
-
-        // ВНИМАНИЕ: Строка NeoForge.EVENT_BUS.register(this) удалена, чтобы не было ошибки!
+        // ВОТ ЭТУ СТРОЧКУ ДОБАВЬ СЮДА:
+        modEventBus.addListener(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers.class, event -> {
+            event.registerBlockEntityRenderer(
+                    com.ruby.mod.create_additional_energy_sourses.ModBlocks.THERMO_GEN_ENTITY.get(),
+                    ctx -> new com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer(ctx)
+            );
+        });
     }
     @net.neoforged.bus.api.SubscribeEvent
     public static void registerRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
