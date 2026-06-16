@@ -45,20 +45,6 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
     }
 
     @Override
-    public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        Direction facing = state.getValue(HORIZONTAL_FACING);
-        // Проверяем: совпадает ли запрашиваемая сторона с лицом ИЛИ с задней частью блока
-        return face == facing || face == facing.getOpposite();
-    }
-
-    @Override
-    public Direction.Axis getRotationAxis(BlockState state) {
-        // Говорим моду Create, вдоль какой оси вращается наш сквозной вал
-        // Если блок смотрит на Север/Юг — ось Z, если на Восток/Запад — ось X
-        return state.getValue(HORIZONTAL_FACING).getAxis();
-    }
-
-    @Override
     public Class<ThermoGeneratorBlockEntity> getBlockEntityClass() {
         return ThermoGeneratorBlockEntity.class;
     }
@@ -67,6 +53,18 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
     public BlockEntityType<? extends ThermoGeneratorBlockEntity> getBlockEntityType() {
         return ModBlocks.THERMO_GEN_ENTITY.get();
 
+    }
+
+    @Override
+    public boolean hasShaftTowards(net.minecraft.world.level.LevelReader world, BlockPos pos, BlockState state, Direction face) {
+        Direction facing = state.getValue(HORIZONTAL_FACING);
+        // Сквозной вал: и спереди, и сзади!
+        return face == facing || face == facing.getOpposite();
+    }
+
+    @Override
+    public net.minecraft.core.Direction.Axis getRotationAxis(BlockState state) {
+        return state.getValue(HORIZONTAL_FACING).getAxis();
     }
 
 }
