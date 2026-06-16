@@ -17,9 +17,11 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     // Текущая скорость, которую выдает мотор
     private float currentSpeed = 0;
 
-    public V8EngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
-        super(type, pos, state);
+    // Замени старый конструктор на этот вариант с двумя аргументами:
+    public V8EngineBlockEntity(BlockPos pos, BlockState state) {
+        super(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state);
     }
+
 
     @Override
     public void tick() {
