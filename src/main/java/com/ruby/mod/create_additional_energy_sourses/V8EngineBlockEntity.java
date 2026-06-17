@@ -79,7 +79,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float meltingPoint = getMaterialMeltingPoint();
         float safeSpeed = getSafeEngineSpeed();
         float maxSpeed = getMaxEngineSpeed();
-        float targetSpeed = Math.min(Math.abs(getTheoreticalSpeed()), maxSpeed);
+        float targetSpeed = Math.min(Math.abs(targetSliderSpeed), maxSpeed);
 
         if (burnTimeRemaining > 0 && targetSpeed > 0) {
             burnTimeRemaining--;
@@ -219,7 +219,10 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tag.putString("EngineMaterial", engineMaterial);
         tag.putFloat("EngineTemp", engineTemperature);
         tag.putBoolean("IsTurboCharged", isTurboCharged);
+        tag.putFloat("SliderSpeed", targetSliderSpeed);
+
     }
+
 
     @Override
     public void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
@@ -229,6 +232,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         this.engineMaterial = tag.getString("EngineMaterial");
         this.engineTemperature = tag.getFloat("EngineTemp");
         this.isTurboCharged = tag.getBoolean("IsTurboCharged");
+        this.targetSliderSpeed = tag.getFloat("SliderSpeed");
     }
 
     @Override
@@ -239,6 +243,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tag.putString("EngineMaterial", engineMaterial);
         tag.putFloat("EngineTemp", engineTemperature);
         tag.putBoolean("IsTurboCharged", isTurboCharged);
+        tag.putFloat("SliderSpeed", targetSliderSpeed);
+
         return tag;
     }
 
@@ -246,6 +252,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
+
+    public float targetSliderSpeed = 0f;
 }
 
 

@@ -15,6 +15,13 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         super(properties);
     }
 
+    // Каноничный способ активировать ползунок настроек Create в 1.21.1
+    @Override
+    public boolean hasAnalogOutputSignal(BlockState state) {
+        return true;
+    }
+
+
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         // Разворачиваем двигатель лицом к игроку при установке
