@@ -2,13 +2,11 @@ package com.ruby.mod.create_additional_energy_sourses;
 
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -24,10 +22,10 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     private float currentSpeed = 0;
     private float lastSentSpeed = -1f;
 
-    // --- НАСТРОЙКИ СУПЕР-ТЮНИНГА V8 ---
-    public int engineQuality = 100;         // Визуальное качество (20-100%)
-    public float secretEfficiency = 1.0f;   // Скрытый коэффициент удачи (0.80 - 1.20)
-    public String engineMaterial = "iron";   // iron (1024), aluminum (4096), titanium (8192)
+    // --- ПАРАМЕТРЫ УЛЬТИМАТИВНОГО ТЮНИНГА ---
+    public int engineQuality = 100;         // Открытое качество (20-100%)
+    public float secretEfficiency = 1.0f;   // Скрытая удача (0.80 - 1.20)
+    public String engineMaterial = "iron";   // iron, aluminum, titanium
     public float engineTemperature = 20.0f; // Температура мотора в °C
     public boolean isTurboCharged = false;  // Статус наддува
 
@@ -37,171 +35,124 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         super(type, pos, state);
     }
 
-    // Градусы биома (Тайга -30°C, Пустыня +60°C, Остальные +20°C)
-    // ИСПРАВЛЕНИЕ: Используем правильный метод getTemperature без передачи BlockPos!
     public float getAmbientTemperature() {
         if (level == null) return 20.0f;
-        // Используем официальный метод-обходчик от NeoForge:
         float vanillaTemp = level.getBiome(worldPosition).value().getModifiedClimateSettings().temperature();
-
-        if (vanillaTemp <= 0.0f) return -30.0f; // Тайга / Зима
-        if (vanillaTemp >= 1.5f) return 60.0f;  // Пустыня / Незер
-        return 20.0f; // Обычный биом
+        if (vanillaTemp <= 0.0f) return -30.0f;
+        if (vanillaTemp >= 1.5f) return 60.0f;
+        return 20.0f;
     }
 
-
-
-
-    // Расчет лимита RPM (Заслонка редстоуна + Сплав + Скрытый тюнинг)
-    // Обновленный расчет предела RPM с учетом взрывной силы топлива!
+    // Рассчитываем БЕЗОПАСНЫЙ ПРЕДЕЛ оборотов без перегрева
     private float getMaxEngineSpeed() {
-        float alloyLimit = 1024f;
-        if (engineMaterial.equals("aluminum")) alloyLimit = 4096f;
-        if (engineMaterial.equals("titanium")) alloyLimit = 8192f;
+        float safeSpeed = getSafeEngineSpeed();
 
-        // Потенциал мотора с учетом открытого качества и скрытого счастья тюнера
-        float potentialMax = alloyLimit * (engineQuality / 100.0f) * secretEfficiency;
-
-        // Считываем заслонку редстоуна (0 - 15)
-        int redstoneSignal = level.getBestNeighborSignal(worldPosition);
-        float throttleProgress = redstoneSignal / 15.0f;
-
-        // Модификатор турбонаддува (без него — только половина мощности)
-        float limitModifier = isTurboCharged ? 1.0f : 0.5f;
-
-        // НОВАЯ ФИШКА: Считываем множитель скорости текущего топлива в баке!
-        float fuelSpeedMultiplier = 0.0f;
+        float fuelSpeedMultiplier = 1.0f;
         if (burnTimeRemaining > 0 && !fuelTank.isEmpty()) {
-            fuelSpeedMultiplier = getFuelSpeedMultiplier(fuelTank.getFluid().getFluid());
-        } else if (fuelTank.isEmpty() && currentSpeed > 0) {
-            // Если топливо только что кончилось, но мотор еще докручивается по инерции
-            fuelSpeedMultiplier = 1.0f;
+            String fluidId = BuiltInRegistries.FLUID.getKey(fuelTank.getFluid().getFluid()).toString();
+            if (fluidId.equals("createdieselgenerators:ethanol")) fuelSpeedMultiplier = 0.6f;
+            if (fluidId.equals("createdieselgenerators:biodiesel")) fuelSpeedMultiplier = 1.0f;
+            if (fluidId.equals("createdieselgenerators:diesel")) fuelSpeedMultiplier = 1.4f;
+            if (fluidId.equals("createdieselgenerators:gasoline")) fuelSpeedMultiplier = 2.0f;
         }
 
-        return potentialMax * throttleProgress * limitModifier * fuelSpeedMultiplier;
+        return safeSpeed * fuelSpeedMultiplier;
     }
-
-    // Вспомогательный метод для определения взрывной силы топлива
-    private float getFuelSpeedMultiplier(Fluid fluid) {
-        String fluidId = net.minecraft.core.registries.BuiltInRegistries.FLUID.getKey(fluid).toString();
-        if (fluidId.equals("createdieselgenerators:ethanol")) return 0.6f;     // Спирт ленивый
-        if (fluidId.equals("createdieselgenerators:biodiesel")) return 1.0f;   // Биодизель (база)
-        if (fluidId.equals("createdieselgenerators:diesel")) return 1.4f;      // Дизель дает тягу
-        if (fluidId.equals("createdieselgenerators:gasoline")) return 2.2f;    // Бензин — взрывной разгон!
-        return 1.0f;
-    }
-
 
     @Override
     public void tick() {
         super.tick();
-        // ПРОВЕРКА КОНФИГА CREATE: Если лимит зажат на 256, мотор уходит в аварийный режим
-        // Мы считываем текущее значение максимальной скорости из официального класса Create!
-        int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
-        if (createMaxSpeed <= 256) {
-            currentSpeed = 0;
-            accelerationTicks = 0;
-            burnTimeRemaining = 0;
-
-            // Раз в 5 секунд (100 тиков) пишем предупреждение игроку над блоком!
-            if (level.getGameTime() % 40 == 0) {
-                // Спавним частицы сердитого дыма (как у злой деревни), показывая, что мотор заблокирован
-                level.addParticle(net.minecraft.core.particles.ParticleTypes.ANGRY_VILLAGER,
-                        worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5, 0, 0, 0);
-            }
-            return; // Глушим мотор, не давая ему выполнять остальной код!
-        }
-
         if (level == null || level.isClientSide) return;
 
-        float ambientTemp = getAmbientTemperature();
-        float maxAllowedTemp = getMaterialMeltingPoint();
-        float maxSpeed = getMaxEngineSpeed();
-        int maxAccTicks = 40;
+        // 1. АВАРИЙНАЯ ЗАЩИТА: Блокировка, если в конфиге Create лимит меньше 32768!
+        int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
+        if (createMaxSpeed < 32768) {
+            currentSpeed = 0;
+            return;
+        }
 
-        // 1. ТЕРМОДИНАМИКА И ПАРАБОЛИЧЕСКИЙ РАЗГОН
-        if (burnTimeRemaining > 0) {
+        float ambientTemp = getAmbientTemperature();
+        float meltingPoint = getMaterialMeltingPoint();
+        float safeSpeed = getSafeEngineSpeed();
+        float maxSpeed = getMaxEngineSpeed();
+
+        // Считываем ползунок регулятора скорости, но зажимаем его топливным максимумом
+        float targetSpeed = Math.min(Math.abs(getTheoreticalSpeed()), maxSpeed);
+
+        // 2. РАБОТА НА ТОПЛИВЕ И ПАРАБОЛИЧЕСКИЙ РАЗГОН ДО ПОЛЗУНКА
+        if (burnTimeRemaining > 0 && targetSpeed > 0) {
             burnTimeRemaining--;
 
-            if (currentSpeed < maxSpeed) {
-                if (accelerationTicks < maxAccTicks) accelerationTicks++;
-                float progress = (float) accelerationTicks / maxAccTicks;
-                currentSpeed = maxSpeed * (progress * progress);
-                if (currentSpeed > maxSpeed) currentSpeed = maxSpeed;
+            if (currentSpeed < targetSpeed) {
+                if (accelerationTicks < 40) accelerationTicks++;
+                float progress = (float) accelerationTicks / 40;
+                currentSpeed = targetSpeed * (progress * progress);
+            } else {
+                currentSpeed = targetSpeed;
             }
 
-            // Нагрев зависит от RPM, плотности топлива и скрытой лотереи
+            // ТЕРМОДИНАМИКА КУБИЧЕСКОГО ПЕРЕГРЕВА 📈
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
-            float fuelHeatMultiplier = getFuelHeatMultiplier(fluidInTank);
+            float fuelHeat = getFuelHeatMultiplier(fluidInTank);
 
-            // Скрытый коэффициент secretEfficiency гасит тепловыделение!
-            float heatGen = (currentSpeed / 256f) * fuelHeatMultiplier * (2.0f - secretEfficiency);
-            engineTemperature += heatGen * 0.4f;
+            // Отношение текущей скорости к безопасной в кубе!
+            float speedRatio = currentSpeed / safeSpeed;
+            float heatGeneration = (float) Math.pow(speedRatio, 3) * fuelHeat * 1.5f;
+
+            engineTemperature += heatGeneration;
 
         } else {
-            // Потребление 100 mB солярки
-            if (fuelTank.getFluidAmount() >= 100) {
+            // Глоток топлива из бака
+            if (fuelTank.getFluidAmount() >= 100 && targetSpeed > 0) {
                 Fluid fluidInTank = fuelTank.getFluid().getFluid();
-                float fuelEfficiency = getFuelBurnTime(fluidInTank);
-
-                if (fuelEfficiency > 0) {
-                    fuelTank.drain(100, FluidAction.EXECUTE);
-                    burnTimeRemaining = (int) (200 * (fuelEfficiency / 100f));
-                    level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-                    setChanged();
-                }
+                burnTimeRemaining = (int) (200 * (getFuelBurnTime(fluidInTank) / 100f));
+                fuelTank.drain(100, FluidAction.EXECUTE);
+                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+                setChanged();
             } else {
-                // Плавное затухание по обратной параболе
+                // Двигатель плавно глушится
                 if (accelerationTicks > 0) {
                     accelerationTicks--;
-                    float progress = (float) accelerationTicks / maxAccTicks;
-                    currentSpeed = maxSpeed * (progress * progress);
+                    float progress = (float) accelerationTicks / 40;
+                    currentSpeed = targetSpeed * (progress * progress);
                 } else {
                     currentSpeed = 0;
                 }
             }
 
-            // Остывание до температуры окружающей среды
-            if (engineTemperature > ambientTemp) {
-                engineTemperature -= 0.5f;
-            } else if (engineTemperature < ambientTemp) {
-                engineTemperature += 0.2f;
-            }
+            // Естественное остывание до температуры биома
+            if (engineTemperature > ambientTemp) engineTemperature -= 0.6f;
+            else if (engineTemperature < ambientTemp) engineTemperature += 0.2f;
         }
 
-        // 2. ВЗРЫВ ПРИ ПЛАВЛЕНИИ МОТОРНОГО СПЛАВА 💥
-        if (engineTemperature >= maxAllowedTemp) {
-            level.explode(null, worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, 8.0f, true, net.minecraft.world.level.Level.ExplosionInteraction.TNT);
+        // 3. КАТАСТРОФИЧЕСКИЙ ВЗРЫВ ПРИ ПЛАВЛЕНИИ СПЛАВА МОТОРА 💥
+        if (engineTemperature >= meltingPoint) {
+            level.explode(null, worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, 9.0f, true, net.minecraft.world.level.Level.ExplosionInteraction.TNT);
             level.destroyBlock(worldPosition, false);
             return;
         }
 
-        // 3. АНТИ-СПАМ СИНХРОНИЗАЦИЯ СЕТИ CREATE (Шаг 32 RPM)
-        if (Math.abs(currentSpeed - lastSentSpeed) >= 32f || (currentSpeed == 0 && lastSentSpeed != 0)) {
+        // 4. СИНХРОНИЗАЦИЯ СЕТИ И ТЕЛЕМЕТРИИ
+        if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
             updateGeneratedRotation();
             lastSentSpeed = currentSpeed;
         }
 
-        // Синхронизация данных для очков раз в секунду
         if (level.getGameTime() % 20 == 0) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             setChanged();
         }
 
-        // 4. ЭФФЕКТ ВЫХЛОПА (Дым густеет от перегрева)
-        float smokeChance = 0.1f + (engineTemperature / maxAllowedTemp) * 0.7f;
+        // Густота дыма зависит от нагрева ядра
+        float smokeChance = 0.05f + (engineTemperature / meltingPoint) * 0.75f;
         if (currentSpeed > 0 && level.random.nextFloat() < smokeChance) {
-            double x = worldPosition.getX() + 0.5;
-            double y = worldPosition.getY() + 1.1;
-            double z = worldPosition.getZ() + 0.5;
-            level.addParticle(ParticleTypes.LARGE_SMOKE, x, y, z, 0.0, 0.1, 0.0);
+            level.addParticle(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 0, 0.08, 0);
         }
     }
-
     private float getMaterialMeltingPoint() {
         if (engineMaterial.equals("aluminum")) return 660.0f;
         if (engineMaterial.equals("titanium")) return 1660.0f;
-        return 1200.0f;
+        return 1200.0f; // Чугун
     }
 
     @Override
@@ -220,54 +171,53 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     private float getFuelHeatMultiplier(Fluid fluid) {
         String fluidId = BuiltInRegistries.FLUID.getKey(fluid).toString();
-        if (fluidId.equals("createdieselgenerators:ethanol")) return 0.6f;
+        if (fluidId.equals("createdieselgenerators:ethanol")) return 0.5f;
         if (fluidId.equals("createdieselgenerators:biodiesel")) return 1.0f;
-        if (fluidId.equals("createdieselgenerators:diesel")) return 1.4f;
-        if (fluidId.equals("createdieselgenerators:gasoline")) return 2.2f;
+        if (fluidId.equals("createdieselgenerators:diesel")) return 1.5f;
+        if (fluidId.equals("createdieselgenerators:gasoline")) return 2.5f;
         return 1.0f;
     }
 
     @Override
     public float calculateAddedStressCapacity() {
         if (currentSpeed <= 0) return 0;
-        float materialMultiplier = engineMaterial.equals("iron") ? 12.0f : 8.0f;
+        float materialMultiplier = engineMaterial.equals("iron") ? 15.0f : 10.0f;
         return currentSpeed * materialMultiplier * (engineQuality / 100.0f);
     }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-        tooltip.add(Component.literal(""));
-
         int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
-        if (createMaxSpeed < 16384) {
+        if (createMaxSpeed < 32768) {
             tooltip.add(Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
-            tooltip.add(Component.literal("§7В конфиге Create лимит скорости зажат на 256."));
-            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в настройках сервера"));
-            tooltip.add(Component.literal("§7до 16384 или больше, чтобы запустить этот двигатель!"));
+            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в конфиге Create до 32768!"));
             return true;
         }
 
+        super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+        tooltip.add(Component.literal(""));
 
         String matColor = engineMaterial.equals("titanium") ? "§b" : (engineMaterial.equals("aluminum") ? "§7" : "§8");
         tooltip.add(Component.literal("§6Спецификация ДВС V8:"));
         tooltip.add(Component.literal(" §eМатериал блока: " + matColor + engineMaterial.toUpperCase()));
         tooltip.add(Component.literal(" §eКачество сборки: §a" + engineQuality + "%"));
 
-        String tempColor = engineTemperature > (getMaterialMeltingPoint() - 200) ? "§c" : (engineTemperature > 100 ? "§6" : "§a");
-        tooltip.add(Component.literal(" §eТемпература ДВС: " + tempColor + String.format("%.1f", engineTemperature) + "°C / " + getMaterialMeltingPoint() + "°C"));
-        tooltip.add(Component.literal(" §7(Окружающая среда: " + String.format("%.1f", getAmbientTemperature()) + "°C)"));
+        String turboText = isTurboCharged ? "§aУСТАНОВЛЕН" : "§cОТСУТСТВУЕТ";
+        tooltip.add(Component.literal(" §eТурбонаддув: " + turboText));
+
+        tooltip.add(Component.literal(" §6Телеметрия температур:"));
+        String tempColor = engineTemperature > (getMaterialMeltingPoint() - 200) ? "§c" : (engineTemperature > 90 ? "§6" : "§a");
+        tooltip.add(Component.literal(" §eТемпература ядра: " + tempColor + String.format("%.1f", engineTemperature) + "°C / " + getMaterialMeltingPoint() + "°C"));
+        tooltip.add(Component.literal(" §eБезопасная зона: §aдо " + String.format("%.0f", getSafeEngineSpeed()) + " RPM"));
 
         if (!fuelTank.isEmpty()) {
-            String fuelName = fuelTank.getFluid().getHoverName().getString();
-            tooltip.add(Component.literal(" §eТопливо в картере: §7" + fuelName + " (" + fuelTank.getFluidAmount() + " mB)"));
+            tooltip.add(Component.literal(" §eТопливо: §7" + fuelTank.getFluid().getHoverName().getString() + " (" + fuelTank.getFluidAmount() + " mB)"));
         } else {
             tooltip.add(Component.literal(" §cБак пуст"));
         }
         return true;
     }
 
-    // Открытые методы сохранения NBT без ключевого слова protected
     @Override
     public void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         super.write(tag, registries, clientPacket);
@@ -277,6 +227,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tag.putFloat("EngineTemp", engineTemperature);
         tag.putBoolean("IsTurboCharged", isTurboCharged);
     }
+
     @Override
     public void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
@@ -297,10 +248,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tag.putBoolean("IsTurboCharged", isTurboCharged);
         return tag;
     }
+
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 }
-
-
