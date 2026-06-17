@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -22,12 +23,11 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     private float currentSpeed = 0;
     private float lastSentSpeed = -1f;
 
-    // --- ПАРАМЕТРЫ УЛЬТИМАТИВНОГО ТЮНИНГА ---
-    public int engineQuality = 100;         // Открытое качество (20-100%)
-    public float secretEfficiency = 1.0f;   // Скрытая удача (0.80 - 1.20)
-    public String engineMaterial = "iron";   // iron, aluminum, titanium
-    public float engineTemperature = 20.0f; // Температура мотора в °C
-    public boolean isTurboCharged = false;  // Статус наддува
+    public int engineQuality = 100;
+    public float secretEfficiency = 1.0f;
+    public String engineMaterial = "iron";
+    public float engineTemperature = 20.0f;
+    public boolean isTurboCharged = false;
 
     private int accelerationTicks = 0;
 
@@ -43,10 +43,16 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return 20.0f;
     }
 
-    // Рассчитываем БЕЗОПАСНЫЙ ПРЕДЕЛ оборотов без перегрева
+    public float getSafeEngineSpeed() {
+        float baseLimit = 1024f;
+        if (engineMaterial.equals("aluminum")) baseLimit = 4096f;
+        if (engineMaterial.equals("titanium")) baseLimit = 8192f;
+        float turboModifier = isTurboCharged ? 2.0f : 1.0f;
+        return baseLimit * (engineQuality / 100.0f) * secretEfficiency * turboModifier;
+    }
+
     private float getMaxEngineSpeed() {
         float safeSpeed = getSafeEngineSpeed();
-
         float fuelSpeedMultiplier = 1.0f;
         if (burnTimeRemaining > 0 && !fuelTank.isEmpty()) {
             String fluidId = BuiltInRegistries.FLUID.getKey(fuelTank.getFluid().getFluid()).toString();
@@ -55,7 +61,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             if (fluidId.equals("createdieselgenerators:diesel")) fuelSpeedMultiplier = 1.4f;
             if (fluidId.equals("createdieselgenerators:gasoline")) fuelSpeedMultiplier = 2.0f;
         }
-
         return safeSpeed * fuelSpeedMultiplier;
     }
 
@@ -64,7 +69,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         super.tick();
         if (level == null || level.isClientSide) return;
 
-        // 1. АВАРИЙНАЯ ЗАЩИТА: Блокировка, если в конфиге Create лимит меньше 32768!
         int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
         if (createMaxSpeed < 32768) {
             currentSpeed = 0;
@@ -75,11 +79,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float meltingPoint = getMaterialMeltingPoint();
         float safeSpeed = getSafeEngineSpeed();
         float maxSpeed = getMaxEngineSpeed();
-
-        // Считываем ползунок регулятора скорости, но зажимаем его топливным максимумом
         float targetSpeed = Math.min(Math.abs(getTheoreticalSpeed()), maxSpeed);
 
-        // 2. РАБОТА НА ТОПЛИВЕ И ПАРАБОЛИЧЕСКИЙ РАЗГОН ДО ПОЛЗУНКА
         if (burnTimeRemaining > 0 && targetSpeed > 0) {
             burnTimeRemaining--;
 
@@ -91,18 +92,14 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 currentSpeed = targetSpeed;
             }
 
-            // ТЕРМОДИНАМИКА КУБИЧЕСКОГО ПЕРЕГРЕВА 📈
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
             float fuelHeat = getFuelHeatMultiplier(fluidInTank);
-
-            // Отношение текущей скорости к безопасной в кубе!
             float speedRatio = currentSpeed / safeSpeed;
             float heatGeneration = (float) Math.pow(speedRatio, 3) * fuelHeat * 1.5f;
 
             engineTemperature += heatGeneration;
 
         } else {
-            // Глоток топлива из бака
             if (fuelTank.getFluidAmount() >= 100 && targetSpeed > 0) {
                 Fluid fluidInTank = fuelTank.getFluid().getFluid();
                 burnTimeRemaining = (int) (200 * (getFuelBurnTime(fluidInTank) / 100f));
@@ -110,7 +107,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
                 setChanged();
             } else {
-                // Двигатель плавно глушится
                 if (accelerationTicks > 0) {
                     accelerationTicks--;
                     float progress = (float) accelerationTicks / 40;
@@ -120,19 +116,16 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 }
             }
 
-            // Естественное остывание до температуры биома
             if (engineTemperature > ambientTemp) engineTemperature -= 0.6f;
             else if (engineTemperature < ambientTemp) engineTemperature += 0.2f;
         }
 
-        // 3. КАТАСТРОФИЧЕСКИЙ ВЗРЫВ ПРИ ПЛАВЛЕНИИ СПЛАВА МОТОРА 💥
         if (engineTemperature >= meltingPoint) {
             level.explode(null, worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, 9.0f, true, net.minecraft.world.level.Level.ExplosionInteraction.TNT);
             level.destroyBlock(worldPosition, false);
             return;
         }
 
-        // 4. СИНХРОНИЗАЦИЯ СЕТИ И ТЕЛЕМЕТРИИ
         if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
             updateGeneratedRotation();
             lastSentSpeed = currentSpeed;
@@ -143,16 +136,16 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             setChanged();
         }
 
-        // Густота дыма зависит от нагрева ядра
         float smokeChance = 0.05f + (engineTemperature / meltingPoint) * 0.75f;
-        if (currentSpeed > 0 && level.random.nextFloat() < smokeChance) {
-            level.addParticle(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 0, 0.08, 0);
+        if (currentSpeed > 0 && level.random.nextFloat() < smokeChance && level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
         }
     }
+
     private float getMaterialMeltingPoint() {
         if (engineMaterial.equals("aluminum")) return 660.0f;
         if (engineMaterial.equals("titanium")) return 1660.0f;
-        return 1200.0f; // Чугун
+        return 1200.0f;
     }
 
     @Override
@@ -254,3 +247,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 }
+
+
+

@@ -50,9 +50,10 @@
   },
   "create:wrench_goggles": {
     "criteria": {
+      "0": "2026-06-17 12:25:13 +0500",
       "1": "2026-06-17 11:34:30 +0500"
     },
-    "done": false
+    "done": true
   },
   "minecraft:recipes/decorations/chest": {
     "criteria": {
