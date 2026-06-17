@@ -22,20 +22,21 @@ base {
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 runs {
+    // В версии 7.1.25 настройки пишутся ТОЛЬКО внутри configureEach!
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
         systemProperty 'forge.logging.console.level', 'debug'
 
-        // Самый надежный способ для версии 7.1.25
+        // Автоматически подключает миксины и ресурсы твоего мода к игре
         modSource project.sourceSets.main
     }
 
+    // ИСПРАВЛЕНИЕ: Блоки client и server пишем пустыми, так как все системные свойства
+    // и пути к миксинам NeoGradle 7.1.25 теперь подхватывает автоматически через modSource!
     client {
-        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
     }
 
     server {
-        systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         programArgument '--nogui'
     }
 }
@@ -84,5 +85,8 @@ idea {
         downloadSources = true
         downloadJavadoc = true
     }
+}
+compileJava {
+    options.compilerArgs << "-Atokens=neoforge=true"
 }
 processResources.outputs.upToDateWhen { false }

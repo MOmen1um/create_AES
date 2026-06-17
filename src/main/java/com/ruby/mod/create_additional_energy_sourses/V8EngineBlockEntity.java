@@ -53,24 +53,65 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
 
     // Расчет лимита RPM (Заслонка редстоуна + Сплав + Скрытый тюнинг)
+    // Обновленный расчет предела RPM с учетом взрывной силы топлива!
     private float getMaxEngineSpeed() {
         float alloyLimit = 1024f;
         if (engineMaterial.equals("aluminum")) alloyLimit = 4096f;
         if (engineMaterial.equals("titanium")) alloyLimit = 8192f;
 
+        // Потенциал мотора с учетом открытого качества и скрытого счастья тюнера
         float potentialMax = alloyLimit * (engineQuality / 100.0f) * secretEfficiency;
 
+        // Считываем заслонку редстоуна (0 - 15)
         int redstoneSignal = level.getBestNeighborSignal(worldPosition);
         float throttleProgress = redstoneSignal / 15.0f;
 
+        // Модификатор турбонаддува (без него — только половина мощности)
         float limitModifier = isTurboCharged ? 1.0f : 0.5f;
 
-        return potentialMax * throttleProgress * limitModifier;
+        // НОВАЯ ФИШКА: Считываем множитель скорости текущего топлива в баке!
+        float fuelSpeedMultiplier = 0.0f;
+        if (burnTimeRemaining > 0 && !fuelTank.isEmpty()) {
+            fuelSpeedMultiplier = getFuelSpeedMultiplier(fuelTank.getFluid().getFluid());
+        } else if (fuelTank.isEmpty() && currentSpeed > 0) {
+            // Если топливо только что кончилось, но мотор еще докручивается по инерции
+            fuelSpeedMultiplier = 1.0f;
+        }
+
+        return potentialMax * throttleProgress * limitModifier * fuelSpeedMultiplier;
     }
+
+    // Вспомогательный метод для определения взрывной силы топлива
+    private float getFuelSpeedMultiplier(Fluid fluid) {
+        String fluidId = net.minecraft.core.registries.BuiltInRegistries.FLUID.getKey(fluid).toString();
+        if (fluidId.equals("createdieselgenerators:ethanol")) return 0.6f;     // Спирт ленивый
+        if (fluidId.equals("createdieselgenerators:biodiesel")) return 1.0f;   // Биодизель (база)
+        if (fluidId.equals("createdieselgenerators:diesel")) return 1.4f;      // Дизель дает тягу
+        if (fluidId.equals("createdieselgenerators:gasoline")) return 2.2f;    // Бензин — взрывной разгон!
+        return 1.0f;
+    }
+
 
     @Override
     public void tick() {
         super.tick();
+        // ПРОВЕРКА КОНФИГА CREATE: Если лимит зажат на 256, мотор уходит в аварийный режим
+        // Мы считываем текущее значение максимальной скорости из официального класса Create!
+        int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
+        if (createMaxSpeed <= 256) {
+            currentSpeed = 0;
+            accelerationTicks = 0;
+            burnTimeRemaining = 0;
+
+            // Раз в 5 секунд (100 тиков) пишем предупреждение игроку над блоком!
+            if (level.getGameTime() % 40 == 0) {
+                // Спавним частицы сердитого дыма (как у злой деревни), показывая, что мотор заблокирован
+                level.addParticle(net.minecraft.core.particles.ParticleTypes.ANGRY_VILLAGER,
+                        worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5, 0, 0, 0);
+            }
+            return; // Глушим мотор, не давая ему выполнять остальной код!
+        }
+
         if (level == null || level.isClientSide) return;
 
         float ambientTemp = getAmbientTemperature();
@@ -197,6 +238,16 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
         tooltip.add(Component.literal(""));
+
+        int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
+        if (createMaxSpeed < 16384) {
+            tooltip.add(Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
+            tooltip.add(Component.literal("§7В конфиге Create лимит скорости зажат на 256."));
+            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в настройках сервера"));
+            tooltip.add(Component.literal("§7до 16384 или больше, чтобы запустить этот двигатель!"));
+            return true;
+        }
+
 
         String matColor = engineMaterial.equals("titanium") ? "§b" : (engineMaterial.equals("aluminum") ? "§7" : "§8");
         tooltip.add(Component.literal("§6Спецификация ДВС V8:"));
