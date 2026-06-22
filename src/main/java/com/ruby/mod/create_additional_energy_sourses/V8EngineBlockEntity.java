@@ -64,83 +64,82 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return safeSpeed * fuelSpeedMultiplier;
     }
 
-    @Override
     public void tick() {
-        super.tick();
-        if (level == null || level.isClientSide) return;
+        // ---- 1. СЧИТЫВАЕМ РЕДСТОУН ДЛЯ ПЕРЕДАЧИ ОБОРОТОВ ----
+        float targetSpeed = 0.0f;
+        if (this.level != null) {
+            // Проверяем силу редстоуна, поступающую на наш блок
+            int redstoneSignal = this.level.getBestNeighborSignal(this.worldPosition);
 
-        int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
-        if (createMaxSpeed < 32768) {
-            currentSpeed = 0;
-            return;
+            // Масштабируем сигнал: сила 15 выдаст хардкорные 3840 RPM!
+            // Безопасный чугунный лимит (1024 RPM) будет достигаться примерно на 4-й силе сигнала.
+            targetSpeed = redstoneSignal * 256.0f;
         }
 
-        float ambientTemp = getAmbientTemperature();
-        float meltingPoint = getMaterialMeltingPoint();
-        float safeSpeed = getSafeEngineSpeed();
-        float maxSpeed = getMaxEngineSpeed();
-        float targetSpeed = Math.min(Math.abs(targetSliderSpeed), maxSpeed);
+        float safeSpeed = 1024.0f;         // ТЕСТОВЫЙ ЧУГУН: лимит до 1024 RPM
+        float meltingPoint = 1200.0f;      // ТЕСТОВЫЙ ЧУГУН: температура взрыва 1200°C
 
-        if (burnTimeRemaining > 0 && targetSpeed > 0) {
-            burnTimeRemaining--;
+        // ---- 2. ПАРАБОЛИЧЕСКИЙ РАЗГОН И ИНЕРЦИЯ ----
+        boolean hasFuel = this.fuelTank != null && !this.fuelTank.getFluid().isEmpty()
+                && this.fuelTank.getFluid().getAmount() >= 10;
 
-            if (currentSpeed < targetSpeed) {
-                if (accelerationTicks < 40) accelerationTicks++;
-                float progress = (float) accelerationTicks / 40;
-                currentSpeed = targetSpeed * (progress * progress);
-            } else {
-                currentSpeed = targetSpeed;
+        if (hasFuel && targetSpeed > 0) {
+            if (accelerationTicks < 40) { // 2 секунды на разгон
+                accelerationTicks++;
             }
-
-            Fluid fluidInTank = fuelTank.getFluid().getFluid();
-            float fuelHeat = getFuelHeatMultiplier(fluidInTank);
-            float speedRatio = currentSpeed / safeSpeed;
-            float heatGeneration = (float) Math.pow(speedRatio, 3) * fuelHeat * 1.5f;
-
-            engineTemperature += heatGeneration;
-
+            float progress = (float) accelerationTicks / 40.0f;
+            this.currentSpeed = targetSpeed * (progress * progress);
         } else {
-            if (fuelTank.getFluidAmount() >= 100 && targetSpeed > 0) {
-                Fluid fluidInTank = fuelTank.getFluid().getFluid();
-                burnTimeRemaining = (int) (200 * (getFuelBurnTime(fluidInTank) / 100f));
-                fuelTank.drain(100, FluidAction.EXECUTE);
-                level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-                setChanged();
+            // Если убрали редстоун или кончилось топливо — плавно глохнет
+            if (accelerationTicks > 0) {
+                accelerationTicks--;
+            }
+            float progress = (float) accelerationTicks / 40.0f;
+            // Чтобы инерция работала правильно, плавно снижаем скорость от последних оборотов
+            this.currentSpeed = (this.currentSpeed > 0) ? this.currentSpeed * 0.95f : 0.0f;
+            if (this.currentSpeed < 1.0f) this.currentSpeed = 0.0f;
+        }
+
+        // Передаем текущие обороты на валы Create
+        this.updateGeneratedRotation();
+
+        // ---- 3. КУБИЧЕСКАЯ ТЕРМОДИНАМИКА ----
+        if (this.level != null && !this.level.isClientSide) {
+            float biomeTemperature = this.level.getBiome(this.worldPosition).value().getBaseTemperature();
+            float baseWorldTemp = (biomeTemperature * 40.0f) - 10.0f;
+
+            if (hasFuel && this.currentSpeed > 0) {
+                float fuelHeatMultiplier = 1.5f;
+                float speedRatio = this.currentSpeed / safeSpeed;
+
+                // Кубический нагрев с балансовым делителем
+                float heatGeneration = ((float) Math.pow(speedRatio, 3) * fuelHeatMultiplier) / 4.0f;
+                this.engineTemperature += heatGeneration;
+
+                // Расход топлива (NeoForge 1.21.1)
+                this.fuelTank.drain(10, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
             } else {
-                if (accelerationTicks > 0) {
-                    accelerationTicks--;
-                    float progress = (float) accelerationTicks / 40;
-                    currentSpeed = targetSpeed * (progress * progress);
-                } else {
-                    currentSpeed = 0;
+                // Естественное охлаждение до комнатной температуры
+                if (this.engineTemperature > baseWorldTemp) {
+                    this.engineTemperature -= 1.5f;
+                } else if (this.engineTemperature < baseWorldTemp) {
+                    this.engineTemperature += 0.1f;
                 }
             }
 
-            if (engineTemperature > ambientTemp) engineTemperature -= 0.6f;
-            else if (engineTemperature < ambientTemp) engineTemperature += 0.2f;
-        }
+            // ---- 4. АВАРИЙНЫЙ ВЗРЫВ ----
+            if (this.engineTemperature >= meltingPoint) {
+                this.level.explode(null, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), 4.0f, true, net.minecraft.world.level.Level.ExplosionInteraction.BLOCK);
+                this.level.destroyBlock(this.worldPosition, false);
+                return;
+            }
 
-        if (engineTemperature >= meltingPoint) {
-            level.explode(null, worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, 9.0f, true, net.minecraft.world.level.Level.ExplosionInteraction.TNT);
-            level.destroyBlock(worldPosition, false);
-            return;
-        }
-
-        if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
-            updateGeneratedRotation();
-            lastSentSpeed = currentSpeed;
-        }
-
-        if (level.getGameTime() % 20 == 0) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-            setChanged();
-        }
-
-        float smokeChance = 0.05f + (engineTemperature / meltingPoint) * 0.75f;
-        if (currentSpeed > 0 && level.random.nextFloat() < smokeChance && level instanceof ServerLevel serverLevel) {
-            serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
+            this.setChanged();
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
         }
     }
+
+
 
     private float getMaterialMeltingPoint() {
         if (engineMaterial.equals("aluminum")) return 660.0f;
