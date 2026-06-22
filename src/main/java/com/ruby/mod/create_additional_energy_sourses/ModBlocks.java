@@ -42,7 +42,7 @@ public class ModBlocks {
 
     // 5. Энтити Термогенератора (Явно передаем тип через .get() в лямбду)
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY =
-            BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
+            BLOCK_ENTITIES.register("thermo_generator_entity", () -> BlockEntityType.Builder.of(
                     (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
                     THERMO_GENERATOR.get()).build(null));
 

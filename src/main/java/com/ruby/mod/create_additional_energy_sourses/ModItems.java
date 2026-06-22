@@ -23,37 +23,4 @@ public class ModItems {
     // Официальный предмет для термогенератора блока
     public static final java.util.function.Supplier<net.minecraft.world.item.Item> THERMO_GENERATOR_ITEM = ITEMS.register("thermo_generator",
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.THERMO_GENERATOR.get(), new net.minecraft.world.item.Item.Properties()));
-
-
-    // ==================== ПАКЕТ ПРЕДМЕТОВ ДЛЯ БЛОКОВ ДВС ====================
-
-    // Алюминий
-    public static final Supplier<Item> ALUMINUM_BLOCK_ITEM = ITEMS.register("aluminum_block",
-            () -> new BlockItem(ModBlocks.ALUMINUM_BLOCK.get(), new Item.Properties()));
-
-    public static final Supplier<Item> ALUMINUM_STAIRS_ITEM = ITEMS.register("aluminum_stairs",
-            () -> new BlockItem(ModBlocks.ALUMINUM_STAIRS.get(), new Item.Properties()));
-
-    public static final Supplier<Item> ALUMINUM_SLAB_ITEM = ITEMS.register("aluminum_slab",
-            () -> new BlockItem(ModBlocks.ALUMINUM_SLAB.get(), new Item.Properties()));
-
-    // Титан
-    public static final Supplier<Item> TITANIUM_BLOCK_ITEM = ITEMS.register("titanium_block",
-            () -> new BlockItem(ModBlocks.TITANIUM_BLOCK.get(), new Item.Properties()));
-
-    public static final Supplier<Item> TITANIUM_STAIRS_ITEM = ITEMS.register("titanium_stairs",
-            () -> new BlockItem(ModBlocks.TITANIUM_STAIRS.get(), new Item.Properties()));
-
-    public static final Supplier<Item> TITANIUM_SLAB_ITEM = ITEMS.register("titanium_slab",
-            () -> new BlockItem(ModBlocks.TITANIUM_SLAB.get(), new Item.Properties()));
-
-    // Органы ДВС
-    public static final Supplier<Item> ENGINE_VALVE_ITEM = ITEMS.register("engine_valve",
-            () -> new BlockItem(ModBlocks.ENGINE_VALVE.get(), new Item.Properties()));
-
-    public static final Supplier<Item> TURBOCHARGER_ITEM = ITEMS.register("turbocharger",
-            () -> new BlockItem(ModBlocks.TURBOCHARGER.get(), new Item.Properties()));
-
-    public static final Supplier<Item> CRANKSHAFT_ITEM = ITEMS.register("crankshaft",
-            () -> new BlockItem(ModBlocks.CRANKSHAFT.get(), new Item.Properties()));
 }

@@ -38,10 +38,10 @@ public class Create_additional_energy_sourses {
         CREATIVE_MODE_TABS.register(modEventBus);
 
         // Слушатель рендереров валов для ОБОИХ блоков
-        modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
-            event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), KineticBlockEntityRenderer::new);
-        });
+        //modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
+        //    event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
+        //    event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), KineticBlockEntityRenderer::new);
+        //});
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
@@ -49,7 +49,7 @@ public class Create_additional_energy_sourses {
                     (be, side) -> {
                         // Если труба подходит СНИЗУ (Direction.DOWN), отдаем ей наш бак
                         if (side == net.minecraft.core.Direction.DOWN) {
-                            return be.fuelTank;
+                            return null; //be.fuelTank;
                         }
                         // С любых других сторон (бока, верх) возвращаем null — трубы не прилипнут!
                         return null;
