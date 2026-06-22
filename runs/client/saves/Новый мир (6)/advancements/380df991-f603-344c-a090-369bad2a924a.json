@@ -1,0 +1,41 @@
+{
+  "create:root": {
+    "criteria": {
+      "0": "2026-06-17 10:52:53 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2026-06-17 10:52:43 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gearbox": {
+    "criteria": {
+      "has_item": "2026-06-17 10:52:54 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
+    "criteria": {
+      "has_item": "2026-06-17 10:52:54 +0500"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:old_growth_birch_forest": "2026-06-17 10:52:53 +0500",
+      "minecraft:beach": "2026-06-17 10:52:57 +0500",
+      "minecraft:forest": "2026-06-17 10:52:44 +0500"
+    },
+    "done": false
+  },
+  "create:shifting_gears": {
+    "criteria": {
+      "0": "2026-06-17 10:53:05 +0500"
+    },
+    "done": true
+  },
+  "DataVersion": 3955
+}

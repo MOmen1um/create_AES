@@ -40,8 +40,6 @@
 /enchant Dev minecraft:efficiency 5
 /enchant Dev minecraft:efficiency 10
 /reload
-/time set day'
-/time set day
-/setblock ~ ~ ~ create_additional_energy_sourses:titanium_slab
-/give Dev create_additional_energy_sourses:aluminum_block
+/flywheel backend off
+/give Dev create_additional_energy_sourses:heavy_handle
 /time set day

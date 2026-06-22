@@ -1,74 +1,61 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
-import net.minecraft.core.registries.BuiltInRegistries;
+import java.util.function.Supplier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-
-
-
-import java.util.function.Supplier;
-
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(BuiltInRegistries.BLOCK, Create_additional_energy_sourses.MODID);
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Create_additional_energy_sourses.MODID);
+    public static final DeferredRegister<Block> BLOCKS =
+            DeferredRegister.create(Registries.BLOCK, Create_additional_energy_sourses.MODID);
 
-    // Термогенератор
-    public static final Supplier<Block> THERMO_GENERATOR = BLOCKS.register("thermo_generator",
-            () -> new ThermoGeneratorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.5F).sound(SoundType.METAL)));
+    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Create_additional_energy_sourses.MODID);
 
-    public static final java.util.function.Supplier THERMO_GEN_ENTITY = BLOCK_ENTITIES.register("thermo_gen_entity",
-            () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
-                    (pos, state) -> new ThermoGeneratorBlockEntity((net.minecraft.world.level.block.entity.BlockEntityType<?>) ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
-                    THERMO_GENERATOR.get()
-            ).build(null));
+    // 1. Блок Термогенератора
+    public static final DeferredHolder<Block, ThermoGeneratorBlock> THERMO_GENERATOR =
+            BLOCKS.register("thermo_generator", () -> new ThermoGeneratorBlock(BlockBehaviour.Properties.of()
+                    .strength(3.0f)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()));
 
-    // Алюминий
-    public static final Supplier<Block> ALUMINUM_BLOCK = BLOCKS.register("aluminum_block",
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
+    // 2. Предмет Термогенератора
+    public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
+            ModItems.ITEMS.register("thermo_generator", () -> new BlockItem(THERMO_GENERATOR.get(), new Item.Properties()));
 
-    public static final Supplier<Block> ALUMINUM_STAIRS = BLOCKS.register("aluminum_stairs",
-            () -> new StairBlock(ALUMINUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
+    // 3. Блок Двигателя V8
+    public static final DeferredHolder<Block, V8EngineBlock> V8_ENGINE_BLOCK =
+            BLOCKS.register("v8_engine", () -> new V8EngineBlock(BlockBehaviour.Properties.of()
+                    .strength(4.0f)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()));
 
-    public static final Supplier<Block> ALUMINUM_SLAB = BLOCKS.register("aluminum_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F, 6.0F).sound(SoundType.METAL)));
+    // 4. Предмет Двигателя V8
+    public static final DeferredHolder<Item, BlockItem> V8_ENGINE_ITEM =
+            ModItems.ITEMS.register("v8_engine", () -> new BlockItem(V8_ENGINE_BLOCK.get(), new Item.Properties()));
 
-    // Титан
-    public static final Supplier<Block> TITANIUM_BLOCK = BLOCKS.register("titanium_block",
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 12.0F).sound(SoundType.METAL)));
+    // 5. Энтити Термогенератора (Явно передаем тип через .get() в лямбду)
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY =
+            BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
+                    (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
+                    THERMO_GENERATOR.get()).build(null));
 
-    public static final Supplier<Block> TITANIUM_STAIRS = BLOCKS.register("titanium_stairs",
-            () -> new StairBlock(TITANIUM_BLOCK.get().defaultBlockState(), BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 12.0F).sound(SoundType.METAL)));
+    // 6. Энтити V8 (Точно так же передаем три параметра)
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("v8_engine_entity", () -> BlockEntityType.Builder.of(
+                    (pos, state) -> new V8EngineBlockEntity(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state),
+                    V8_ENGINE_BLOCK.get()).build(null));
 
-    public static final Supplier<Block> TITANIUM_SLAB = BLOCKS.register("titanium_slab",
-            () -> new SlabBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 12.0F).sound(SoundType.METAL)));
-
-    // ДВС Детали
-    public static final Supplier<Block> ENGINE_VALVE = BLOCKS.register("engine_valve",
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(3.0F).sound(SoundType.METAL)));
-
-    public static final Supplier<Block> TURBOCHARGER = BLOCKS.register("turbocharger",
-            () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(4.0F).sound(SoundType.METAL)));
-
-    // Коленвал (Блок и Сущность)
-    public static final Supplier<Block> CRANKSHAFT = BLOCKS.register("crankshaft",
-            () -> new CrankshaftBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(5.0F).sound(SoundType.METAL)));
-
-    public static final Supplier<BlockEntityType<CrankshaftBlockEntity>> CRANKSHAFT_ENTITY = BLOCK_ENTITIES.register("crankshaft_entity",
-            () -> BlockEntityType.Builder.of(
-                    (pos, state) -> new CrankshaftBlockEntity((BlockEntityType<?>) ModBlocks.CRANKSHAFT_ENTITY.get(), pos, state),
-                    CRANKSHAFT.get()
-            ).build(null));
-    // Тот самый метод, который требовал главный файл мода!
-    public static void register(IEventBus modEventBus) {
-        BLOCKS.register(modEventBus);
-        BLOCK_ENTITIES.register(modEventBus);
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+        BLOCK_ENTITIES.register(eventBus);
     }
 }
+
+
