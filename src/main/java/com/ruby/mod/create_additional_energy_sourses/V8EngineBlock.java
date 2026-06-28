@@ -32,7 +32,7 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
         Direction facing = state.getValue(HORIZONTAL_FACING);
         // Сквозной вал: коленвал торчит и спереди, и сзади двигателя!
-        return face == facing || face == facing.getOpposite();
+        return face == facing.getOpposite();
     }
 
     @Override

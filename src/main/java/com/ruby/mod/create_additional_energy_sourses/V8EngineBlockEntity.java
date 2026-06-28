@@ -131,11 +131,14 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             return;
         }
 
-        if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
-            updateGeneratedRotation();
+        if (Math.abs(currentSpeed - lastSentSpeed) >= 1f || (currentSpeed == 0 && lastSentSpeed != 0)) {
+            this.setChanged();
+            this.updateGeneratedRotation(); // Важнейший пинок для валов Create!
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
             lastSentSpeed = currentSpeed;
         }
 
+        // Обновляем телеметрию для очков инженера (Goggles) каждую секунду
         if (level.getGameTime() % 20 == 0) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             setChanged();
