@@ -27,7 +27,7 @@ public class ModBlocks {
 
     // 2. Предмет Термогенератора
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
-            ModItems.ITEMS.register("thermo_generator", () -> new BlockItem(THERMO_GENERATOR.get(), new Item.Properties()));
+          ModItems.ITEMS.register("thermo_generator_item", () -> new BlockItem(THERMO_GENERATOR.get(), new Item.Properties()));
 
     // 3. Блок Двигателя V8
     public static final DeferredHolder<Block, V8EngineBlock> V8_ENGINE_BLOCK =
@@ -42,9 +42,9 @@ public class ModBlocks {
 
     // 5. Энтити Термогенератора (Явно передаем тип через .get() в лямбду)
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermoGeneratorBlockEntity>> THERMO_GEN_ENTITY =
-            BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
-                    (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
-                    THERMO_GENERATOR.get()).build(null));
+           BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
+                   (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
+                   THERMO_GENERATOR.get()).build(null));
 
     // 6. Энтити V8 (Точно так же передаем три параметра)
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =

@@ -181,5 +181,23 @@
     },
     "done": true
   },
+  "simulated:root": {
+    "criteria": {
+      "0": "2026-06-28 16:00:59 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/aviators_goggles": {
+    "criteria": {
+      "has_ingredient": "2026-06-28 16:00:59 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:root": {
+    "criteria": {
+      "0": "2026-06-28 16:00:59 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

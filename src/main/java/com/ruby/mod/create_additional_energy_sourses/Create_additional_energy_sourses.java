@@ -29,6 +29,10 @@ public class Create_additional_energy_sourses {
                         // Кладем на витрину полноценные, зарегистрированные Блок-Предметы
                         output.accept(new ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get(), 1));
                         output.accept(new ItemStack(ModBlocks.V8_ENGINE_ITEM.get(), 1));
+                        output.accept(new ItemStack(ModItems.ADVANCED_PICKAXE.get()));
+                        output.accept(new ItemStack(ModItems.HEAVY_HANDLE.get()));
+                        output.accept(new ItemStack(ModItems.HEAVY_TIP.get()));
+                        output.accept(new ItemStack(ModItems.PICKAXE_CORE.get()));
                     })
                     .build());
 
