@@ -15,6 +15,8 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         super(properties);
     }
 
+
+
     // Каноничный способ активировать ползунок настроек Create в 1.21.1
     @Override
     public boolean hasAnalogOutputSignal(BlockState state) {
@@ -32,7 +34,7 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
         Direction facing = state.getValue(HORIZONTAL_FACING);
         // Сквозной вал: коленвал торчит и спереди, и сзади двигателя!
-        return face == facing.getOpposite();
+        return face == facing || face == facing.getOpposite();
     }
 
     @Override
@@ -50,4 +52,5 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         // Эту корзину мы сейчас добавим в ModBlocks
         return ModBlocks.V8_ENGINE_ENTITY.get();
     }
+
 }

@@ -59,7 +59,7 @@ public class ThermoGeneratorBlock extends HorizontalKineticBlock implements IBE<
     public boolean hasShaftTowards(net.minecraft.world.level.LevelReader world, BlockPos pos, BlockState state, Direction face) {
         Direction facing = state.getValue(HORIZONTAL_FACING);
         // Сквозной вал: и спереди, и сзади!
-        return face == facing || face == facing.getOpposite();
+        return face == facing.getOpposite();
     }
 
     @Override

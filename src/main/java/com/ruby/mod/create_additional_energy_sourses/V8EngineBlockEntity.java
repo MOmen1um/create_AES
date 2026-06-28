@@ -64,9 +64,45 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return safeSpeed * fuelSpeedMultiplier;
     }
 
-    // Переменная для хранения виртуального значения ползунка (от 0 до 512)
-// Её нужно объявить в начале класса V8EngineBlockEntity, но для теста можно использовать локально
-    protected int sliderValue = 0;
+    @Override
+    public void addBehaviours(java.util.List<com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour> behaviours) {
+        super.addBehaviours(behaviours);
+
+        // Трансформатор со всеми абстрактными методами Create 1.21.1
+        com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform customTransform =
+                new com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform() {
+                    @Override
+                    public net.minecraft.world.phys.Vec3 getLocalOffset(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+                        // Ползунок ровно в центре блока ДВС
+                        return new net.minecraft.world.phys.Vec3(0.5, 1.0, 0.5);
+                    }
+
+                    @Override
+                    public void rotate(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state, com.mojang.blaze3d.vertex.PoseStack ms) {
+                        // Стандартный угол разворота: плашка ползунка смотрит вверх/вперед
+                        ms.mulPose(com.mojang.math.Axis.XP.rotationDegrees(90f));
+                    }
+                };
+
+        com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour slider =
+                new com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour(
+                        net.minecraft.network.chat.Component.literal("Обороты двигателя (RPM)"),
+                        this,
+                        customTransform
+                );
+
+        // Устанавливаем границы: от 0 до 32768 RPM
+        slider.between(0, 128);
+
+        slider.withCallback(value -> {
+            this.targetSliderSpeed = value;
+            this.updateGeneratedRotation();
+        });
+
+
+        behaviours.add(slider);
+    }
+
 
 
     @Override
@@ -131,14 +167,11 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             return;
         }
 
-        if (Math.abs(currentSpeed - lastSentSpeed) >= 1f || (currentSpeed == 0 && lastSentSpeed != 0)) {
-            this.setChanged();
-            this.updateGeneratedRotation(); // Важнейший пинок для валов Create!
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+        if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
+            updateGeneratedRotation();
             lastSentSpeed = currentSpeed;
         }
 
-        // Обновляем телеметрию для очков инженера (Goggles) каждую секунду
         if (level.getGameTime() % 20 == 0) {
             level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
             setChanged();
@@ -261,12 +294,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-    // 2. Метод, который Create вызывает при обновлении сети.
-    // Без него метод updateGeneratedRotation() в tick() просто ничего не делает!
-    @Override
-    public void updateGeneratedRotation() {
-        super.updateGeneratedRotation();
-    }
     public float targetSliderSpeed = 0f;
 }
 
