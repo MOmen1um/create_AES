@@ -261,6 +261,12 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
+    // 2. Метод, который Create вызывает при обновлении сети.
+    // Без него метод updateGeneratedRotation() в tick() просто ничего не делает!
+    @Override
+    public void updateGeneratedRotation() {
+        super.updateGeneratedRotation();
+    }
     public float targetSliderSpeed = 0f;
 }
 
