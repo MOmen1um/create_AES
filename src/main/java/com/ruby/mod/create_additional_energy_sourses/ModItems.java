@@ -6,6 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
@@ -17,6 +18,7 @@ public class ModItems {
     // Твои старые предметы (инструменты)
     public static final Supplier<Item> ADVANCED_PICKAXE = ITEMS.register("advanced_pickaxe",
             () -> new AdvancedPickaxeItem(ModToolTiers.ADVANCED_TIER, new Item.Properties().attributes(PickaxeItem.createAttributes(ModToolTiers.ADVANCED_TIER, 1.0F, -2.8F))));
+    public static final DeferredHolder<Item, Item> ADVANCED_PRECISION_MECHANISM = ITEMS.register("advanced_precision_mechanism", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> HEAVY_HANDLE = ITEMS.register("heavy_handle", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> PICKAXE_CORE = ITEMS.register("pickaxe_core", () -> new Item(new Item.Properties()));
     public static final Supplier<Item> HEAVY_TIP = ITEMS.register("heavy_tip", () -> new Item(new Item.Properties()));

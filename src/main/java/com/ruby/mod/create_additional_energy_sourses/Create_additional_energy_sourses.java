@@ -33,6 +33,8 @@ public class Create_additional_energy_sourses {
                         output.accept(new ItemStack(ModItems.HEAVY_HANDLE.get()));
                         output.accept(new ItemStack(ModItems.HEAVY_TIP.get()));
                         output.accept(new ItemStack(ModItems.PICKAXE_CORE.get()));
+                        output.accept(new ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
+
                     })
                     .build());
 
