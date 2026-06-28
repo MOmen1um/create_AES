@@ -66,5 +66,11 @@
     },
     "done": true
   },
+  "create:recipes/misc/crafting/kinetics/stressometer_from_conversion": {
+    "criteria": {
+      "has_item": "2026-06-28 17:29:44 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

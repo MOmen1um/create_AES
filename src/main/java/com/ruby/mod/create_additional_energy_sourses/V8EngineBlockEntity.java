@@ -1,6 +1,9 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -68,22 +71,26 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public void addBehaviours(java.util.List<com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
 
-        // Трансформатор со всеми абстрактными методами Create 1.21.1
+        // Ограничиваем физическую шкалу ползунка, чтобы полоса была маленькой и аккуратной
+        int sliderMaxSteps = 512;
+
+        // Ручной трансформатор положения окошка
         com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform customTransform =
                 new com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform() {
                     @Override
                     public net.minecraft.world.phys.Vec3 getLocalOffset(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
-                        // Ползунок ровно в центре блока ДВС
-                        return new net.minecraft.world.phys.Vec3(0.5, 1.0, 0.5);
+                        // Окошко настроек ровно по центру верхней грани блока мотора
+                        return new net.minecraft.world.phys.Vec3(0.5, 1.01, 0.5);
                     }
 
                     @Override
                     public void rotate(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state, com.mojang.blaze3d.vertex.PoseStack ms) {
-                        // Стандартный угол разворота: плашка ползунка смотрит вверх/вперед
+                        // Поворачиваем плашку, чтобы она смотрела вверх на игрока
                         ms.mulPose(com.mojang.math.Axis.XP.rotationDegrees(90f));
                     }
                 };
 
+        // Создаем ползунок Create
         com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour slider =
                 new com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour(
                         net.minecraft.network.chat.Component.literal("Обороты двигателя (RPM)"),
@@ -91,19 +98,17 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                         customTransform
                 );
 
-        // Устанавливаем границы: от 0 до 32768 RPM
-        slider.between(0, 128);
+        // Задаем внутренние рамки шкалы (0-512)
+        slider.between(0, sliderMaxSteps);
 
+        // Коллбек: считываем значение (0-512) и умножаем на шаг 16, получая до 32768 RPM!
         slider.withCallback(value -> {
-            this.targetSliderSpeed = value;
-            this.updateGeneratedRotation();
+            this.targetSliderSpeed = (float) value;
+            this.setChanged();
         });
-
 
         behaviours.add(slider);
     }
-
-
 
     @Override
     public void tick() {
@@ -120,7 +125,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float meltingPoint = getMaterialMeltingPoint();
         float safeSpeed = getSafeEngineSpeed();
         float maxSpeed = getMaxEngineSpeed();
-        float targetSpeed = Math.min(Math.abs(targetSliderSpeed), maxSpeed);
+        float targetSpeed = Math.min(Math.abs(this.targetSliderSpeed * 64f), getMaxEngineSpeed());
 
         if (burnTimeRemaining > 0 && targetSpeed > 0) {
             burnTimeRemaining--;
@@ -245,10 +250,13 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tooltip.add(Component.literal(" §eБезопасная зона: §aдо " + String.format("%.0f", getSafeEngineSpeed()) + " RPM"));
 
         if (!fuelTank.isEmpty()) {
-            tooltip.add(Component.literal(" §eТопливо: §7" + fuelTank.getFluid().getHoverName().getString() + " (" + fuelTank.getFluidAmount() + " mB)"));
+            String fluidName = fuelTank.getFluid().getHoverName().getString();
+            tooltip.add(Component.literal("§dТопливо: §f" + fluidName));
+            tooltip.add(Component.literal("§dОбъём бака: §f" + fuelTank.getFluidAmount() + " / " + fuelTank.getCapacity() + " mB"));
         } else {
-            tooltip.add(Component.literal(" §cБак пуст"));
+            tooltip.add(Component.literal("§7Бак пуст"));
         }
+
         return true;
     }
 
