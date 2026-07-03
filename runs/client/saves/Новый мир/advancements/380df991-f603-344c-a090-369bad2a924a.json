@@ -72,5 +72,131 @@
     },
     "done": true
   },
+  "offroad:recipes/misc/large_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-03 14:48:10 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/steering_wheel": {
+    "criteria": {
+      "has_ingredient": "2026-07-03 14:48:10 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/monstrous_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-03 14:48:10 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-03 14:48:10 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/small_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-03 14:48:10 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/light_gray_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/brown_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/black_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/blue_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/green_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/yellow_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/light_blue_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/red_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/magenta_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/cyan_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/lime_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/white_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/orange_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gray_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/purple_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/pink_valve_handle_from_other_valve_handle": {
+    "criteria": {
+      "has_valve": "2026-07-03 14:48:27 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

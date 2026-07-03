@@ -26,15 +26,18 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        // Разворачиваем двигатель лицом к игроку при установке
-        return this.defaultBlockState().setValue(HORIZONTAL_FACING, context.getHorizontalDirection().getOpposite());
+        // Берём направление, куда смотрит игрок, и КРУТИМ НА 180 градусов (.getOpposite())
+        Direction facing = context.getHorizontalDirection();
+
+        return this.defaultBlockState().setValue(HORIZONTAL_FACING, facing);
     }
+
 
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
         Direction facing = state.getValue(HORIZONTAL_FACING);
-        // Сквозной вал: коленвал торчит и спереди, и сзади двигателя!
-        return face == facing || face == facing.getOpposite();
+        // Теперь коленвал будет выходить со стороны, противоположной «лицу» в коде (которая стала физическим передом)
+        return face == facing.getOpposite();
     }
 
     @Override

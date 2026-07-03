@@ -301,7 +301,10 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
-
+    // 1. Даем Create прямой доступ к баку для очков инженера
+    public net.neoforged.neoforge.fluids.capability.IFluidHandler getFluidTank() {
+        return this.fuelTank; // Теперь типы идеально совпадут и ошибка исчезнет!
+    }
     public float targetSliderSpeed = 0f;
 }
 

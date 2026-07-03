@@ -18,9 +18,7 @@ public class Create_additional_energy_sourses {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, MODID);
 
-    // Наша кастомная вкладка креатива
-    // Наша кастомная вкладка креатива
-    // Наша кастомная вкладка креатива
+
     public static final net.neoforged.neoforge.registries.DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_TAB =
             CREATIVE_MODE_TABS.register("create_aes_tab", () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(ModBlocks.THERMO_GENERATOR.get()))
@@ -43,24 +41,40 @@ public class Create_additional_energy_sourses {
         ModItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
+
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), KineticBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), V8EngineRenderer::new);
         });
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    ModBlocks.V8_ENGINE_ENTITY.get(),
-                    (be, side) -> {
-                        // Если труба подходит СНИЗУ (Direction.DOWN), отдаем ей наш бак
-                        if (side == net.minecraft.core.Direction.DOWN) {
-                            return be.fuelTank;
+                    ModBlocks.V8_ENGINE_ENTITY.get(), // Твой BlockEntityType для V8
+                    (com.simibubi.create.foundation.blockEntity.SmartBlockEntity be, net.minecraft.core.Direction side) -> {
+
+                        // Явно приводим базовый SmartBlockEntity к нашему классу V8EngineBlockEntity
+                        if (be instanceof V8EngineBlockEntity v8) {
+                            // Если труба подходит СНИЗУ (Direction.DOWN), отдаем ей наш бак
+                            if (side == net.minecraft.core.Direction.DOWN) {
+                                return v8.getFluidTank(); // Теперь компилятор точно поймет этот метод!
+                            }
                         }
+
                         // С любых других сторон (бока, верх) возвращаем null — трубы не прилипнут!
                         return null;
                     }
             );
         });
+
     }
+    // Добавляем этот метод в главный класс мода (или в клиентский класс)
+    private void registerBlockRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
+        // Привязываем наш новый рендер вала к энтити V8 двигателя
+        event.registerBlockEntityRenderer(
+                ModBlocks.V8_ENGINE_ENTITY.get(), // Твой BlockEntityType для V8 мотора
+                V8EngineRenderer::new
+        );
+    }
+
 }
