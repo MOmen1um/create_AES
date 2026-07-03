@@ -130,6 +130,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         if (burnTimeRemaining > 0 && targetSpeed > 0) {
             burnTimeRemaining--;
 
+
+            this.setChanged();
+            this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             if (currentSpeed < targetSpeed) {
                 if (accelerationTicks < 40) accelerationTicks++;
                 float progress = (float) accelerationTicks / 40;
@@ -152,6 +155,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 fuelTank.drain(100, FluidAction.EXECUTE);
                 level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
                 setChanged();
+
+                this.setChanged();
+                this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             } else {
                 if (accelerationTicks > 0) {
                     accelerationTicks--;
@@ -234,7 +240,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         }
 
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-        tooltip.add(Component.literal(""));
+        tooltip.add(Component.literal("    §eEngine info :"));
 
         String matColor = engineMaterial.equals("titanium") ? "§b" : (engineMaterial.equals("aluminum") ? "§7" : "§8");
         tooltip.add(Component.literal("§6Спецификация ДВС V8:"));
@@ -250,38 +256,42 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tooltip.add(Component.literal(" §eБезопасная зона: §aдо " + String.format("%.0f", getSafeEngineSpeed()) + " RPM"));
 
         if (!fuelTank.isEmpty()) {
-            String fluidName = fuelTank.getFluid().getHoverName().getString();
-            tooltip.add(Component.literal("§dТопливо: §f" + fluidName));
-            tooltip.add(Component.literal("§dОбъём бака: §f" + fuelTank.getFluidAmount() + " / " + fuelTank.getCapacity() + " mB"));
+            tooltip.add(Component.literal(" §eТопливо: §7" + fuelTank.getFluid().getHoverName().getString() + " (" + fuelTank.getFluidAmount() + " mB)"));
         } else {
-            tooltip.add(Component.literal("§7Бак пуст"));
+            tooltip.add(Component.literal(" §cБак пуст"));
         }
-
         return true;
     }
 
     @Override
-    public void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
-        super.write(tag, registries, clientPacket);
-        tag.putInt("EngineQuality", engineQuality);
-        tag.putFloat("SecretEfficiency", secretEfficiency);
-        tag.putString("EngineMaterial", engineMaterial);
-        tag.putFloat("EngineTemp", engineTemperature);
-        tag.putBoolean("IsTurboCharged", isTurboCharged);
-        tag.putFloat("SliderSpeed", targetSliderSpeed);
+    protected void write(net.minecraft.nbt.CompoundTag tag, boolean clientPacket) {
+        super.write(tag, clientPacket);
+        tag.putFloat("CurrentSpeed", this.currentSpeed);
+        tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
+        tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
+        tag.putFloat("EngineTemperature", this.engineTemperature);
+        tag.putInt("AccelerationTicks", this.accelerationTicks);
 
+        // Сохраняем бак NeoForge
+        net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
+        this.fuelTank.writeToNBT(fluidTag);
+        tag.put("FuelTank", fluidTag);
     }
 
 
     @Override
-    public void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
-        super.read(tag, registries, clientPacket);
-        this.engineQuality = tag.getInt("EngineQuality");
-        this.secretEfficiency = tag.getFloat("SecretEfficiency");
-        this.engineMaterial = tag.getString("EngineMaterial");
-        this.engineTemperature = tag.getFloat("EngineTemp");
-        this.isTurboCharged = tag.getBoolean("IsTurboCharged");
-        this.targetSliderSpeed = tag.getFloat("SliderSpeed");
+    protected void read(net.minecraft.nbt.CompoundTag tag, boolean clientPacket) {
+        super.read(tag, clientPacket);
+        this.currentSpeed = tag.getFloat("CurrentSpeed");
+        this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
+        this.burnTimeRemaining = tag.getInt("BurnTimeRemaining");
+        this.engineTemperature = tag.getFloat("EngineTemperature");
+        this.accelerationTicks = tag.getInt("AccelerationTicks");
+
+        // Читаем бак NeoForge
+        if (tag.contains("FuelTank")) {
+            this.fuelTank.readFromNBT(tag.getCompound("FuelTank"));
+        }
     }
 
     @Override

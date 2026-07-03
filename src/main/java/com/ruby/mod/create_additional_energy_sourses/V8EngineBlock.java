@@ -23,7 +23,6 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         return true;
     }
 
-
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         // Берём направление, куда смотрит игрок, и КРУТИМ НА 180 градусов (.getOpposite())
@@ -41,9 +40,12 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     }
 
     @Override
-    public Direction.Axis getRotationAxis(BlockState state) {
+    public net.minecraft.core.Direction.Axis getRotationAxis(net.minecraft.world.level.block.state.BlockState state) {
+        // Вернули имя getRotationAxis, которое требует компилятор!
+        // Теперь оно идеально переопределяет родительский класс Create без дубликатов
         return state.getValue(HORIZONTAL_FACING).getAxis();
     }
+
 
     @Override
     public Class<V8EngineBlockEntity> getBlockEntityClass() {
@@ -55,5 +57,7 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         // Эту корзину мы сейчас добавим в ModBlocks
         return ModBlocks.V8_ENGINE_ENTITY.get();
     }
+
+
 
 }

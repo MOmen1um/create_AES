@@ -45,7 +45,6 @@ public class Create_additional_energy_sourses {
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
-            event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), V8EngineRenderer::new);
         });
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(
@@ -54,27 +53,16 @@ public class Create_additional_energy_sourses {
                     (com.simibubi.create.foundation.blockEntity.SmartBlockEntity be, net.minecraft.core.Direction side) -> {
 
                         // Явно приводим базовый SmartBlockEntity к нашему классу V8EngineBlockEntity
+                        // Внутри лямбды регистрации капабилити в главном классе сделай так:
                         if (be instanceof V8EngineBlockEntity v8) {
-                            // Если труба подходит СНИЗУ (Direction.DOWN), отдаем ей наш бак
-                            if (side == net.minecraft.core.Direction.DOWN) {
-                                return v8.getFluidTank(); // Теперь компилятор точно поймет этот метод!
-                            }
+                            return v8.getFluidTank(); // Возвращаем бак для ВСЕХ сторон, чтобы очки инженера всегда его видели!
                         }
-
-                        // С любых других сторон (бока, верх) возвращаем null — трубы не прилипнут!
                         return null;
+
                     }
             );
         });
 
-    }
-    // Добавляем этот метод в главный класс мода (или в клиентский класс)
-    private void registerBlockRenderers(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) {
-        // Привязываем наш новый рендер вала к энтити V8 двигателя
-        event.registerBlockEntityRenderer(
-                ModBlocks.V8_ENGINE_ENTITY.get(), // Твой BlockEntityType для V8 мотора
-                V8EngineRenderer::new
-        );
     }
 
 }
