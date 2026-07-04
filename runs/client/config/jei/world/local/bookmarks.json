@@ -10,5 +10,16 @@
   {"ingredient":{"id":"createdieselgenerators:red_cement_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"createdieselgenerators:yellow_cement_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"createdieselgenerators:entity_filter"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"createdieselgenerators:gasoline_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"createdieselgenerators:gasoline_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:copper_diving_helmet"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:crafting_blueprint"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:sand_paper"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:honey_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:schematic_and_quill"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:cardboard_chestplate"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:crushed_raw_zinc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:goggles"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:stressometer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:wooden_bracket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"createdieselgenerators:crude_oil_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

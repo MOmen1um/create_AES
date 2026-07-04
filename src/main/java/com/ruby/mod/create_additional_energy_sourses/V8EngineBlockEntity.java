@@ -146,7 +146,18 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             float speedRatio = currentSpeed / safeSpeed;
             float heatGeneration = (float) Math.pow(speedRatio, 3) * fuelHeat * 1.5f;
 
+
+
             engineTemperature += heatGeneration;
+
+            if (this.currentSpeed <= safeSpeed) {
+                // Если игрок держит скорость в норме, температура балансирует в районе 595 - 600 градусов
+                if (this.engineTemperature > 600.0f) {
+                    // Добавляем реалистичное колебание вокруг 600°C (от 598.0 до 600.0)
+                    float vibration = (float) Math.sin(this.level.getGameTime() * 0.2f) * 1.0f;
+                    this.engineTemperature = 599.0f + vibration;
+                }
+            }
 
         } else {
             if (fuelTank.getFluidAmount() >= 100 && targetSpeed > 0) {
@@ -191,6 +202,11 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float smokeChance = 0.05f + (engineTemperature / meltingPoint) * 0.75f;
         if (currentSpeed > 0 && level.random.nextFloat() < smokeChance && level instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
+        }
+
+        if (this.level.getGameTime() % 20 == 0) {
+            this.setChanged();
+            this.sendData(); // Синхронизирует безопасную скорость и литры топлива с клиентом!
         }
     }
 
@@ -240,7 +256,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         }
 
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-        tooltip.add(Component.literal("    §eEngine info :"));
+        tooltip.add(Component.literal(""));
 
         String matColor = engineMaterial.equals("titanium") ? "§b" : (engineMaterial.equals("aluminum") ? "§7" : "§8");
         tooltip.add(Component.literal("§6Спецификация ДВС V8:"));
@@ -264,36 +280,42 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     @Override
-    protected void write(net.minecraft.nbt.CompoundTag tag, boolean clientPacket) {
-        super.write(tag, clientPacket);
+    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        // ИСПРАВЛЕНО: Добавили registries в super.write
+        super.write(tag, registries, clientPacket);
+
+        tag.putBoolean("IsTurboCharged", this.isTurboCharged);
         tag.putFloat("CurrentSpeed", this.currentSpeed);
         tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
         tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
         tag.putFloat("EngineTemperature", this.engineTemperature);
         tag.putInt("AccelerationTicks", this.accelerationTicks);
 
-        // Сохраняем бак NeoForge
-        net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
-        this.fuelTank.writeToNBT(fluidTag);
+        // ИСПРАВЛЕНО: В 1.21.1 бак требует registries для записи жидкостей
+        CompoundTag fluidTag = new CompoundTag();
+        this.fuelTank.writeToNBT(registries, fluidTag);
         tag.put("FuelTank", fluidTag);
     }
 
-
     @Override
-    protected void read(net.minecraft.nbt.CompoundTag tag, boolean clientPacket) {
-        super.read(tag, clientPacket);
+    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
+        // ИСПРАВЛЕНО: Добавили registries в super.read
+        super.read(tag, registries, clientPacket);
+
+        this.isTurboCharged = tag.getBoolean("IsTurboCharged");
         this.currentSpeed = tag.getFloat("CurrentSpeed");
         this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
         this.burnTimeRemaining = tag.getInt("BurnTimeRemaining");
         this.engineTemperature = tag.getFloat("EngineTemperature");
-        this.accelerationTicks = tag.getInt("AccelerationTicks");
+        this.accelerationTicks = tag.getFloat("AccelerationTicks") != 0 ? (int)tag.getFloat("AccelerationTicks") : tag.getInt("AccelerationTicks"); // Безопасное чтение типов
 
-        // Читаем бак NeoForge
+        // ИСПРАВЛЕНО: Бак требует registries для чтения в 1.21.1
         if (tag.contains("FuelTank")) {
-            this.fuelTank.readFromNBT(tag.getCompound("FuelTank"));
+            this.fuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
         }
     }
 
+    // --- 2. СИНХРОНИЗАЦИЯ ПАКЕТОВ ДЛЯ ОЧКОВ ИНЖЕНЕРА (ОБНОВЛЕНИЕ БАКА НА ЭКРАНЕ) ---
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
@@ -304,6 +326,10 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tag.putBoolean("IsTurboCharged", isTurboCharged);
         tag.putFloat("SliderSpeed", targetSliderSpeed);
 
+        // Упаковываем бак в сетевой тег обновления с поддержкой провайдера реестров
+        CompoundTag fluidTag = new CompoundTag();
+        this.fuelTank.writeToNBT(registries, fluidTag);
+        tag.put("FuelTank", fluidTag);
         return tag;
     }
 
@@ -311,10 +337,12 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
-    // 1. Даем Create прямой доступ к баку для очков инженера
+
+    // Предоставляем бак для NeoForge BlockCapability системы труб
     public net.neoforged.neoforge.fluids.capability.IFluidHandler getFluidTank() {
-        return this.fuelTank; // Теперь типы идеально совпадут и ошибка исчезнет!
+        return this.fuelTank;
     }
+
     public float targetSliderSpeed = 0f;
 }
 
