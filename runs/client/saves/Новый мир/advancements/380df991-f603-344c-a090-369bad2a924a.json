@@ -636,6 +636,12 @@
     },
     "done": true
   },
+  "create:water_supply": {
+    "criteria": {
+      "0": "2026-07-04 21:07:46 +0500"
+    },
+    "done": true
+  },
   "minecraft:recipes/transportation/cherry_boat": {
     "criteria": {
       "in_water": "2026-07-04 21:07:52 +0500"
@@ -678,12 +684,6 @@
     },
     "done": true
   },
-  "create:water_supply": {
-    "criteria": {
-      "0": "2026-07-04 21:07:46 +0500"
-    },
-    "done": true
-  },
   "minecraft:recipes/transportation/jungle_boat": {
     "criteria": {
       "in_water": "2026-07-04 21:07:52 +0500"
@@ -693,6 +693,12 @@
   "minecraft:recipes/transportation/dark_oak_boat": {
     "criteria": {
       "in_water": "2026-07-04 21:07:52 +0500"
+    },
+    "done": true
+  },
+  "create:stressometer": {
+    "criteria": {
+      "0": "2026-07-04 21:59:39 +0500"
     },
     "done": true
   },

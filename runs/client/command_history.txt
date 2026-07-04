@@ -2,8 +2,6 @@
 /recipe give Dev *
 /reload
 /recipe give Dev *
-/reload
-/recipe give Dev *
 /recipe give Dev
 /give Dev create_additional_energy_sourses:thermo_generator
 /recipe give Dev *
@@ -48,3 +46,5 @@
 /give Dev create_additional_energy_sourses:radiator_copper
 /give Dev create_additional_energy_sourses:radiator_steel
 /give Dev create_additional_energy_sourses:radiator_ultimate
+/time set day\
+/time set day

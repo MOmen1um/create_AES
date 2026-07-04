@@ -34,7 +34,10 @@ public class Create_additional_energy_sourses {
                         output.accept(new ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
                         output.accept(new ItemStack(ModBlocks.ALUMINUM_V8_ENGINE_ITEM.get()));
                         output.accept(new ItemStack(ModBlocks.TITANIUM_V8_ENGINE_ITEM.get()));
-
+                        output.accept(new ItemStack(ModBlocks.RADIATOR_COPPER_ITEM));
+                        output.accept(new ItemStack(ModBlocks.RADIATOR_STEEL_ITEM));
+                        output.accept(new ItemStack(ModBlocks.RADIATOR_BRASS_ITEM));
+                        output.accept(new ItemStack(ModBlocks.RADIATOR_ULTIMATE_ITEM));
                     })
                     .build());
 

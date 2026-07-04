@@ -58,48 +58,49 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     public float getSafeEngineSpeed() {
-        // 1. ВОССТАНОВИЛИ ТВОЮ ОРИГИНАЛЬНУЮ ЛОГИКУ СКОРОСТЕЙ
+        // === 1. ВОССТАНОВЛЕННАЯ ЛОГИКА МАТЕРИАЛОВ И ТУРБИНЫ ===
         float baseLimit = 1024f;
         if (this.engineMaterial != null) {
             if (this.engineMaterial.equals("aluminum")) baseLimit = 4096f;
             if (this.engineMaterial.equals("titanium")) baseLimit = 8192f;
         }
+        float baseSafeSpeed = baseLimit * (isTurboCharged ? 2.0f : 1.0f);
 
-        // Учёт турбонаддува (твоя оригинальная тернарная строчка)
-        float turboModifier = isTurboCharged ? 2.0f : 1.0f;
-
-        // Перемножаем базовый лимит на турбину
-        float baseSafeSpeed = baseLimit * turboModifier;
-
-        // --- 2. ИНТЕГРИРУЕМ РАДИАТОРЫ THE LONG DRIVE СТРОГО СПЕРЕДИ ---
+        // === 2. ИНТЕГРИРУЕМ РАДИАТОРЫ С ПРОВЕРКОЙ ВОДЫ ===
         float currentMultiplier = 1.0f;
-
         net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
+
         if (state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
             net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
-
-            // Ищем блок радиатора строго на морде двигателя
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
             net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
-            if (neighborBE != null) {
-                String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(neighborBE.getType()).toString();
+            if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+                String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
+                int waterUsage = 1; // Расход воды
 
-                // Проверяем тиры радиаторов и выставляем множители скорости
-                if (beName.startsWith("create_additional_energy_sourses:radiator_")) {
+                // Если есть вода, применяем множитель и тратим её
+                if (!radiator.waterTank.isEmpty() && radiator.waterTank.getFluidAmount() >= waterUsage) {
                     if (beName.contains("copper")) currentMultiplier = 1.25f;
-                    if (beName.contains("steel")) currentMultiplier = 1.50f;
-                    if (beName.contains("brass")) currentMultiplier = 1.75f;
-                    if (beName.contains("ultimate")) currentMultiplier = 2.00f;
+                    else if (beName.contains("steel")) currentMultiplier = 1.50f;
+                    else if (beName.contains("brass")) currentMultiplier = 1.75f;
+                    else if (beName.contains("ultimate")) currentMultiplier = 2.00f;
+
+                    if (this.currentSpeed > 0 && !this.level.isClientSide) {
+                        radiator.waterTank.drain(waterUsage, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+                        radiator.setChanged();
+
+                        // СИНХРОНИЗАЦИЯ: Говорим серверу мгновенно отправить пакет с новым объемом воды на клиент!
+                        this.level.sendBlockUpdated(radiator.getBlockPos(), radiator.getBlockState(), radiator.getBlockState(), 3);
+                    }
                 }
             }
         }
+        this.setChanged();
+        this.sendData();
 
-        // Применяем множитель охлаждения к финальной скорости материала
-        float rawCalculatedSpeed = baseSafeSpeed * currentMultiplier;
-
-        // Железное округление до ближайшего числа, кратного 64, под сетку слайдера Create!
-        return Math.round(rawCalculatedSpeed / 64.0f) * 64.0f;
+        // Финальная скорость с учетом охлаждения и округления
+        return Math.round((baseSafeSpeed * currentMultiplier) / 64.0f) * 64.0f;
     }
 
 
@@ -333,6 +334,34 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         String tempColor = engineTemperature > (getMaterialMeltingPoint() - 200) ? "§c" : (engineTemperature > 90 ? "§6" : "§a");
         tooltip.add(Component.literal(" §eТемпература ядра: " + tempColor + String.format("%.1f", engineTemperature) + "°C / " + getMaterialMeltingPoint() + "°C"));
         tooltip.add(Component.literal(" §eБезопасная зона: §aдо " + String.format("%.0f", getSafeEngineSpeed()) + " RPM"));
+        net.minecraft.world.level.block.state.BlockState blockState = this.getBlockState();
+        if (blockState.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
+            net.minecraft.core.Direction facing = blockState.getValue(V8EngineBlock.HORIZONTAL_FACING);
+            net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+            net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+
+            if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+                String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
+                String tierName = "ОБЫЧНЫЙ";
+                String tierColor = "§7";
+                String efficiency = "100%";
+
+                if (beName.contains("copper")) { tierName = "МЕДНЫЙ"; tierColor = "§6"; efficiency = "+25%"; }
+                else if (beName.contains("steel")) { tierName = "СТАЛЬНОЙ"; tierColor = "§f"; efficiency = "+50%"; }
+                else if (beName.contains("brass")) { tierName = "ЛАТУННЫЙ"; tierColor = "§e"; efficiency = "+75%"; }
+                else if (beName.contains("ultimate")) { tierName = "УЛЬТИМАТИВНЫЙ"; tierColor = "§b"; efficiency = "+100%"; }
+
+                tooltip.add(Component.literal(""));
+                tooltip.add(Component.literal("§6Состояние охлаждения V8:"));
+                tooltip.add(Component.literal(" §eРадиатор: " + tierColor + tierName + " (§a" + efficiency + " RPM§e)"));
+
+                if (!radiator.waterTank.isEmpty()) {
+                    tooltip.add(Component.literal(" §eЗаполнение бака: §b" + radiator.waterTank.getFluidAmount() + " / " + radiator.waterTank.getCapacity() + " mB"));
+                } else {
+                    tooltip.add(Component.literal(" §c⚠ РАДИАТОР СУХОЙ (НЕТ ОХЛАЖДЕНИЯ!)"));
+                }
+            }
+        }
 
         if (!fuelTank.isEmpty()) {
             tooltip.add(Component.literal(" §eТопливо: §7" + fuelTank.getFluid().getHoverName().getString() + " (" + fuelTank.getFluidAmount() + " mB)"));

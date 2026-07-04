@@ -41,10 +41,12 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     }
 
     @Override
-    public net.minecraft.core.Direction.Axis getRotationAxis(net.minecraft.world.level.block.state.BlockState state) {
-        // Вернули имя getRotationAxis, которое требует компилятор!
-        // Теперь оно идеально переопределяет родительский класс Create без дубликатов
-        return state.getValue(HORIZONTAL_FACING).getAxis();
+    public net.minecraft.core.Direction.Axis getRotationAxis(BlockState state) {
+        // Направление вала должно СОВПАДАТЬ с тем, куда смотрит сам двигатель!
+        if (state.hasProperty(HORIZONTAL_FACING)) {
+            return state.getValue(HORIZONTAL_FACING).getAxis();
+        }
+        return net.minecraft.core.Direction.Axis.X;
     }
 
 

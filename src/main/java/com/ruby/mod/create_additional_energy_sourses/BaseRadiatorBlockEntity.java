@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import java.util.List;
+import net.minecraft.network.chat.Component;
 
 public class BaseRadiatorBlockEntity extends SmartBlockEntity {
     // Внутренний бак радиатора на 4000 мБ (4 ведра воды)
@@ -21,6 +22,7 @@ public class BaseRadiatorBlockEntity extends SmartBlockEntity {
     @Override
     public void addBehaviours(List<BlockEntityBehaviour> behaviours) {}
 
+
     // Сохранение бака радиатора на диск (1.21.1 стандарты с registries)
     @Override
     protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
@@ -29,6 +31,7 @@ public class BaseRadiatorBlockEntity extends SmartBlockEntity {
         this.waterTank.writeToNBT(registries, fluidTag);
         tag.put("WaterTank", fluidTag);
     }
+
 
     // Чтение бака радиатора с диска
     @Override
@@ -52,5 +55,6 @@ public class BaseRadiatorBlockEntity extends SmartBlockEntity {
     public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket() {
         return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
     }
+
 }
 

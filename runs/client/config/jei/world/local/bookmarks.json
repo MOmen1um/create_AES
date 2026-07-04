@@ -42,5 +42,6 @@
   {"ingredient":{"id":"create:portable_storage_interface"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:redstone_contact"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:sticky_mechanical_piston"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create:smart_chute"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"create:smart_chute"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:fluid_pipe"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]
