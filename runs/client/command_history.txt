@@ -43,3 +43,7 @@
 /flywheel backend off
 /give Dev create_additional_energy_sourses:heavy_handle
 /time set day
+/give Dev create_additional_energy_sourses:aluminum_v8_engine
+/give Dev create_additional_energy_sourses:titanium_v8_engine_v8_engine
+/give Dev create_additional_energy_sourses:titanium_v8_engine
+/weather clear

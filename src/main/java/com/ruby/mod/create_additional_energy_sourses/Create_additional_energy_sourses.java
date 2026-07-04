@@ -32,6 +32,8 @@ public class Create_additional_energy_sourses {
                         output.accept(new ItemStack(ModItems.HEAVY_TIP.get()));
                         output.accept(new ItemStack(ModItems.PICKAXE_CORE.get()));
                         output.accept(new ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
+                        output.accept(new ItemStack(ModBlocks.ALUMINUM_V8_ENGINE_ITEM.get()));
+                        output.accept(new ItemStack(ModBlocks.TITANIUM_V8_ENGINE_ITEM.get()));
 
                     })
                     .build());
@@ -49,16 +51,36 @@ public class Create_additional_energy_sourses {
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    ModBlocks.V8_ENGINE_ENTITY.get(), // Твой BlockEntityType для V8
-                    (com.simibubi.create.foundation.blockEntity.SmartBlockEntity be, net.minecraft.core.Direction side) -> {
-
-                        // Явно приводим базовый SmartBlockEntity к нашему классу V8EngineBlockEntity
-                        // Внутри лямбды регистрации капабилити в главном классе сделай так:
-                        if (be instanceof V8EngineBlockEntity v8) {
-                            return v8.getFluidTank(); // Возвращаем бак для ВСЕХ сторон, чтобы очки инженера всегда его видели!
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.V8_ENGINE_ENTITY.get(),
+                    (be, side) -> {
+                        if (be instanceof V8EngineBlockEntity v8 && side == net.minecraft.core.Direction.DOWN) {
+                            return v8.getFluidTank();
                         }
                         return null;
+                    }
+            );
 
+            // --- 2. РЕГИСТРАЦИЯ БАКА АЛЮМИНИЕВОГО ДВС (Только снизу) ---
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.ALUMINUM_V8_ENGINE_ENTITY.get(),
+                    (be, side) -> {
+                        if (be instanceof AluminumV8EngineBlockEntity v8 && side == net.minecraft.core.Direction.DOWN) {
+                            return v8.getFluidTank();
+                        }
+                        return null;
+                    }
+            );
+
+            // --- 3. РЕГИСТРАЦИЯ БАКА ТИТАНОВОГО ДВС (Только снизу) ---
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.TITANIUM_V8_ENGINE_ENTITY.get(),
+                    (be, side) -> {
+                        if (be instanceof TitaniumV8EngineBlockEntity v8 && side == net.minecraft.core.Direction.DOWN) {
+                            return v8.getFluidTank();
+                        }
+                        return null;
                     }
             );
         });

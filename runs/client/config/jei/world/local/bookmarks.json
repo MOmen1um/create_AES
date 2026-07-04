@@ -21,5 +21,12 @@
   {"ingredient":{"id":"create:goggles"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:stressometer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:wooden_bracket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"createdieselgenerators:crude_oil_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"createdieselgenerators:crude_oil_bucket"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"createdieselgenerators:diesel_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:diorite_stairs"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:smooth_sandstone_stairs"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:mud_brick_stairs"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:deepslate_tiles"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:polished_andesite"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:diorite_slab"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

@@ -53,8 +53,8 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     }
 
     @Override
-    public BlockEntityType<? extends V8EngineBlockEntity> getBlockEntityType() {
-        // Эту корзину мы сейчас добавим в ModBlocks
+    public net.minecraft.world.level.block.entity.BlockEntityType<? extends V8EngineBlockEntity> getBlockEntityType() {
+        // Указали универсальный тип с помощью '? extends', чтобы чугун, алюминий и титан могли использовать этот базовый класс блока!
         return ModBlocks.V8_ENGINE_ENTITY.get();
     }
 
