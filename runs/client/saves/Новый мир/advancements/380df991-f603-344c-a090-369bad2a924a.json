@@ -612,5 +612,23 @@
     },
     "done": true
   },
+  "simulated:applied_kinematics": {
+    "criteria": {
+      "0": "2026-07-04 14:49:39 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/contraption_diagram": {
+    "criteria": {
+      "has_ingredient": "2026-07-04 14:49:39 +0500"
+    },
+    "done": true
+  },
+  "create:shifting_gears": {
+    "criteria": {
+      "0": "2026-07-04 17:32:02 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

@@ -83,6 +83,35 @@ public class Create_additional_energy_sourses {
                         return null;
                     }
             );
+            // --- ПРЯМАЯ РЕГИСТРАЦИЯ ТРУБ ДЛЯ КАЖДОГО ТИРА РАДИАТОРОВ ---
+
+            // 1. Медный
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_COPPER_ENTITY.get(),
+                    (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
+            );
+
+            // 2. Латунный
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_BRASS_ENTITY.get(),
+                    (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
+            );
+
+            // 3. Стальной
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_STEEL_ENTITY.get(),
+                    (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
+            );
+
+            // 4. Топовый (Ультимативный)
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_ULTIMATE_ENTITY.get(),
+                    (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
+            );
         });
 
     }

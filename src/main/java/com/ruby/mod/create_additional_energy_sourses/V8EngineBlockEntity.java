@@ -26,7 +26,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     private float currentSpeed = 0;
     private float lastSentSpeed = -1f;
 
-    public int engineQuality = 100;
+    public float engineQuality = 1.0f;
     public float secretEfficiency = 1.0f;
     public String engineMaterial;
     public float engineTemperature = 20.0f;
@@ -34,16 +34,19 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     private int accelerationTicks = 0;
 
-    // Наш старый конструктор для совместимости
+    // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
-        // ИСПРАВЛЕНО: Дописали четвертый аргумент "iron" в самый конец!
         this(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state, "iron");
     }
 
-    // НОВЫЙ конструктор, который будут вызывать наши алюминиевые и титановые двигатели!
+    // Главный конструктор
     public V8EngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, String material) {
         super(type, pos, state);
         this.engineMaterial = material;
+
+        // УБРАЛИ РАНДОМ: Теперь при создании у всех двигателей базовые 100% параметров
+        this.engineQuality = 1.0f;
+        this.secretEfficiency = 1.0f;
     }
 
     public float getAmbientTemperature() {
@@ -55,12 +58,50 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     public float getSafeEngineSpeed() {
+        // 1. ВОССТАНОВИЛИ ТВОЮ ОРИГИНАЛЬНУЮ ЛОГИКУ СКОРОСТЕЙ
         float baseLimit = 1024f;
-        if (engineMaterial.equals("aluminum")) baseLimit = 4096f;
-        if (engineMaterial.equals("titanium")) baseLimit = 8192f;
+        if (this.engineMaterial != null) {
+            if (this.engineMaterial.equals("aluminum")) baseLimit = 4096f;
+            if (this.engineMaterial.equals("titanium")) baseLimit = 8192f;
+        }
+
+        // Учёт турбонаддува (твоя оригинальная тернарная строчка)
         float turboModifier = isTurboCharged ? 2.0f : 1.0f;
-        return baseLimit * (engineQuality / 100.0f) * secretEfficiency * turboModifier;
+
+        // Перемножаем базовый лимит на турбину
+        float baseSafeSpeed = baseLimit * turboModifier;
+
+        // --- 2. ИНТЕГРИРУЕМ РАДИАТОРЫ THE LONG DRIVE СТРОГО СПЕРЕДИ ---
+        float currentMultiplier = 1.0f;
+
+        net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
+        if (state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
+            net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
+
+            // Ищем блок радиатора строго на морде двигателя
+            net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+            net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+
+            if (neighborBE != null) {
+                String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(neighborBE.getType()).toString();
+
+                // Проверяем тиры радиаторов и выставляем множители скорости
+                if (beName.startsWith("create_additional_energy_sourses:radiator_")) {
+                    if (beName.contains("copper")) currentMultiplier = 1.25f;
+                    if (beName.contains("steel")) currentMultiplier = 1.50f;
+                    if (beName.contains("brass")) currentMultiplier = 1.75f;
+                    if (beName.contains("ultimate")) currentMultiplier = 2.00f;
+                }
+            }
+        }
+
+        // Применяем множитель охлаждения к финальной скорости материала
+        float rawCalculatedSpeed = baseSafeSpeed * currentMultiplier;
+
+        // Железное округление до ближайшего числа, кратного 64, под сетку слайдера Create!
+        return Math.round(rawCalculatedSpeed / 64.0f) * 64.0f;
     }
+
 
     private float getMaxEngineSpeed() {
         float safeSpeed = getSafeEngineSpeed();
@@ -135,8 +176,23 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float maxSpeed = getMaxEngineSpeed();
         float targetSpeed = Math.min(Math.abs(this.targetSliderSpeed * 64f), getMaxEngineSpeed());
 
-        if (burnTimeRemaining > 0 && targetSpeed > 0) {
-            burnTimeRemaining--;
+        if (this.burnTimeRemaining > 0 && targetSpeed > 0) {
+            // --- РАСЧЁТ ДИНАМИЧЕСКОГО РАСХОДА ТОПЛИВА ---
+            // Находим отношение текущей скорости к безопасной (speedRatio)
+            float speedRatio = this.currentSpeed / this.getSafeEngineSpeed();
+
+            // Рассчитываем множитель расхода:
+            // Если мотор стоит или еле крутится, расход минимальный (0.2).
+            // На полной безопасной скорости расход равен 1.0.
+            // В зоне оверспида (наддува) расход растёт квадратично, заставляя мотор «жрать» бензин ведрами!
+            float fuelConsumptionMultiplier = 0.2f + (float) Math.pow(speedRatio, 2) * 0.8f;
+
+            // Переводим множитель в целые тики и уменьшаем время горения.
+            // Минимальный расход — 1 тик за тик, чтобы топливо не зависало бесконечно.
+            int ticksToBurn = Math.max(1, Math.round(fuelConsumptionMultiplier));
+            this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
+            // ---------------------------------------------
+            
 
 
             this.setChanged();
@@ -151,7 +207,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
             float fuelHeat = getFuelHeatMultiplier(fluidInTank);
-            float speedRatio = currentSpeed / safeSpeed;
             float heatGeneration = (float) Math.pow(speedRatio, 3) * fuelHeat * 1.5f;
 
 
@@ -251,7 +306,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public float calculateAddedStressCapacity() {
         if (currentSpeed <= 0) return 0;
         float materialMultiplier = engineMaterial.equals("iron") ? 15.0f : 10.0f;
-        return currentSpeed * materialMultiplier * (engineQuality / 100.0f);
+        return currentSpeed * materialMultiplier * secretEfficiency;
     }
 
     @Override
@@ -269,7 +324,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         String matColor = engineMaterial.equals("titanium") ? "§b" : (engineMaterial.equals("aluminum") ? "§7" : "§8");
         tooltip.add(Component.literal("§6Спецификация ДВС V8:"));
         tooltip.add(Component.literal(" §eМатериал блока: " + matColor + engineMaterial.toUpperCase()));
-        tooltip.add(Component.literal(" §eКачество сборки: §a" + engineQuality + "%"));
 
         String turboText = isTurboCharged ? "§aУСТАНОВЛЕН" : "§cОТСУТСТВУЕТ";
         tooltip.add(Component.literal(" §eТурбонаддув: " + turboText));
@@ -310,13 +364,13 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         // ИСПРАВЛЕНО: Добавили registries в super.read
         super.read(tag, registries, clientPacket);
 
+
         this.isTurboCharged = tag.getBoolean("IsTurboCharged");
         this.currentSpeed = tag.getFloat("CurrentSpeed");
         this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
         this.burnTimeRemaining = tag.getInt("BurnTimeRemaining");
         this.engineTemperature = tag.getFloat("EngineTemperature");
         this.accelerationTicks = tag.getFloat("AccelerationTicks") != 0 ? (int)tag.getFloat("AccelerationTicks") : tag.getInt("AccelerationTicks"); // Безопасное чтение типов
-
         // ИСПРАВЛЕНО: Бак требует registries для чтения в 1.21.1
         if (tag.contains("FuelTank")) {
             this.fuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
@@ -327,8 +381,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
-        tag.putInt("EngineQuality", engineQuality);
-        tag.putFloat("SecretEfficiency", secretEfficiency);
         tag.putString("EngineMaterial", engineMaterial);
         tag.putFloat("EngineTemp", engineTemperature);
         tag.putBoolean("IsTurboCharged", isTurboCharged);
