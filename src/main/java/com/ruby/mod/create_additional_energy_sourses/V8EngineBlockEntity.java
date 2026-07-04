@@ -28,14 +28,22 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     public int engineQuality = 100;
     public float secretEfficiency = 1.0f;
-    public String engineMaterial = "iron";
+    public String engineMaterial;
     public float engineTemperature = 20.0f;
     public boolean isTurboCharged = false;
 
     private int accelerationTicks = 0;
 
-    public V8EngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    // Наш старый конструктор для совместимости
+    public V8EngineBlockEntity(BlockPos pos, BlockState state) {
+        // ИСПРАВЛЕНО: Дописали четвертый аргумент "iron" в самый конец!
+        this(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state, "iron");
+    }
+
+    // НОВЫЙ конструктор, который будут вызывать наши алюминиевые и титановые двигатели!
+    public V8EngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, String material) {
         super(type, pos, state);
+        this.engineMaterial = material;
     }
 
     public float getAmbientTemperature() {
