@@ -147,8 +147,4 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         // x2: 15, y2: 14, z2: 15 (модель чуть ниже блока по высоте)
         return Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
     }
-
-
-
-
 }

@@ -193,26 +193,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
             // ---------------------------------------------
 
-            float speedRatioForSound = this.currentSpeed / this.getSafeEngineSpeed();
 
-            // Рассчитываем динамический интервал между ударами поршней в зависимости от оборотов
-            // На холостых (близко к 0) мотор будет пыхать раз в 2 секунды (40 тиков)
-            // На максимальной скорости — раз в полсекунды (10 тиков), создавая ровный гул
-            int soundInterval = Math.max(10, Math.round(40f - (speedRatio * 30f)));
-
-            if (this.level.getGameTime() % soundInterval == 0) {
-                // Зажимаем Pitch в строгие рамки: от 0.4 (басовитый ДВС) до 1.25 (максимальный предел)
-                float calculatedPitch = 0.4f + (speedRatioForSound * 0.6f);
-                if (calculatedPitch > 1.25f) calculatedPitch = 1.25f; // Защита ушей игрока от визга
-
-                // Уменьшаем громкость до 0.4f, чтобы фабрика не оглушала при долгой работе
-                this.level.playSound(null, this.worldPosition,
-                        net.minecraft.sounds.SoundEvents.MINECART_RIDING,
-                        net.minecraft.sounds.SoundSource.BLOCKS,
-                        0.4f,
-                        calculatedPitch
-                );
-            }
 
 
             this.setChanged();
