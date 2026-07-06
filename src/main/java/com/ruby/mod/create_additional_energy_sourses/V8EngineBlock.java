@@ -140,6 +140,13 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         return 0; // Свет проходит сквозь пустые места модели
     }
 
+
+    // 2. Указываем правильный тип рендера для кастомных 3D-моделей
+    @Override
+    public net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
+        return net.minecraft.world.level.block.RenderShape.MODEL;
+    }
+
     // 2. КАСТОМНАЯ СЕТКА ХИТБОКСА (VoxelShape)
     // Сейчас мы настроим сетку, которая чуть меньше стандартного блока по высоте и ширине!
     @Override
