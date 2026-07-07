@@ -468,5 +468,41 @@
     },
     "done": true
   },
+  "create:recipes/misc/crafting/logistics/andesite_table_cloth_clear": {
+    "criteria": {
+      "has_andesite_table_cloth": "2026-07-07 19:08:29 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/logistics/copper_table_cloth_clear": {
+    "criteria": {
+      "has_copper_table_cloth": "2026-07-07 19:08:34 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/logistics/brass_table_cloth_clear": {
+    "criteria": {
+      "has_brass_table_cloth": "2026-07-07 19:08:49 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_porkchop_from_campfire_cooking": {
+    "criteria": {
+      "has_porkchop": "2026-07-07 20:17:31 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_porkchop": {
+    "criteria": {
+      "has_porkchop": "2026-07-07 20:17:31 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/food/cooked_porkchop_from_smoking": {
+    "criteria": {
+      "has_porkchop": "2026-07-07 20:17:31 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }

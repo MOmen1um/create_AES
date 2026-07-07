@@ -297,12 +297,12 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
         if (Math.abs(this.currentSpeed) > 1.0f) {
             // Мотор плавно греется на холостых
-            baseHeat = 0.05f + (Math.abs(this.currentSpeed) / safeSpeed) * 1.2f;
+            baseHeat = 0.05f + (Math.abs(this.currentSpeed) / safeSpeed) * 3.35f;
 
             // Агрессивный перегрев, если зашли в красную зону превышения безопасного RPM
             if (Math.abs(this.currentSpeed) > safeSpeed) {
                 // Коэффициент 4.2f настроен так, чтобы на 2х скорости БЕЗ радиатора выдать ~600°C!
-                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeed) / safeSpeed) * 12.6f;
+                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeed) / safeSpeed) * 4.2f;
             }
         }
 
