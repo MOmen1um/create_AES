@@ -8,6 +8,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -85,7 +86,20 @@ public class NonModularEnginesBlock extends HorizontalKineticBlock implements En
 
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
-        return face.getAxis() == getRotationAxis(state);
+        Direction facing = state.getValue(HORIZONTAL_FACING);
+        // Теперь коленвал будет выходить со стороны, противоположной «лицу» в коде (которая стала физическим передом)
+        return face == facing.getOpposite();
+    }
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        // Берём направление, куда смотрит игрок, и КРУТИМ НА 180 градусов (.getOpposite())
+        Direction facing = context.getHorizontalDirection();
+
+        return this.defaultBlockState().setValue(HORIZONTAL_FACING, facing);
+    }
+    @Override
+    protected boolean propagatesSkylightDown(BlockState state, net.minecraft.world.level.BlockGetter reader, BlockPos pos) {
+        return true;
     }
 }
 

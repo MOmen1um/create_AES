@@ -203,11 +203,11 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
             // ---------------------------------------------
 
-
-
-
             this.setChanged();
-            this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
+            this.sendData();
+            if (this.level != null) {
+                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+            }
             if (currentSpeed < targetSpeed) {
                 if (accelerationTicks < 40) accelerationTicks++;
                 float progress = (float) accelerationTicks / 40;
@@ -278,9 +278,15 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
         }
 
-        if (this.level.getGameTime() % 20 == 0) {
+        // Если мотор крутится, принудительно обновляем блок и вал каждый тик!
+        if (this.currentSpeed > 0) {
+            this.updateGeneratedRotation();
             this.setChanged();
-            this.sendData(); // Синхронизирует безопасную скорость и литры топлива с клиентом!
+            this.sendData();
+        }
+
+        if (this.level.getGameTime() % 20 == 0) {
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
         }
     }
 
@@ -324,8 +330,10 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
         if (createMaxSpeed < 32768) {
-            tooltip.add(Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
-            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в конфиге Create до 32768!"));
+            tooltip.add(Component.literal("  §c⚠ ДВИГАТЕЛЬ ЗАБЛОКИРОВАН! ⚠"));
+            tooltip.add(Component.literal("  §7Причина: Низкий лимит скорости в Create."));
+            tooltip.add(Component.literal("  §eРешение: §aВыставьте §emaxRotationSpeed §aв"));
+            tooltip.add(Component.literal("  §aконфиге сервера минимум на §e32768 §aRPM!"));
             return true;
         }
 

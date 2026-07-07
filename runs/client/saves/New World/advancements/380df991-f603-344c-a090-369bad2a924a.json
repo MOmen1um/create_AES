@@ -385,9 +385,10 @@
   },
   "create:wrench_goggles": {
     "criteria": {
+      "0": "2026-07-07 09:16:24 +0500",
       "1": "2026-07-07 07:55:22 +0500"
     },
-    "done": false
+    "done": true
   },
   "aeronautics:recipes/misc/aviators_goggles": {
     "criteria": {
