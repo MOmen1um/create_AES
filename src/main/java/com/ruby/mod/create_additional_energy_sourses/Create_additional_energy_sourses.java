@@ -24,8 +24,8 @@ public class Create_additional_energy_sourses {
                     .icon(() -> new ItemStack(ModBlocks.THERMO_GENERATOR.get()))
                     .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
                     .displayItems((parameters, output) -> {
-                        // 1. Термогенератор и кастомные предметы
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get(), 1));
+                        // 1. Стандартные предметы мода
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PICKAXE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_HANDLE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_TIP.get()));
@@ -38,38 +38,23 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_BRASS_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_ULTIMATE_ITEM.get()));
 
-                        // 3. НЕМОДУЛЬНЫЕ ДВИГАТЕЛИ (Выстраиваем по материалам и мощности)
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_I4.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_V8.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_W16.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_R32.get()));
+                        // 3. НАШ ДУБОВЫЙ ЭТАЛОННЫЙ СТАБИЛЬНЫЙ МОТОР ДЛЯ СРАВНЕНИЯ
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.V8_ENGINE.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_I4.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_V8.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_W16.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_R32.get()));
+                        // 4. ГЕНИАЛЬНЫЙ ЦИКЛ: Автоматически добавляем ВСЕ 24 новых мотора без ручной писанины!
+                        // Мы просто берем все зарегистрированные блоки из ModBlocks, находим их предметы по ID и кладем в инвентарь
+                        ModBlocks.BLOCKS.getEntries().forEach(holder -> {
+                            net.minecraft.resources.ResourceLocation blockId = holder.getId();
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_I4.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_V8.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_W16.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_R32.get()));
-
-                        // 4. МОДУЛЬНЫЕ ДВИГАТЕЛИ (Сквозные блоки)
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_I4.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_V8.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_W16.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_R32.get()));
-
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_I4.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_V8.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_W16.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_R32.get()));
-
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_I4.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_V8.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_W16.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_R32.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.V8_ENGINE.get(), 1));
+                            // Пропускаем те блоки, которые мы уже добавили вручную выше
+                            if (!blockId.getPath().contains("thermo_generator") && !blockId.getPath().contains("radiator") && !blockId.getPath().contains("classic")) {
+                                // Ищем зарегистрированный BlockItem в реестре предметов по точному ID блока
+                                net.minecraft.world.item.Item blockItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(blockId);
+                                if (blockItem != null && blockItem != net.minecraft.world.item.Items.AIR) {
+                                    output.accept(new net.minecraft.world.item.ItemStack(blockItem));
+                                }
+                            }
+                        });
                     })
                     .build());
 
