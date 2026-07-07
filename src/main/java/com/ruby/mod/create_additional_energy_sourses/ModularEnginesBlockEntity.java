@@ -1,17 +1,13 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import java.util.List;
 
-public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
+// Наследуемся от нашего универсального класса из папки Setup
+public class ModularEnginesBlockEntity extends com.ruby.mod.create_additional_energy_sourses.NonModularEnginesBlockEntity {
 
-    public ModularEnginesBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, String material, String engineType) {
-        super(type, pos, state, material, engineType);
+    public ModularEnginesBlockEntity(BlockPos pos, BlockState state) {
+        // Передаем ровно 2 аргумента в супер-конструктор (как он теперь и просит)!
+        super(pos, state);
     }
 }

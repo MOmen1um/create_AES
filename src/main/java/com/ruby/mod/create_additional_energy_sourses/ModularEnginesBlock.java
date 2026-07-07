@@ -22,8 +22,8 @@ public class ModularEnginesBlock extends HorizontalKineticBlock implements net.m
     // Рождаем модульный BlockEntity
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        // Передаем тип напрямую из ModBlocks без вызова лишних методов
-        return new ModularEnginesBlockEntity(ModBlocks.MODULAR_ENGINE_ENTITY.get(), pos, state, this.material, this.engineType);
+        // Оставляем строго 2 аргумента! Класс сам всё определит автоматически
+        return new ModularEnginesBlockEntity(pos, state);
     }
 
     // Вспомогательный метод (убрали @Override, чтобы Create не ругался)

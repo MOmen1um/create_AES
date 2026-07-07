@@ -28,17 +28,19 @@ public class ModBlocks {
                     .noOcclusion()));
 
 
-    // Наш классический эталонный ДВС для тестов
+    // Наш эталонный стабильный мотор для тестов и сравнения
     public static final net.neoforged.neoforge.registries.DeferredHolder<Block, Block> V8_ENGINE =
             BLOCKS.register("v8_engine_classic", () -> new V8EngineBlock(BlockBehaviour.Properties.of()
                     .strength(4.0f)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
 
-    // ГЕРАЛЬДИЧЕСКИЙ ШТРИХ: Регистрируем предмет для этого блока!
-    static {
-        ModItems.ITEMS.register("v8_engine_classic", () -> new net.minecraft.world.item.BlockItem(V8_ENGINE.get(), new net.minecraft.world.item.Item.Properties()));
-    }
+    // Отдельный тип сущности для классического эталона
+    public static final net.neoforged.neoforge.registries.DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("v8_engine_classic_entity", () -> BlockEntityType.Builder.of(
+                    V8EngineBlockEntity::new,
+                    V8_ENGINE.get()
+            ).build(null));
 
     // 2. Предмет Термогенератора
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
@@ -48,13 +50,6 @@ public class ModBlocks {
             BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
                     (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
                     THERMO_GENERATOR.get()).build(null));
-
-    // Отдельный тип сущности для классического эталона
-    public static final net.neoforged.neoforge.registries.DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
-            BLOCK_ENTITIES.register("v8_engine_classic_entity", () -> BlockEntityType.Builder.of(
-                    V8EngineBlockEntity::new,
-                    V8_ENGINE.get()
-            ).build(null));
 
     public static final DeferredHolder<Block, Block> RADIATOR_COPPER = BLOCKS.register("radiator_copper",
             () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(2.0f).sound(SoundType.COPPER), () -> ModBlocks.RADIATOR_COPPER_ENTITY.get()));
@@ -140,19 +135,25 @@ public class ModBlocks {
     // 4. РЕГИСТРАЦИЯ СУЩНОСТЕЙ (BLOCK ENTITIES)
     // ==========================================
 
-    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ НЕМОДУЛЬНЫХ ДВИГАТЕЛЕЙ
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<NonModularEnginesBlockEntity>> NON_MODULAR_ENGINE_ENTITY =
+    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ НЕМОДУЛЬНЫХ ДВИГАТЕЛЕЙ (Твоя оригинальная сетка!)
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<com.ruby.mod.create_additional_energy_sourses.NonModularEnginesBlockEntity>> NON_MODULAR_ENGINE_ENTITY =
             BLOCK_ENTITIES.register("non_modular_engine_entity", () -> BlockEntityType.Builder.of(
-                    (pos, state) -> new NonModularEnginesBlockEntity(ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(), pos, state, "iron", "i4"),
+                    // Передаем строго pos и state! А тип сущности класс заберет сам через ModBlocks
+                    (pos, state) -> new com.ruby.mod.create_additional_energy_sourses.NonModularEnginesBlockEntity(pos, state),
+
+                    // Твоя сетка моторов капсом
                     IRON_I4.get(), IRON_V8.get(), IRON_W16.get(), IRON_R32.get(),
                     ALUMINUM_I4.get(), ALUMINUM_V8.get(), ALUMINUM_W16.get(), ALUMINUM_R32.get(),
                     TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get()
             ).build(null));
 
-    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ МОДУЛЬНЫХ ДВИГАТЕЛЕЙ
+    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ МОДУЛЬНЫХ ДВИГАТЕЛЕЙ (Раскомментируем и чистим!)
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =
             BLOCK_ENTITIES.register("modular_engine_entity", () -> BlockEntityType.Builder.of(
-                    (pos, state) -> new ModularEnginesBlockEntity(ModBlocks.MODULAR_ENGINE_ENTITY.get(), pos, state, "iron", "i4"),
+                    // Передаем строго pos и state!
+                    (pos, state) -> new ModularEnginesBlockEntity(pos, state),
+
+                    // Твоя сетка модульных блоков капсом
                     MODULAR_IRON_I4.get(), MODULAR_IRON_V8.get(), MODULAR_IRON_W16.get(), MODULAR_IRON_R32.get(),
                     MODULAR_ALUMINUM_I4.get(), MODULAR_ALUMINUM_V8.get(), MODULAR_ALUMINUM_W16.get(), MODULAR_ALUMINUM_R32.get(),
                     MODULAR_TITANIUM_I4.get(), MODULAR_TITANIUM_V8.get(), MODULAR_TITANIUM_W16.get(), MODULAR_TITANIUM_R32.get()

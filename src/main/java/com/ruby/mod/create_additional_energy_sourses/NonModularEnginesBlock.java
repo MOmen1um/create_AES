@@ -36,7 +36,8 @@ public class NonModularEnginesBlock extends HorizontalKineticBlock implements En
     // 1. Создание сущности блока (Связано с нашим универсальным типом)
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new NonModularEnginesBlockEntity(ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(), pos, state, this.material, this.engineType);
+        // Оставляем строго 2 аргумента! Используем правильный путь к нашему классу в папке Setup
+        return new com.ruby.mod.create_additional_energy_sourses.NonModularEnginesBlockEntity(pos, state);
     }
 
     @Override
