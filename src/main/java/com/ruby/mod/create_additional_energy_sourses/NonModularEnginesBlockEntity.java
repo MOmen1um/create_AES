@@ -115,6 +115,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         slider.withCallback(value -> {
             this.targetSliderSpeed = (float) value;
             this.setChanged();
+            this.updateGeneratedRotation();
             this.notifyUpdate();
         });
 
@@ -191,57 +192,37 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     }
     @Override
     public void tick() {
+        // Код Create супер-класса должен выполняться ВСЕГДА (он крутит внутренние таймеры ползунков!)
         super.tick();
 
-        // Логика сжигания топлива работает ТОЛЬКО на сервере
+        // Тестовое топливо
+        this.burnTimeRemaining = 100;
+
+        // Серверная логика сжигания топлива
         if (level != null && !level.isClientSide) {
             if (this.burnTimeRemaining > 0) {
                 this.burnTimeRemaining--;
-                if (level.getGameTime() % 20 == 0) {
-                    this.setChanged();
-                    this.notifyUpdate();
-                }
             }
         }
 
-        // РАЗГОН ДВИГАТЕЛЯ (Убираем зависимость от burnTimeRemaining для синхронизации ползунка!)
+        // Логика изменения скорости ползунка (должна работать и на клиенте, и на сервере для рендера!)
         if (this.targetSliderSpeed > 0) {
-            if (this.currentSpeed < this.targetSliderSpeed) {
-                this.accelerationTicks++;
-                if (this.accelerationTicks >= 5) { // Ускорим шаг до 5 тиков, чтобы разгонялся бодрее
-                    this.currentSpeed = Math.min(this.targetSliderSpeed, this.currentSpeed + 8.0f);
-                    this.accelerationTicks = 0;
+            this.currentSpeed = this.targetSliderSpeed;
 
-                    // Обновляем вращение на сервере
-                    if (level != null && !level.isClientSide) {
-                        this.updateGeneratedRotation();
-                        this.setChanged();
-                    }
-                }
-            } else if (this.currentSpeed > this.targetSliderSpeed) {
-                this.currentSpeed = Math.max(this.targetSliderSpeed, this.currentSpeed - 8.0f);
-                if (level != null && !level.isClientSide) {
-                    this.updateGeneratedRotation();
-                    this.setChanged();
-                }
+            // Пинаем сеть Create только на сервере!
+            if (level != null && !level.isClientSide) {
+                this.updateGeneratedRotation();
             }
         } else {
-            if (this.currentSpeed > 0) {
-                this.currentSpeed = Math.max(0, this.currentSpeed - 16.0f);
-                if (level != null && !level.isClientSide) {
-                    this.updateGeneratedRotation();
-                    this.setChanged();
-                }
+            this.currentSpeed = 0;
+            if (level != null && !level.isClientSide) {
+                this.updateGeneratedRotation();
             }
-            this.accelerationTicks = 0;
         }
 
-        // ТЕРМОДИНАМИКА И ОСТАЛЬНОЙ КОД... (оставь как есть)
-
-        // В самом конце метода tick() — ЖЕСТКАЯ СИНХРОНИЗАЦИЯ СКОРОСТИ
-        if (this.currentSpeed != this.lastSentSpeed) {
-            this.lastSentSpeed = this.currentSpeed;
-            if (level != null && !level.isClientSide) {
+        // Синхронизация пакетов для очков инженера
+        if (level != null && !level.isClientSide) {
+            if (level.getGameTime() % 10 == 0) {
                 this.setChanged();
                 this.notifyUpdate();
             }

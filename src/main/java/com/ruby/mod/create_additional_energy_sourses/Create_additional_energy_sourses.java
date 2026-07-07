@@ -69,6 +69,7 @@ public class Create_additional_energy_sourses {
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
+            AllClientTypes.register(ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(), NonModularEngineInstance::new, NonModularEngineRenderer::new);
         });
         // === ИСПРАВЛЕННЫЙ СЛУШАТЕЛЬ ТОПЛИВНЫХ КАПАБИЛИТИ ДЛЯ 1.21.1 ===
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {

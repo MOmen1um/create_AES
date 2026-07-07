@@ -117,6 +117,5 @@ public class NonModularEnginesBlock extends HorizontalKineticBlock implements En
             }
         }
     }
-
 }
 
