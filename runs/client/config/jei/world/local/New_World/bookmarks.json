@@ -55,5 +55,6 @@
   {"ingredient":{"id":"create_additional_energy_sourses:modular_iron_w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:brass_casing"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:modular_titanium_v8_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"create_additional_energy_sourses:modular_titanium_v8_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:v8_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]
