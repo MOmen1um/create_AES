@@ -24,7 +24,7 @@ public class Create_additional_energy_sourses {
                     .icon(() -> new ItemStack(ModBlocks.THERMO_GENERATOR.get()))
                     .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
                     .displayItems((parameters, output) -> {
-                        // 1. Базовые предметы мода
+                        // 1. Стандартные предметы мода (Используем _ITEM.get() для чистых предметов!)
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PICKAXE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_HANDLE.get()));
@@ -37,16 +37,20 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_STEEL_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_BRASS_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_ULTIMATE_ITEM.get()));
+                        // 3. ДОБАВЛЯЕМ СТАБИЛЬНЫЙ КЛАССИЧЕСКИЙ ЭТАЛОН НАПРЯМУЮ ЧЕРЕЗ РЕЕСТР ПРЕДМЕТОВ
+                        net.minecraft.world.item.Item classicItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "v8_engine_classic")
+                        );
+                        if (classicItem != null && classicItem != net.minecraft.world.item.Items.AIR) {
+                            output.accept(new net.minecraft.world.item.ItemStack(classicItem));
+                        }
 
-                        // 3. ДОБАВЛЯЕМ НАШ СТАБИЛЬНЫЙ ЭТАЛОННЫЙ ДВИГАТЕЛЬ
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.V8_ENGINE.get()));
-
-                        // 4. УМНЫЙ ЦИКЛ: Автоматически превращаем новые 24 блока в ItemStack предметов!
+                        // 4. ГЕНИАЛЬНЫЙ ЦИКЛ: Автоматически превращаем новые 24 блока в ItemStack предметов!
                         ModBlocks.BLOCKS.getEntries().forEach(holder -> {
                             net.minecraft.resources.ResourceLocation id = holder.getId();
-                            // Пропускаем то, что мы уже положили руками
+                            // Пропускаем термогенератор, радиаторы и классический эталон, так как положили их руками выше
                             if (!id.getPath().contains("thermo_generator") && !id.getPath().contains("radiator") && !id.getPath().contains("classic")) {
-                                // Достаем зарегистрированный BlockItem из ванильного реестра предметов по ID блока
+                                // Достаем зарегистрированный BlockItem из ванильного реестра предметов по точному ID блока
                                 net.minecraft.world.item.Item blockItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id);
                                 if (blockItem != null && blockItem != net.minecraft.world.item.Items.AIR) {
                                     output.accept(new net.minecraft.world.item.ItemStack(blockItem));

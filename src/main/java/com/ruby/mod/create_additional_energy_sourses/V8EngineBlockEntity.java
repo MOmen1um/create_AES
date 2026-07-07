@@ -33,6 +33,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public boolean isTurboCharged = false;
 
     private int accelerationTicks = 0;
+    private int overheatMeltingTimer = 0;
+    private float maxMeltingTemp;
 
     // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
@@ -190,27 +192,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float targetSpeed = Math.min(Math.abs(this.targetSliderSpeed * 64f), getMaxEngineSpeed());
 
         if (this.burnTimeRemaining > 0 && targetSpeed > 0) {
-            // --- РАСЧЁТ ДИНАМИЧЕСКОГО РАСХОДА ТОПЛИВА ---
-            // Находим отношение текущей скорости к безопасной (speedRatio)
-            float speedRatio = this.currentSpeed / this.getSafeEngineSpeed();
-
-            // Рассчитываем множитель расхода:
-            // Если мотор стоит или еле крутится, расход минимальный (0.2).
-            // На полной безопасной скорости расход равен 1.0.
-            // В зоне оверспида (наддува) расход растёт квадратично, заставляя мотор «жрать» бензин ведрами!
-            float fuelConsumptionMultiplier = 0.2f + (float) Math.pow(speedRatio, 2) * 0.8f;
-
-            // Переводим множитель в целые тики и уменьшаем время горения.
-            // Минимальный расход — 1 тик за тик, чтобы топливо не зависало бесконечно.
-            int ticksToBurn = Math.max(1, Math.round(fuelConsumptionMultiplier));
+            int ticksToBurn = 1;
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
-            // ---------------------------------------------
 
-
-
-
-            this.setChanged();
-            this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             if (currentSpeed < targetSpeed) {
                 if (accelerationTicks < 40) accelerationTicks++;
                 float progress = (float) accelerationTicks / 40;
@@ -220,21 +204,44 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             }
 
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
+
             float fuelHeat = getFuelHeatMultiplier(fluidInTank);
-            float heatGeneration = (float) Math.pow(speedRatio, 3) * fuelHeat * 1.5f;
+            // --- ⚙️ ЧЕСТНАЯ ТЕРМОДИНАМИКА (Без отрицательных циклов и заклинивания) ---
+            float safeSpeedLimit = getSafeEngineSpeed();
 
-
-
-            engineTemperature += heatGeneration;
-
-            if (this.currentSpeed <= safeSpeed) {
-                // Если игрок держит скорость в норме, температура балансирует в районе 595 - 600 градусов
-                if (this.engineTemperature > 600.0f) {
-                    // Добавляем реалистичное колебание вокруг 600°C (от 598.0 до 600.0)
-                    float vibration = (float) Math.sin(this.level.getGameTime() * 0.2f) * 1.0f;
-                    this.engineTemperature = 599.0f + vibration;
-                }
+            // 1. Защита от стартового нуля: если мотор холоднее воздуха биома, он мгновенно выравнивается
+            if (this.engineTemperature < ambientTemp) {
+                this.engineTemperature = ambientTemp;
             }
+
+            // 2. Базовый нагрев на холостых оборотах
+            float baseHeat = 0.05f + (Math.abs(this.currentSpeed) / safeSpeedLimit) * 1.2f;
+
+            // 3. Агрессивный перегрев в красной зоне (если превысили безопасный RPM)
+            float overspeedHeat = 0.0f;
+            if (Math.abs(this.currentSpeed) > safeSpeedLimit) {
+                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeedLimit) / safeSpeedLimit) * 5.5f;
+            }
+
+            // 4. Охлаждение Ньютона и радиатор (Работают строго если мотор ГОРЯЧЕЕ воздуха!)
+            float naturalCooling = 0.0f;
+            float radiatorCooling = 0.0f;
+
+            if (this.engineTemperature > ambientTemp) {
+                naturalCooling = (this.engineTemperature - ambientTemp) * 0.005f;
+                // Радиатор (пока true для тестов) обдувает только горячий металл
+                radiatorCooling = true ? (this.engineTemperature - ambientTemp) * 0.02f : 0.0f;
+            }
+
+            // Итоговый тепловой баланс за тик
+            this.engineTemperature += (baseHeat + overspeedHeat - naturalCooling - radiatorCooling);
+            this.engineTemperature = 50;
+
+            // Окончательная фиксация, чтобы температура не проваливалась ниже климата биома
+            if (this.engineTemperature < ambientTemp) {
+                this.engineTemperature = ambientTemp;
+            }
+
 
         } else {
             if (fuelTank.getFluidAmount() >= 100 && targetSpeed > 0) {
@@ -260,10 +267,44 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             else if (engineTemperature < ambientTemp) engineTemperature += 0.2f;
         }
 
-        if (engineTemperature >= meltingPoint) {
-            level.explode(null, worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, 9.0f, true, net.minecraft.world.level.Level.ExplosionInteraction.TNT);
-            level.destroyBlock(worldPosition, false);
-            return;
+        // --- 💥 МЕХАНИКА АВАРИЙНОГО ВЗРЫВА ПРИ ПЕРЕГРЕВЕ ---
+        // Убираем старое ограничение "2-х" от скорости — пусть Ньютоновский нагрев летит на максимум!
+        if (this.engineTemperature >= this.maxMeltingTemp) {
+            this.engineTemperature = this.maxMeltingTemp; // Удерживаем шкалу на пике
+
+            // Если мотор работает на пределе плавления, запускаем таймер уничтожения
+            if (this.currentSpeed > 0) {
+                this.overheatMeltingTimer++;
+
+                // Каждые полсекунды (10 тиков) пускаем грозные искры и дым из блока, предупреждая игрока!
+                if (this.overheatMeltingTimer % 10 == 0) {
+                    this.level.addParticle(net.minecraft.core.particles.ParticleTypes.LAVA,
+                            this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.1, this.worldPosition.getZ() + 0.5, 0, 0.1, 0);
+                    this.level.playSound(null, this.worldPosition, net.minecraft.sounds.SoundEvents.CAMPFIRE_CRACKLE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
+                }
+
+                // 200 тиков = 10 секунд на максимальном жаре без воды. Время вышло — БАБАХ!
+                if (this.overheatMeltingTimer >= 200) {
+                    if (!this.level.isClientSide) {
+                        // Создаем полноценный взрыв Майнкрафта (сила 3.0f, поджигает блоки, уничтожает двигатель)
+                        this.level.explode(null,
+                                this.worldPosition.getX() + 0.5,
+                                this.worldPosition.getY() + 0.5,
+                                this.worldPosition.getZ() + 0.5,
+                                3.0f, // Сила взрыва (чуть меньше ТНТ, но разнесет всё вокруг)
+                                net.minecraft.world.level.Level.ExplosionInteraction.BLOCK // Разрушает блоки
+                        );
+                        // Полностью удаляем BlockEntity, так как его разорвало на куски
+                        this.level.removeBlock(this.worldPosition, false);
+                    }
+                    return; // Немедленно выходим из тика, блока больше нет!
+                }
+            }
+        } else {
+            // Если игрок вовремя успел сбросить газ или залить воду — мотор начинает остывать, таймер сбрасывается
+            if (this.overheatMeltingTimer > 0) {
+                this.overheatMeltingTimer = Math.max(0, this.overheatMeltingTimer - 2); // Остывает износ постепенно
+            }
         }
 
         if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
@@ -284,6 +325,10 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         if (this.level.getGameTime() % 20 == 0) {
             this.setChanged();
             this.sendData(); // Синхронизирует безопасную скорость и литры топлива с клиентом!
+        }
+        if (this.level != null && !this.level.isClientSide) {
+            this.sendData(); // <--- ПИНАЕТ КЭШ FLYWHEEL И СИНХРОНИЗИРУЕТ ДАННЫЕ С КЛИЕНТОМ
+            this.setChanged();
         }
     }
 
@@ -384,47 +429,52 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     @Override
-    protected void write(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
-        // ИСПРАВЛЕНО: Добавили registries в super.write
+    protected void write(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.write(tag, registries, clientPacket);
+
+        // Честно сохраняем текущие градусы на диск и в сеть
+        tag.putFloat("EngineTemperature", this.engineTemperature);
 
         tag.putBoolean("IsTurboCharged", this.isTurboCharged);
         tag.putFloat("CurrentSpeed", this.currentSpeed);
         tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
-        tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
-        tag.putFloat("EngineTemperature", this.engineTemperature);
-        tag.putInt("AccelerationTicks", this.accelerationTicks);
 
-        // ИСПРАВЛЕНО: В 1.21.1 бак требует registries для записи жидкостей
-        CompoundTag fluidTag = new CompoundTag();
+        net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
         this.fuelTank.writeToNBT(registries, fluidTag);
         tag.put("FuelTank", fluidTag);
     }
 
+
     @Override
-    protected void read(CompoundTag tag, HolderLookup.Provider registries, boolean clientPacket) {
-        // ИСПРАВЛЕНО: Добавили registries в super.read
+    protected void read(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
 
+        // ГЕОМЕТРИЧЕСКОЕ ИСПРАВЛЕНИЕ: Считываем градусы из NBT ТОЛЬКО если они там реально были сохранены!
+        if (tag.contains("EngineTemperature")) {
+            this.engineTemperature = tag.getFloat("EngineTemperature");
+        } else {
+            // Если блок только что поставили и тега на диске нет — принудительно оставляем климат биома (20°C)!
+            this.engineTemperature = getAmbientTemperature();
+        }
 
         this.isTurboCharged = tag.getBoolean("IsTurboCharged");
         this.currentSpeed = tag.getFloat("CurrentSpeed");
         this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
-        this.burnTimeRemaining = tag.getInt("BurnTimeRemaining");
-        this.engineTemperature = tag.getFloat("EngineTemperature");
-        this.accelerationTicks = tag.getFloat("AccelerationTicks") != 0 ? (int)tag.getFloat("AccelerationTicks") : tag.getInt("AccelerationTicks"); // Безопасное чтение типов
-        // ИСПРАВЛЕНО: Бак требует registries для чтения в 1.21.1
+
         if (tag.contains("FuelTank")) {
             this.fuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
         }
+
+        // Обновляем тировые свойства на основе загруженного металла
     }
+
 
     // --- 2. СИНХРОНИЗАЦИЯ ПАКЕТОВ ДЛЯ ОЧКОВ ИНЖЕНЕРА (ОБНОВЛЕНИЕ БАКА НА ЭКРАНЕ) ---
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = super.getUpdateTag(registries);
         tag.putString("EngineMaterial", engineMaterial);
-        tag.putFloat("EngineTemp", engineTemperature);
+        tag.putFloat("EngineTemperature", engineTemperature);
         tag.putBoolean("IsTurboCharged", isTurboCharged);
         tag.putFloat("SliderSpeed", targetSliderSpeed);
 

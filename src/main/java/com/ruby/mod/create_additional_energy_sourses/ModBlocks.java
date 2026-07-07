@@ -28,12 +28,17 @@ public class ModBlocks {
                     .noOcclusion()));
 
 
-    // Наш эталонный стабильный мотор для тестов и сравнения
+    // Наш классический эталонный ДВС для тестов
     public static final net.neoforged.neoforge.registries.DeferredHolder<Block, Block> V8_ENGINE =
             BLOCKS.register("v8_engine_classic", () -> new V8EngineBlock(BlockBehaviour.Properties.of()
                     .strength(4.0f)
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
+
+    // ГЕРАЛЬДИЧЕСКИЙ ШТРИХ: Регистрируем предмет для этого блока!
+    static {
+        ModItems.ITEMS.register("v8_engine_classic", () -> new net.minecraft.world.item.BlockItem(V8_ENGINE.get(), new net.minecraft.world.item.Item.Properties()));
+    }
 
     // 2. Предмет Термогенератора
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
