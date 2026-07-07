@@ -35,13 +35,6 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()));
 
-    // Отдельный тип сущности для классического эталона
-    public static final net.neoforged.neoforge.registries.DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
-            BLOCK_ENTITIES.register("v8_engine_classic_entity", () -> BlockEntityType.Builder.of(
-                    V8EngineBlockEntity::new,
-                    V8_ENGINE.get()
-            ).build(null));
-
     // 2. Предмет Термогенератора
     public static final DeferredHolder<Item, BlockItem> THERMO_GENERATOR_ITEM =
             ModItems.ITEMS.register("thermo_generator_item", () -> new BlockItem(THERMO_GENERATOR.get(), new Item.Properties()));
@@ -50,6 +43,13 @@ public class ModBlocks {
             BLOCK_ENTITIES.register("thermo_generator", () -> BlockEntityType.Builder.of(
                     (pos, state) -> new ThermoGeneratorBlockEntity(ModBlocks.THERMO_GEN_ENTITY.get(), pos, state),
                     THERMO_GENERATOR.get()).build(null));
+
+    // Отдельный тип сущности для классического эталона
+    public static final net.neoforged.neoforge.registries.DeferredHolder<BlockEntityType<?>, BlockEntityType<V8EngineBlockEntity>> V8_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("v8_engine_classic_entity", () -> BlockEntityType.Builder.of(
+                    V8EngineBlockEntity::new,
+                    V8_ENGINE.get()
+            ).build(null));
 
     public static final DeferredHolder<Block, Block> RADIATOR_COPPER = BLOCKS.register("radiator_copper",
             () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(2.0f).sound(SoundType.COPPER), () -> ModBlocks.RADIATOR_COPPER_ENTITY.get()));
