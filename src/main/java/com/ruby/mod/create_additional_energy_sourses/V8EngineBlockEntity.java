@@ -49,6 +49,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         // УБРАЛИ РАНДОМ: Теперь при создании у всех двигателей базовые 100% параметров
         this.engineQuality = 1.0f;
         this.secretEfficiency = 1.0f;
+        this.maxMeltingTemp = getMaterialMeltingPoint();
     }
 
     public float getAmbientTemperature() {
@@ -206,41 +207,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
 
             float fuelHeat = getFuelHeatMultiplier(fluidInTank);
-            // --- ⚙️ ЧЕСТНАЯ ТЕРМОДИНАМИКА (Без отрицательных циклов и заклинивания) ---
-            float safeSpeedLimit = getSafeEngineSpeed();
-
-            // 1. Защита от стартового нуля: если мотор холоднее воздуха биома, он мгновенно выравнивается
-            if (this.engineTemperature < ambientTemp) {
-                this.engineTemperature = ambientTemp;
-            }
-
-            // 2. Базовый нагрев на холостых оборотах
-            float baseHeat = 0.05f + (Math.abs(this.currentSpeed) / safeSpeedLimit) * 1.2f;
-
-            // 3. Агрессивный перегрев в красной зоне (если превысили безопасный RPM)
-            float overspeedHeat = 0.0f;
-            if (Math.abs(this.currentSpeed) > safeSpeedLimit) {
-                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeedLimit) / safeSpeedLimit) * 5.5f;
-            }
-
-            // 4. Охлаждение Ньютона и радиатор (Работают строго если мотор ГОРЯЧЕЕ воздуха!)
-            float naturalCooling = 0.0f;
-            float radiatorCooling = 0.0f;
-
-            if (this.engineTemperature > ambientTemp) {
-                naturalCooling = (this.engineTemperature - ambientTemp) * 0.005f;
-                // Радиатор (пока true для тестов) обдувает только горячий металл
-                radiatorCooling = true ? (this.engineTemperature - ambientTemp) * 0.02f : 0.0f;
-            }
-
-            // Итоговый тепловой баланс за тик
-            this.engineTemperature += (baseHeat + overspeedHeat - naturalCooling - radiatorCooling);
-            this.engineTemperature = 50;
-
-            // Окончательная фиксация, чтобы температура не проваливалась ниже климата биома
-            if (this.engineTemperature < ambientTemp) {
-                this.engineTemperature = ambientTemp;
-            }
 
 
         } else {
@@ -262,10 +228,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                     currentSpeed = 0;
                 }
             }
-
-            if (engineTemperature > ambientTemp) engineTemperature -= 0.6f;
-            else if (engineTemperature < ambientTemp) engineTemperature += 0.2f;
         }
+
 
         // --- 💥 МЕХАНИКА АВАРИЙНОГО ВЗРЫВА ПРИ ПЕРЕГРЕВЕ ---
         // Убираем старое ограничение "2-х" от скорости — пусть Ньютоновский нагрев летит на максимум!
@@ -320,6 +284,46 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float smokeChance = 0.05f + (engineTemperature / meltingPoint) * 0.75f;
         if (currentSpeed > 0 && level.random.nextFloat() < smokeChance && level instanceof ServerLevel serverLevel) {
             serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
+        }
+        // === ⚙️ ГЛОБАЛЬНАЯ ТЕРМОДИНАМИКА (Вынесена из условий топлива) ===
+        // 1. Защита от стартового нуля
+        if (this.engineTemperature <= 0.0f) {
+            this.engineTemperature = ambientTemp;
+        }
+
+        // 2. Нагрев: идет ТОЛЬКО если мотор реально вращается (currentSpeed > 0)
+        float baseHeat = 0.0f;
+        float overspeedHeat = 0.0f;
+
+        if (Math.abs(this.currentSpeed) > 1.0f) {
+            // Мотор плавно греется на холостых
+            baseHeat = 0.05f + (Math.abs(this.currentSpeed) / safeSpeed) * 1.2f;
+
+            // Агрессивный перегрев, если зашли в красную зону превышения безопасного RPM
+            if (Math.abs(this.currentSpeed) > safeSpeed) {
+                // Коэффициент 4.2f настроен так, чтобы на 2х скорости БЕЗ радиатора выдать ~600°C!
+                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeed) / safeSpeed) * 12.6f;
+            }
+        }
+
+        // 3. Охлаждение по закону Ньютона (Радиатор считает true)
+        float naturalCooling = 0.0f;
+        float radiatorCooling = 0.0f;
+
+        if (this.engineTemperature > ambientTemp) {
+            // Металл остывает только от естественного воздуха вокруг
+            naturalCooling = (this.engineTemperature - ambientTemp) * 0.005f;
+
+            // ОТКЛЮЧАЕМ РАДИАТОР: Ставим строго false, чтобы настроить базовый жар!
+            radiatorCooling = false ? (this.engineTemperature - ambientTemp) * 0.02f : 0.0f;
+        }
+
+        // Применяем тепловой баланс за тик
+        this.engineTemperature += (baseHeat + overspeedHeat - naturalCooling - radiatorCooling);
+
+        // Фиксация, чтобы мотор пассивно нагревался/остывал до температуры биома
+        if (this.engineTemperature < ambientTemp) {
+            this.engineTemperature = ambientTemp;
         }
 
         if (this.level.getGameTime() % 20 == 0) {
