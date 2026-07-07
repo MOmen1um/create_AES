@@ -24,20 +24,51 @@ public class Create_additional_energy_sourses {
                     .icon(() -> new ItemStack(ModBlocks.THERMO_GENERATOR.get()))
                     .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
                     .displayItems((parameters, output) -> {
-                        // Кладем на витрину полноценные, зарегистрированные Блок-Предметы
-                        output.accept(new ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get(), 1));
-                        output.accept(new ItemStack(ModBlocks.V8_ENGINE_ITEM.get(), 1));
-                        output.accept(new ItemStack(ModItems.ADVANCED_PICKAXE.get()));
-                        output.accept(new ItemStack(ModItems.HEAVY_HANDLE.get()));
-                        output.accept(new ItemStack(ModItems.HEAVY_TIP.get()));
-                        output.accept(new ItemStack(ModItems.PICKAXE_CORE.get()));
-                        output.accept(new ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
-                        output.accept(new ItemStack(ModBlocks.ALUMINUM_V8_ENGINE_ITEM.get()));
-                        output.accept(new ItemStack(ModBlocks.TITANIUM_V8_ENGINE_ITEM.get()));
-                        output.accept(new ItemStack(ModBlocks.RADIATOR_COPPER_ITEM));
-                        output.accept(new ItemStack(ModBlocks.RADIATOR_STEEL_ITEM));
-                        output.accept(new ItemStack(ModBlocks.RADIATOR_BRASS_ITEM));
-                        output.accept(new ItemStack(ModBlocks.RADIATOR_ULTIMATE_ITEM));
+                        // 1. Термогенератор и кастомные предметы
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get(), 1));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PICKAXE.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_HANDLE.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_TIP.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.PICKAXE_CORE.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
+
+                        // 2. Радиаторы охлаждения
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_COPPER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_STEEL_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_BRASS_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_ULTIMATE_ITEM.get()));
+
+                        // 3. НЕМОДУЛЬНЫЕ ДВИГАТЕЛИ (Выстраиваем по материалам и мощности)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.IRON_R32.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_R32.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_R32.get()));
+
+                        // 4. МОДУЛЬНЫЕ ДВИГАТЕЛИ (Сквозные блоки)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_IRON_R32.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_ALUMINUM_R32.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_R32.get()));
                     })
                     .build());
 
@@ -51,42 +82,23 @@ public class Create_additional_energy_sourses {
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
         });
+        // === ИСПРАВЛЕННЫЙ СЛУШАТЕЛЬ ТОПЛИВНЫХ КАПАБИЛИТИ ДЛЯ 1.21.1 ===
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
+
+            // 1. Открываем бак для жидкостей у всех НЕМОДУЛЬНЫХ двигателей мода
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.V8_ENGINE_ENTITY.get(),
-                    (be, side) -> {
-                        if (be instanceof V8EngineBlockEntity v8 && side == net.minecraft.core.Direction.DOWN) {
-                            return v8.getFluidTank();
-                        }
-                        return null;
-                    }
+                    ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(),
+                    (blockEntity, side) -> blockEntity.fuelTank // Отдаём бак немодульного мотора
             );
 
-            // --- 2. РЕГИСТРАЦИЯ БАКА АЛЮМИНИЕВОГО ДВС (Только снизу) ---
+            // 2. Открываем бак для жидкостей у всех МОДУЛЬНЫХ двигателей мода
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.ALUMINUM_V8_ENGINE_ENTITY.get(),
-                    (be, side) -> {
-                        if (be instanceof AluminumV8EngineBlockEntity v8 && side == net.minecraft.core.Direction.DOWN) {
-                            return v8.getFluidTank();
-                        }
-                        return null;
-                    }
+                    ModBlocks.MODULAR_ENGINE_ENTITY.get(),
+                    (blockEntity, side) -> blockEntity.fuelTank // Отдаём бак модульного мотора
             );
 
-            // --- 3. РЕГИСТРАЦИЯ БАКА ТИТАНОВОГО ДВС (Только снизу) ---
-            event.registerBlockEntity(
-                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.TITANIUM_V8_ENGINE_ENTITY.get(),
-                    (be, side) -> {
-                        if (be instanceof TitaniumV8EngineBlockEntity v8 && side == net.minecraft.core.Direction.DOWN) {
-                            return v8.getFluidTank();
-                        }
-                        return null;
-                    }
-            );
-            // --- ПРЯМАЯ РЕГИСТРАЦИЯ ТРУБ ДЛЯ КАЖДОГО ТИРА РАДИАТОРОВ ---
 
             // 1. Медный
             event.registerBlockEntity(
@@ -117,6 +129,6 @@ public class Create_additional_energy_sourses {
             );
         });
 
-    }
 
+    }
 }

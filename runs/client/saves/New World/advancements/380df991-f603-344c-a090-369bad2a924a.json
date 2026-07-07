@@ -1,500 +1,397 @@
 {
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
-      "unlock_right_away": "2026-07-04 22:56:10 +0500"
+      "unlock_right_away": "2026-07-06 21:24:08 +0500"
     },
     "done": true
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:plains": "2026-07-04 22:56:11 +0500"
+      "minecraft:plains": "2026-07-06 21:24:09 +0500"
     },
     "done": false
   },
+  "create:recipes/misc/crafting/kinetics/track_station": {
+    "criteria": {
+      "has_item": "2026-07-06 21:25:03 +0500"
+    },
+    "done": true
+  },
   "create:root": {
     "criteria": {
-      "0": "2026-07-04 22:56:29 +0500"
+      "0": "2026-07-06 21:25:03 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/train_door": {
+    "criteria": {
+      "has_item": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
   "simulated:root": {
     "criteria": {
-      "0": "2026-07-04 22:56:29 +0500"
+      "0": "2026-07-06 21:25:03 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/track_signal": {
+    "criteria": {
+      "has_item": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
   "aeronautics:root": {
     "criteria": {
-      "0": "2026-07-04 22:56:29 +0500"
+      "0": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
-  "simulated:applied_kinematics": {
+  "create:recipes/misc/crafting/kinetics/controls": {
     "criteria": {
-      "0": "2026-07-04 22:56:29 +0500"
+      "has_item": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
-  "simulated:recipes/misc/contraption_diagram": {
+  "create:recipes/misc/crafting/kinetics/track_observer_from_other_plates": {
     "criteria": {
-      "has_ingredient": "2026-07-04 22:56:29 +0500"
+      "has_item": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
-  "create:recipes/misc/crafting/kinetics/vertical_gearbox_from_conversion": {
+  "create:recipes/misc/crafting/kinetics/track_observer": {
     "criteria": {
-      "has_item": "2026-07-04 22:56:32 +0500"
+      "has_item": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
-  "create:wrench_goggles": {
+  "create:recipes/misc/crafting/kinetics/train_trapdoor": {
     "criteria": {
-      "0": "2026-07-05 13:14:23 +0500",
-      "1": "2026-07-04 22:56:56 +0500"
+      "has_item": "2026-07-06 21:25:03 +0500"
     },
     "done": true
   },
-  "aeronautics:recipes/misc/aviators_goggles": {
+  "create:recipes/misc/crafting/kinetics/mechanical_crafter": {
     "criteria": {
-      "has_ingredient": "2026-07-04 22:56:56 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "create:recipes/misc/crafting/kinetics/gearbox": {
+  "create:recipes/misc/crafting/kinetics/rotation_speed_controller": {
     "criteria": {
-      "has_item": "2026-07-04 22:57:18 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
+  "simulated:recipes/misc/throttle_lever": {
     "criteria": {
-      "has_item": "2026-07-04 22:57:18 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "create:shifting_gears": {
+  "create:recipes/misc/crafting/kinetics/mechanical_arm": {
     "criteria": {
-      "0": "2026-07-04 22:58:11 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/brewing/cauldron": {
+  "aeronautics:recipes/misc/propeller_bearing": {
     "criteria": {
-      "has_water_bucket": "2026-07-04 22:58:25 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/decorations/chest": {
+  "simulated:recipes/misc/analog_transmission": {
     "criteria": {
-      "has_lots_of_items": "2026-07-04 22:58:30 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/cherry_boat": {
+  "simulated:recipes/misc/modulating_linked_receiver": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/bamboo_raft": {
+  "simulated:recipes/misc/red_portable_engine": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/spruce_boat": {
+  "create:recipes/misc/crafting/kinetics/brass_door": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/birch_boat": {
+  "create:recipes/misc/crafting/logistics/content_observer": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/oak_boat": {
+  "aeronautics:recipes/misc/gyroscopic_propeller_bearing": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/mangrove_boat": {
+  "create:recipes/misc/crafting/logistics/display_link": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/acacia_boat": {
+  "create:recipes/misc/crafting/logistics/stockpile_switch": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/jungle_boat": {
+  "create:recipes/misc/crafting/kinetics/sequenced_gearshift": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/transportation/dark_oak_boat": {
+  "simulated:recipes/misc/optical_sensor": {
     "criteria": {
-      "in_water": "2026-07-04 22:58:39 +0500"
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
-  "create:mechanical_pump_0": {
+  "create:recipes/misc/crafting/logistics/redstone_contact": {
     "criteria": {
-      "0": "2026-07-04 22:58:44 +0500"
+      "has_item": "2026-07-06 21:25:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/clockwork_bearing": {
+    "criteria": {
+      "has_item": "2026-07-06 21:25:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/nixie_tube": {
+    "criteria": {
+      "has_item": "2026-07-06 21:25:27 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/directional_linked_receiver": {
+    "criteria": {
+      "has_ingredient": "2026-07-06 21:25:27 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_saw": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/torsion_spring": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/logistics/redstone_link": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/logistics/desk_bell": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_press": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_roller": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/physics_assembler": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/andesite_door": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/directional_gearshift": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/portable_storage_interface": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_bearing": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/velocity_sensor": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/laser_pointer": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/gantry_carriage": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/weighted_ejector": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "offroad:recipes/misc/wheel_mount": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/laser_sensor": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/millstone": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_plough": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/chain_conveyor": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_harvester": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/encased_chain_drive_from_zinc": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/clutch": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/depot": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/encased_chain_drive": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_drill": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/altitude_sensor": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/mechanical_piston": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/gearshift": {
     "criteria": {
-      "has_item": "2026-07-04 23:00:06 +0500"
+      "has_item": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
   "simulated:recipes/misc/swivel_bearing": {
     "criteria": {
-      "has_ingredient": "2026-07-04 23:00:06 +0500"
+      "has_ingredient": "2026-07-06 21:25:28 +0500"
     },
     "done": true
   },
-  "create:recipes/building_blocks/crafting/kinetics/yellow_seat_from_other_seat": {
+  "create:mechanical_pump_0": {
     "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
+      "0": "2026-07-07 07:55:02 +0500"
     },
     "done": true
   },
-  "create:recipes/building_blocks/crafting/kinetics/blue_seat_from_other_seat": {
+  "create:recipes/misc/crafting/kinetics/gearbox": {
     "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
+      "has_item": "2026-07-07 07:55:08 +0500"
     },
     "done": true
   },
-  "create:recipes/building_blocks/crafting/kinetics/pink_seat_from_other_seat": {
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
     "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
+      "has_item": "2026-07-07 07:55:08 +0500"
     },
     "done": true
   },
-  "create:recipes/building_blocks/crafting/kinetics/green_seat_from_other_seat": {
+  "create:wrench_goggles": {
     "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
+      "1": "2026-07-07 07:55:22 +0500"
     },
-    "done": true
+    "done": false
   },
-  "create:recipes/building_blocks/crafting/kinetics/white_seat_from_other_seat": {
+  "aeronautics:recipes/misc/aviators_goggles": {
     "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/cyan_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/black_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/lime_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/purple_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/light_blue_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/red_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/orange_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/magenta_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/light_gray_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/brown_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/building_blocks/crafting/kinetics/gray_seat_from_other_seat": {
-    "criteria": {
-      "has_seat": "2026-07-04 23:00:25 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/large_tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-04 23:01:05 +0500"
-    },
-    "done": true
-  },
-  "simulated:recipes/misc/steering_wheel": {
-    "criteria": {
-      "has_ingredient": "2026-07-04 23:01:05 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/monstrous_tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-04 23:01:05 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-04 23:01:05 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/small_tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-04 23:01:05 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/misc/netherite_ingot_from_netherite_block": {
-    "criteria": {
-      "has_netherite_block": "2026-07-04 23:02:45 +0500"
-    },
-    "done": true
-  },
-  "simulated:unpowered_steering": {
-    "criteria": {
-      "0": "2026-07-05 13:32:29 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/secondary_linear_chassis_from_conversion": {
-    "criteria": {
-      "has_item": "2026-07-05 13:25:57 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/sail_frame_from_conversion": {
-    "criteria": {
-      "has_item": "2026-07-05 13:17:38 +0500"
-    },
-    "done": true
-  },
-  "simulated:recipes/misc/white_symmetric_sail": {
-    "criteria": {
-      "has_ingredient": "2026-07-05 13:17:38 +0500"
-    },
-    "done": true
-  },
-  "aeronautics:in_thrust_we_trust": {
-    "criteria": {
-      "0": "2026-07-05 13:17:47 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/white_sail": {
-    "criteria": {
-      "has_ingredient": "2026-07-05 13:26:36 +0500"
+      "has_ingredient": "2026-07-07 07:55:22 +0500"
     },
     "done": true
   },

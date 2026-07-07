@@ -3,13 +3,25 @@ package com.ruby.mod.create_additional_energy_sourses;
 import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import com.simibubi.create.AllBlockEntityTypes;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 
-public class NonModularEnginesBlock extends HorizontalKineticBlock implements net.minecraft.world.level.block.EntityBlock {
+public class NonModularEnginesBlock extends HorizontalKineticBlock implements EntityBlock {
 
     private final String material;
     private final String engineType;
@@ -20,26 +32,57 @@ public class NonModularEnginesBlock extends HorizontalKineticBlock implements ne
         this.engineType = engineType;
     }
 
-    // Этот метод призывает наш универсальный немодульный BlockEntity, передавая туда параметры
+    // 1. Создание сущности блока (Связано с нашим универсальным типом)
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        // Мы используем ленивую регистрацию. Передаем тип сущности через твой ModBlocks реестр
-        return new NonModularEnginesBlockEntity(getLeftType(), pos, state, this.material, this.engineType);
+        return new NonModularEnginesBlockEntity(ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(), pos, state, this.material, this.engineType);
     }
 
-    // Вспомогательный метод, который мы свяжем с ModBlocks чуть позже
-    protected BlockEntityType<? extends NonModularEnginesBlockEntity> getLeftType() {
-        // Заглушка, здесь IDEA может попросить точную ссылку на тип BlockEntity из реестра
-        return null;
+    @Override
+    protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state, net.minecraft.world.level.Level level, BlockPos pos, net.minecraft.world.entity.player.Player player, net.minecraft.world.phys.BlockHitResult hitResult) {
+        if (!level.isClientSide) {
+            if (level.getBlockEntity(pos) instanceof NonModularEnginesBlockEntity v8) {
+
+                // Получаем предмет в главной руке игрока
+                net.minecraft.world.item.ItemStack heldItem = player.getItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND);
+
+                // --- СВЯЗКА С CREATE DIESEL GENERATORS ---
+                // Динамически ищем ID турбонаддува в глобальном реестре Майнкрафта
+                net.minecraft.resources.ResourceLocation turbochargerId = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("createdieselgenerators", "engine_turbocharger");
+                net.minecraft.world.item.Item turbochargerItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(turbochargerId);
+
+                // Проверяем: если предмет существует в сборке, игрок держит именно его и турбина ещё не установлена
+                if (turbochargerItem != null && heldItem.is(turbochargerItem) && !v8.isTurboCharged) {
+                    // Активируем турбонаддув!
+                    v8.isTurboCharged = true;
+
+                    // Забираем 1 турбокомпрессор из руки (если игрок не в креативе)
+                    if (!player.isCreative()) {
+                        heldItem.shrink(1);
+                    }
+
+                    // Проигрываем сочный звук шестерёнок Create при успешной установке
+                    level.playSound(null, pos, net.minecraft.sounds.SoundEvents.IRON_TRAPDOOR_CLOSE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.2f);
+
+                    // Мгновенно синхронизируем данные, чтобы меню и очки инженера обновились!
+                    v8.setChanged();
+                    v8.sendData();
+                    level.sendBlockUpdated(pos, state, state, 3);
+
+                    return net.minecraft.world.InteractionResult.SUCCESS;
+                }
+                // -----------------------------------------
+            }
+        }
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
-    // Говорим Create, с какой стороны у блока выходит крутящий вал (вдоль направления взгляда)
+    // Обязательные кинетические методы Create
     @Override
     public Direction.Axis getRotationAxis(BlockState state) {
         return state.getValue(HORIZONTAL_FACING).getAxis();
     }
 
-    // Проверка устойчивости вала Create
     @Override
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
         return face.getAxis() == getRotationAxis(state);

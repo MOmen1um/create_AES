@@ -15,13 +15,15 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
         super(type, pos, state, material, engineType);
     }
 
+
+
     // --- 1. ЛОГИКА «УМНОГО» ОБЪЕДИНЁННОГО БАКА ---
     // Этот метод ищет самую первую секцию в ряду, чтобы все блоки сосали топливо из одного бака
     public ModularEnginesBlockEntity getMasterSection() {
         BlockState state = this.getBlockState();
-        if (!state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) return this;
+        if (!state.hasProperty(ModularEnginesBlock.HORIZONTAL_FACING)) return this;
 
-        Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
+        Direction facing = state.getValue(ModularEnginesBlock.HORIZONTAL_FACING);
         // Противоположное направление (идем назад по цепочке коленвала)
         Direction backward = facing.getOpposite();
 
@@ -99,9 +101,9 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
     // --- 3. УМНАЯ БОКОВАЯ ПРОВЕРКА РАДИАТОРА (Свободный сквозной вал спереди/сзади) ---
     private boolean checkRadiatorsActive() {
         BlockState blockState = this.getBlockState();
-        if (!blockState.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) return false;
+        if (!blockState.hasProperty(ModularEnginesBlock.HORIZONTAL_FACING)) return false;
 
-        Direction facing = blockState.getValue(V8EngineBlock.HORIZONTAL_FACING);
+        Direction facing = blockState.getValue(ModularEnginesBlock.HORIZONTAL_FACING);
         int waterUsage = 1; // Сколько воды тратит ОДИН радиатор за тик
         int activeRadiatorsCount = 0;
 

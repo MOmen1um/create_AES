@@ -22,11 +22,13 @@ public class ModularEnginesBlock extends HorizontalKineticBlock implements net.m
     // Рождаем модульный BlockEntity
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ModularEnginesBlockEntity(getModularType(), pos, state, this.material, this.engineType);
+        // Передаем тип напрямую из ModBlocks без вызова лишних методов
+        return new ModularEnginesBlockEntity(ModBlocks.MODULAR_ENGINE_ENTITY.get(), pos, state, this.material, this.engineType);
     }
 
-    protected BlockEntityType<? extends ModularEnginesBlockEntity> getModularType() {
-        return null; // Тоже свяжем при регистрации в ModBlocks
+    // Вспомогательный метод (убрали @Override, чтобы Create не ругался)
+    public net.minecraft.world.level.block.entity.BlockEntityType<? extends ModularEnginesBlockEntity> getBlockEntityType() {
+        return ModBlocks.MODULAR_ENGINE_ENTITY.get();
     }
 
     @Override
@@ -38,5 +40,6 @@ public class ModularEnginesBlock extends HorizontalKineticBlock implements net.m
     public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
         return face.getAxis() == getRotationAxis(state);
     }
+
 }
 

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_additional_energy_sourses:block/titanium_i4_engine", "y": 180 },
+    "facing=east":  { "model": "create_additional_energy_sourses:block/titanium_i4_engine", "y": 270 },
+    "facing=south": { "model": "create_additional_energy_sourses:block/titanium_i4_engine" },
+    "facing=west":  { "model": "create_additional_energy_sourses:block/titanium_i4_engine", "y": 90 }
+  }
+}

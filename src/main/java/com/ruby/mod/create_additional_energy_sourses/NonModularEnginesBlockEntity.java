@@ -68,6 +68,43 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         }
     }
 
+    @Override
+    public void addBehaviours(java.util.List<com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour> behaviours) {
+        super.addBehaviours(behaviours);
+
+        // Позиционируем окошко RPM ровно по центру над блоком двигателя
+        com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform customTransform =
+                new com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform() {
+                    @Override
+                    public net.minecraft.world.phys.Vec3 getLocalOffset(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+                        return new net.minecraft.world.phys.Vec3(0.5, 1.01, 0.5);
+                    }
+
+                    @Override
+                    public void rotate(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state, com.mojang.blaze3d.vertex.PoseStack ms) {
+                        ms.mulPose(com.mojang.math.Axis.XP.rotationDegrees(90f));
+                    }
+                };
+
+        // Создаем ползунок Create на 512 шагов
+        com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour slider =
+                new com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour(
+                        net.minecraft.network.chat.Component.literal("Обороты двигателя (RPM)"),
+                        this,
+                        customTransform
+                );
+
+        slider.between(0, 512);
+
+        // Коллбэк: когда игрок крутит колесико, записываем шаги в targetSliderSpeed
+        slider.withCallback(value -> {
+            this.targetSliderSpeed = (float) value;
+            this.setChanged();
+        });
+
+        behaviours.add(slider);
+    }
+
     // --- 2. ТВОЯ ГЕНИАЛЬНАЯ ФОРМУЛА МОЩНОСТИ (Чистый Create 1.21.1) ---
     // В 1.21.1 этот метод не принимает аргументов и возвращает базовый стресс
     @Override
@@ -111,6 +148,86 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         // Обновляем вращение в Create
         be.updateGeneratedRotation();
         be.setChanged();
+    }
+
+    // === ГЛАВНЫЙ МЕТОД ОБНОВЛЕНИЯ (ТИК) ДВИГАТЕЛЯ ===
+    @Override
+    public void tick() {
+        // 1. Обязательно вызываем тик родительского класса Create, чтобы крутился вал и считалась кинетика
+        super.tick();
+
+        // 2. Все вычисления делаем только на сервере
+        if (this.level == null || this.level.isClientSide) return;
+
+        // Рассчитываем целевую скорость (ползунок * 64)
+        float realTargetSpeed = this.targetSliderSpeed * 64.0f;
+
+        // --- МЕХАНИКА НЬЮТОНОВСКОГО РАЗГОНА ---
+        if (this.currentSpeed != realTargetSpeed) {
+            // Чугун тяжелее, титан легче. Чем больше поршней — тем больше инерция массы
+            float massFactor = (this.countOfPistons * 0.4f) * (this.engineMaterial.equals("iron") ? 1.6f : 1.0f);
+            float accelerationRate = (this.countOfPistons * this.materialPower) / (massFactor * 100f);
+
+            // Плавное приближение к целевой скорости
+            if (this.currentSpeed < realTargetSpeed) {
+                this.currentSpeed = Math.min(realTargetSpeed, this.currentSpeed + accelerationRate);
+            } else {
+                this.currentSpeed = Math.max(realTargetSpeed, this.currentSpeed - accelerationRate * 1.5f); // Тормозит быстрее
+            }
+
+            // ПИНАЕМ СЕТЬ CREATE: Обновляем вращение валов, раз скорость поменялась!
+            this.updateGeneratedRotation();
+            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+        }
+
+        // --- НЬЮТОНОВСКАЯ ТЕРМОДИНАМИКА ---
+        float ambientTemp = 20.0f; // Температура воздуха вокруг
+
+        // Нагрев: зависит от текущих рабочих оборотов
+        float heatGeneration = (Math.abs(this.currentSpeed) / this.maxSafeSpeed) * 3.5f;
+
+        // Закон охлаждения Ньютона: чем горячее мотор, тем эффективнее он отдает тепло воздуху!
+        float naturalCooling = (this.engineTemperature - ambientTemp) * 0.015f;
+
+        // Проверяем радиатор ПЕРЕД двигателем (Твоё уточнение баланса охлаждения!)
+        boolean hasRadiator = false;
+        net.minecraft.world.level.block.state.BlockState blockState = this.getBlockState();
+        if (blockState.hasProperty(NonModularEnginesBlock.HORIZONTAL_FACING)) {
+            net.minecraft.core.Direction facing = blockState.getValue(NonModularEnginesBlock.HORIZONTAL_FACING);
+            net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+            if (this.level.getBlockEntity(frontPos) instanceof BaseRadiatorBlockEntity rad) {
+                if (!rad.waterTank.isEmpty() && rad.waterTank.getFluidAmount() >= 1) {
+                    rad.waterTank.drain(1, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+                    rad.setChanged();
+                    hasRadiator = true;
+                }
+            }
+        }
+
+        // Дополнительное охлаждение от радиатора (0.03f для немодульного спереди)
+        float radiatorCooling = hasRadiator ? (this.engineTemperature - ambientTemp) * 0.03f : 0.0f;
+
+        // Применяем тепловой баланс
+        this.engineTemperature += (heatGeneration - naturalCooling - radiatorCooling);
+
+        // Защита: удерживаем на максимуме плавления
+        if (this.engineTemperature > this.maxMeltingTemp) {
+            this.engineTemperature = this.maxMeltingTemp;
+        }
+
+        // --- ЖОР ТОПЛИВА В ТИКЕ ---
+        if (this.currentSpeed > 0) {
+            if (!this.fuelTank.isEmpty() && this.fuelTank.getFluidAmount() >= 1) {
+                this.fuelTank.drain(1, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+            } else {
+                // Если бензин кончился — глушим двигатель
+                this.currentSpeed = Math.max(0, this.currentSpeed - 5.0f);
+                this.updateGeneratedRotation();
+            }
+        }
+
+        // Сохраняем измененное состояние в тике
+        this.setChanged();
     }
 
     // Сообщаем Create текущую скорость генерации
@@ -184,8 +301,8 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
 
         // 3. ПРОВЕРКА РАДИАТОРА ПЕРЕД ДВИГАТЕЛЕМ
         BlockState blockState = this.getBlockState();
-        if (blockState.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
-            net.minecraft.core.Direction facing = blockState.getValue(V8EngineBlock.HORIZONTAL_FACING);
+        if (blockState.hasProperty(NonModularEnginesBlock.HORIZONTAL_FACING)) {
+            net.minecraft.core.Direction facing = blockState.getValue(NonModularEnginesBlock.HORIZONTAL_FACING);
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
             net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
@@ -219,6 +336,8 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             tooltip.add(Component.literal("  §cБак пуст"));
         }
 
+
         return true;
     }
+
 }
