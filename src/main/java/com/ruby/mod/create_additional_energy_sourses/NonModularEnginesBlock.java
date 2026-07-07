@@ -101,5 +101,21 @@ public class NonModularEnginesBlock extends HorizontalKineticBlock implements En
     protected boolean propagatesSkylightDown(BlockState state, net.minecraft.world.level.BlockGetter reader, BlockPos pos) {
         return true;
     }
+    @Override
+    public void neighborChanged(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.Block block, net.minecraft.core.BlockPos fromPos, boolean isMoving) {
+        super.neighborChanged(state, level, pos, block, fromPos, isMoving);
+
+        // Когда блок рядом меняется (например, убрали радиатор),
+        // мы принудительно дергаем BlockEntity, чтобы он пересчитал параметры
+        if (!level.isClientSide) {
+            net.minecraft.world.level.block.entity.BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof NonModularEnginesBlockEntity engine) {
+                // Вызываем принудительное обновление сети Create и NBT
+                engine.setChanged();
+                engine.notifyUpdate();
+            }
+        }
+    }
+
 }
 

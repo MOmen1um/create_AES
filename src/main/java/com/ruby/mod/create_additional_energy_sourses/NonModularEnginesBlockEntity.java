@@ -144,11 +144,17 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
 
         // Если мир еще не загрузился или мы на стороне клиента — ничего не делаем
         if (level == null || level.isClientSide) return;
+        this.burnTimeRemaining = 99999;
 
         // 1. ЛОГИКА ТОПЛИВА (Burn Time)
         // Если топливо горит, уменьшаем таймер каждый тик
         if (burnTimeRemaining > 0) {
             burnTimeRemaining--;
+
+            if (level.getGameTime() % 20 == 0) {
+                this.setChanged();
+                this.notifyUpdate();
+            }
         }
 
         // Получаем текущую скорость вала из Create
@@ -195,6 +201,16 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         if (speed != lastSentSpeed) {
             lastSentSpeed = speed;
             notifyUpdate();
+        }
+        if (level != null && !level.isClientSide) {
+            // Если скорость на ползунке изменилась по сравнению с тем, что сейчас выдает вал
+            if (this.targetSliderSpeed != this.currentSpeed) {
+                this.currentSpeed = this.targetSliderSpeed;
+
+                // ЭТИ ДВЕ СТРОЧКИ ЗАСТАВЯТ CREATE МГНОВЕННО ПЕРЕСЧИТАТЬ СЕТЬ:
+                this.updateGeneratedRotation();
+                this.setChanged();
+            }
         }
     }
 
@@ -368,12 +384,18 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     @Override
     public net.minecraft.nbt.CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider registries) {
         net.minecraft.nbt.CompoundTag tag = super.getUpdateTag(registries);
-
-        // Передаем клиенту критические для визуала и поршней данные
-        tag.putFloat("EngineTemperature", this.engineTemperature);
-        tag.putFloat("CurrentSpeed", this.getSpeed()); // Передаем скорость вала напрямую в рендер
+        // Записываем абсолютно всё состояние для клиента, чтобы меню не "слетало"
         tag.putString("EngineType", this.engineType != null ? this.engineType : "I");
         tag.putString("EngineMaterial", this.engineMaterial != null ? this.engineMaterial : "cast_iron");
+        tag.putInt("RadiatorType", this.radiatorType);
+        tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
+        tag.putFloat("EngineTemperature", this.engineTemperature);
+        tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
+
+        // Синхронизируем жидкость в баке для инженеров
+        net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
+        this.FuelTank.writeToNBT(registries, fluidTag);
+        tag.put("FuelTank", fluidTag);
 
         return tag;
     }
