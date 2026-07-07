@@ -115,6 +115,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         slider.withCallback(value -> {
             this.targetSliderSpeed = (float) value;
             this.setChanged();
+            this.notifyUpdate();
         });
 
         behaviours.add(slider);
@@ -157,8 +158,8 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     }
     @Override
     public float calculateAddedStressCapacity() {
-        float speed = Math.abs(getSpeed());
-        // Если двигатель заглушен или топливо кончилось — он не держит нагрузку сети
+        // Считаем мощность от РЕАЛЬНЫХ оборотов поршней, а не от заклинившей сети!
+        float speed = Math.abs(this.currentSpeed);
         if (speed <= 0 || burnTimeRemaining <= 0) return 0;
 
         // Л.С. на один поршень при базовых 64 RPM
@@ -190,91 +191,60 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     }
     @Override
     public void tick() {
-        this.burnTimeRemaining = 1000;
         super.tick();
 
-        // Работаем только на стороне логики (сервера)
-        if (level == null || level.isClientSide) return;
-
-        // 1. ЛОГИКА СЖИГАНИЯ ТОПЛИВА
-
-        if (this.burnTimeRemaining > 0) {
-            this.burnTimeRemaining--;
-            // Каждую секунду синхронизируем бак с клиентом, чтобы шкала не дергалась
-            if (level.getGameTime() % 20 == 0) {
-                this.setChanged();
-                this.notifyUpdate();
+        // Логика сжигания топлива работает ТОЛЬКО на сервере
+        if (level != null && !level.isClientSide) {
+            if (this.burnTimeRemaining > 0) {
+                this.burnTimeRemaining--;
+                if (level.getGameTime() % 20 == 0) {
+                    this.setChanged();
+                    this.notifyUpdate();
+                }
             }
         }
 
-        // 2. СИСТЕМЫ РАЗГОНА И СКОРОСТИ (Твой эталонный плавный разгон!)
-        if (this.burnTimeRemaining > 0 && this.targetSliderSpeed > 0) {
-            // Если текущая скорость меньше выставленной на ползунке — плавно разгоняем
+        // РАЗГОН ДВИГАТЕЛЯ (Убираем зависимость от burnTimeRemaining для синхронизации ползунка!)
+        if (this.targetSliderSpeed > 0) {
             if (this.currentSpeed < this.targetSliderSpeed) {
                 this.accelerationTicks++;
-                // Каждые 10 тиков (полсекунды) прибавляем обороты
-                if (this.accelerationTicks >= 10) {
+                if (this.accelerationTicks >= 5) { // Ускорим шаг до 5 тиков, чтобы разгонялся бодрее
                     this.currentSpeed = Math.min(this.targetSliderSpeed, this.currentSpeed + 8.0f);
                     this.accelerationTicks = 0;
-                    // Пинаем сеть Create обновить крутящий момент вала!
-                    this.updateGeneratedRotation();
+
+                    // Обновляем вращение на сервере
+                    if (level != null && !level.isClientSide) {
+                        this.updateGeneratedRotation();
+                        this.setChanged();
+                    }
                 }
             } else if (this.currentSpeed > this.targetSliderSpeed) {
-                // Если игрок скрутил ползунок вниз — плавно сбрасываем обороты
                 this.currentSpeed = Math.max(this.targetSliderSpeed, this.currentSpeed - 8.0f);
-                this.updateGeneratedRotation();
-                this.setChanged();
+                if (level != null && !level.isClientSide) {
+                    this.updateGeneratedRotation();
+                    this.setChanged();
+                }
             }
         } else {
-            // Топливо кончилось или ползунок в нуле — плавно глушим мотор до полной остановки
             if (this.currentSpeed > 0) {
                 this.currentSpeed = Math.max(0, this.currentSpeed - 16.0f);
-                this.updateGeneratedRotation();
+                if (level != null && !level.isClientSide) {
+                    this.updateGeneratedRotation();
+                    this.setChanged();
+                }
             }
             this.accelerationTicks = 0;
         }
 
-        // 3. ТЕРМОДИНАМИКА И КАЛИБРОВКА НАГРЕВА
-        float ambientTemp = getAmbientTemperature(); // Твой рабочий метод температуры биома!
-        float maxSpeed = getSafeEngineSpeed();
+        // ТЕРМОДИНАМИКА И ОСТАЛЬНОЙ КОД... (оставь как есть)
 
-        if (this.currentSpeed > 0) {
-            // Динамический коэффициент нагрева под любой металл: на макс. оборотах будет ~700°C
-            float heatCoefficient = 700.0f / maxSpeed;
-            float targetTemperature = ambientTemp + (this.currentSpeed * heatCoefficient);
-
-            // Плавное изменение стрелки термометра с учетом твоих радиаторов
-            if (this.engineTemperature < targetTemperature) {
-                // Радиатор замедляет нагрев двигателя
-                this.engineTemperature += 0.2f * (1.0f - getCoolingEfficiency());
-            } else if (this.engineTemperature > targetTemperature) {
-                // Радиатор помогает остывать быстрее при сбросе газа
-                this.engineTemperature -= 0.1f * (1.0f + getCoolingEfficiency());
-            }
-        } else {
-            // Двигатель полностью заглушен — плавно остывает до температуры биома
-            if (this.engineTemperature > ambientTemp) {
-                this.engineTemperature = Math.max(ambientTemp, this.engineTemperature - (0.5f * (1.0f + getCoolingEfficiency())));
-            }
-        }
-
-        // 4. ТАЙМЕР ПЛАВЛЕНИЯ И ПЕРЕГРЕВА (overheatMeltingTimer из твоего V8)
-        if (this.engineTemperature >= this.maxMeltingTemp) {
-            this.overheatMeltingTimer++;
-            if (this.overheatMeltingTimer >= 100) { // 5 секунд критического перегрева
-                this.triggerOverheat();
-            }
-        } else {
-            if (this.overheatMeltingTimer > 0) {
-                this.overheatMeltingTimer--;
-            }
-        }
-
-        // 5. ОТПРАВКА ОБНОВЛЕНИЙ НА КЛИЕНТ ДЛЯ АНИМАЦИИ ПОРШНЕЙ
+        // В самом конце метода tick() — ЖЕСТКАЯ СИНХРОНИЗАЦИЯ СКОРОСТИ
         if (this.currentSpeed != this.lastSentSpeed) {
             this.lastSentSpeed = this.currentSpeed;
-            this.setChanged();
-            this.notifyUpdate();
+            if (level != null && !level.isClientSide) {
+                this.setChanged();
+                this.notifyUpdate();
+            }
         }
     }
     @Override
@@ -346,12 +316,8 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
 
     @Override
     public float getGeneratedSpeed() {
-        // Если двигатель работает и в нем горит топливо
-        if (this.burnTimeRemaining > 0) {
-            // Возвращаем текущую скорость (которая разгоняется в tick())
-            return this.currentSpeed;
-        }
-        return 0; // Если заглох — скорость ноль
+        // Отдаем реальную скорость вращения вала без слепых блокировок!
+        return this.currentSpeed;
     }
     @Override
     protected void write(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
@@ -418,5 +384,28 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     // Предоставляем бак для NeoForge BlockCapability системы труб
     public net.neoforged.neoforge.fluids.capability.IFluidHandler getFluidTank() {
         return this.FuelTank;
+    }
+    // 1. Говорим Create, с какой стороны блока находится крутящийся вал
+
+    // 2. Метод, который Create вызывает для проверки активности источника
+    public boolean isSource() {
+        // Источник активен и крутит сеть, только если реальная скорость больше нуля!
+        return this.currentSpeed > 0;
+    }
+    // 1. Метод собирает актуальные кастомные данные (скорость, радиатор) и отправляет пакет на клиент
+    @Override
+    public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    // 2. Метод принудительно заставляет клиент перерисовать интерфейс и обновить переменные при получении пакета
+    @Override
+    public void onDataPacket(net.minecraft.network.Connection net, net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket pkt, net.minecraft.core.HolderLookup.Provider registries) {
+        super.onDataPacket(net, pkt, registries);
+        // Загружаем прилетевшие с сервера данные прямо в память клиента
+        net.minecraft.nbt.CompoundTag tag = pkt.getTag();
+        if (tag != null) {
+            this.read(tag, registries, true);
+        }
     }
 }
