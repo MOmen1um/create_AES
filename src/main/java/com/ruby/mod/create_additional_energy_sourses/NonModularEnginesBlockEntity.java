@@ -4,6 +4,8 @@ import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
+import com.simibubi.create.infrastructure.config.AllConfigs;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -26,403 +28,246 @@ import net.minecraft.util.Mth;
 
 public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
 
-    // Основные характеристики архитектуры двигателя
+    // 1. Параметры конкретного экземпляра (задаются при установке блока)
     public String engineType;      // "I", "V", "W", "R"
     public String engineMaterial;  // "cast_iron", "aluminum", "titanium"
-    public boolean isTurboCharged = false; // Бывшая hasTurbo — возвращаем твое оригинальное имя!
-    public int radiatorType = 0;   // 0 - нет, 1 - медный, 2 - стальной, 3 - латунный, 4 - ультимативный
 
-    // Твой родной бак для топлива
+    // 2. Оригинальные переменные из твоего эталона V8 (проверь названия букву в букву!)
     public final FluidTank FuelTank = new FluidTank(4000);
-
-    // Логика работы и тайминги
-    public float targetSliderSpeed = 0f;
     private int burnTimeRemaining = 0;
     private float currentSpeed = 0;
     private float lastSentSpeed = -1f;
     public float engineQuality = 1.0f;
     public float secretEfficiency = 1.0f;
 
-    // Термодинамика (Твои оригинальные переменные)
     public float engineTemperature = 20.0f;
-    public static final float BASE_TEMP = 20.0f;
+    public boolean isTurboCharged = false;
     private int accelerationTicks = 0;
     private int overheatMeltingTimer = 0;
-    public float maxMeltingTemp; // Вот она! Без опечаток
+    public float maxMeltingTemp;
+    public float targetSliderSpeed = 16.0f;
+    public int radiatorType = 0;
 
+    // Главный универсальный конструктор
     public NonModularEnginesBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, String engineType, String engineMaterial) {
         super(type, pos, state);
         this.engineType = engineType.toUpperCase();
         this.engineMaterial = engineMaterial.toLowerCase();
 
+        // Переносим расчет критической температуры из логики эталона, но делаем его динамическим
         this.maxMeltingTemp = switch (this.engineMaterial) {
-            case "cast_iron" -> 1200f;   // Чугун плавится при ~1200°C
-            case "aluminum" -> 660f;     // Алюминий плавится при 660°C
-            case "titanium" -> 1668f;    // Титан держит до 1668°C
+            case "aluminum" -> 660f;
+            case "titanium" -> 1668f;
             default -> 1200f;
         };
     }
-
-    /**
-     * 1. РАСЧЕТ МАКСИМАЛЬНОЙ СКОРОСТИ (RPM)
-     */
-    public float getMaxSafeSpeed() {
+    private void triggerOverheat() {
+        if (level != null && !level.isClientSide) {
+            // Удаляем блок двигателя, чтобы он не остался после взрыва
+            level.destroyBlock(worldPosition, false);
+            // Устраиваем красивый бабах мощностью 4 блока (как динамит), который поджигает окружение
+            level.explode(null, worldPosition.getX() + 0.5D, worldPosition.getY() + 0.5D, worldPosition.getZ() + 0.5D,
+                    4.0F, true, net.minecraft.world.level.Level.ExplosionInteraction.TNT);
+        }
+    }
+    public float getCoolingEfficiency() {
+        return switch (this.radiatorType) {
+            case 1 -> 0.15f; // Медный
+            case 2 -> 0.30f; // Стальной
+            case 3 -> 0.50f; // Латунный
+            case 4 -> 1.00f; // Ультимативный
+            default -> 0.05f; // Без радиатора
+        };
+    }
+    private float getAmbientTemperature() {
+        if (level != null) {
+            // Берем базовую температуру биома в этой точке мира и переводим в условные градусы
+            return level.getBiome(worldPosition).value().getBaseTemperature() * 25.0f;
+        }
+        return 20.0f; // Дефолт, если мира еще нет
+    }
+    public float getSafeEngineSpeed() {
         float baseSpeed = switch (this.engineMaterial) {
             case "cast_iron" -> 1024f;
             case "aluminum" -> 4096f;
             case "titanium" -> 8192f;
             default -> 1024f;
         };
-        // Турбина удваивает максимальные обороты
+        // Если стоит турбина — лимит оборотов удваивается!
         return isTurboCharged ? baseSpeed * 2.0f : baseSpeed;
     }
-
-
-    /**
-     * 2. ЛОГИКА ОХЛАЖДЕНИЯ (РАДИАТОРЫ)
-     */
-    public float getCoolingEfficiency() {
-        // Множитель эффективности рассеивания тепла
-        return switch (this.radiatorType) {
-            case 1 -> 0.15f; // Медный (базовый)
-            case 2 -> 0.30f; // Стальной (средний)
-            case 3 -> 0.50f; // Латунный (хороший)
-            case 4 -> 1.00f; // Ультимативный (мощный)
-            default -> 0.05f; // Без радиатора (пассивное остывание воздуха)
-        };
-    }
-
     @Override
-    public void addBehaviours(java.util.List<com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour> behaviours) {
-        super.addBehaviours(behaviours);
+    public float calculateAddedStressCapacity() {
+        float speed = Math.abs(getSpeed());
+        // Если двигатель заглушен или топливо кончилось — он не держит нагрузку сети
+        if (speed <= 0 || burnTimeRemaining <= 0) return 0;
 
-        // Ограничиваем физическую шкалу ползунка, чтобы полоса была маленькой и аккуратной
-        int sliderMaxSteps = 512;
+        // Л.С. на один поршень при базовых 64 RPM
+        float powerPerPiston = switch (this.engineMaterial) {
+            case "cast_iron" -> 30f * 64f;  // 30 л.с.
+            case "aluminum" -> 60f * 64f;   // 60 л.с.
+            case "titanium" -> 100f * 64f;  // 100 л.с.
+            default -> 30f * 64f;
+        };
 
-        // Ручной трансформатор положения окошка
-        com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform customTransform =
-                new com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform() {
-                    @Override
-                    public net.minecraft.world.phys.Vec3 getLocalOffset(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
-                        // Окошко настроек ровно по центру верхней грани блока мотора
-                        return new net.minecraft.world.phys.Vec3(0.5, 1.01, 0.5);
-                    }
+        // Считаем поршни по твоей архитектуре
+        int pistonCount = switch (this.engineType) {
+            case "I" -> 4;
+            case "V" -> 8;
+            case "W" -> 12;
+            case "R" -> 32;
+            default -> 4;
+        };
 
-                    @Override
-                    public void rotate(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state, com.mojang.blaze3d.vertex.PoseStack ms) {
-                        // Поворачиваем плашку, чтобы она смотрела вверх на игрока
-                        ms.mulPose(com.mojang.math.Axis.XP.rotationDegrees(90f));
-                    }
-                };
+        float totalPower = powerPerPiston * pistonCount;
 
-        // Создаем ползунок Create
-        com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour slider =
-                new com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour(
-                        net.minecraft.network.chat.Component.literal("Обороты двигателя (RPM)"),
-                        this,
-                        customTransform
-                );
+        // Множитель турбины х2
+        if (isTurboCharged) {
+            totalPower *= 2.0f;
+        }
 
-        // Задаем внутренние рамки шкалы (0-512)
-        slider.between(0, sliderMaxSteps);
-
-        // Коллбек: считываем значение (0-512) и умножаем на шаг 16, получая до 32768 RPM!
-        slider.withCallback(value -> {
-            this.targetSliderSpeed = (float) value;
-            this.setChanged();
-        });
-
-        behaviours.add(slider);
+        // Масштабируем итоговый Stress Capacity от текущей скорости
+        return totalPower * (speed / 64.0f);
     }
-
-    /**
-     * 3. ТИК ДВИГАТЕЛЯ И ТЕРМОДИНАМИКА
-     */
+    @Override
+    public float getGeneratedSpeed() {
+        // Если двигатель работает и в нем горит топливо
+        if (this.burnTimeRemaining > 0) {
+            // Возвращаем текущую скорость (которая разгоняется в tick())
+            return this.currentSpeed;
+        }
+        return 0; // Если заглох — скорость ноль
+    }
     @Override
     public void tick() {
         super.tick();
 
-        // Если мир еще не загрузился или мы на стороне клиента — ничего не делаем
+        // Работаем только на стороне логики (сервера)
         if (level == null || level.isClientSide) return;
-        this.burnTimeRemaining = 99999;
 
-        // 1. ЛОГИКА ТОПЛИВА (Burn Time)
-        // Если топливо горит, уменьшаем таймер каждый тик
-        if (burnTimeRemaining > 0) {
-            burnTimeRemaining--;
-
+        // 1. ЛОГИКА СЖИГАНИЯ ТОПЛИВА
+        if (this.burnTimeRemaining > 0) {
+            this.burnTimeRemaining--;
+            // Каждую секунду синхронизируем бак с клиентом, чтобы шкала не дергалась
             if (level.getGameTime() % 20 == 0) {
                 this.setChanged();
                 this.notifyUpdate();
             }
         }
 
-        // Получаем текущую скорость вала из Create
-        float speed = Math.abs(getSpeed());
-        float maxSpeed = getMaxSafeSpeed();
-
-        // 2. ДИНАМИЧЕСКИЙ НАГРЕВ (Твоя откалиброванная механика!)
-        if (speed > 0) {
-            // Коэффициент подстраивается под материал: на макс. оборотах будет ровно 700°C
-            float heatCoefficient = 700.0f / maxSpeed;
-            float targetTemperature = BASE_TEMP + (speed * heatCoefficient);
-
-            // Радиатор замедляет нагрев двигателя
-            if (engineTemperature < targetTemperature) {
-                engineTemperature += 0.2f * (1.0f - getCoolingEfficiency());
-            } else if (engineTemperature > targetTemperature) {
-                // Если сбросили газ, радиатор помогает остыть быстрее
-                engineTemperature -= 0.1f * (1.0f + getCoolingEfficiency());
-            }
-            this.updateGeneratedRotation();
-        } else {
-            // Двигатель заглушен — плавно остывает до комнатной температуры
-            if (engineTemperature > BASE_TEMP) {
-                engineTemperature = Math.max(BASE_TEMP, engineTemperature - (0.5f * (1.0f + getCoolingEfficiency())));
-            }
-        }
-
-        // 3. ПРОВЕРКА НА КРИТИЧЕСКИЙ ПЕРЕГРЕВ AND ПЛАВЛЕНИЕ
-        // Используем твою переменную maxMeltingTemp, которую посчитали в конструкторе!
-        if (engineTemperature >= maxMeltingTemp) {
-            overheatMeltingTimer++;
-            // Если движок кипит дольше 5 секунд (100 тиков) — вызываем бабах
-            if (overheatMeltingTimer >= 100) {
-                triggerOverheat();
-            }
-        } else {
-            // Если температура упала ниже опасной, сбрасываем таймер разрушения
-            if (overheatMeltingTimer > 0) {
-                overheatMeltingTimer--;
-            }
-        }
-
-        // Отправляем пакеты обновлений, если скорость изменилась (для рендеров поршней)
-        if (speed != lastSentSpeed) {
-            lastSentSpeed = speed;
-            notifyUpdate();
-        }
-        if (level != null && !level.isClientSide) {
-            // Если скорость на ползунке изменилась по сравнению с тем, что сейчас выдает вал
-            if (this.targetSliderSpeed != this.currentSpeed) {
-                this.currentSpeed = this.targetSliderSpeed;
-
-                // ЭТИ ДВЕ СТРОЧКИ ЗАСТАВЯТ CREATE МГНОВЕННО ПЕРЕСЧИТАТЬ СЕТЬ:
+        // 2. СИСТЕМЫ РАЗГОНА И СКОРОСТИ (Твой эталонный плавный разгон!)
+        if (this.burnTimeRemaining > 0 && this.targetSliderSpeed > 0) {
+            // Если текущая скорость меньше выставленной на ползунке — плавно разгоняем
+            if (this.currentSpeed < this.targetSliderSpeed) {
+                this.accelerationTicks++;
+                // Каждые 10 тиков (полсекунды) прибавляем обороты
+                if (this.accelerationTicks >= 10) {
+                    this.currentSpeed = Math.min(this.targetSliderSpeed, this.currentSpeed + 8.0f);
+                    this.accelerationTicks = 0;
+                    // Пинаем сеть Create обновить крутящий момент вала!
+                    this.updateGeneratedRotation();
+                }
+            } else if (this.currentSpeed > this.targetSliderSpeed) {
+                // Если игрок скрутил ползунок вниз — плавно сбрасываем обороты
+                this.currentSpeed = Math.max(this.targetSliderSpeed, this.currentSpeed - 8.0f);
                 this.updateGeneratedRotation();
-                this.setChanged();
+            }
+        } else {
+            // Топливо кончилось или ползунок в нуле — плавно глушим мотор до полной остановки
+            if (this.currentSpeed > 0) {
+                this.currentSpeed = Math.max(0, this.currentSpeed - 16.0f);
+                this.updateGeneratedRotation();
+            }
+            this.accelerationTicks = 0;
+        }
+
+        // 3. ТЕРМОДИНАМИКА И КАЛИБРОВКА НАГРЕВА
+        float ambientTemp = getAmbientTemperature(); // Твой рабочий метод температуры биома!
+        float maxSpeed = getSafeEngineSpeed();
+
+        if (this.currentSpeed > 0) {
+            // Динамический коэффициент нагрева под любой металл: на макс. оборотах будет ~700°C
+            float heatCoefficient = 700.0f / maxSpeed;
+            float targetTemperature = ambientTemp + (this.currentSpeed * heatCoefficient);
+
+            // Плавное изменение стрелки термометра с учетом твоих радиаторов
+            if (this.engineTemperature < targetTemperature) {
+                // Радиатор замедляет нагрев двигателя
+                this.engineTemperature += 0.2f * (1.0f - getCoolingEfficiency());
+            } else if (this.engineTemperature > targetTemperature) {
+                // Радиатор помогает остывать быстрее при сбросе газа
+                this.engineTemperature -= 0.1f * (1.0f + getCoolingEfficiency());
+            }
+        } else {
+            // Двигатель полностью заглушен — плавно остывает до температуры биома
+            if (this.engineTemperature > ambientTemp) {
+                this.engineTemperature = Math.max(ambientTemp, this.engineTemperature - (0.5f * (1.0f + getCoolingEfficiency())));
             }
         }
-    }
 
-    /**
-     * 4 РАСЧЕТ МОЩНОСТИ (SU) НА КИНЕТИЧЕСКУЮ СЕТЬ CREATE
-     */
-    @Override
-    public float calculateAddedStressCapacity() {
-        float speed = Math.abs(getSpeed());
-        // Если двигатель стоит или в баке нет топлива (burnTimeRemaining == 0), мощность не генерируется
-        if (speed <= 0 || burnTimeRemaining <= 0) return 0;
-
-        // 1. Базовая мощность на 1 поршень (при эталонных 64 RPM, как ты расписал в л.с.)
-        float powerPerPiston = switch (this.engineMaterial) {
-            case "cast_iron" -> 30f * 64f;  // Чугун: 30 л.с. -> 1920 SU
-            case "aluminum" -> 60f * 64f;   // Алюминий: 60 л.с. -> 3840 SU
-            case "titanium" -> 100f * 64f;  // Титан: 100 л.с. -> 6400 SU
-            default -> 30f * 64f;
-        };
-
-        // 2. Количество поршней в зависимости от архитектуры (I, V, W, R)
-        int pistonCount = switch (this.engineType) {
-            case "I" -> 4;   // Рядный
-            case "V" -> 8;   // V-образный
-            case "W" -> 12;  // W-образный
-            case "R" -> 32;  // Твой кастомный 32-поршневой монстр
-            default -> 4;
-        };
-
-        // Считаем общую базовую мощность мотора
-        float totalPower = powerPerPiston * pistonCount;
-
-        // 3. Учитываем множитель турбины
-        if (isTurboCharged) {
-            totalPower *= 2.0f; // Жёсткий x2 к мощности!
-        }
-
-        // В Create итоговый Stress Capacity масштабируется от текущей скорости блока
-        // Формула: Общая мощность * (текущая скорость / 64)
-        return totalPower * (speed / 64.0f);
-    }
-
-    @Override
-    protected void write(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
-        super.write(tag, registries, clientPacket);
-
-        // Сохраняем базовые характеристики двигателя
-        tag.putString("EngineType", this.engineType);
-        tag.putString("EngineMaterial", this.engineMaterial);
-
-        // Используем точные методы из твоего эталона!
-        tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
-        tag.putBoolean("IsTurboCharged", this.isTurboCharged);
-        tag.putFloat("EngineTemperature", this.engineTemperature);
-        tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
-        tag.putFloat("CurrentSpeed", this.currentSpeed);
-
-        // Сохранение твоего бака FuelTank строго по эталону
-        net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
-        this.FuelTank.writeToNBT(registries, fluidTag);
-        tag.put("FuelTank", fluidTag);
-    }
-
-    @Override
-    protected void read(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
-        super.read(tag, registries, clientPacket);
-
-        if (tag.contains("EngineType")) this.engineType = tag.getString("EngineType");
-        if (tag.contains("EngineMaterial")) this.engineMaterial = tag.getString("EngineMaterial");
-
-        // Восстановление логики температурного климата из твоего эталона!
-        if (tag.contains("EngineTemperature")) {
-            this.engineTemperature = tag.getFloat("EngineTemperature");
+        // 4. ТАЙМЕР ПЛАВЛЕНИЯ И ПЕРЕГРЕВА (overheatMeltingTimer из твоего V8)
+        if (this.engineTemperature >= this.maxMeltingTemp) {
+            this.overheatMeltingTimer++;
+            if (this.overheatMeltingTimer >= 100) { // 5 секунд критического перегрева
+                this.triggerOverheat();
+            }
         } else {
-            // Если данных нет, оставляем климат биома (20°C)
-            this.engineTemperature = 20.0f;
+            if (this.overheatMeltingTimer > 0) {
+                this.overheatMeltingTimer--;
+            }
         }
 
-        // Считываем остальные переменные
-        if (tag.contains("TargetSliderSpeed")) this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
-
-        this.isTurboCharged = tag.getBoolean("IsTurboCharged");
-        this.burnTimeRemaining = tag.getInt("BurnTimeRemaining");
-        this.currentSpeed = tag.getFloat("CurrentSpeed");
-
-        // Загрузка бака FuelTank строго по эталону
-        if (tag.contains("FuelTank")) {
-            this.FuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
+        // 5. ОТПРАВКА ОБНОВЛЕНИЙ НА КЛИЕНТ ДЛЯ АНИМАЦИИ ПОРШНЕЙ
+        if (this.currentSpeed != this.lastSentSpeed) {
+            this.lastSentSpeed = this.currentSpeed;
+            this.setChanged();
+            this.notifyUpdate();
         }
     }
-
     @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+    public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        // 1. Аварийная блокировка из твоего эталона, если скорость в конфиге Create занижена
         int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
         if (createMaxSpeed < 32768) {
-            tooltip.add(Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
-            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в конфиге Create до 32768!"));
+            tooltip.add(net.minecraft.network.chat.Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
+            tooltip.add(net.minecraft.network.chat.Component.literal("§7Повысьте 'maxRotationSpeed' в конфиге Create до 32768!"));
             return true;
         }
 
+        // Вызываем базовые строки Create (Stress/SU)
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-        tooltip.add(Component.literal(""));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8--------------------------------"));
 
-        String matColor = engineMaterial.equals("titanium") ? "§b" : (engineMaterial.equals("aluminum") ? "§7" : "§8");
-        tooltip.add(Component.literal("§6Спецификация ДВС V8:"));
-        tooltip.add(Component.literal(" §eМатериал блока: " + matColor + engineMaterial.toUpperCase()));
+        // 2. Спецификация ДВС
+        String readableType = switch (this.engineType != null ? this.engineType : "I") {
+            case "I" -> "Inline-4";
+            case "V" -> "V8";
+            case "W" -> "W12";
+            case "R" -> "Radial R-32 Monster";
+            default -> "Unknown";
+        };
+        tooltip.add(net.minecraft.network.chat.Component.literal("§6Спецификация ДВС: §7" + readableType));
 
+        // 3. Материал блока и динамический цвет текста (как в твоем эталоне)
+        String matColor = this.engineMaterial.equals("titanium") ? "§b" : (this.engineMaterial.equals("aluminum") ? "§7" : "§8");
+        tooltip.add(net.minecraft.network.chat.Component.literal("§eМатериал блока: " + matColor + this.engineMaterial.toUpperCase()));
+
+        // 4. Турбонаддув
         String turboText = isTurboCharged ? "§aУСТАНОВЛЕН" : "§cОТСУТСТВУЕТ";
-        tooltip.add(Component.literal(" §eТурбонаддув: " + turboText));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§eТурбонаддув: " + turboText));
 
-        tooltip.add(Component.literal(" §6Телеметрия температур:"));
-        String tempColor = engineTemperature > (maxMeltingTemp - 200) ? "§c" : (engineTemperature > 90 ? "§6" : "§a");
-        tooltip.add(Component.literal(" §eТемпература ядра: " + tempColor + String.format("%.1f", engineTemperature) + "°C / " + maxMeltingTemp + "°C"));
-        tooltip.add(Component.literal(" §eБезопасная зона: §aдо " + String.format("%.0f", getMaxSafeSpeed()) + " RPM"));
-        net.minecraft.world.level.block.state.BlockState blockState = this.getBlockState();
-        if (blockState.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
-            net.minecraft.core.Direction facing = blockState.getValue(V8EngineBlock.HORIZONTAL_FACING);
-            net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
-            net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+        // 5. Телеметрия температур
+        tooltip.add(net.minecraft.network.chat.Component.literal("§7Телеметрия температур:"));
 
-            if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
-                String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
-                String tierName = "ОБЫЧНЫЙ";
-                String tierColor = "§7";
-                String efficiency = "100%";
+        // Меняем цвет цифр: если до плавления осталось меньше 200 градусов — подсвечиваем красным
+        String tempColor = (this.engineTemperature > (this.maxMeltingTemp - 200f)) ? "§c" : "§a";
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8 Температура ядра: " + tempColor + String.format("%.1f", this.engineTemperature) + "°C / " + this.maxMeltingTemp + "°C"));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8 Безопасная зона: ядро < " + String.format("%.0f", getSafeEngineSpeed()) + " RPM"));
 
-                if (beName.contains("copper")) { tierName = "МЕДНЫЙ"; tierColor = "§6"; efficiency = "+25%"; }
-                else if (beName.contains("steel")) { tierName = "СТАЛЬНОЙ"; tierColor = "§f"; efficiency = "+50%"; }
-                else if (beName.contains("brass")) { tierName = "ЛАТУННЫЙ"; tierColor = "§e"; efficiency = "+75%"; }
-                else if (beName.contains("ultimate")) { tierName = "УЛЬТИМАТИВНЫЙ"; tierColor = "§b"; efficiency = "+100%"; }
-
-                tooltip.add(Component.literal(""));
-                tooltip.add(Component.literal("§6Состояние охлаждения V8:"));
-                tooltip.add(Component.literal(" §eРадиатор: " + tierColor + tierName + " (§a" + efficiency + " RPM§e)"));
-
-                if (!radiator.waterTank.isEmpty()) {
-                    tooltip.add(Component.literal(" §eЗаполнение бака: §b" + radiator.waterTank.getFluidAmount() + " / " + radiator.waterTank.getCapacity() + " mB"));
-                } else {
-                    tooltip.add(Component.literal(" §c⚠ РАДИАТОР СУХОЙ (НЕТ ОХЛАЖДЕНИЯ!)"));
-                }
-            }
-        }
-
-        if (!FuelTank.isEmpty()) {
-            tooltip.add(Component.literal(" §eТопливо: §7" + FuelTank.getFluid().getHoverName().getString() + " (" + FuelTank.getFluidAmount() + " mB)"));
-        } else {
-            tooltip.add(Component.literal(" §cБак пуст"));
-        }
         return true;
-    }
-
-    private void triggerOverheat() {
-        // Логика взрыва или поломки блока при перегреве
-        // level.explode(...) или превращение блока в разрушенный аналог
-    }
-
-    // 1. Метод отправляет данные клиенту при первой загрузке чанка
-    @Override
-    public net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket getUpdatePacket() {
-        return net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    // 3. Метод заставляет Create обновлять рендер, когда скорость вала меняется
-    @Override
-    public void notifyUpdate() {
-        super.notifyUpdate();
-        if (level != null && !level.isClientSide) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-        }
-    }
-    @Override
-    public net.minecraft.nbt.CompoundTag getUpdateTag(net.minecraft.core.HolderLookup.Provider registries) {
-        net.minecraft.nbt.CompoundTag tag = super.getUpdateTag(registries);
-        // Записываем абсолютно всё состояние для клиента, чтобы меню не "слетало"
-        tag.putString("EngineType", this.engineType != null ? this.engineType : "I");
-        tag.putString("EngineMaterial", this.engineMaterial != null ? this.engineMaterial : "cast_iron");
-        tag.putInt("RadiatorType", this.radiatorType);
-        tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
-        tag.putFloat("EngineTemperature", this.engineTemperature);
-        tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
-
-        // Синхронизируем жидкость в баке для инженеров
-        net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
-        this.FuelTank.writeToNBT(registries, fluidTag);
-        tag.put("FuelTank", fluidTag);
-
-        return tag;
-    }
-
-    // Включаем/выключаем турбину (можно вызывать при установке кастомного апгрейда на блок)
-    public void setTurbo(boolean isTurboCharged) {
-        this.isTurboCharged = isTurboCharged;
-        notifyUpdate();
-    }
-
-    // Устанавливаем тип радиатора
-    public void setRadiatorType(int type) {
-        this.radiatorType = Mth.clamp(type, 0, 4);
-        notifyUpdate();
-    }
-
-    public float getEngineTemperature() {
-        return this.engineTemperature;
     }
     // Предоставляем бак для NeoForge BlockCapability системы труб
     public net.neoforged.neoforge.fluids.capability.IFluidHandler getFluidTank() {
         return this.FuelTank;
-    }
-    private void onFluidTankChanged(net.neoforged.neoforge.fluids.FluidStack stack) {
-        this.setChanged();
-        if (level != null && !level.isClientSide) {
-            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
-        }
     }
 }

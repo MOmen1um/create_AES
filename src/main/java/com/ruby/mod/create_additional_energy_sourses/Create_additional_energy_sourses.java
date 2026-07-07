@@ -77,14 +77,14 @@ public class Create_additional_energy_sourses {
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
                     ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(),
-                    (blockEntity, side) -> blockEntity.getFluidTank() // Используем метод вместо поля!
+                    (blockEntity, side) -> ((NonModularEnginesBlockEntity) blockEntity).getFluidTank()
             );
 
             // 2. Открываем бак для жидкостей у всех МОДУЛЬНЫХ двигателей мода
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
                     ModBlocks.MODULAR_ENGINE_ENTITY.get(),
-                    (blockEntity, side) -> blockEntity.getFluidTank() // Используем метод вместо поля!
+                    (blockEntity, side) -> ((ModularEnginesBlockEntity) blockEntity).getFluidTank()
             );
 
 
