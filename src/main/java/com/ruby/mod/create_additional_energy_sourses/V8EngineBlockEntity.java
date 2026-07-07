@@ -19,55 +19,34 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import java.util.List;
 
-public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
+public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     public final FluidTank fuelTank = new FluidTank(4000);
-    protected String engineMaterial , engineType;
     private int burnTimeRemaining = 0;
+    private float currentSpeed = 0;
     private float lastSentSpeed = -1f;
-    private int accelerationTicks = 0;
-    protected int countOfPistons = 4;
-    protected float materialPower = 30f, maxSafeSpeed = 512f, maxMeltingTemp = 300f;
-    public float currentSpeed = 0f, engineTemperature = 20f;
+
+    public float engineQuality = 1.0f;
+    public float secretEfficiency = 1.0f;
+    public String engineMaterial;
+    public float engineTemperature = 20.0f;
     public boolean isTurboCharged = false;
 
-    public NonModularEnginesBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, String material, String engineType) {
-        super(type, pos, state);
-        this.engineMaterial = material;
-        this.engineType = engineType;
-        setupEngineProperties();
+    private int accelerationTicks = 0;
+
+    // Конструктор по умолчанию
+    public V8EngineBlockEntity(BlockPos pos, BlockState state) {
+        this(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state, "iron");
     }
 
-    private void setupEngineProperties() {
-        // Защита от краша: если блок ещё не успел полностью инициализироваться в мире
-        if (this.getType() == null) return;
+    // Главный конструктор
+    public V8EngineBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state, String material) {
+        super(type, pos, state);
+        this.engineMaterial = material;
 
-        // Автоматически достаем ID блока из реестра игры (например, "titanium_r32_engine")
-        String blockId = net.minecraft.world.level.block.entity.BlockEntityType.getKey(this.getType()).getPath();
-
-        // 1. Динамически определяем металл по имени блока
-        if (blockId.contains("aluminum")) this.engineMaterial = "aluminum";
-        else if (blockId.contains("titanium")) this.engineMaterial = "titanium";
-        else this.engineMaterial = "iron";
-
-        // 2. Динамически определяем компоновку и количество поршней
-        if (blockId.contains("i4")) this.engineType = "i4";
-        else if (blockId.contains("w16")) this.engineType = "w16";
-        else if (blockId.contains("r32")) this.engineType = "r32";
-        else this.engineType = "v8"; // Дефолт, если это базовый чугунный мотор
-
-        // 3. ТВОЙ РОДНОЙ НАДЁЖНЫЙ SWITCH-CASE С ГИТХАБА (Работает без изменений)
-        switch (this.engineMaterial) {
-            case "iron" -> { this.materialPower = 30f; this.maxSafeSpeed = this.isTurboCharged ? 1024f : 512f; this.maxMeltingTemp = 300f; }
-            case "aluminum" -> { this.materialPower = 60f; this.maxSafeSpeed = this.isTurboCharged ? 4096f : 2048f; this.maxMeltingTemp = 450f; }
-            case "titanium" -> { this.materialPower = 100f; this.maxSafeSpeed = this.isTurboCharged ? 16384f : 8192f; this.maxMeltingTemp = 600f; }
-        }
-        switch (this.engineType) {
-            case "i4" -> this.countOfPistons = 4;
-            case "v8" -> this.countOfPistons = 8;
-            case "w16" -> this.countOfPistons = 16;
-            case "r32" -> this.countOfPistons = 32;
-        }
+        // УБРАЛИ РАНДОМ: Теперь при создании у всех двигателей базовые 100% параметров
+        this.engineQuality = 1.0f;
+        this.secretEfficiency = 1.0f;
     }
 
     public float getAmbientTemperature() {
@@ -88,12 +67,18 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         float baseSafeSpeed = baseLimit * (isTurboCharged ? 2.0f : 1.0f);
 
         // === 2. ИНТЕГРИРУЕМ РАДИАТОРЫ С ПРОВЕРКОЙ ВОДЫ ===
+
+
+
+
+
+
         float currentMultiplier = 1.0f;
 
         net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
 
-        if (state.hasProperty(NonModularEnginesBlock.HORIZONTAL_FACING)) {
-            net.minecraft.core.Direction facing = state.getValue(NonModularEnginesBlock.HORIZONTAL_FACING);
+        if (state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
+            net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
 
 
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
@@ -221,11 +206,11 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
             // ---------------------------------------------
 
+
+
+
             this.setChanged();
-            this.sendData();
-            if (this.level != null) {
-                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
-            }
+            this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             if (currentSpeed < targetSpeed) {
                 if (accelerationTicks < 40) accelerationTicks++;
                 float progress = (float) accelerationTicks / 40;
@@ -296,15 +281,9 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
         }
 
-        // Если мотор крутится, принудительно обновляем блок и вал каждый тик!
-        if (this.currentSpeed > 0) {
-            this.updateGeneratedRotation();
-            this.setChanged();
-            this.sendData();
-        }
-
         if (this.level.getGameTime() % 20 == 0) {
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+            this.setChanged();
+            this.sendData(); // Синхронизирует безопасную скорость и литры топлива с клиентом!
         }
     }
 
@@ -341,17 +320,15 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     public float calculateAddedStressCapacity() {
         if (currentSpeed <= 0) return 0;
         float materialMultiplier = engineMaterial.equals("iron") ? 15.0f : 10.0f;
-        return currentSpeed * materialMultiplier;
+        return currentSpeed * materialMultiplier * secretEfficiency;
     }
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
         int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
         if (createMaxSpeed < 32768) {
-            tooltip.add(Component.literal("  §c⚠ ДВИГАТЕЛЬ ЗАБЛОКИРОВАН! ⚠"));
-            tooltip.add(Component.literal("  §7Причина: Низкий лимит скорости в Create."));
-            tooltip.add(Component.literal("  §eРешение: §aВыставьте §emaxRotationSpeed §aв"));
-            tooltip.add(Component.literal("  §aконфиге сервера минимум на §e32768 §aRPM!"));
+            tooltip.add(Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
+            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в конфиге Create до 32768!"));
             return true;
         }
 
@@ -370,8 +347,8 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         tooltip.add(Component.literal(" §eТемпература ядра: " + tempColor + String.format("%.1f", engineTemperature) + "°C / " + getMaterialMeltingPoint() + "°C"));
         tooltip.add(Component.literal(" §eБезопасная зона: §aдо " + String.format("%.0f", getSafeEngineSpeed()) + " RPM"));
         net.minecraft.world.level.block.state.BlockState blockState = this.getBlockState();
-        if (blockState.hasProperty(NonModularEnginesBlock.HORIZONTAL_FACING)) {
-            net.minecraft.core.Direction facing = blockState.getValue(NonModularEnginesBlock.HORIZONTAL_FACING);
+        if (blockState.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
+            net.minecraft.core.Direction facing = blockState.getValue(V8EngineBlock.HORIZONTAL_FACING);
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
             net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
