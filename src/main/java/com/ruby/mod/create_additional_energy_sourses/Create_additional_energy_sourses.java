@@ -69,6 +69,7 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_V8.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_W16.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.MODULAR_TITANIUM_R32.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.V8_ENGINE.get(), 1));
                     })
                     .build());
 
@@ -126,6 +127,11 @@ public class Create_additional_energy_sourses {
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
                     (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_ULTIMATE_ENTITY.get(),
                     (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
+            );
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    ModBlocks.V8_ENGINE_ENTITY.get(),
+                    (blockEntity, side) -> blockEntity.fuelTank
             );
         });
 

@@ -39,24 +39,26 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     private void setupEngineProperties() {
-        // Защита от краша: если блок ещё не успел полностью инициализироваться в мире
-        if (this.getType() == null) return;
+        // Защита от краша при первой инициализации чанка
+        if (this.level == null || this.getBlockState() == null) return;
 
-        // Автоматически достаем ID блока из реестра игры (например, "titanium_r32_engine")
-        String blockId = net.minecraft.world.level.block.entity.BlockEntityType.getKey(this.getType()).getPath();
+        // ГЕНИАЛЬНОЕ ИСПРАВЛЕНИЕ: Берем ID конкретного блока из мира!
+        // Например: "titanium_r32_engine" или "aluminum_v8_engine"
+        net.minecraft.resources.ResourceLocation blockRl = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(this.getBlockState().getBlock());
+        String blockId = blockRl.getPath();
 
-        // 1. Динамически определяем металл по имени блока
+        // 1. Динамически определяем металл по реальному имени блока
         if (blockId.contains("aluminum")) this.engineMaterial = "aluminum";
         else if (blockId.contains("titanium")) this.engineMaterial = "titanium";
         else this.engineMaterial = "iron";
 
-        // 2. Динамически определяем компоновку и количество поршней
+        // 2. Динамически определяем компоновку и поршни
         if (blockId.contains("i4")) this.engineType = "i4";
         else if (blockId.contains("w16")) this.engineType = "w16";
         else if (blockId.contains("r32")) this.engineType = "r32";
-        else this.engineType = "v8"; // Дефолт, если это базовый чугунный мотор
+        else this.engineType = "v8"; // Твой дефолтный V8
 
-        // 3. ТВОЙ РОДНОЙ НАДЁЖНЫЙ SWITCH-CASE С ГИТХАБА (Работает без изменений)
+        // 3. ТВОЙ НАДЁЖНЫЙ РАБОЧИЙ SWITCH-CASE (Оставляем без изменений)
         switch (this.engineMaterial) {
             case "iron" -> { this.materialPower = 30f; this.maxSafeSpeed = this.isTurboCharged ? 1024f : 512f; this.maxMeltingTemp = 300f; }
             case "aluminum" -> { this.materialPower = 60f; this.maxSafeSpeed = this.isTurboCharged ? 4096f : 2048f; this.maxMeltingTemp = 450f; }
@@ -439,7 +441,9 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         // ИСПРАВЛЕНО: Бак требует registries для чтения в 1.21.1
         if (tag.contains("FuelTank")) {
             this.fuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
+
         }
+        setupEngineProperties(); // Принудительно напоминаем моду, из какого металла он сделан
     }
 
     // --- 2. СИНХРОНИЗАЦИЯ ПАКЕТОВ ДЛЯ ОЧКОВ ИНЖЕНЕРА (ОБНОВЛЕНИЕ БАКА НА ЭКРАНЕ) ---
