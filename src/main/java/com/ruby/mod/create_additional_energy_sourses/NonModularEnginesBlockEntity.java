@@ -1,6 +1,7 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
 import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
@@ -192,39 +193,26 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     }
     @Override
     public void tick() {
-        // Код Create супер-класса должен выполняться ВСЕГДА (он крутит внутренние таймеры ползунков!)
-        super.tick();
-
-        // Тестовое топливо
+        // ТЕСТОВАЯ ЗАГЛУШКА: Двигатель всегда заправлен на 100 тиков, пока тестируем!
         this.burnTimeRemaining = 100;
 
-        // Серверная логика сжигания топлива
+        super.tick();
+
+        // Работаем на стороне сервера
         if (level != null && !level.isClientSide) {
+            // Если в баке горит топливо
             if (this.burnTimeRemaining > 0) {
                 this.burnTimeRemaining--;
             }
-        }
 
-        // Логика изменения скорости ползунка (должна работать и на клиенте, и на сервере для рендера!)
-        if (this.targetSliderSpeed > 0) {
-            this.currentSpeed = this.targetSliderSpeed;
+            // Если скорость на ползунке отличается от текущей скорости вала — плавно разгоняем вал!
+            if (this.currentSpeed != this.targetSliderSpeed) {
+                this.currentSpeed = this.targetSliderSpeed;
 
-            // Пинаем сеть Create только на сервере!
-            if (level != null && !level.isClientSide) {
+                // ЭТИ СТРОЧКИ ПРИНУДИТЕЛЬНО ЗАСТАВЯТ CREATE КРУТИТЬ ВАЛЫ В МИРЕ:
                 this.updateGeneratedRotation();
-            }
-        } else {
-            this.currentSpeed = 0;
-            if (level != null && !level.isClientSide) {
-                this.updateGeneratedRotation();
-            }
-        }
-
-        // Синхронизация пакетов для очков инженера
-        if (level != null && !level.isClientSide) {
-            if (level.getGameTime() % 10 == 0) {
                 this.setChanged();
-                this.notifyUpdate();
+                this.notifyUpdate(); // Шлём сетевой пакет клиенту!
             }
         }
     }
@@ -297,18 +285,18 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
 
     @Override
     public float getGeneratedSpeed() {
-        // Отдаем реальную скорость вращения вала без слепых блокировок!
+        // Отдаем скорость ползунка напрямую в сеть!
         return this.currentSpeed;
     }
     @Override
     protected void write(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.write(tag, registries, clientPacket);
 
-        // 1. Сохраняем базовые характеристики архитектуры
-        tag.putString("EngineType", this.engineType != null ? this.engineType : "I");
-        tag.putString("EngineMaterial", this.engineMaterial != null ? this.engineMaterial : "cast_iron");
+        // 1. Записываем архитектуру, чтобы switch-case очков инженера не сбрасывался в "Unknown"
+        if (this.engineType != null) tag.putString("EngineType", this.engineType);
+        if (this.engineMaterial != null) tag.putString("EngineMaterial", this.engineMaterial);
 
-        // 2. Сохраняем переменные логики и телеметрии
+        // 2. Записываем характеристики работы
         tag.putBoolean("IsTurboCharged", this.isTurboCharged);
         tag.putFloat("EngineTemperature", this.engineTemperature);
         tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
@@ -316,7 +304,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
         tag.putInt("RadiatorType", this.radiatorType);
 
-        // 3. Сохраняем твой кастомный бак для топлива
+        // 3. Записываем твой кастомный FluidTank бак жидкостей с провайдером реестров!
         if (this.FuelTank != null) {
             net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
             this.FuelTank.writeToNBT(registries, fluidTag);
@@ -328,15 +316,15 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     protected void read(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
 
-        // 1. Читаем базовые характеристики
+        // 1. Читаем архитектуру
         if (tag.contains("EngineType")) this.engineType = tag.getString("EngineType");
         if (tag.contains("EngineMaterial")) this.engineMaterial = tag.getString("EngineMaterial");
 
-        // 2. Читаем переменные логики (с проверкой на существование, как в твоем эталоне)
+        // 2. Читаем телеметрию
         if (tag.contains("EngineTemperature")) {
             this.engineTemperature = tag.getFloat("EngineTemperature");
         } else {
-            this.engineTemperature = 20.0f; // Дефолт при установке блока
+            this.engineTemperature = 20.0f; // Окат на комнатную, если блок новый
         }
 
         this.isTurboCharged = tag.getBoolean("IsTurboCharged");
@@ -345,7 +333,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         if (tag.contains("TargetSliderSpeed")) this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
         this.radiatorType = tag.getInt("RadiatorType");
 
-        // 3. Читаем данные бака с топливом
+        // 3. Считываем бак жидкостей обратно в память ДВС
         if (this.FuelTank != null && tag.contains("FuelTankData")) {
             this.FuelTank.readFromNBT(registries, tag.getCompound("FuelTankData"));
         }
@@ -369,9 +357,10 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     // 1. Говорим Create, с какой стороны блока находится крутящийся вал
 
     // 2. Метод, который Create вызывает для проверки активности источника
+    @Override
     public boolean isSource() {
-        // Источник активен и крутит сеть, только если реальная скорость больше нуля!
-        return this.currentSpeed > 0;
+        // Говорим сети Create, что эта сущность САМА создаёт крутящий момент!
+        return true;
     }
     // 1. Метод собирает актуальные кастомные данные (скорость, радиатор) и отправляет пакет на клиент
     @Override
@@ -389,4 +378,21 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             this.read(tag, registries, true);
         }
     }
+    // Убираем @Override, чтобы компилятор не ругался на суперкласс
+    public net.minecraft.core.Direction getSourceFacing() {
+        BlockState blockState = this.getBlockState();
+        // Используем встроенное свойство направления Create блоков
+        if (blockState.hasProperty(com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING)) {
+            return blockState.getValue(com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING);
+        }
+        return net.minecraft.core.Direction.NORTH; // Дефолт, если что-то пошло не так
+    }
+    public net.minecraft.core.Direction.Axis getRotationAxis() {
+        BlockState blockState = this.getBlockState();
+        if (blockState.hasProperty(com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING)) {
+            return blockState.getValue(com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING).getAxis();
+        }
+        return net.minecraft.core.Direction.Axis.X;
+    }
+
 }
