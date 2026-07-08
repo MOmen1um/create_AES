@@ -18,7 +18,7 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
             this.maxMeltingTemp = 1668f;
         } else if (blockId.contains("aluminum")) {
             this.engineMaterial = "aluminum";
-            this.maxMeltingTemp = 660f;
+            this.maxMeltingTemp = 700f;
         } else {
             this.engineMaterial = "cast_iron";
             this.maxMeltingTemp = 1200f;
@@ -41,72 +41,69 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
 
     @Override
     public float getSafeEngineSpeed() {
-        // Базовый безопасный порог без охлаждения из твоих чертежей
+        // 1. Базовая безопасная скорость
         float baseSafeSpeed = switch (this.engineMaterial != null ? this.engineMaterial : "cast_iron") {
-            case "cast_iron" -> 512f;
-            case "aluminum" -> 1024f;
-            case "titanium" -> 2048f;
+            case "cast_iron" -> 1024f;
+            case "aluminum"  -> 2048f;
+            case "titanium"  -> 4096f;
             default -> 512f;
         };
 
-        // Сканируем радиатор перед ДВС (как в твоем эталоне V8)
-        if (this.level != null) {
-            net.minecraft.world.level.block.state.BlockState blockState = this.getBlockState();
-            if (blockState.hasProperty(com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING)) {
-                net.minecraft.core.Direction facing = blockState.getValue(com.simibubi.create.content.kinetics.base.HorizontalKineticBlock.HORIZONTAL_FACING);
-                net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
-                net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+        // 2. Умножение х2 от радиатора
+        if (hasRadiatorConnected()) {
+            baseSafeSpeed *= 2.0f;
+        }
 
-                // Если перед ДВС стоит радиатор — ЖЕСТКО УДВАИВАЕМ БЕЗОПАСНЫЙ ПОРОГ!
-                if (neighborBE instanceof BaseRadiatorBlockEntity) {
-                    baseSafeSpeed *= 2.0f;
-                }
-            }
+        // 3. Умножение х2 от турбонаддува (если он тоже должен разгонять вал)
+        if (this.isTurboCharged) {
+            baseSafeSpeed *= 2.0f;
         }
 
         return baseSafeSpeed;
     }
 
-    // ЭТОТ ОВЕРРАЙД ПОЛНОСТЬЮ ОТКЛЮЧИТ СТАРЫЙ МЕТОД ИЗ V8 И УБЕРЕТ МИЛЛИОНЫ SU!
     @Override
     public float calculateAddedStressCapacity() {
-        // Забираем текущую скорость всей сети Create
         float speed = Math.abs(getSpeed());
 
-        // Если бак пустой или валы стоят — выдаем ровно 0 SU
-        if (speed <= 0 || this.burnTimeRemaining <= 0) return 0;
+        // Защита от загрузки чанка
+        if (speed < 8.0f || this.burnTimeRemaining <= 0) return 0f;
 
-        // Строгий баланс Diesel Generators: выставляем чистую базовую силу на один поршень
-        float powerPerPiston = switch (this.engineMaterial != null ? this.engineMaterial : "cast_iron") {
-            case "cast_iron" -> 30f * 64;   // Чугун (для I4 даст базовые 64 SU)
-            case "aluminum" -> 60f * 64;    // Алюминий (для I4 даст базовые 128 SU)
-            case "titanium" -> 100f * 64;    // Титан (для I4 даст базовые 256 SU)
-            default -> 16f;
+        // 1. Базовая фиксированная мощность
+        float targetFixedSU = switch (this.engineMaterial != null ? this.engineMaterial : "cast_iron") {
+            case "cast_iron" -> 1920;
+            case "aluminum"  -> 3840;
+            case "titanium"  -> 6400;
+            default -> 1920f;
         };
 
-        // Умножаем на количество поршней, которое мы успешно определили в конструкторе!
-        float totalStaticPower = powerPerPiston * this.pistonCount;
+        // 2. Множитель поршней
+        float typeMultiplier = "I".equals(this.engineType) ? 4.0f : ("V".equals(this.engineType) ? 8.0f : ("W".equals(this.engineType) ? 16.0f : 32.0f));
+        targetFixedSU *= typeMultiplier;
 
-        // Если турбонаддув включен — жестко удваиваем крутящий момент
+        // 3. Честное умножение х2 от турбины
         if (this.isTurboCharged) {
-            return totalStaticPower *= 2.0f;
+            targetFixedSU *= 2.0f;
         }
 
-        // Возвращаем ГОТОВУЮ базовую константу.
-        // Больше никакого родительского кода! Create сам умножит её на скорость сети,
-        // и цифры на табло мгновенно рухнут до адекватных, красивых значений.
-        return totalStaticPower / speed;
+        // 4. Честное умножение х2 от радиатора (если он установлен перед ДВС)
+        if (hasRadiatorConnected()) {
+            targetFixedSU *= 2.0f;
+        }
+
+
+        return targetFixedSU / speed;
     }
     @Override
     public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
         // Убираем super.addToGoggleTooltip, чтобы на экране не дублировался старый текст!
-        tooltip.add(net.minecraft.network.chat.Component.literal("§8--------------------------------"));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8----------------------------------------------"));
 
         // 1. Архитектура и Конфигурация ДВС
         String readableType = switch (this.engineType != null ? this.engineType : "I") {
             case "I" -> "Inline-4 (Рядный)";
             case "V" -> "V8 Engine (V-образный)";
-            case "W" -> "W12 Engine (W-образный)";
+            case "W" -> "W16 Engine (W-образный)";
             case "R" -> "Radial R-32 (Авиационный монстр)";
             default -> "Стандартный ДВС";
         };
@@ -117,7 +114,7 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
         tooltip.add(net.minecraft.network.chat.Component.literal("§e📦 Материал: " + matColor + (this.engineMaterial != null ? this.engineMaterial.toUpperCase() : "CAST_IRON")));
 
         // 3. Турбонаддув
-        String turboText = this.isTurboCharged ? "§a✔ АКТИВИРОВАН (x2 Мощность)" : "§c✖ ОТСУТСТВУЕТ";
+        String turboText = this.isTurboCharged ? "§a✔ АКТИВИРОВАН (x2 Мощность,Скорость)" : "§c✖ ОТСУТСТВУЕТ";
         tooltip.add(net.minecraft.network.chat.Component.literal("§d🚀 Турбонаддув: " + turboText));
 
         // 3.5 Динамическое сканирование РАДИАТОРА из твоего эталона V8!
@@ -133,17 +130,16 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
                 // Если перед ДВС действительно стоит твой радиатор
                 if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
                     String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
-                    if (beName.contains("copper")) radiatorText = "§6Медный (+25% Охлаждения)";
-                    else if (beName.contains("steel")) radiatorText = "§7Стальной (+50% Охлаждения)";
-                    else if (beName.contains("brass")) radiatorText = "§eЛатунный (+75% Охлаждения)";
-                    else if (beName.contains("ultimate")) radiatorText = "§bУЛЬТИМАТИВНЫЙ (+100% Охлаждения)";
+                    if (beName.contains("copper")) radiatorText = "§6Медный +25%";
+                    else if (beName.contains("steel")) radiatorText = "§7Стальной +50%";
+                    else if (beName.contains("brass")) radiatorText = "§eЛатунный +75%";
+                    else if (beName.contains("ultimate")) radiatorText = "§bУЛЬТИМАТИВНЫЙ +100%";
                     else radiatorText = "§fСтандартный радиатор";
                 }
             }
         }
-        tooltip.add(net.minecraft.network.chat.Component.literal("§b❄ Охлаждение: " + radiatorText));
 
-        tooltip.add(net.minecraft.network.chat.Component.literal("§8--------------------------------"));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8----------------------------------------------"));
 
         // 4. Живая Телеметрия Ядра
         tooltip.add(net.minecraft.network.chat.Component.literal("§f📊 ТЕЛЕМЕТРИЯ ЯДРА:"));
@@ -171,11 +167,47 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
             tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Топливо в ДВС: §c✖ БАК НЕ ИНИЦИАЛИЗИРОВАН"));
         }
 
-        // 6. Выводим сбалансированную мощность SU (без двойного умножения скорости!)
-        float currentSU = calculateAddedStressCapacity();
-        tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Мощность генератора: §e" + String.format("%.0f", currentSU) + " SU"));
+        // Вместо вызова calculateAddedStressCapacity() считаем чистые SU для вывода на экран:
+        float currentSU = 0;
 
+        if (Math.abs(getSpeed()) >= 8.0f) {
+            float powerPerPiston = "titanium".equals(this.engineMaterial) ? 6400f : ("aluminum".equals(this.engineMaterial) ? 3840f : 1920f);
+            currentSU = powerPerPiston * this.pistonCount;
+
+            if (this.isTurboCharged) currentSU *= 2.0f;
+            if (hasRadiatorConnected()) currentSU *= 2.0f;
+        }
+
+// Теперь выводим эту переменную в строчку:
+        tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Мощность генератора: §e" + String.format("%.0f", currentSU) + " SU"));
+
+
+// === 🌊 НОВЫЙ БЛОК: СТАТУС ОХЛАЖДЕНИЯ И ОБЪЕМ ВОДЫ ===
+        if (this.level != null) {
+            net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
+            if (state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
+                net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
+                net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+                net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+
+                if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+                    int currentWater = radiator.waterTank.getFluidAmount();
+                    int maxWater = radiator.waterTank.getCapacity(); // Максимальный объём бака радиатора
+
+                    if (currentWater > 0) {
+                        tooltip.add(net.minecraft.network.chat.Component.literal("§b❄ Охлаждение: " + radiatorText));
+                        // Выводим объём воды красивым сине-голубым цветом, например: "Вода: 950 / 1000 mB"
+                        tooltip.add(net.minecraft.network.chat.Component.literal("▪ Хладагент (Вода): §9" + currentWater + " §8/ §3" + maxWater + " mB"));
+                    } else {
+                        tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Охлаждение: §4НЕТ ВОДЫ!"));
+                    }
+                } else {
+                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Охлаждение: §7НЕТ РАДИАТОРА"));
+                }
+            }
+        }
+
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8----------------------------------------------"));
         return true;
     }
-
 }

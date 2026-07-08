@@ -1,9 +1,6 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
-import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
-import com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform;
-import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -21,13 +18,11 @@ import java.util.List;
 
 public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
-    public final FluidTank fuelTank = new FluidTank(4000);
+    public final FluidTank fuelTank = new FluidTank(1000);
     protected int burnTimeRemaining = 0;
     private float currentSpeed = 0;
-    private float lastSentSpeed = -1f;
+    private float lastSentSpeed = 0f;
 
-    public float engineQuality = 1.0f;
-    public float secretEfficiency = 1.0f;
     protected String engineMaterial;
     public float engineTemperature = 20.0f;
     public boolean isTurboCharged = false;
@@ -54,8 +49,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         this.engineMaterial = material;
 
         // УБРАЛИ РАНДОМ: Теперь при создании у всех двигателей базовые 100% параметров
-        this.engineQuality = 1.0f;
-        this.secretEfficiency = 1.0f;
         this.maxMeltingTemp = getMaterialMeltingPoint();
     }
 
@@ -76,42 +69,24 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         }
         float baseSafeSpeed = baseLimit * (isTurboCharged ? 2.0f : 1.0f);
 
-        // === 2. ИНТЕГРИРУЕМ РАДИАТОРЫ С ПРОВЕРКОЙ ВОДЫ ===
-
-
-
-
-
-
+        // === 2. ИНТЕГРИРУЕМ РАДИАТОРЫ С ПРОВЕРКОЙ ВОДЫ (БЕЗ ДРАЙНА ТУТ) ===
         float currentMultiplier = 1.0f;
-
         net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
 
         if (state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) {
             net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
-
-
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
             net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
             if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
                 String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
-                int waterUsage = 1; // Расход воды
 
-                // Если есть вода, применяем множитель и тратим её
-                if (!radiator.waterTank.isEmpty() && radiator.waterTank.getFluidAmount() >= waterUsage) {
+                // Просто проверяем, что вода ЕСТЬ. Физически тратить её будем в тиках!
+                if (!radiator.waterTank.isEmpty() && radiator.waterTank.getFluidAmount() > 0) {
                     if (beName.contains("copper")) currentMultiplier = 1.25f;
                     else if (beName.contains("steel")) currentMultiplier = 1.50f;
                     else if (beName.contains("brass")) currentMultiplier = 1.75f;
                     else if (beName.contains("ultimate")) currentMultiplier = 2.00f;
-
-                    if (this.currentSpeed > 0 && !this.level.isClientSide) {
-                        radiator.waterTank.drain(waterUsage, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
-                        radiator.setChanged();
-
-                        // СИНХРОНИЗАЦИЯ: Говорим серверу мгновенно отправить пакет с новым объемом воды на клиент!
-                        this.level.sendBlockUpdated(radiator.getBlockPos(), radiator.getBlockState(), radiator.getBlockState(), 3);
-                    }
                 }
             }
         }
@@ -120,10 +95,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
         // Финальная скорость с учетом охлаждения и округления
         return Math.round((baseSafeSpeed * currentMultiplier) / 64.0f) * 64.0f;
-
-
-
     }
+
+
 
 
     private float getMaxEngineSpeed() {
@@ -139,6 +113,79 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return safeSpeed * fuelSpeedMultiplier;
     }
 
+    public boolean hasRadiatorConnected() {
+        if (this.level == null) return false;
+
+        net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
+        if (!state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) return false;
+
+        net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
+        net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+        net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+
+        // Возвращает true, если перед капотом реально стоит радиатор и он не пустой
+        if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+            return !radiator.waterTank.isEmpty() && radiator.waterTank.getFluidAmount() > 0;
+        }
+        return false;
+    }
+
+    private float getRadiatorCoolingEffect() {
+        if (this.level == null) return 0.0f;
+
+        net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
+        if (!state.hasProperty(V8EngineBlock.HORIZONTAL_FACING)) return 0.0f;
+
+        net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
+        net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+        net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
+
+        // 1. Заранее объявляем переменную эффективности охлаждения, чтобы Java её видела везде
+        float efficiency = 0.0f;
+
+        if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+            // Если бак пустой — радиатор физически не охлаждает
+            if (!this.level.isClientSide) {
+
+                // 2. ЖОР ВОДЫ НА СЕРВЕРЕ (когда мотор реально заведен и вращается)
+                if (Math.abs(this.currentSpeed) > 1.0f && !this.level.isClientSide) {
+
+                    // ФОКУС: Вода тратится строго один раз в секунду (каждый 20-й тик мира)!
+                    // В остальные 19 тиков радиатор охлаждает бесплатно за счёт уже испарившейся порции.
+                    if (this.level.getGameTime() % 20 == 0) {
+
+                        // Твоя формула прогрессивного испарения в СЕКУНДУ:
+                        float maxTemp = this.maxMeltingTemp > 0 ? this.maxMeltingTemp : 1200f;
+                        int progressiveWaterUsage = (int)(3.0f * (this.engineTemperature / maxTemp * 100.0f));
+
+                        // Защита от нулевого расхода
+                        if (progressiveWaterUsage < 1) progressiveWaterUsage = 1;
+
+                        // Защита от высасывания большего объема, чем осталось в баке радиатора
+                        int finalDrain = Math.min(progressiveWaterUsage, radiator.waterTank.getFluidAmount());
+
+                        // Сливаем воду из бака радиатора
+                        radiator.waterTank.drain(finalDrain, net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+                        radiator.setChanged();
+
+                        // Мгновенно обновляем полоску воды на клиенте
+                        this.level.sendBlockUpdated(radiator.getBlockPos(), radiator.getBlockState(), radiator.getBlockState(), 3);
+                    }
+                }
+
+                // Плавное обновление полоски воды у игрока (каждые 5 тиков)
+                if (this.level.getGameTime() % 5 == 0) {
+                    this.level.sendBlockUpdated(radiator.getBlockPos(), radiator.getBlockState(), radiator.getBlockState(), 3);
+                }
+            }
+
+            // Возвращаем итоговое охлаждение по закону Ньютона (разница температур * эффективность радиатора)
+            return (this.engineTemperature - 20f) * efficiency;
+        }
+
+        return 0.0f;
+    }
+
     @Override
     public void addBehaviours(java.util.List<com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour> behaviours) {
         super.addBehaviours(behaviours);
@@ -151,8 +198,22 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 new com.simibubi.create.foundation.blockEntity.behaviour.ValueBoxTransform() {
                     @Override
                     public net.minecraft.world.phys.Vec3 getLocalOffset(net.minecraft.world.level.LevelAccessor level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
-                        // Окошко настроек ровно по центру верхней грани блока мотора
-                        return new net.minecraft.world.phys.Vec3(0.5, 1.01, 0.5);
+                        // 1. Базовая дефолтная высота слайдера (1.01 — стандартный блок)
+                        double targetY = 1.00D;
+
+                        // 2. Вытаскиваем имя блока из стейта, чтобы определить тип мотора
+                        String blockName = state.getBlock().toString().toLowerCase();
+
+                        // 3. Твой switch-case для идеального выравнивания ползунка по высоте моделей!
+                        // Поскольку один пиксель в Minecraft равен 1.0 / 16.0 = 0.0625, добавляем его к базе
+                        if (blockName.contains("w16")) {
+                            targetY = 1.00D + (1.0D / 16.0D); // Поднимаем на 1 пиксель (~1.0725)
+                        } else if (blockName.contains("r32") || blockName.contains("radial")) {
+                            targetY = 1.00D + (2.0D / 16.0D); // Поднимаем на 2 пикселя (~1.135)
+                        }
+
+                        // 4. Возвращаем вектор со смещением. Вектор автоматически учитывает повороты блока!
+                        return new net.minecraft.world.phys.Vec3(0.5D, targetY, 0.5D);
                     }
 
                     @Override
@@ -278,9 +339,19 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             }
         }
 
-        if (Math.abs(currentSpeed - lastSentSpeed) >= 16f || (currentSpeed == 0 && lastSentSpeed != 0)) {
-            updateGeneratedRotation();
+        // Меняем блок обновления вращения на безопасный:
+        if (Math.abs(currentSpeed - lastSentSpeed) >= 16f) {
+            // Защита: если мир только загрузился (gameTime маленький)
+            // или блок ещё не валиден в мире, не пинаем сеть Create
+            if (this.level != null && !this.isRemoved()) {
+                updateGeneratedRotation();
+            }
             lastSentSpeed = currentSpeed;
+        } else if (currentSpeed == 0 && lastSentSpeed != 0) {
+            if (this.level != null && !this.isRemoved()) {
+                updateGeneratedRotation();
+            }
+            lastSentSpeed = 0;
         }
 
         if (level.getGameTime() % 20 == 0) {
@@ -293,42 +364,56 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, worldPosition.getX() + 0.5, worldPosition.getY() + 1.1, worldPosition.getZ() + 0.5, 1, 0, 0.08, 0, 0);
         }
         // === ⚙️ ГЛОБАЛЬНАЯ ТЕРМОДИНАМИКА (Вынесена из условий топлива) ===
-        // 1. Защита от стартового нуля
+// 1. Защита от стартового нуля
         if (this.engineTemperature <= 0.0f) {
             this.engineTemperature = ambientTemp;
         }
 
-        // 2. Нагрев: идет ТОЛЬКО если мотор реально вращается (currentSpeed > 0)
+// 2. Нагрев: идет ТОЛЬКО если мотор реально вращается (currentSpeed > 0)
         float baseHeat = 0.0f;
         float overspeedHeat = 0.0f;
 
         if (Math.abs(this.currentSpeed) > 1.0f) {
-            // Мотор плавно греется на холостых
-            baseHeat = 0.05f + (Math.abs(this.currentSpeed) / safeSpeed) * 3.35f;
+            // Вводим модификатор нагрева в зависимости от металла
+            float materialHeatFactor = switch (this.engineMaterial != null ? this.engineMaterial : "cast_iron") {
+                case "cast_iron" -> 1.0f;   // Чугун: стандарт
+                case "aluminum"  -> 0.82f;  // АЛЮМИНИЙ: греется чуть слабее, чтобы стабилизироваться около 645-650°C без радиатора
+                case "titanium"  -> 1.4f;   // Титан: греется сильнее, раскрывая свой огромный лимит
+                default -> 1.0f;
+            };
+
+            // Мотор плавно греется на холостых (применяем наш коэффициент к базовому нагреву)
+            baseHeat = (0.05f + (Math.abs(this.currentSpeed) / safeSpeed) * 3.35f) * materialHeatFactor;
 
             // Агрессивный перегрев, если зашли в красную зону превышения безопасного RPM
             if (Math.abs(this.currentSpeed) > safeSpeed) {
-                // Коэффициент 4.2f настроен так, чтобы на 2х скорости БЕЗ радиатора выдать ~600°C!
-                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeed) / safeSpeed) * 4.2f;
+                overspeedHeat = ((Math.abs(this.currentSpeed) - safeSpeed) / safeSpeed) * 4.2f * materialHeatFactor;
             }
         }
 
-        // 3. Охлаждение по закону Ньютона (Радиатор считает true)
+// 3. Охлаждение по закону Ньютона (Радиатор считает true)
         float naturalCooling = 0.0f;
         float radiatorCooling = 0.0f;
 
         if (this.engineTemperature > ambientTemp) {
-            // Металл остывает только от естественного воздуха вокруг
-            naturalCooling = (this.engineTemperature - ambientTemp) * 0.005f;
+            // Вводим коэффициент естественной теплоотдачи металла на воздухе
+            float materialCoolingFactor = switch (this.engineMaterial != null ? this.engineMaterial : "cast_iron") {
+                case "cast_iron" -> 1.0f;   // Чугун остывает стандартно
+                case "aluminum"  -> 1.25f;  // АЛЮМИНИЙ: высокая теплопроводность, остывает на воздухе быстрее!
+                case "titanium"  -> 0.85f;  // Титан: неохотно отдает тепло в атмосферу
+                default -> 1.0f;
+            };
 
-            // ОТКЛЮЧАЕМ РАДИАТОР: Ставим строго false, чтобы настроить базовый жар!
-            radiatorCooling = false ? (this.engineTemperature - ambientTemp) * 0.02f : 0.0f;
+            // Металл остывает только от естественного воздуха вокруг
+            naturalCooling = (this.engineTemperature - ambientTemp) * 0.005f * materialCoolingFactor;
+
+            radiatorCooling = getRadiatorCoolingEffect();
         }
 
-        // Применяем тепловой баланс за тик
+// Применяем тепловой баланс за тик
         this.engineTemperature += (baseHeat + overspeedHeat - naturalCooling - radiatorCooling);
 
-        // Фиксация, чтобы мотор пассивно нагревался/остывал до температуры биома
+// Фиксация, чтобы мотор пассивно нагревался/остывал до температуры биома
         if (this.engineTemperature < ambientTemp) {
             this.engineTemperature = ambientTemp;
         }
@@ -446,7 +531,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         // Честно сохраняем текущие градусы на диск и в сеть
         tag.putFloat("EngineTemperature", this.engineTemperature);
 
-        //tag.putBoolean("IsTurboCharged", this.isTurboCharged);
+        tag.putBoolean("IsTurboCharged", this.isTurboCharged);
         //tag.putFloat("CurrentSpeed", this.currentSpeed);
         tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
 
@@ -469,7 +554,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         }
 
 
-        //this.isTurboCharged = tag.getBoolean("IsTurboCharged");
+        this.isTurboCharged = tag.getBoolean("IsTurboCharged");
         //this.currentSpeed = tag.getFloat("CurrentSpeed");
         this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
 
@@ -496,6 +581,18 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         tag.put("FuelTank", fluidTag);
         return tag;
     }
+    @Override
+    public void onLoad() {
+        super.onLoad();
+
+        // Как только блок загрузился в мир — жестко приказываем Create:
+        // "Перепроверь и очисти старый кэш этой кинетической ветки!"
+        if (this.level != null && !this.level.isClientSide) {
+            // Вызываем обновление вращения, чтобы сбросить фантомные SU из кэша сохранения
+            this.updateGeneratedRotation();
+        }
+    }
+
 
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {

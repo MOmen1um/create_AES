@@ -99,36 +99,6 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         }
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
-    @Override
-    public void onRemove(BlockState state, net.minecraft.world.level.Level level, BlockPos pos, BlockState newState, boolean isMoving) {
-        if (!state.is(newState.getBlock())) {
-            if (!level.isClientSide) {
-                if (level.getBlockEntity(pos) instanceof V8EngineBlockEntity v8) {
-
-                    // 1. ВОССТАНОВИЛИ: Создаем ItemStack нашего двигателя (берём его BlockItem)
-                    net.minecraft.world.item.ItemStack dropItem = new net.minecraft.world.item.ItemStack(this.asItem());
-
-                    // 2. Создаем NBT-тег и зашиваем туда наши параметры сохранения
-                    net.minecraft.nbt.CompoundTag tag = new net.minecraft.nbt.CompoundTag();
-
-                    // ИСПРАВЛЕНО: Добавили принудительное приведение типов (float) к Math.round, чтобы Java не ругалась!
-                    tag.putFloat("EngineQuality", (float) Math.round(v8.engineQuality * 100.0f) / 100.0f);
-                    tag.putFloat("SecretEfficiency", (float) Math.round(v8.secretEfficiency * 100.0f) / 100.0f);
-
-                    // Безопасное хранение в CUSTOM_DATA для Minecraft 1.21.1
-                    dropItem.set(net.minecraft.core.component.DataComponents.CUSTOM_DATA,
-                            net.minecraft.world.item.component.CustomData.of(tag));
-
-                    // 3. Выбрасываем предмет физически в мир на координаты блока
-                    net.minecraft.world.entity.item.ItemEntity itemEntity = new net.minecraft.world.entity.item.ItemEntity(
-                            level, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, dropItem
-                    );
-                    level.addFreshEntity(itemEntity);
-                }
-            }
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
-    }
     // 1. ОТКЛЮЧАЕМ ЭФФЕКТ РЕНТГЕНА (Говорим игре честно рендерить соседние блоки)
     @Override
     protected boolean propagatesSkylightDown(BlockState state, net.minecraft.world.level.BlockGetter reader, BlockPos pos) {

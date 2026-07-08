@@ -1,4 +1,3 @@
-/give Dev create_additional_energy_sourses:thermo_generator
 /recipe give Dev *
 /reload
 /recipe give @s create_additional_energy_sourses:thermo_generator
@@ -48,3 +47,4 @@
 /kill @e[type=!minecraft:player]
 /gamerule doMobSpawning false
 /give Dev create_additional_energy_sourses:v8_engine
+/weather clear

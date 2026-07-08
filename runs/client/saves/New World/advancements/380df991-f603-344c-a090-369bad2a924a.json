@@ -1,302 +1,205 @@
 {
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
-      "unlock_right_away": "2026-07-08 11:49:42 +0500"
+      "unlock_right_away": "2026-07-08 16:29:28 +0500"
     },
     "done": true
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:plains": "2026-07-08 11:49:43 +0500"
+      "minecraft:desert": "2026-07-08 16:29:29 +0500"
     },
     "done": false
   },
   "create:root": {
     "criteria": {
-      "0": "2026-07-08 11:49:49 +0500"
+      "0": "2026-07-08 16:29:38 +0500"
     },
     "done": true
   },
   "simulated:root": {
     "criteria": {
-      "0": "2026-07-08 11:49:49 +0500"
+      "0": "2026-07-08 16:29:38 +0500"
     },
     "done": true
   },
   "aeronautics:root": {
     "criteria": {
-      "0": "2026-07-08 11:49:49 +0500"
+      "0": "2026-07-08 16:29:38 +0500"
     },
     "done": true
   },
   "create:wrench_goggles": {
     "criteria": {
-      "0": "2026-07-08 11:58:37 +0500",
-      "1": "2026-07-08 11:53:42 +0500"
+      "1": "2026-07-08 16:29:44 +0500"
     },
-    "done": true
+    "done": false
   },
   "aeronautics:recipes/misc/aviators_goggles": {
     "criteria": {
-      "has_ingredient": "2026-07-08 11:53:42 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/brewing/cauldron": {
-    "criteria": {
-      "has_water_bucket": "2026-07-08 11:54:14 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/cherry_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/bamboo_raft": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/spruce_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/birch_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/oak_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/mangrove_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/acacia_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/jungle_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/transportation/dark_oak_boat": {
-    "criteria": {
-      "in_water": "2026-07-08 11:54:15 +0500"
+      "has_ingredient": "2026-07-08 16:29:44 +0500"
     },
     "done": true
   },
   "minecraft:recipes/decorations/chest": {
     "criteria": {
-      "has_lots_of_items": "2026-07-08 11:54:49 +0500"
+      "has_lots_of_items": "2026-07-08 16:31:19 +0500"
     },
     "done": true
   },
-  "minecraft:recipes/redstone/lever": {
+  "minecraft:recipes/brewing/cauldron": {
     "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/combat/stone_sword": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/decorations/cobblestone_wall": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/tools/stone_axe": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:story/mine_stone": {
-    "criteria": {
-      "get_stone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/decorations/furnace": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/cobblestone_slab_from_cobblestone_stonecutting": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/stone": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/tools/stone_pickaxe": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/cobblestone_slab": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/decorations/cobblestone_wall_from_cobblestone_stonecutting": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/cobblestone_stairs_from_cobblestone_stonecutting": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/building_blocks/cobblestone_stairs": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/tools/stone_hoe": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "minecraft:recipes/tools/stone_shovel": {
-    "criteria": {
-      "has_cobblestone": "2026-07-08 11:55:04 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/portable_fluid_interface": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:17 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/spout": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:17 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/item_drain": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:17 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/copper_door": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:17 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/large_water_wheel": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:23 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/gearbox": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:35 +0500"
-    },
-    "done": true
-  },
-  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
-    "criteria": {
-      "has_item": "2026-07-08 11:56:35 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/large_tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-08 11:56:57 +0500"
-    },
-    "done": true
-  },
-  "simulated:recipes/misc/steering_wheel": {
-    "criteria": {
-      "has_ingredient": "2026-07-08 11:56:57 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/monstrous_tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-08 11:56:57 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-08 11:56:57 +0500"
-    },
-    "done": true
-  },
-  "offroad:recipes/misc/small_tire": {
-    "criteria": {
-      "has_ingredient": "2026-07-08 11:56:57 +0500"
+      "has_water_bucket": "2026-07-08 16:31:19 +0500"
     },
     "done": true
   },
   "create:mechanical_pump_0": {
     "criteria": {
-      "0": "2026-07-08 11:57:42 +0500"
+      "0": "2026-07-08 16:31:43 +0500"
     },
     "done": true
   },
   "create:stressometer": {
     "criteria": {
-      "0": "2026-07-08 12:23:06 +0500"
+      "0": "2026-07-08 16:48:15 +0500"
     },
     "done": true
   },
   "create:recipes/misc/crafting/kinetics/speedometer_from_conversion": {
     "criteria": {
-      "has_item": "2026-07-08 12:23:06 +0500"
+      "has_item": "2026-07-08 16:48:15 +0500"
     },
     "done": true
   },
-  "create:recipes/misc/crafting/kinetics/stressometer_from_conversion": {
+  "create:recipes/misc/crafting/kinetics/gearbox": {
     "criteria": {
-      "has_item": "2026-07-08 13:05:38 +0500"
+      "has_item": "2026-07-08 17:04:26 +0500"
     },
     "done": true
   },
-  "create:display_link": {
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
     "criteria": {
-      "0": "2026-07-08 13:13:42 +0500"
+      "has_item": "2026-07-08 17:04:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/cherry_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/bamboo_raft": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/spruce_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/birch_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/oak_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/mangrove_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/acacia_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/jungle_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/transportation/dark_oak_boat": {
+    "criteria": {
+      "in_water": "2026-07-08 17:04:30 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone_slab": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/smooth_sandstone": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/sandstone_wall_from_sandstone_stonecutting": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cut_sandstone": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone_stairs_from_sandstone_stonecutting": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone_stairs": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cut_sandstone_from_sandstone_stonecutting": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/chiseled_sandstone_from_sandstone_stonecutting": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/cut_sandstone_slab_from_sandstone_stonecutting": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/sandstone_slab_from_sandstone_stonecutting": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/sandstone_wall": {
+    "criteria": {
+      "has_sandstone": "2026-07-08 17:14:26 +0500"
     },
     "done": true
   },
