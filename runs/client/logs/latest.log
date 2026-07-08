@@ -1,36 +1,36 @@
-[08июл.2026 13:43:35.707] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.227, --assetIndex, asset-index, --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --gameDir, ., --fml.fmlVersion, 4.0.42, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.227, --fml.neoFormVersion, 20240808.144430]
-[08июл.2026 13:43:35.709] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.3+9-LTS
-[08июл.2026 13:43:35.710] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.3 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
-[08июл.2026 13:43:35.788] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
-[08июл.2026 13:43:35.867] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
-[08июл.2026 13:43:35.969] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
-[08июл.2026 13:43:36.026] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Kostya/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23142!/ Service=ModLauncher Env=CLIENT
-[08июл.2026 13:43:36.124] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
-[08июл.2026 13:43:36.138] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
-[08июл.2026 13:43:36.148] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jei-1.21.1-neoforge-19.27.0.340.jar" [locator: {mods folder locator at C:\Users\Kostya\Documents\GitHub\create_AES\runs\client\mods}, reader: mod manifest]
-[08июл.2026 13:43:36.152] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.168] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "create-1.21.1-6.0.10 (1).jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.171] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "create-aeronautics-bundled-1.21.1-1.2.1 (1).jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.173] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "createdieselgenerators-1.21.1-1.3.13.jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.176] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ponder-neoforge-1.0.82+mc1.21.1.jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.179] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-neoforge-1.21.1-1.2.2 (1).jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.180] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4060/PCIe/SSE2 GL version 4.6.0 NVIDIA 591.86, NVIDIA Corporation
-[08июл.2026 13:43:36.183] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.227] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.3.jar" [locator: userdev mods and services, reader: mod manifest]
-[08июл.2026 13:43:36.651] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using Mod File: C:\Users\Kostya\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-neoforge\0.5.3\a0919957808de97707c5fb4ce073e66aeef3e187\mixinextras-neoforge-0.5.3.jar
-[08июл.2026 13:43:36.651] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ponder. Using Mod File: C:\Users\Kostya\Documents\GitHub\create_AES\libs\ponder-neoforge-1.0.82+mc1.21.1.jar
-[08июл.2026 13:43:36.651] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 10 dependencies adding them to mods collection
-[08июл.2026 13:43:36.651] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "dev.eriksonn.aeronautics.aeronautics-neoforge-1.21.1-1.2.1.jar" [parent: create-aeronautics-bundled-1.21.1-1.2.1 (1).jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.651] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "molang-compiler-3.1.1.19.jar" [parent: veil-neoforge-1.21.1-4.0.0.jar, locator: jarinjar]
-[08июл.2026 13:43:36.651] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "Registrate-MC1.21-1.3.0+67.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.651] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "veil-neoforge-1.21.1-4.0.0.jar" [parent: sable-neoforge-1.21.1-1.2.2 (1).jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.651] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "dev.simulated_team.simulated.simulated-neoforge-1.21.1-1.2.1.jar" [parent: create-aeronautics-bundled-1.21.1-1.2.1 (1).jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.652] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-companion-common-1.21.1-1.6.0.jar" [parent: createdieselgenerators-1.21.1-1.3.13.jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.652] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "flywheel-neoforge-1.21.1-1.0.6.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.652] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "glsl-processor-0.2.3.jar" [parent: veil-neoforge-1.21.1-4.0.0.jar, locator: jarinjar]
-[08июл.2026 13:43:36.652] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "dev.ryanhcode.offroad.offroad-neoforge-1.21.1-1.2.1.jar" [parent: create-aeronautics-bundled-1.21.1-1.2.1 (1).jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.652] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.227.jar" [parent: neoforge-21.1.227.jar, locator: jarinjar, reader: mod manifest]
-[08июл.2026 13:43:36.654] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
+[08июл.2026 14:13:37.653] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgeclientdev, --version, 21.1.227, --assetIndex, asset-index, --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --gameDir, ., --fml.fmlVersion, 4.0.42, --fml.mcVersion, 1.21.1, --fml.neoForgeVersion, 21.1.227, --fml.neoFormVersion, 20240808.144430]
+[08июл.2026 14:13:37.655] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 21.0.3+9-LTS
+[08июл.2026 14:13:37.656] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 11.0.5+main.901c6ea8 starting: java version 21.0.3 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[08июл.2026 14:13:37.729] [main/INFO] [net.neoforged.fml.loading.ImmediateWindowHandler/]: Loading ImmediateWindowProvider fmlearlywindow
+[08июл.2026 14:13:37.806] [main/INFO] [EARLYDISPLAY/]: Trying GL version 4.6
+[08июл.2026 14:13:37.895] [main/INFO] [EARLYDISPLAY/]: Requested GL version 4.6 got version 4.6
+[08июл.2026 14:13:37.961] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.7 Source=union:/C:/Users/Kostya/.gradle/caches/modules-2/files-2.1/net.fabricmc/sponge-mixin/0.15.2+mixin.0.8.7/2af2f021d8e02a0220dc27a7a72b4666d66d44ca/sponge-mixin-0.15.2+mixin.0.8.7.jar%23142!/ Service=ModLauncher Env=CLIENT
+[08июл.2026 14:13:38.052] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
+[08июл.2026 14:13:38.064] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: neoforge devenv provider ([C:\Users\Kostya\Documents\GitHub\create_AES\.gradle\repositories\ng_dummy_ng\net\neoforged\neoforge\21.1.227\neoforge-21.1.227.jar])]
+[08июл.2026 14:13:38.072] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "jei-1.21.1-neoforge-19.27.0.340.jar" [locator: {mods folder locator at C:\Users\Kostya\Documents\GitHub\create_AES\runs\client\mods}, reader: mod manifest]
+[08июл.2026 14:13:38.077] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "main" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.085] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "create-1.21.1-6.0.10 (1).jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.088] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "create-aeronautics-bundled-1.21.1-1.2.1 (1).jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.099] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "createdieselgenerators-1.21.1-1.3.13.jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.101] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "ponder-neoforge-1.0.82+mc1.21.1.jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.104] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-neoforge-1.21.1-1.2.2 (1).jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.107] [pool-2-thread-1/INFO] [EARLYDISPLAY/]: GL info: NVIDIA GeForce RTX 4060/PCIe/SSE2 GL version 4.6.0 NVIDIA 591.86, NVIDIA Corporation
+[08июл.2026 14:13:38.108] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "neoforge-21.1.227.jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.141] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "mixinextras-neoforge-0.5.3.jar" [locator: userdev mods and services, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: library:mixinextras.neoforge. Using Mod File: C:\Users\Kostya\.gradle\caches\modules-2\files-2.1\io.github.llamalad7\mixinextras-neoforge\0.5.3\a0919957808de97707c5fb4ce073e66aeef3e187\mixinextras-neoforge-0.5.3.jar
+[08июл.2026 14:13:38.512] [main/WARN] [net.neoforged.jarjar.selection.JarSelector/]: Attempted to select a dependency jar for JarJar which was passed in as source: ponder. Using Mod File: C:\Users\Kostya\Documents\GitHub\create_AES\libs\ponder-neoforge-1.0.82+mc1.21.1.jar
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.locators.JarInJarDependencyLocator/]: Found 10 dependencies adding them to mods collection
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "dev.eriksonn.aeronautics.aeronautics-neoforge-1.21.1-1.2.1.jar" [parent: create-aeronautics-bundled-1.21.1-1.2.1 (1).jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "molang-compiler-3.1.1.19.jar" [parent: veil-neoforge-1.21.1-4.0.0.jar, locator: jarinjar]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found gamelibrary file "Registrate-MC1.21-1.3.0+67.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "veil-neoforge-1.21.1-4.0.0.jar" [parent: sable-neoforge-1.21.1-1.2.2 (1).jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "dev.simulated_team.simulated.simulated-neoforge-1.21.1-1.2.1.jar" [parent: create-aeronautics-bundled-1.21.1-1.2.1 (1).jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "sable-companion-common-1.21.1-1.6.0.jar" [parent: createdieselgenerators-1.21.1-1.3.13.jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "flywheel-neoforge-1.21.1-1.0.6.jar" [parent: create-1.21.1-6.0.10 (1).jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "glsl-processor-0.2.3.jar" [parent: veil-neoforge-1.21.1-4.0.0.jar, locator: jarinjar]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found mod file "dev.ryanhcode.offroad.offroad-neoforge-1.21.1-1.2.1.jar" [parent: create-aeronautics-bundled-1.21.1-1.2.1 (1).jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.512] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/SCAN]: Found library file "net.neoforged.neoforge-coremods-21.1.227.jar" [parent: neoforge-21.1.227.jar, locator: jarinjar, reader: mod manifest]
+[08июл.2026 14:13:38.514] [main/INFO] [net.neoforged.fml.loading.moddiscovery.ModDiscoverer/]: 
      Mod List:
 		Name Version (Mod Id)
 
@@ -49,60 +49,60 @@
 		Sable 1.2.2 (sable)
 		Sable Companion 1.6.0 (sablecompanion)
 		Veil 4.0.0 (veil)
-[08июл.2026 13:43:37.203] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
-[08июл.2026 13:43:37.240] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.227, --gameDir, ., --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --assetIndex, asset-index]
-[08июл.2026 13:43:37.308] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.command.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.309] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.debug.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.309] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.dynamicbuffer.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.310] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.fix.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.310] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.framebuffer.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.310] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.necromancer.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.311] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.network.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.311] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.performance.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.312] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.perspective.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.312] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.pipeline.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.312] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.quasar.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.312] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.registry.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.313] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.rendertype.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.313] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.resource.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.313] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.scheduler.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.314] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.shader.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.314] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.314] [main/WARN] [mixin/]: Reference map 'simulated.refmap.json' for simulated.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.314] [main/WARN] [mixin/]: Reference map 'createdieselgenerators.refmap.json' for createdieselgenerators.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.317] [main/WARN] [mixin/]: Reference map 'aeronautics.refmap.json' for aeronautics.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.326] [main/WARN] [mixin/]: Reference map 'ponder.refmap.json' for ponder-common.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.332] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
-[08июл.2026 13:43:37.333] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
-[08июл.2026 13:43:37.333] [main/WARN] [mixin/]: Reference map 'offroad.refmap.json' for offroad.mixins.json could not be read. If this is a development environment you can ignore this message
-[08июл.2026 13:43:37.656] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/pipeline/PipelineManager (java.lang.ClassNotFoundException: net.irisshaders.iris.pipeline.PipelineManager)
-[08июл.2026 13:43:37.657] [main/WARN] [mixin/]: @Mixin target net.irisshaders.iris.pipeline.PipelineManager was not found veil.neoforge.mixins.json:client.perspective.iris.PipelineManagerMixin from mod veil
-[08июл.2026 13:43:38.120] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
-[08июл.2026 13:43:40.276] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 307 milliseconds
-[08июл.2026 13:43:43.534] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[08июл.2026 13:43:43.535] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
-[08июл.2026 13:43:43.539] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[08июл.2026 13:43:43.539] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
-[08июл.2026 13:43:43.540] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
-[08июл.2026 13:43:43.684] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/assets/.mcassetsroot' uses unexpected schema
-[08июл.2026 13:43:43.685] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/data/.mcassetsroot' uses unexpected schema
-[08июл.2026 13:43:43.705] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[08июл.2026 13:43:43.710] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
-[08июл.2026 13:43:43.772] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
-[08июл.2026 13:43:44.037] [modloading-worker-0/INFO] [Veil/]: Veil is initializing.
-[08июл.2026 13:43:44.102] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.227, for MC 1.21.1
-[08июл.2026 13:43:45.016] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.10 initializing! Commit hash: ac0c444d9828da3453ae8cc65338e8de063286fb
-[08июл.2026 13:43:45.021] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
-[08июл.2026 13:43:45.027] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 3.420 milliseconds
-[08июл.2026 13:43:47.140] [modloading-worker-0/INFO] [dev.ryanhcode.sable.Sable/]: Sable loaded!
-[08июл.2026 13:43:47.156] [modloading-worker-0/WARN] [dev.ryanhcode.sable.Sable/]: NOTE: Sable is loaded with Flywheel. Sable contains extensive shader overrides and a full light-storage replacement. Expect this to cause compatibility issues. If issues arise, please report them to the Sable issue tracker (https://github.com/ryanhcode/sable/issues) instead of the Flywheel issue tracker.
-[08июл.2026 13:43:49.337] [Render thread/INFO] [Veil/]: GL Debug supported
-[08июл.2026 13:43:49.544] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
-[08июл.2026 13:43:49.872] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/veil, mod/simulated, mod/createdieselgenerators, mod/jei, mod/aeronautics, mod/aeronautics_bundled, mod/create_additional_energy_sourses, mod/sablecompanion, mod/flywheel, mod/ponder, mod/create, mod/sable, mod/offroad, mod/neoforge, file/Mini Items (4).zip
-[08июл.2026 13:43:50.113] [Worker-Main-4/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
-[08июл.2026 13:43:50.114] [Worker-Main-13/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
-[08июл.2026 13:43:50.117] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Starting version check at https://api.modrinth.com/updates/create/forge_updates.json?neoforge=only
-[08июл.2026 13:43:50.906] [Worker-Main-8/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:blockstates/aluminum_i4_engine.json
+[08июл.2026 14:13:38.987] [main/INFO] [mixin/]: Compatibility level set to JAVA_21
+[08июл.2026 14:13:39.006] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgeclientdev' with arguments [--version, 21.1.227, --gameDir, ., --assetsDir, C:\Users\Kostya\.gradle\caches\minecraft\assets, --assetIndex, asset-index]
+[08июл.2026 14:13:39.072] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.command.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.debug.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.dynamicbuffer.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.fix.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.framebuffer.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.necromancer.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.network.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.074] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.performance.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.perspective.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.pipeline.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.quasar.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.registry.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.rendertype.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.resource.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.scheduler.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.shader.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'veil.refmap.json' for veil.neoforge.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.075] [main/WARN] [mixin/]: Reference map 'simulated.refmap.json' for simulated.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.076] [main/WARN] [mixin/]: Reference map 'createdieselgenerators.refmap.json' for createdieselgenerators.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.078] [main/WARN] [mixin/]: Reference map 'aeronautics.refmap.json' for aeronautics.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.085] [main/WARN] [mixin/]: Reference map 'ponder.refmap.json' for ponder-common.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.092] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
+[08июл.2026 14:13:39.092] [main/INFO] [dev.ryanhcode.sable.mixin.AbstractSableMixinPlugin/]: Using Vanilla renderer mixins
+[08июл.2026 14:13:39.093] [main/WARN] [mixin/]: Reference map 'offroad.refmap.json' for offroad.mixins.json could not be read. If this is a development environment you can ignore this message
+[08июл.2026 14:13:39.338] [main/WARN] [mixin/]: Error loading class: net/irisshaders/iris/pipeline/PipelineManager (java.lang.ClassNotFoundException: net.irisshaders.iris.pipeline.PipelineManager)
+[08июл.2026 14:13:39.339] [main/WARN] [mixin/]: @Mixin target net.irisshaders.iris.pipeline.PipelineManager was not found veil.neoforge.mixins.json:client.perspective.iris.PipelineManagerMixin from mod veil
+[08июл.2026 14:13:39.724] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.5.3).
+[08июл.2026 14:13:40.648] [Datafixer Bootstrap/INFO] [com.mojang.datafixers.DataFixerBuilder/]: 229 Datafixer optimizations took 230 milliseconds
+[08июл.2026 14:13:43.764] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08июл.2026 14:13:43.765] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, location] and [teleport, targets] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08июл.2026 14:13:43.766] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, destination] and [teleport, targets] with inputs: [Player, 0123, @e, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[08июл.2026 14:13:43.767] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets] and [teleport, destination] with inputs: [Player, 0123, dd12be42-52a9-4a91-a8a1-11c01849e498]
+[08июл.2026 14:13:43.768] [main/WARN] [net.minecraft.commands.Commands/]: Ambiguity between arguments [teleport, targets, location] and [teleport, targets, destination] with inputs: [0.1 -0.5 .9, 0 0 0]
+[08июл.2026 14:13:43.883] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/assets/.mcassetsroot' uses unexpected schema
+[08июл.2026 14:13:43.883] [Render thread/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Kostya/Documents/GitHub/create_AES/.gradle/repositories/ng_dummy_ng/net/neoforged/neoforge/21.1.227/neoforge-21.1.227.jar%23196!/data/.mcassetsroot' uses unexpected schema
+[08июл.2026 14:13:43.906] [Render thread/INFO] [com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService/]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[08июл.2026 14:13:43.914] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Setting user: Dev
+[08июл.2026 14:13:43.992] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Backend library: LWJGL version 3.3.3+5
+[08июл.2026 14:13:44.258] [modloading-worker-0/INFO] [Veil/]: Veil is initializing.
+[08июл.2026 14:13:44.303] [modloading-worker-0/INFO] [net.neoforged.neoforge.common.NeoForgeMod/NEOFORGE-MOD]: NeoForge mod loading, version 21.1.227, for MC 1.21.1
+[08июл.2026 14:13:44.601] [modloading-worker-0/INFO] [com.simibubi.create.Create/]: Create 6.0.10 initializing! Commit hash: ac0c444d9828da3453ae8cc65338e8de063286fb
+[08июл.2026 14:13:44.616] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager...
+[08июл.2026 14:13:44.621] [modloading-worker-0/INFO] [mezz.jei.library.load.PluginCaller/]: Sending ConfigManager took 4.002 milliseconds
+[08июл.2026 14:13:45.675] [modloading-worker-0/INFO] [dev.ryanhcode.sable.Sable/]: Sable loaded!
+[08июл.2026 14:13:45.685] [modloading-worker-0/WARN] [dev.ryanhcode.sable.Sable/]: NOTE: Sable is loaded with Flywheel. Sable contains extensive shader overrides and a full light-storage replacement. Expect this to cause compatibility issues. If issues arise, please report them to the Sable issue tracker (https://github.com/ryanhcode/sable/issues) instead of the Flywheel issue tracker.
+[08июл.2026 14:13:46.859] [Render thread/INFO] [Veil/]: GL Debug supported
+[08июл.2026 14:13:47.047] [Render thread/INFO] [net.neoforged.neoforge.gametest.GameTestHooks/]: Enabled Gametest Namespaces: []
+[08июл.2026 14:13:47.279] [Render thread/INFO] [net.minecraft.server.packs.resources.ReloadableResourceManager/]: Reloading ResourceManager: vanilla, mod_resources, mod/veil, mod/simulated, mod/createdieselgenerators, mod/jei, mod/aeronautics, mod/aeronautics_bundled, mod/create_additional_energy_sourses, mod/sablecompanion, mod/flywheel, mod/ponder, mod/create, mod/sable, mod/offroad, mod/neoforge, file/Mini Items (4).zip
+[08июл.2026 14:13:47.336] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Starting version check at https://api.modrinth.com/updates/create/forge_updates.json?neoforge=only
+[08июл.2026 14:13:47.355] [Worker-Main-13/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_all_no_pua-15.1.05.hex, loading
+[08июл.2026 14:13:47.398] [Worker-Main-3/INFO] [net.minecraft.client.gui.font.providers.UnihexProvider/]: Found unifont_jp_patch-15.1.05.hex, loading
+[08июл.2026 14:13:47.951] [Worker-Main-14/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:blockstates/aluminum_i4_engine.json
 java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\resources\main\assets\create_additional_energy_sourses\blockstates
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112) ~[?:?]
@@ -110,7 +110,7 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:266) ~[?:?]
 	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596) ~[?:?]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[08июл.2026 13:43:50.909] [Worker-Main-8/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:lang/ru_ru.json
+[08июл.2026 14:13:47.956] [Worker-Main-14/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:lang/ru_ru.json
 java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\resources\main\assets\create_additional_energy_sourses\lang
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112) ~[?:?]
@@ -118,7 +118,7 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:266) ~[?:?]
 	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596) ~[?:?]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[08июл.2026 13:43:50.911] [Worker-Main-8/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:models/block/aluminum_i4_engine.json
+[08июл.2026 14:13:47.958] [Worker-Main-14/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:models/block/aluminum_i4_engine.json
 java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\resources\main\assets\create_additional_energy_sourses\models\block
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112) ~[?:?]
@@ -126,7 +126,7 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:266) ~[?:?]
 	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596) ~[?:?]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[08июл.2026 13:43:50.914] [Worker-Main-8/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:models/item/advanced_pickaxe.json
+[08июл.2026 14:13:47.962] [Worker-Main-14/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:models/item/advanced_pickaxe.json
 java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\resources\main\assets\create_additional_energy_sourses\models\item
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112) ~[?:?]
@@ -134,7 +134,7 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:266) ~[?:?]
 	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596) ~[?:?]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[08июл.2026 13:43:50.917] [Worker-Main-8/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:textures/block/aluminum_i4_engine.png
+[08июл.2026 14:13:47.966] [Worker-Main-14/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:textures/block/aluminum_i4_engine.png
 java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\resources\main\assets\create_additional_energy_sourses\textures\block
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112) ~[?:?]
@@ -142,7 +142,7 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:266) ~[?:?]
 	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596) ~[?:?]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[08июл.2026 13:43:50.920] [Worker-Main-8/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:textures/item/advanced_pickaxe.png
+[08июл.2026 14:13:47.971] [Worker-Main-14/ERROR] [Veil/]: Failed to listen to resource: create_additional_energy_sourses:textures/item/advanced_pickaxe.png
 java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\resources\main\assets\create_additional_energy_sourses\textures\item
 	at java.base/sun.nio.fs.WindowsException.translateToIOException(WindowsException.java:85) ~[?:?]
 	at java.base/sun.nio.fs.WindowsException.asIOException(WindowsException.java:112) ~[?:?]
@@ -150,243 +150,237 @@ java.nio.file.NoSuchFileException: C:\Users\Kostya\Documents\GitHub\create_AES\r
 	at java.base/sun.nio.fs.AbstractPoller.processRequests(AbstractPoller.java:266) ~[?:?]
 	at java.base/sun.nio.fs.WindowsWatchService$Poller.run(WindowsWatchService.java:596) ~[?:?]
 	at java.base/java.lang.Thread.run(Thread.java:1583) ~[?:?]
-[08июл.2026 13:43:50.952] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Found status: OUTDATED Current: 6.0.10 Target: 6.0.10+mc1.21.1
-[08июл.2026 13:43:51.025] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'minecraft:block' referenced from: simulated:block/rope_connector/block_horizontal: java.io.FileNotFoundException: minecraft:models/block.json
-[08июл.2026 13:43:51.122] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=west'
-[08июл.2026 13:43:51.122] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=north'
-[08июл.2026 13:43:51.122] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=south'
-[08июл.2026 13:43:51.122] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=east'
-[08июл.2026 13:43:51.122] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_copper.json' missing model for variant: 'create_additional_energy_sourses:radiator_copper#'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_brass.json' missing model for variant: 'create_additional_energy_sourses:radiator_brass#'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_steel.json' missing model for variant: 'create_additional_energy_sourses:radiator_steel#'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_ultimate.json' missing model for variant: 'create_additional_energy_sourses:radiator_ultimate#'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=east'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=west'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=south'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=north'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=west'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=east'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=north'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=south'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=east'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=west'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=north'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=south'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=south'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=east'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=west'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=north'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=west'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=north'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=east'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=south'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=north'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=west'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=south'
-[08июл.2026 13:43:51.124] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=south'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=north'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=west'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=west'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=north'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=south'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=south'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=west'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=north'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=west'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=north'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=south'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=north'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=south'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=west'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=east'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=north'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=south'
-[08июл.2026 13:43:51.125] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=west'
-[08июл.2026 13:43:51.269] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_w16_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_w16_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_w16_engine.json
-[08июл.2026 13:43:51.269] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_r32_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_r32_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_r32_engine.json
-[08июл.2026 13:43:51.269] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_ultimate' referenced from: create_additional_energy_sourses:item/radiator_ultimate: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_ultimate.json
-[08июл.2026 13:43:51.269] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_w16_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_w16_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_w16_engine.json
-[08июл.2026 13:43:51.270] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_r32_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_r32_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_r32_engine.json
-[08июл.2026 13:43:51.271] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_v8_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_v8_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_v8_engine.json
-[08июл.2026 13:43:51.272] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_i4_engine' referenced from: create_additional_energy_sourses:item/modular_iron_i4_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_i4_engine.json
-[08июл.2026 13:43:51.274] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_steel' referenced from: create_additional_energy_sourses:item/radiator_steel: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_steel.json
-[08июл.2026 13:43:51.274] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_copper' referenced from: create_additional_energy_sourses:item/radiator_copper: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_copper.json
-[08июл.2026 13:43:51.274] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_r32_engine' referenced from: create_additional_energy_sourses:item/modular_iron_r32_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_r32_engine.json
-[08июл.2026 13:43:51.274] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_brass' referenced from: create_additional_energy_sourses:item/radiator_brass: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_brass.json
-[08июл.2026 13:43:51.274] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_w16_engine' referenced from: create_additional_energy_sourses:item/modular_iron_w16_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_w16_engine.json
-[08июл.2026 13:43:51.276] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_v8_engine' referenced from: create_additional_energy_sourses:item/modular_iron_v8_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_v8_engine.json
-[08июл.2026 13:43:51.276] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_i4_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_i4_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_i4_engine.json
-[08июл.2026 13:43:51.276] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_v8_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_v8_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_v8_engine.json
-[08июл.2026 13:43:51.276] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_i4_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_i4_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_i4_engine.json
-[08июл.2026 13:43:51.276] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/thermo_generator' referenced from: create_additional_energy_sourses:item/thermo_generator: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/thermo_generator.json
-[08июл.2026 13:43:51.819] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=east:
+[08июл.2026 14:13:48.007] [NeoForge Version Check/INFO] [net.neoforged.fml.VersionChecker/]: [create] Found status: OUTDATED Current: 6.0.10 Target: 6.0.10+mc1.21.1
+[08июл.2026 14:13:48.127] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'minecraft:block' referenced from: simulated:block/rope_connector/block_horizontal: java.io.FileNotFoundException: minecraft:models/block.json
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=west'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=north'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=south'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/v8_engine_classic.json' missing model for variant: 'create_additional_energy_sourses:v8_engine_classic#facing=east'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_copper.json' missing model for variant: 'create_additional_energy_sourses:radiator_copper#'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_brass.json' missing model for variant: 'create_additional_energy_sourses:radiator_brass#'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_steel.json' missing model for variant: 'create_additional_energy_sourses:radiator_steel#'
+[08июл.2026 14:13:48.232] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/radiator_ultimate.json' missing model for variant: 'create_additional_energy_sourses:radiator_ultimate#'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=east'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=west'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=south'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_i4_engine#facing=north'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=west'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=east'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=north'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_v8_engine#facing=south'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=east'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=west'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=north'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_w16_engine#facing=south'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=south'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=east'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=west'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_iron_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_iron_r32_engine#facing=north'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=west'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=north'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=east'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_i4_engine#facing=south'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=north'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=west'
+[08июл.2026 14:13:48.233] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=south'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_v8_engine#facing=east'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=south'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=north'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=east'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_w16_engine#facing=west'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=west'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=north'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=south'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_aluminum_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_aluminum_r32_engine#facing=east'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=south'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=east'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=west'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_i4_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_i4_engine#facing=north'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=west'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=north'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=east'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_v8_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_v8_engine#facing=south'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=north'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=south'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=east'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_w16_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_w16_engine#facing=west'
+[08июл.2026 14:13:48.234] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=east'
+[08июл.2026 14:13:48.235] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=north'
+[08июл.2026 14:13:48.235] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=south'
+[08июл.2026 14:13:48.235] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.BlockStateModelLoader/]: Exception loading blockstate definition: 'create_additional_energy_sourses:blockstates/modular_titanium_r32_engine.json' missing model for variant: 'create_additional_energy_sourses:modular_titanium_r32_engine#facing=west'
+[08июл.2026 14:13:48.332] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_w16_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_w16_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_w16_engine.json
+[08июл.2026 14:13:48.332] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_r32_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_r32_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_r32_engine.json
+[08июл.2026 14:13:48.332] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_ultimate' referenced from: create_additional_energy_sourses:item/radiator_ultimate: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_ultimate.json
+[08июл.2026 14:13:48.332] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_w16_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_w16_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_w16_engine.json
+[08июл.2026 14:13:48.332] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_r32_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_r32_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_r32_engine.json
+[08июл.2026 14:13:48.333] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_v8_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_v8_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_v8_engine.json
+[08июл.2026 14:13:48.334] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_i4_engine' referenced from: create_additional_energy_sourses:item/modular_iron_i4_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_i4_engine.json
+[08июл.2026 14:13:48.335] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_steel' referenced from: create_additional_energy_sourses:item/radiator_steel: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_steel.json
+[08июл.2026 14:13:48.335] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_copper' referenced from: create_additional_energy_sourses:item/radiator_copper: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_copper.json
+[08июл.2026 14:13:48.335] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_r32_engine' referenced from: create_additional_energy_sourses:item/modular_iron_r32_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_r32_engine.json
+[08июл.2026 14:13:48.335] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/radiator_brass' referenced from: create_additional_energy_sourses:item/radiator_brass: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/radiator_brass.json
+[08июл.2026 14:13:48.336] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_w16_engine' referenced from: create_additional_energy_sourses:item/modular_iron_w16_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_w16_engine.json
+[08июл.2026 14:13:48.336] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_iron_v8_engine' referenced from: create_additional_energy_sourses:item/modular_iron_v8_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_iron_v8_engine.json
+[08июл.2026 14:13:48.336] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_i4_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_i4_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_i4_engine.json
+[08июл.2026 14:13:48.337] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_titanium_v8_engine' referenced from: create_additional_energy_sourses:item/modular_titanium_v8_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_titanium_v8_engine.json
+[08июл.2026 14:13:48.337] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/modular_aluminum_i4_engine' referenced from: create_additional_energy_sourses:item/modular_aluminum_i4_engine: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/modular_aluminum_i4_engine.json
+[08июл.2026 14:13:48.337] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelBakery/]: Unable to load model: 'create_additional_energy_sourses:item/thermo_generator' referenced from: create_additional_energy_sourses:item/thermo_generator: java.io.FileNotFoundException: create_additional_energy_sourses:models/item/thermo_generator.json
+[08июл.2026 14:13:48.939] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=east:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[08июл.2026 13:43:51.820] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=west:
+[08июл.2026 14:13:48.939] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=west:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[08июл.2026 13:43:51.820] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator_item#inventory:
+[08июл.2026 14:13:48.939] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator_item#inventory:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[08июл.2026 13:43:51.820] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=north:
+[08июл.2026 14:13:48.939] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=north:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[08июл.2026 13:43:51.820] [Worker-Main-9/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=south:
+[08июл.2026 14:13:48.939] [Worker-Main-2/WARN] [net.minecraft.client.resources.model.ModelManager/]: Missing textures in model create_additional_energy_sourses:thermo_generator#facing=south:
     minecraft:textures/atlas/blocks.png:create_additional_energy_sourses:block/example
-[08июл.2026 13:43:51.886] [Render thread/INFO] [Veil/]: Loaded 0 shader modifications
-[08июл.2026 13:43:51.980] [Render thread/INFO] [Veil/]: Loaded 29 shaders from: pinwheel/shaders/program
-[08июл.2026 13:43:52.057] [Worker-Main-7/INFO] [PonderIndex/]: Registering Ponder Scenes took 58.19 ms
-[08июл.2026 13:43:52.060] [Worker-Main-7/INFO] [PonderIndex/]: Registering Ponder Tags took 2.878 ms
-[08июл.2026 13:43:52.126] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
-[08июл.2026 13:43:52.126] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
-[08июл.2026 13:43:52.149] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on FxSound Speakers (FxSound Audio Enhancer)
-[08июл.2026 13:43:52.149] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
-[08июл.2026 13:43:52.195] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
-[08июл.2026 13:43:52.203] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
-[08июл.2026 13:43:52.203] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
-[08июл.2026 13:43:52.203] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
-[08июл.2026 13:43:52.204] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
-[08июл.2026 13:43:52.206] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
-[08июл.2026 13:43:52.207] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
-[08июл.2026 13:43:52.207] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
-[08июл.2026 13:43:52.207] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
-[08июл.2026 13:43:52.244] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x0 minecraft:textures/atlas/particles.png-atlas
-[08июл.2026 13:43:52.245] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
-[08июл.2026 13:43:52.245] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
-[08июл.2026 13:43:52.245] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
-[08июл.2026 13:43:52.245] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
-[08июл.2026 13:43:52.262] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
-[08июл.2026 13:43:52.300] [Render thread/INFO] [Veil/]: Loaded 3 framebuffers
-[08июл.2026 13:43:52.325] [Render thread/INFO] [Veil/]: Loaded 6 post pipelines
-[08июл.2026 13:43:52.336] [Render thread/INFO] [Veil/]: Loaded 4 render types
-[08июл.2026 13:43:52.336] [Render thread/INFO] [Veil/]: Enabled bloom pipeline
-[08июл.2026 13:43:52.337] [Render thread/INFO] [Veil/]: Loaded 0 quasar particles
-[08июл.2026 13:43:52.337] [Render thread/INFO] [Veil/]: Loaded 0 templates
-[08июл.2026 13:43:52.337] [Render thread/INFO] [Veil/]: Loaded 0 modules
-[08июл.2026 13:43:52.339] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
-[08июл.2026 13:43:52.363] [Render thread/INFO] [flywheel/backend/shaders/]: Loaded 77 shader sources in 15,987 ms
-[08июл.2026 13:43:52.380] [Render thread/INFO] [Veil/]: Compiled 58 vanilla shaders in 89.09 ms
-[08июл.2026 13:43:52.384] [Render thread/INFO] [com.simibubi.create.Create/]: Loaded 58 train hat configurations.
-[08июл.2026 13:43:52.385] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
-[08июл.2026 13:43:53.332] [Render thread/INFO] [Veil/]: Finished uploading vanilla shaders
-[08июл.2026 13:43:55.812] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
-[08июл.2026 13:43:55.815] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
-[08июл.2026 13:43:56.428] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 3056 recipes
-[08июл.2026 13:43:56.590] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2644 advancements
-[08июл.2026 13:43:57.208] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
-[08июл.2026 13:43:57.208] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
-[08июл.2026 13:43:57.389] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Assigned physics scene ID 0 to minecraft:overworld
-[08июл.2026 13:43:57.511] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Assigned physics scene ID 1 to minecraft:the_nether
-[08июл.2026 13:43:57.534] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Assigned physics scene ID 2 to minecraft:the_end
-[08июл.2026 13:43:57.556] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
-[08июл.2026 13:43:57.684] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
-[08июл.2026 13:43:57.739] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
-[08июл.2026 13:43:57.742] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 166 ms
-[08июл.2026 13:43:57.822] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
-[08июл.2026 13:43:57.822] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
-[08июл.2026 13:43:57.908] [Render thread/INFO] [dev.ryanhcode.sable.Sable/]: Adding local UDP server channel future
-[08июл.2026 13:43:57.915] [Render thread/WARN] [io.netty.bootstrap.Bootstrap/]: Unknown channel option 'SO_BROADCAST' for channel '[id: 0xfadd8aa6]'
-[08июл.2026 13:43:57.920] [Netty Server IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Server UDP channel active
-[08июл.2026 13:43:57.931] [Render thread/INFO] [dev.ryanhcode.sable.Sable/]: Starting local client UDP channel future
-[08июл.2026 13:43:57.932] [Netty Local Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Client UDP channel active
-[08июл.2026 13:43:58.061] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
-[08июл.2026 13:43:58.062] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
-[08июл.2026 13:43:58.266] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:5de84e28] logged in with entity id 1 at (-4.860457846534699, -59.0625, 9.254316535652626)
-[08июл.2026 13:43:58.269] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Beginning attempted authentication with player Dev
-[08июл.2026 13:43:58.288] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
-[08июл.2026 13:43:59.150] [Render thread/INFO] [flywheel/]: Started 10 worker threads
-[08июл.2026 13:43:59.180] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
-[08июл.2026 13:43:59.188] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
-[08июл.2026 13:43:59.193] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 5.503 milliseconds
-[08июл.2026 13:43:59.194] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
-[08июл.2026 13:43:59.197] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 3.201 milliseconds
-[08июл.2026 13:43:59.200] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
-[08июл.2026 13:43:59.264] [Render thread/WARN] [mezz.jei.library.plugins.vanilla.ingredients.ItemStackListFactory/]: 1 duplicate items were found in 'Create: Diesel Generators' creative tab's: displayItems
+[08июл.2026 14:13:49.004] [Render thread/INFO] [Veil/]: Loaded 0 shader modifications
+[08июл.2026 14:13:49.091] [Render thread/INFO] [Veil/]: Loaded 29 shaders from: pinwheel/shaders/program
+[08июл.2026 14:13:49.169] [Worker-Main-10/INFO] [PonderIndex/]: Registering Ponder Scenes took 60.10 ms
+[08июл.2026 14:13:49.173] [Worker-Main-10/INFO] [PonderIndex/]: Registering Ponder Tags took 3.300 ms
+[08июл.2026 14:13:49.242] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:item.goat_horn.play
+[08июл.2026 14:13:49.242] [Render thread/WARN] [net.minecraft.client.sounds.SoundEngine/]: Missing sound for event: minecraft:entity.goat.screaming.horn_break
+[08июл.2026 14:13:49.269] [Render thread/INFO] [com.mojang.blaze3d.audio.Library/]: OpenAL initialized on device OpenAL Soft on FxSound Speakers (FxSound Audio Enhancer)
+[08июл.2026 14:13:49.270] [Render thread/INFO] [net.minecraft.client.sounds.SoundEngine/SOUNDS]: Sound engine started
+[08июл.2026 14:13:49.323] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x2048x4 minecraft:textures/atlas/blocks.png-atlas
+[08июл.2026 14:13:49.332] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/signs.png-atlas
+[08июл.2026 14:13:49.332] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/shield_patterns.png-atlas
+[08июл.2026 14:13:49.332] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x4 minecraft:textures/atlas/banner_patterns.png-atlas
+[08июл.2026 14:13:49.333] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 2048x1024x4 minecraft:textures/atlas/armor_trims.png-atlas
+[08июл.2026 14:13:49.335] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 128x64x4 minecraft:textures/atlas/decorated_pot.png-atlas
+[08июл.2026 14:13:49.335] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x4 minecraft:textures/atlas/chest.png-atlas
+[08июл.2026 14:13:49.335] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/shulker_boxes.png-atlas
+[08июл.2026 14:13:49.335] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x4 minecraft:textures/atlas/beds.png-atlas
+[08июл.2026 14:13:49.371] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x512x0 minecraft:textures/atlas/particles.png-atlas
+[08июл.2026 14:13:49.372] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 512x256x0 minecraft:textures/atlas/paintings.png-atlas
+[08июл.2026 14:13:49.372] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x128x0 minecraft:textures/atlas/mob_effects.png-atlas
+[08июл.2026 14:13:49.372] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 64x64x0 minecraft:textures/atlas/map_decorations.png-atlas
+[08июл.2026 14:13:49.373] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 1024x512x0 minecraft:textures/atlas/gui.png-atlas
+[08июл.2026 14:13:49.389] [Render thread/WARN] [net.minecraft.client.renderer.ShaderInstance/]: Shader rendertype_entity_translucent_emissive could not find sampler named Sampler2 in the specified shader program.
+[08июл.2026 14:13:49.430] [Render thread/INFO] [Veil/]: Loaded 3 framebuffers
+[08июл.2026 14:13:49.461] [Render thread/INFO] [Veil/]: Loaded 6 post pipelines
+[08июл.2026 14:13:49.473] [Render thread/INFO] [Veil/]: Loaded 4 render types
+[08июл.2026 14:13:49.473] [Render thread/INFO] [Veil/]: Enabled bloom pipeline
+[08июл.2026 14:13:49.474] [Render thread/INFO] [Veil/]: Loaded 0 quasar particles
+[08июл.2026 14:13:49.474] [Render thread/INFO] [Veil/]: Loaded 0 templates
+[08июл.2026 14:13:49.474] [Render thread/INFO] [Veil/]: Loaded 0 modules
+[08июл.2026 14:13:49.479] [Render thread/INFO] [net.minecraft.client.renderer.texture.TextureAtlas/]: Created: 256x256x0 jei:textures/atlas/gui.png-atlas
+[08июл.2026 14:13:49.498] [Render thread/INFO] [flywheel/backend/shaders/]: Loaded 77 shader sources in 13,398 ms
+[08июл.2026 14:13:49.519] [Render thread/INFO] [Veil/]: Compiled 58 vanilla shaders in 100.4 ms
+[08июл.2026 14:13:49.525] [Render thread/INFO] [com.simibubi.create.Create/]: Loaded 58 train hat configurations.
+[08июл.2026 14:13:49.526] [Render thread/INFO] [net.neoforged.neoforge.client.entity.animation.json.AnimationLoader/]: Loaded 0 entity animations
+[08июл.2026 14:13:50.483] [Render thread/INFO] [Veil/]: Finished uploading vanilla shaders
+[08июл.2026 14:13:54.089] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
+[08июл.2026 14:13:54.091] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
+[08июл.2026 14:13:54.643] [Render thread/INFO] [net.minecraft.world.item.crafting.RecipeManager/]: Loaded 3056 recipes
+[08июл.2026 14:13:54.766] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 2644 advancements
+[08июл.2026 14:13:55.376] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Starting integrated minecraft server version 1.21.1
+[08июл.2026 14:13:55.376] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Generating keypair
+[08июл.2026 14:13:55.562] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Assigned physics scene ID 0 to minecraft:overworld
+[08июл.2026 14:13:55.655] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Assigned physics scene ID 1 to minecraft:the_end
+[08июл.2026 14:13:55.672] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Assigned physics scene ID 2 to minecraft:the_nether
+[08июл.2026 14:13:55.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Preparing start region for dimension minecraft:overworld
+[08июл.2026 14:13:55.773] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Preparing spawn area: 0%
+[08июл.2026 14:13:55.817] [Server thread/INFO] [net.neoforged.neoforge.server.permission.PermissionAPI/]: Successfully initialized permission handler neoforge:default_handler
+[08июл.2026 14:13:55.828] [progressListener/INFO] [net.minecraft.server.level.progress.LoggerChunkProgressListener/]: Time elapsed: 135 ms
+[08июл.2026 14:13:55.867] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing view distance to 12, from 10
+[08июл.2026 14:13:55.867] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Changing simulation distance to 12, from 0
+[08июл.2026 14:13:55.955] [Render thread/INFO] [dev.ryanhcode.sable.Sable/]: Adding local UDP server channel future
+[08июл.2026 14:13:55.958] [Render thread/WARN] [io.netty.bootstrap.Bootstrap/]: Unknown channel option 'SO_BROADCAST' for channel '[id: 0x974986cb]'
+[08июл.2026 14:13:55.961] [Netty Server IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Server UDP channel active
+[08июл.2026 14:13:55.971] [Render thread/INFO] [dev.ryanhcode.sable.Sable/]: Starting local client UDP channel future
+[08июл.2026 14:13:55.973] [Netty Local Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Client UDP channel active
+[08июл.2026 14:13:56.102] [Render thread/INFO] [com.simibubi.create.Create/]: Created 157 recipes which will be injected into the game
+[08июл.2026 14:13:56.103] [Render thread/INFO] [com.simibubi.create.Create/]: Created 0 tags which will be injected into the game
+[08июл.2026 14:13:56.280] [Server thread/INFO] [net.minecraft.server.players.PlayerList/]: Dev[local:E:3189e0bf] logged in with entity id 2 at (-4.6577449210463335, -60.0, 10.600635790261425)
+[08июл.2026 14:13:56.283] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Beginning attempted authentication with player Dev
+[08июл.2026 14:13:56.304] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev joined the game
+[08июл.2026 14:13:57.281] [Render thread/INFO] [flywheel/]: Started 10 worker threads
+[08июл.2026 14:13:57.307] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI...
+[08июл.2026 14:13:57.313] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes...
+[08июл.2026 14:13:57.317] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering item subtypes took 5.213 milliseconds
+[08июл.2026 14:13:57.319] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes...
+[08июл.2026 14:13:57.321] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering fluid subtypes took 2.380 milliseconds
+[08июл.2026 14:13:57.324] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients...
+[08июл.2026 14:13:57.389] [Render thread/WARN] [mezz.jei.library.plugins.vanilla.ingredients.ItemStackListFactory/]: 1 duplicate items were found in 'Create: Diesel Generators' creative tab's: displayItems
 This may indicate that these types of item need a subtype interpreter added to JEI:
 [createdieselgenerators:track_layers_bag]
-[08июл.2026 13:43:59.304] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 104.1 milliseconds
-[08июл.2026 13:43:59.304] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 104.6 milliseconds
-[08июл.2026 13:43:59.304] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
-[08июл.2026 13:43:59.306] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 2.360 milliseconds
-[08июл.2026 13:43:59.307] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
-[08июл.2026 13:43:59.308] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 844.4 microseconds
-[08июл.2026 13:43:59.321] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
-[08июл.2026 13:43:59.321] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 548.1 microseconds
-[08июл.2026 13:43:59.334] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
-[08июл.2026 13:43:59.348] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 13.82 milliseconds
-[08июл.2026 13:43:59.364] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: createdieselgenerators:jei_plugin took 15.31 milliseconds
-[08июл.2026 13:43:59.389] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: create:jei_plugin took 25.16 milliseconds
-[08июл.2026 13:43:59.393] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 58.14 milliseconds
-[08июл.2026 13:43:59.394] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
-[08июл.2026 13:43:59.398] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 3.465 milliseconds
-[08июл.2026 13:43:59.399] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
-[08июл.2026 13:43:59.400] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 1.861 milliseconds
-[08июл.2026 13:43:59.401] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
-[08июл.2026 13:43:59.412] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 11.24 milliseconds
-[08июл.2026 13:43:59.413] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
-[08июл.2026 13:43:59.414] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 292.8 microseconds
-[08июл.2026 13:43:59.414] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
-[08июл.2026 13:43:59.535] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 120.3 milliseconds
-[08июл.2026 13:43:59.596] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 56.11 milliseconds
-[08июл.2026 13:43:59.615] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 19.57 milliseconds
-[08июл.2026 13:43:59.616] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 201.4 milliseconds
-[08июл.2026 13:43:59.620] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
-[08июл.2026 13:43:59.624] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 3.194 milliseconds
-[08июл.2026 13:43:59.629] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
-[08июл.2026 13:43:59.635] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
-[08июл.2026 13:43:59.642] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 7.532 milliseconds
-[08июл.2026 13:43:59.646] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
-[08июл.2026 13:43:59.647] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
-[08июл.2026 13:43:59.648] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
-[08июл.2026 13:43:59.663] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 14.53 milliseconds
-[08июл.2026 13:43:59.663] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
-[08июл.2026 13:43:59.686] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2649 ingredients
-[08июл.2026 13:43:59.815] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2649 ingredients
-[08июл.2026 13:43:59.816] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 152.9 milliseconds
-[08июл.2026 13:43:59.877] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 230.1 milliseconds
-[08июл.2026 13:43:59.877] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 230.6 milliseconds
-[08июл.2026 13:43:59.877] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 248.0 milliseconds
-[08июл.2026 13:43:59.877] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
-[08июл.2026 13:43:59.878] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 290.9 microseconds
-[08июл.2026 13:43:59.878] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 697.1 milliseconds
-[08июл.2026 13:43:59.883] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 103 advancements
-[08июл.2026 13:44:00.231] [Render thread/INFO] [Veil/]: Multi-Bind supported, using core
-[08июл.2026 13:44:24.591] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[08июл.2026 13:44:24.602] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[08июл.2026 13:44:24.602] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:overworld
-[08июл.2026 13:44:24.609] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[08июл.2026 13:44:24.610] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_nether
-[08июл.2026 13:44:24.610] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[08июл.2026 13:44:24.610] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_end
-[08июл.2026 13:47:44.091] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
-[08июл.2026 13:47:44.106] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[08июл.2026 13:47:44.106] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:overworld
-[08июл.2026 13:47:44.116] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[08июл.2026 13:47:44.117] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_nether
-[08июл.2026 13:47:44.117] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[08июл.2026 13:47:44.118] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_end
-[08июл.2026 13:48:47.750] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!
-[08июл.2026 13:48:47.752] [Netty Local Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Client UDP channel inactive
-[08июл.2026 13:48:47.754] [Netty Local Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Closed UDP channel!
-[08июл.2026 13:48:47.760] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
-[08июл.2026 13:48:47.762] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
-[08июл.2026 13:48:47.762] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
-[08июл.2026 13:48:47.765] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 3.204 milliseconds
-[08июл.2026 13:48:47.805] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Disconnected
-[08июл.2026 13:48:47.806] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev left the game
-[08июл.2026 13:48:47.826] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
-[08июл.2026 13:48:47.859] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
-[08июл.2026 13:48:47.861] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
-[08июл.2026 13:48:47.861] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
-[08июл.2026 13:48:47.971] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
-[08июл.2026 13:48:47.971] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:overworld
-[08июл.2026 13:48:47.997] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
-[08июл.2026 13:48:47.997] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_nether
-[08июл.2026 13:48:48.002] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
-[08июл.2026 13:48:48.003] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_end
-[08июл.2026 13:48:48.012] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
-[08июл.2026 13:48:48.012] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
-[08июл.2026 13:48:48.012] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
-[08июл.2026 13:48:48.012] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08июл.2026 14:13:57.433] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering ingredients: jei:minecraft took 108.6 milliseconds
+[08июл.2026 14:13:57.433] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering ingredients took 109.1 milliseconds
+[08июл.2026 14:13:57.433] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients...
+[08июл.2026 14:13:57.437] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering extra ingredients took 3.289 milliseconds
+[08июл.2026 14:13:57.438] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases...
+[08июл.2026 14:13:57.439] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering search ingredient aliases took 893.3 microseconds
+[08июл.2026 14:13:57.450] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info...
+[08июл.2026 14:13:57.451] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Mod Info took 588.2 microseconds
+[08июл.2026 14:13:57.464] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories...
+[08июл.2026 14:13:57.477] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: jei:minecraft took 12.87 milliseconds
+[08июл.2026 14:13:57.493] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: createdieselgenerators:jei_plugin took 17.13 milliseconds
+[08июл.2026 14:13:57.509] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering categories: create:jei_plugin took 14.86 milliseconds
+[08июл.2026 14:13:57.511] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering categories took 47.35 milliseconds
+[08июл.2026 14:13:57.511] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions...
+[08июл.2026 14:13:57.513] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering vanilla category extensions took 1.064 milliseconds
+[08июл.2026 14:13:57.513] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts...
+[08июл.2026 14:13:57.513] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipe catalysts took 820.3 microseconds
+[08июл.2026 14:13:57.514] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry...
+[08июл.2026 14:13:57.519] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building recipe registry took 5.751 milliseconds
+[08июл.2026 14:13:57.520] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins...
+[08июл.2026 14:13:57.520] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering advanced plugins took 225.3 microseconds
+[08июл.2026 14:13:57.521] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes...
+[08июл.2026 14:13:57.654] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:minecraft took 132.0 milliseconds
+[08июл.2026 14:13:57.683] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: createdieselgenerators:jei_plugin took 27.54 milliseconds
+[08июл.2026 14:13:57.753] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: create:jei_plugin took 71.09 milliseconds
+[08июл.2026 14:13:57.781] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering recipes: jei:internal took 26.61 milliseconds
+[08июл.2026 14:13:57.781] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes took 259.9 milliseconds
+[08июл.2026 14:13:57.788] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers...
+[08июл.2026 14:13:57.792] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering recipes transfer handlers took 3.991 milliseconds
+[08июл.2026 14:13:57.799] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime...
+[08июл.2026 14:13:57.807] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers...
+[08июл.2026 14:13:57.816] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering gui handlers took 8.687 milliseconds
+[08июл.2026 14:13:57.820] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime...
+[08июл.2026 14:13:57.821] [Render thread/INFO] [mezz.jei.gui.startup.JeiGuiStarter/]: Starting JEI GUI
+[08июл.2026 14:13:57.821] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list...
+[08июл.2026 14:13:57.836] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient list took 14.16 milliseconds
+[08июл.2026 14:13:57.836] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter...
+[08июл.2026 14:13:57.854] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Adding 2649 ingredients
+[08июл.2026 14:13:57.981] [Render thread/INFO] [mezz.jei.gui.ingredients.IngredientFilter/]: Added 2649 ingredients
+[08июл.2026 14:13:57.982] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building ingredient filter took 146.0 milliseconds
+[08июл.2026 14:13:58.043] [Render thread/INFO] [mezz.jei.library.load.PluginCallerTimerRunnable/]: Registering Runtime: jei:neoforge_gui took 222.7 milliseconds
+[08июл.2026 14:13:58.043] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Registering Runtime took 223.1 milliseconds
+[08июл.2026 14:13:58.043] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Building runtime took 244.3 milliseconds
+[08июл.2026 14:13:58.044] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime...
+[08июл.2026 14:13:58.044] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime took 241.8 microseconds
+[08июл.2026 14:13:58.044] [Render thread/INFO] [mezz.jei.core.util.LoggedTimer/]: Starting JEI took 737.0 milliseconds
+[08июл.2026 14:13:58.049] [Render thread/INFO] [net.minecraft.advancements.AdvancementTree/]: Loaded 103 advancements
+[08июл.2026 14:13:58.222] [Render thread/INFO] [Veil/]: Multi-Bind supported, using core
+[08июл.2026 14:14:30.170] [Server thread/INFO] [net.minecraft.client.server.IntegratedServer/]: Saving and pausing game...
+[08июл.2026 14:14:30.181] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[08июл.2026 14:14:30.181] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:overworld
+[08июл.2026 14:14:30.190] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[08июл.2026 14:14:30.190] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_end
+[08июл.2026 14:14:30.190] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[08июл.2026 14:14:30.190] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_nether
+[08июл.2026 14:14:30.615] [Netty Local Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Client UDP channel inactive
+[08июл.2026 14:14:30.615] [Netty Local Client IO #1/INFO] [dev.ryanhcode.sable.Sable/]: Closed UDP channel!
+[08июл.2026 14:14:30.615] [Render thread/INFO] [mezz.jei.library.startup.JeiStarter/]: Stopping JEI
+[08июл.2026 14:14:30.615] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable...
+[08июл.2026 14:14:30.616] [Render thread/INFO] [mezz.jei.neoforge.plugins.neoforge.NeoForgeGuiPlugin/]: Stopping JEI GUI
+[08июл.2026 14:14:30.616] [Render thread/INFO] [mezz.jei.library.load.PluginCaller/]: Sending Runtime Unavailable took 588.8 microseconds
+[08июл.2026 14:14:30.621] [Server thread/INFO] [net.minecraft.server.network.ServerGamePacketListenerImpl/]: Dev lost connection: Disconnected
+[08июл.2026 14:14:30.621] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Dev left the game
+[08июл.2026 14:14:30.629] [Server thread/INFO] [net.minecraft.server.network.ServerCommonPacketListenerImpl/]: Stopping singleplayer server as player logged out
+[08июл.2026 14:14:30.680] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Stopping server
+[08июл.2026 14:14:30.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving players
+[08июл.2026 14:14:30.681] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving worlds
+[08июл.2026 14:14:30.729] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:overworld
+[08июл.2026 14:14:30.729] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:overworld
+[08июл.2026 14:14:30.752] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_end
+[08июл.2026 14:14:30.752] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_end
+[08июл.2026 14:14:30.757] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: Saving chunks for level 'ServerLevel[New World]'/minecraft:the_nether
+[08июл.2026 14:14:30.757] [Server thread/INFO] [dev.ryanhcode.sable.Sable/]: Saving sub-levels for level 'ServerLevel[New World]'/minecraft:the_nether
+[08июл.2026 14:14:30.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (New World): All chunks are saved
+[08июл.2026 14:14:30.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM1): All chunks are saved
+[08июл.2026 14:14:30.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage (DIM-1): All chunks are saved
+[08июл.2026 14:14:30.763] [Server thread/INFO] [net.minecraft.server.MinecraftServer/]: ThreadedAnvilChunkStorage: All dimensions are saved
+[08июл.2026 14:14:31.198] [Render thread/INFO] [net.minecraft.client.Minecraft/]: Stopping!

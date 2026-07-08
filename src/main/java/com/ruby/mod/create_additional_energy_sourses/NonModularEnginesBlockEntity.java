@@ -89,14 +89,13 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
 
         // Если турбонаддув включен — жестко удваиваем крутящий момент
         if (this.isTurboCharged) {
-            totalStaticPower *= 2.0f;
+            return totalStaticPower *= 2.0f;
         }
 
         // Возвращаем ГОТОВУЮ базовую константу.
         // Больше никакого родительского кода! Create сам умножит её на скорость сети,
         // и цифры на табло мгновенно рухнут до адекватных, красивых значений.
-        totalStaticPower = 100;
-        return totalStaticPower;
+        return totalStaticPower / speed;
     }
     @Override
     public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {

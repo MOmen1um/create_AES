@@ -446,8 +446,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         // Честно сохраняем текущие градусы на диск и в сеть
         tag.putFloat("EngineTemperature", this.engineTemperature);
 
-        tag.putBoolean("IsTurboCharged", this.isTurboCharged);
-        tag.putFloat("CurrentSpeed", this.currentSpeed);
+        //tag.putBoolean("IsTurboCharged", this.isTurboCharged);
+        //tag.putFloat("CurrentSpeed", this.currentSpeed);
         tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
 
         net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
@@ -468,8 +468,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             this.engineTemperature = getAmbientTemperature();
         }
 
-        this.isTurboCharged = tag.getBoolean("IsTurboCharged");
-        this.currentSpeed = tag.getFloat("CurrentSpeed");
+
+        //this.isTurboCharged = tag.getBoolean("IsTurboCharged");
+        //this.currentSpeed = tag.getFloat("CurrentSpeed");
         this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
 
         if (tag.contains("FuelTank")) {
