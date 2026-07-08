@@ -1,4 +1,3 @@
-/recipe give Dev
 /give Dev create_additional_energy_sourses:thermo_generator
 /recipe give Dev *
 /reload
@@ -48,3 +47,4 @@
 /time set day
 /kill @e[type=!minecraft:player]
 /gamerule doMobSpawning false
+/give Dev create_additional_energy_sourses:v8_engine

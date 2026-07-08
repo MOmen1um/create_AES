@@ -65,11 +65,28 @@ public class Create_additional_energy_sourses {
         ModItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
+        // Автоматический слушатель для инициализации визуализации Create валов
+        modEventBus.addListener((net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers event) -> {
+            // Привязываем стандартный ShaftRenderer к твоей новой общей сущности.
+            // Это мгновенно разблокирует меню ползунков, очки инженера и запустит вращение моделей поршней!
+            event.registerBlockEntityRenderer(
+                    ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(),
+                    com.simibubi.create.content.kinetics.base.ShaftRenderer::new
+            );
+
+            // Точно так же привязываем валы к модульным двигателям, чтобы они тоже ожили
+            event.registerBlockEntityRenderer(
+                    ModBlocks.MODULAR_ENGINE_ENTITY.get(),
+                    com.simibubi.create.content.kinetics.base.ShaftRenderer::new
+            );
+        });
+
 
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
         });
+
         // === ИСПРАВЛЕННЫЙ СЛУШАТЕЛЬ ТОПЛИВНЫХ КАПАБИЛИТИ ДЛЯ 1.21.1 ===
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
 

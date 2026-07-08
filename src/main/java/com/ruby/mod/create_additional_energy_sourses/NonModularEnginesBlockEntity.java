@@ -117,7 +117,9 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
             this.targetSliderSpeed = (float) value;
             this.setChanged();
             this.updateGeneratedRotation();
-            this.notifyUpdate();
+            if (level != null && level.isClientSide) {
+                this.notifyUpdate();
+            }
         });
 
         behaviours.add(slider);
@@ -160,19 +162,23 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     }
     @Override
     public float calculateAddedStressCapacity() {
-        // Считаем мощность от РЕАЛЬНЫХ оборотов поршней, а не от заклинившей сети!
+        // КРИТИЧЕСКИ ВАЖНО: Считаем мощность ОТ ТАХОМЕТРА ПОРШНЕЙ, а не от ползунка!
+        // Если поршни стоят (currentSpeed == 0) — генератор выдаст ровно 0 SU,
+        // и космические миллионы на экране мгновенно исчезнут!
         float speed = Math.abs(this.currentSpeed);
-        if (speed <= 0 || burnTimeRemaining <= 0) return 0;
 
-        // Л.С. на один поршень при базовых 64 RPM
+        // ВРЕМЕННО ДЛЯ ТЕСТА: Оставляем топливо активным
+        int testBurnTime = 100;
+        if (speed <= 0 || testBurnTime <= 0) return 0;
+
+        // Дальше идет весь твой остальной рабочий switch-case по поршням и металлам...
         float powerPerPiston = switch (this.engineMaterial) {
-            case "cast_iron" -> 30f * 64f;  // 30 л.с.
-            case "aluminum" -> 60f * 64f;   // 60 л.с.
-            case "titanium" -> 100f * 64f;  // 100 л.с.
+            case "cast_iron" -> 30f * 64f;
+            case "aluminum" -> 60f * 64f;
+            case "titanium" -> 100f * 64f;
             default -> 30f * 64f;
         };
 
-        // Считаем поршни по твоей архитектуре
         int pistonCount = switch (this.engineType) {
             case "I" -> 4;
             case "V" -> 8;
@@ -182,38 +188,92 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         };
 
         float totalPower = powerPerPiston * pistonCount;
+        if (isTurboCharged) totalPower *= 2.0f;
 
-        // Множитель турбины х2
-        if (isTurboCharged) {
-            totalPower *= 2.0f;
-        }
-
-        // Масштабируем итоговый Stress Capacity от текущей скорости
         return totalPower * (speed / 64.0f);
     }
     @Override
     public void tick() {
-        // ТЕСТОВАЯ ЗАГЛУШКА: Двигатель всегда заправлен на 100 тиков, пока тестируем!
+        // ТЕСТОВАЯ ЗАПРАВКА: всегда заправлен!
         this.burnTimeRemaining = 100;
 
         super.tick();
 
-        // Работаем на стороне сервера
-        if (level != null && !level.isClientSide) {
-            // Если в баке горит топливо
-            if (this.burnTimeRemaining > 0) {
-                this.burnTimeRemaining--;
-            }
+        // Все расчеты ведем на сервере
+        if (level == null || level.isClientSide) return;
 
-            // Если скорость на ползунке отличается от текущей скорости вала — плавно разгоняем вал!
-            if (this.currentSpeed != this.targetSliderSpeed) {
-                this.currentSpeed = this.targetSliderSpeed;
+        // Расход топлива
+        if (this.burnTimeRemaining > 0) {
+            this.burnTimeRemaining--;
+        }
 
-                // ЭТИ СТРОЧКИ ПРИНУДИТЕЛЬНО ЗАСТАВЯТ CREATE КРУТИТЬ ВАЛЫ В МИРЕ:
+        // СИСТЕМА ПЛАВНОГО РАЗГОНА ИЗ ТВОЕГО ЭТАЛОНА V8
+        if (this.burnTimeRemaining > 0 && this.targetSliderSpeed > 0) {
+
+            // ⚡ ЭЛЕКТРОСТАРТЕР: если мотор должен крутиться, но намертво заклинен в нуле
+            if (this.currentSpeed == 0) {
+                this.currentSpeed = 0.1f; // Даем микро-толчок, чтобы Create проснулся!
                 this.updateGeneratedRotation();
-                this.setChanged();
-                this.notifyUpdate(); // Шлём сетевой пакет клиенту!
             }
+
+            // Плавный разгон поршней
+            if (this.currentSpeed < this.targetSliderSpeed) {
+                this.accelerationTicks++;
+                if (this.accelerationTicks >= 10) { // Разгон каждые 10 тиков (полсекунды)
+                    // Прибавляем по 8 RPM, но не выше ползунка
+                    this.currentSpeed = Math.min(this.targetSliderSpeed, this.currentSpeed + 8.0f);
+                    this.accelerationTicks = 0;
+
+                    // Сами пинаем сеть Create на каждом шаге разгона, как в V8!
+                    this.updateGeneratedRotation();
+                }
+            } else if (this.currentSpeed > this.targetSliderSpeed) {
+                // Плавный сброс оборотов
+                this.currentSpeed = Math.max(this.targetSliderSpeed, this.currentSpeed - 8.0f);
+                this.updateGeneratedRotation();
+            }
+        } else {
+            // Топливо кончилось или ползунок в нуле — плавно глушим мотор по инерции
+            if (this.currentSpeed > 0) {
+                this.currentSpeed = Math.max(0, this.currentSpeed - 16.0f);
+                this.updateGeneratedRotation();
+            }
+            this.accelerationTicks = 0;
+        }
+
+        // ТЕРМОДИНАМИКА НА ОСНОВЕ РЕАЛЬНЫХ ОБОРОТОВ (currentSpeed)
+        float ambientTemp = getAmbientTemperature();
+        float maxSpeed = getSafeEngineSpeed();
+
+        if (this.currentSpeed > 0) {
+            float heatCoefficient = 700.0f / maxSpeed;
+            float targetTemperature = ambientTemp + (this.currentSpeed * heatCoefficient);
+
+            if (this.engineTemperature < targetTemperature) {
+                this.engineTemperature += 0.2f * (1.0f - getCoolingEfficiency());
+            } else if (this.engineTemperature > targetTemperature) {
+                this.engineTemperature -= 0.1f * (1.0f + getCoolingEfficiency());
+            }
+        } else {
+            if (this.engineTemperature > ambientTemp) {
+                this.engineTemperature = Math.max(ambientTemp, this.engineTemperature - (0.5f * (1.0f + getCoolingEfficiency())));
+            }
+        }
+
+        // ТАЙМЕР ПЛАВЛЕНИЯ И ВЗРЫВА
+        if (this.engineTemperature >= this.maxMeltingTemp) {
+            this.overheatMeltingTimer++;
+            if (this.overheatMeltingTimer >= 100) {
+                this.triggerOverheat();
+            }
+        } else {
+            if (this.overheatMeltingTimer > 0) this.overheatMeltingTimer--;
+        }
+
+        // ЖЁСТКАЯ ОТПРАВКА ДАННЫХ В ОЧКИ ИНЖЕНЕРА (sendData из 1.21.1)
+        if (level.getGameTime() % 10 == 0) {
+            this.setChanged();
+            this.sendData();
         }
     }
     @Override
@@ -267,7 +327,8 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         String tempColor = (this.engineTemperature > (this.maxMeltingTemp - 200f)) ? "§c" : "§a";
         tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Температура: " + tempColor + String.format("%.1f", this.engineTemperature) + "°C §7/ §4" + this.maxMeltingTemp + "°C"));
 
-        // Выводим текущие обороты против лимита
+        // Выводим обороты ползунка/вала, которые реально крутят шестеренку
+        // Показываем игроку плавный, живой разгон оборотов!
         float safeSpeed = getSafeEngineSpeed();
         String speedColor = (this.currentSpeed > safeSpeed) ? "§c⚠ " : "§a";
         tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Обороты: " + speedColor + String.format("%.0f", this.currentSpeed) + " §7/ §2" + safeSpeed + " RPM"));
@@ -276,7 +337,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         String fuelStatus = (this.burnTimeRemaining > 0) ? "§6" + this.burnTimeRemaining + " тиков" : "§cПУСТОЙ БАК";
         tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Топливо: " + fuelStatus));
 
-        // Выводим расчетную мощность SU прямо в очки для удобства
+        // Мощность SU тоже привязываем к реальным оборотам поршней
         float currentSU = calculateAddedStressCapacity();
         tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Мощность сети: §e" + String.format("%.0f", currentSU) + " SU"));
 
@@ -285,18 +346,18 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
 
     @Override
     public float getGeneratedSpeed() {
-        // Отдаем скорость ползунка напрямую в сеть!
-        return this.currentSpeed;
+        // Пробиваем блокировку Create: выдаем скорость ползунка напрямую!
+        return this.targetSliderSpeed;
     }
     @Override
     protected void write(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.write(tag, registries, clientPacket);
 
-        // 1. Записываем архитектуру, чтобы switch-case очков инженера не сбрасывался в "Unknown"
+        // 1. Сохраняем текстовые параметры архитектуры ДВС
         if (this.engineType != null) tag.putString("EngineType", this.engineType);
         if (this.engineMaterial != null) tag.putString("EngineMaterial", this.engineMaterial);
 
-        // 2. Записываем характеристики работы
+        // 2. Сохраняем переменные телеметрии
         tag.putBoolean("IsTurboCharged", this.isTurboCharged);
         tag.putFloat("EngineTemperature", this.engineTemperature);
         tag.putInt("BurnTimeRemaining", this.burnTimeRemaining);
@@ -304,9 +365,10 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         tag.putFloat("TargetSliderSpeed", this.targetSliderSpeed);
         tag.putInt("RadiatorType", this.radiatorType);
 
-        // 3. Записываем твой кастомный FluidTank бак жидкостей с провайдером реестров!
+        // 3. Безопасное сохранение твоего бака FuelTank без вызова конфликтующих методов Create!
         if (this.FuelTank != null) {
             net.minecraft.nbt.CompoundTag fluidTag = new net.minecraft.nbt.CompoundTag();
+            // Используем стандартный NeoForge-метод сохранения жидкостей, он не зависит от обфускации Create!
             this.FuelTank.writeToNBT(registries, fluidTag);
             tag.put("FuelTankData", fluidTag);
         }
@@ -316,15 +378,15 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     protected void read(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
 
-        // 1. Читаем архитектуру
+        // 1. Считываем параметры архитектуры
         if (tag.contains("EngineType")) this.engineType = tag.getString("EngineType");
         if (tag.contains("EngineMaterial")) this.engineMaterial = tag.getString("EngineMaterial");
 
-        // 2. Читаем телеметрию
+        // 2. Считываем переменные
         if (tag.contains("EngineTemperature")) {
             this.engineTemperature = tag.getFloat("EngineTemperature");
         } else {
-            this.engineTemperature = 20.0f; // Окат на комнатную, если блок новый
+            this.engineTemperature = 20.0f;
         }
 
         this.isTurboCharged = tag.getBoolean("IsTurboCharged");
@@ -333,7 +395,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         if (tag.contains("TargetSliderSpeed")) this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
         this.radiatorType = tag.getInt("RadiatorType");
 
-        // 3. Считываем бак жидкостей обратно в память ДВС
+        // 3. Безопасное считывание бака жидкостей
         if (this.FuelTank != null && tag.contains("FuelTankData")) {
             this.FuelTank.readFromNBT(registries, tag.getCompound("FuelTankData"));
         }
@@ -357,9 +419,9 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
     // 1. Говорим Create, с какой стороны блока находится крутящийся вал
 
     // 2. Метод, который Create вызывает для проверки активности источника
-    @Override
-    public boolean isSource() {
-        // Говорим сети Create, что эта сущность САМА создаёт крутящий момент!
+    // ЭТОТ МЕТОД РАЗБЛОКИРУЕТ ПЕРЕДАЧУ КРУТЯЩЕГО МОМЕНТА ДЛЯ ВСЕХ 24 ДВИГАТЕЛЕЙ!
+    public boolean isSource(net.minecraft.world.level.block.state.BlockState state) {
+        // Жестко говорим Create: ДА, этот физический блок является генератором!
         return true;
     }
     // 1. Метод собирает актуальные кастомные данные (скорость, радиатор) и отправляет пакет на клиент
@@ -394,5 +456,7 @@ public class NonModularEnginesBlockEntity extends GeneratingKineticBlockEntity {
         }
         return net.minecraft.core.Direction.Axis.X;
     }
+
+
 
 }

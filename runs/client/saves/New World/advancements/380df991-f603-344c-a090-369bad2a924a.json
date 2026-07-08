@@ -504,5 +504,53 @@
     },
     "done": true
   },
+  "offroad:recipes/misc/large_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-08 00:55:02 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/steering_wheel": {
+    "criteria": {
+      "has_ingredient": "2026-07-08 00:55:02 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/monstrous_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-08 00:55:02 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-08 00:55:02 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/small_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-08 00:55:02 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/speedometer_from_conversion": {
+    "criteria": {
+      "has_item": "2026-07-08 01:29:58 +0500"
+    },
+    "done": true
+  },
+  "create:stressometer": {
+    "criteria": {
+      "0": "2026-07-08 01:29:59 +0500"
+    },
+    "done": true
+  },
+  "create:shifting_gears": {
+    "criteria": {
+      "0": "2026-07-08 01:35:48 +0500"
+    },
+    "done": true
+  },
   "DataVersion": 3955
 }
