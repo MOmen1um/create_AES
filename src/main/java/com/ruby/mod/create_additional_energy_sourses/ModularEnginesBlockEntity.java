@@ -3,11 +3,14 @@ package com.ruby.mod.create_additional_energy_sourses;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;
 
-// Наследуемся от нашего универсального класса из папки Setup
-public class ModularEnginesBlockEntity extends com.ruby.mod.create_additional_energy_sourses.NonModularEnginesBlockEntity {
+// Расширяем наш универсальный класс, чтобы забрать логику считывания имени блока и всю физику V8
+public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
 
     public ModularEnginesBlockEntity(BlockPos pos, BlockState state) {
-        // Передаем ровно 2 аргумента в супер-конструктор (как он теперь и просит)!
+        // Прокидываем ровно 2 аргумента наверх, чтобы состыковаться с новым конструктором
         super(pos, state);
     }
+
+    // Если в будущем для модульных ДВС тебе понадобится кастомная формула SU
+    // или другое поведение, мы сможем переопределить методы прямо здесь!
 }

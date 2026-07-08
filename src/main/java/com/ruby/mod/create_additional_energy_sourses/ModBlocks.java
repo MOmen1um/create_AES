@@ -147,13 +147,12 @@ public class ModBlocks {
                     TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get()
             ).build(null));
 
-    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ МОДУЛЬНЫХ ДВИГАТЕЛЕЙ (Раскомментируем и чистим!)
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =
-            BLOCK_ENTITIES.register("modular_engine_entity", () -> BlockEntityType.Builder.of(
-                    // Передаем строго pos и state!
-                    (pos, state) -> new ModularEnginesBlockEntity(pos, state),
+    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ МОДУЛЬНЫХ ДВИГАТЕЛЕЙ (Чистый и автоматический!)
+    public static final net.minecraft.core.Holder MODULAR_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("modular_engine_entity", () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
+                    ModularEnginesBlockEntity::new, // Передаем ссылку на наш автоматический 2-аргументный конструктор
 
-                    // Твоя сетка модульных блоков капсом
+                    // Твоя сетка модульных моторов капсом
                     MODULAR_IRON_I4.get(), MODULAR_IRON_V8.get(), MODULAR_IRON_W16.get(), MODULAR_IRON_R32.get(),
                     MODULAR_ALUMINUM_I4.get(), MODULAR_ALUMINUM_V8.get(), MODULAR_ALUMINUM_W16.get(), MODULAR_ALUMINUM_R32.get(),
                     MODULAR_TITANIUM_I4.get(), MODULAR_TITANIUM_V8.get(), MODULAR_TITANIUM_W16.get(), MODULAR_TITANIUM_R32.get()
@@ -174,7 +173,7 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion();
 
-            return isModular ? new ModularEnginesBlock(props, material, type) : new NonModularEnginesBlock(props, material, type);
+            return isModular ? new ModularEnginesBlock(props) : new NonModularEnginesBlock(props);
         });
 
         ModItems.ITEMS.register(id, () -> new BlockItem(registeredBlock.get(), new Item.Properties()));

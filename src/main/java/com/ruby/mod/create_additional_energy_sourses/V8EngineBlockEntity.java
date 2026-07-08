@@ -22,23 +22,30 @@ import java.util.List;
 public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     public final FluidTank fuelTank = new FluidTank(4000);
-    private int burnTimeRemaining = 0;
+    protected int burnTimeRemaining = 0;
     private float currentSpeed = 0;
     private float lastSentSpeed = -1f;
 
     public float engineQuality = 1.0f;
     public float secretEfficiency = 1.0f;
-    public String engineMaterial;
+    protected String engineMaterial;
     public float engineTemperature = 20.0f;
     public boolean isTurboCharged = false;
 
     private int accelerationTicks = 0;
     private int overheatMeltingTimer = 0;
-    private float maxMeltingTemp;
+    protected float maxMeltingTemp;
+    protected int pistonCount = 8;
+    protected String engineType = "V";
 
     // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
         this(ModBlocks.V8_ENGINE_ENTITY.get(), pos, state, "iron");
+    }
+    // Наш гибкий конструктор для детей перенаправляет вызов в твой главный рабочий конструктор на строке 51!
+    public V8EngineBlockEntity(net.minecraft.world.level.block.entity.BlockEntityType<?> customType, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state) {
+        // Передаем тип, позицию, стейт и дефолтный чугун, чтобы запустилась вся базовая инициализация баков!
+        this(customType, pos, state, "iron");
     }
 
     // Главный конструктор
@@ -369,7 +376,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public float calculateAddedStressCapacity() {
         if (currentSpeed <= 0) return 0;
         float materialMultiplier = engineMaterial.equals("iron") ? 15.0f : 10.0f;
-        return currentSpeed * materialMultiplier * secretEfficiency;
+        return currentSpeed * materialMultiplier;
     }
 
     @Override
