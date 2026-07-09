@@ -1,0 +1,8 @@
+[
+  {"version":2},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_r32_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:cogwheel"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:creative_motor"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:mechanical_press"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create:speedometer"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+]

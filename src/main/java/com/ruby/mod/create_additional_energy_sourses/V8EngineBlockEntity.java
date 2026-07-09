@@ -87,7 +87,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
             net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
-            if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+            if (neighborBE instanceof BaseRadiatorBlockEntity radiator && this.hasRadiatorConnected()) {
                 String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
 
                 // Просто проверяем, что вода ЕСТЬ. Физически тратить её будем в тиках!
@@ -371,18 +371,49 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 // 200 тиков = 10 секунд на максимальном жаре без воды. Время вышло — БАБАХ!
                 if (this.overheatMeltingTimer >= 200) {
                     if (!this.level.isClientSide) {
-                        // Создаем полноценный взрыв Майнкрафта (сила 3.0f, поджигает блоки, уничтожает двигатель)
+                        // 1. Вычисляем базовую силу от материала
+                        float basePower = switch (this.engineMaterial != null ? this.engineMaterial : "iron") {
+                            case "aluminum" -> 12.0f;
+                            case "titanium" -> 25.0f;
+                            default -> 5.0f;
+                        };
+
+                        // 2. ОПРЕДЕЛЯЕМ ТИП ДВИГАТЕЛЯ И КРАТНО ВЫРАЩИВАЕМ СИЛУ ВЗРЫВА
+                        float typeMultiplier = 1.0f; // По умолчанию для V8 оставляем х1
+
+                        // Берем имя блока для точного определения конфигурации цилиндров
+                        String blockName = this.getBlockState().getBlock().toString().toLowerCase();
+
+                        if (blockName.contains("i4") || blockName.contains("inline")) {
+                            typeMultiplier = 0.5f;   // Рядный — в 2 раза слабее
+                        } else if (blockName.contains("w16")) {
+                            typeMultiplier = 2.0f;   // W16 — в 2 раза сильнее!
+                        } else if (blockName.contains("radial") || blockName.contains("r32")) {
+                            typeMultiplier = 4.0f;   // Радиальный (звездообразный) — в 4 раза сильнее! 🌋
+                        }
+
+                        // Применяем множитель типа к базовой силе
+                        float explosionPower = basePower * typeMultiplier;
+
+                        // 3. Добавляем бонус от остатков топлива
+                        if (!this.fuelTank.isEmpty()) {
+                            explosionPower += ((float) this.fuelTank.getFluidAmount() / 100.0f);
+                        }
+
+                        // 4. Твой стабильный ванильный метод взрыва
                         this.level.explode(null,
                                 this.worldPosition.getX() + 0.5,
                                 this.worldPosition.getY() + 0.5,
                                 this.worldPosition.getZ() + 0.5,
-                                3.0f, // Сила взрыва (чуть меньше ТНТ, но разнесет всё вокруг)
-                                net.minecraft.world.level.Level.ExplosionInteraction.BLOCK // Разрушает блоки
+                                explosionPower,
+                                true,
+                                net.minecraft.world.level.Level.ExplosionInteraction.TNT
                         );
-                        // Полностью удаляем BlockEntity, так как его разорвало на куски
+
+                        // Удаляем останки ДВС
                         this.level.removeBlock(this.worldPosition, false);
                     }
-                    return; // Немедленно выходим из тика, блока больше нет!
+                    return;
                 }
             }
         } else {
@@ -547,7 +578,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
             net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
-            if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+            if (neighborBE instanceof BaseRadiatorBlockEntity radiator && this.hasRadiatorConnected()) {
                 String beName = net.minecraft.world.level.block.entity.BlockEntityType.getKey(radiator.getType()).toString();
                 String tierName = "ОБЫЧНЫЙ";
                 String tierColor = "§7";
