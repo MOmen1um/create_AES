@@ -20,3 +20,7 @@ type = "required"
 versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
+
+[[ponder.plugins]]
+modId="create_additional_energy_sourses"
+pluginClass="com.ruby.mod.create_additional_energy_sourses.ModPonderPlugin"

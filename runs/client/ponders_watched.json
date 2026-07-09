@@ -1,1 +1,1 @@
-["create:sail","simulated:docking_connector","simulated:swivel_bearing_intro","simulated:symmetric_sail","simulated:rope_intro"]
+["simulated:portable_engine","simulated:docking_connector","create:mechanical_drill","createdieselgenerators:diesel_engine","create:deployer","simulated:swivel_bearing_intro","simulated:rope_intro","create:sail","createdieselgenerators:huge_diesel_engine","simulated:physics_assembler_intro","simulated:symmetric_sail","create:rope_pulley","createdieselgenerators:large_diesel_engine"]

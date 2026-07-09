@@ -138,7 +138,7 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
                     if (beName.contains("copper")) radiatorText = "§6Медный +25%";
                     else if (beName.contains("steel")) radiatorText = "§7Стальной +50%";
                     else if (beName.contains("brass")) radiatorText = "§eЛатунный +75%";
-                    else if (beName.contains("ultimate")) radiatorText = "§bУЛЬТИМАТИВНЫЙ +100%";
+                    else if (beName.contains("ultimate")) radiatorText = "§bТитановый +100%";
                     else radiatorText = "§fСтандартный радиатор";
                 }
             }
@@ -207,7 +207,8 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
                         tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Охлаждение: §4НЕТ ВОДЫ!"));
                     }
                 } else {
-                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Охлаждение: §7НЕТ РАДИАТОРА"));
+                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪§4НЕТ РАДИАТОРА"));
+                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪§4ИЛИ ОН НЕПРАВИЛЬНО ПОДКЛЮЧЕН"));
                 }
             }
         }
