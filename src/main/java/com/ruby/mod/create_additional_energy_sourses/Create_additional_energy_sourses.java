@@ -35,8 +35,8 @@ public class Create_additional_energy_sourses {
                         // 2. Радиаторы
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_COPPER_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_STEEL_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_BRASS_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_ULTIMATE_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_GOLD_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_TITANIUM_ITEM.get()));
                         // 3. ДОБАВЛЯЕМ СТАБИЛЬНЫЙ КЛАССИЧЕСКИЙ ЭТАЛОН НАПРЯМУЮ ЧЕРЕЗ РЕЕСТР ПРЕДМЕТОВ
                         net.minecraft.world.item.Item classicItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
                                 net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "v8_engine_classic")
@@ -93,7 +93,7 @@ public class Create_additional_energy_sourses {
             // 2. Латунный
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_BRASS_ENTITY.get(),
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_GOLD_ENTITY.get(),
                     (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
             );
 
@@ -107,7 +107,7 @@ public class Create_additional_energy_sourses {
             // 4. Топовый (Ультимативный)
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_ULTIMATE_ENTITY.get(),
+                    (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_TITANIUM_ENTITY.get(),
                     (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
             );
             event.registerBlockEntity(

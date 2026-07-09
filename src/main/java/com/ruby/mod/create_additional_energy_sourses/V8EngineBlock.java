@@ -79,6 +79,8 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
                     // Активируем турбонаддув!
                     v8.isTurboCharged = true;
 
+                    v8.updateGeneratedRotation();
+
                     // Забираем 1 турбокомпрессор из руки (если игрок не в креативе)
                     if (!player.isCreative()) {
                         heldItem.shrink(1);

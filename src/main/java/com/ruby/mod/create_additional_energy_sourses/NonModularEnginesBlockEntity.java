@@ -66,32 +66,37 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
     public float calculateAddedStressCapacity() {
         float speed = Math.abs(getSpeed());
 
-        // Защита от загрузки чанка
+        // Защита от загрузки чанка (пока сеть Create не проснулась)
         if (speed < 8.0f || this.burnTimeRemaining <= 0) return 0f;
 
-        // 1. Базовая фиксированная мощность
-        float targetFixedSU = switch (this.engineMaterial != null ? this.engineMaterial : "cast_iron") {
-            case "cast_iron" -> 1920;
-            case "aluminum"  -> 3840;
-            case "titanium"  -> 6400;
-            default -> 1920f;
-        };
+        // 1. Базовая фиксированная мощность материала
+        float targetFixedSU = 1920f*4;
+        if (this.engineMaterial != null) {
+            if (this.engineMaterial.equals("aluminum")) targetFixedSU = 3840f*4;
+            if (this.engineMaterial.equals("titanium")) targetFixedSU = 6400f*8;
+        }
 
-        // 2. Множитель поршней
-        float typeMultiplier = "I".equals(this.engineType) ? 4.0f : ("V".equals(this.engineType) ? 8.0f : ("W".equals(this.engineType) ? 16.0f : 32.0f));
+        // 2. Безопасный расчёт множителя поршней (без вложенных тернарников)
+        float typeMultiplier = 1.0f;
+        String currentType = this.engineType != null ? this.engineType : "I";
+
+        if (currentType.equals("V")) typeMultiplier = 8.0f;
+        else if (currentType.equals("W")) typeMultiplier = 16.0f;
+        else if (currentType.equals("R")) typeMultiplier = 32.0f;
+        else typeMultiplier = 4.0f; // Для рядного "I" (I4)
+
         targetFixedSU *= typeMultiplier;
 
-        // 3. Честное умножение х2 от турбины
+        // 3. Честное умножение х2 от турбины (теперь работает для всех типов!)
         if (this.isTurboCharged) {
             targetFixedSU *= 2.0f;
         }
 
-        // 4. Честное умножение х2 от радиатора (если он установлен перед ДВС)
         if (hasRadiatorConnected()) {
-            targetFixedSU *= 2.0f;
+            return targetFixedSU / (speed / 2.0f);
         }
 
-
+        // Если радиатора нет, возвращаем стандартное деление
         return targetFixedSU / speed;
     }
     @Override
@@ -171,7 +176,7 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
         float currentSU = 0;
 
         if (Math.abs(getSpeed()) >= 8.0f) {
-            float powerPerPiston = "titanium".equals(this.engineMaterial) ? 6400f : ("aluminum".equals(this.engineMaterial) ? 3840f : 1920f);
+            float powerPerPiston = "titanium".equals(this.engineMaterial) ? 6400f*8 : ("aluminum".equals(this.engineMaterial) ? 3840f*4 : 1920f*4);
             currentSU = powerPerPiston * this.pistonCount;
 
             if (this.isTurboCharged) currentSU *= 2.0f;

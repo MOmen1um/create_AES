@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_additional_energy_sourses:block/radiator_copper", "y": 180 },
+    "facing=east":  { "model": "create_additional_energy_sourses:block/radiator_copper", "y": 270 },
+    "facing=south": { "model": "create_additional_energy_sourses:block/radiator_copper" },
+    "facing=west":  { "model": "create_additional_energy_sourses:block/radiator_copper", "y": 90 }
+  }
+}

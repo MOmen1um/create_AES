@@ -18,7 +18,15 @@ import java.util.List;
 
 public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
-    public final FluidTank fuelTank = new FluidTank(1000);
+    public final FluidTank fuelTank = new FluidTank(1000) {
+        @Override
+        protected void onContentsChanged() {
+            super.onContentsChanged();
+            // Просто сохраняем данные в Майнкрафте, без вызова цепных реакций сетей!
+            V8EngineBlockEntity.this.setChanged();
+        }
+    };
+    private boolean wasFuelEmpty = true;
     protected int burnTimeRemaining = 0;
     private float currentSpeed = 0;
     private float lastSentSpeed = 0f;
@@ -32,6 +40,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     protected float maxMeltingTemp;
     protected int pistonCount = 8;
     protected String engineType = "V";
+    private boolean wasWaterEmpty;
 
     // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
@@ -253,6 +262,34 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             currentSpeed = 0;
             return;
         }
+        if (this.level != null && !this.level.isClientSide) {
+
+            // Смотрим, есть ли топливо в баке
+            boolean hasFuelNow = this.fuelTank.getFluidAmount() > 0;
+
+            // Заводим флаг (переменную класса), чтобы мотор помнил своё прошлое состояние топлива
+            // Добавь в в самый верх класса V8EngineBlockEntity!
+            if (hasFuelNow && this.wasFuelEmpty) {
+                // Мотор только что заправили! Мгновенно обновляем сеть без рекурсий
+                this.updateGeneratedRotation();
+                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+                this.wasFuelEmpty = false; // Запоминаем, что бак больше не пустой
+            } else if (!hasFuelNow && !this.wasFuelEmpty) {
+                // Топливо только что кончилось! Сбрасываем сеть в ноль
+                this.updateGeneratedRotation();
+                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+                this.wasFuelEmpty = true; // Запоминаем, что бак опустел
+            }
+            // Точно такая же проверка для воды в радиаторе!
+            boolean hasWaterNow = this.hasRadiatorConnected();
+            // Объяви private boolean wasWaterEmpty = true; в самом верху класса
+            if (hasWaterNow != !this.wasWaterEmpty) {
+                this.wasWaterEmpty = !hasWaterNow;
+                this.setChanged();
+                this.updateGeneratedRotation();
+                this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(), 3);
+            }
+        }
 
         float ambientTemp = getAmbientTemperature();
         float meltingPoint = getMaterialMeltingPoint();
@@ -426,6 +463,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             this.sendData(); // <--- ПИНАЕТ КЭШ FLYWHEEL И СИНХРОНИЗИРУЕТ ДАННЫЕ С КЛИЕНТОМ
             this.setChanged();
         }
+
     }
 
     private float getMaterialMeltingPoint() {
