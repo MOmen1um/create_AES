@@ -95,7 +95,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                     if (beName.contains("copper")) currentMultiplier = 1.25f;
                     else if (beName.contains("steel")) currentMultiplier = 1.50f;
                     else if (beName.contains("brass")) currentMultiplier = 1.75f;
-                    else if (beName.contains("ultimate")) currentMultiplier = 2.00f;
+                    else if (beName.contains("titanium")) currentMultiplier = 2.00f;
                 }
             }
         }

@@ -52,22 +52,22 @@ public class ModBlocks {
                     THERMO_GENERATOR.get()).build(null));
 
     public static final DeferredHolder<Block, Block> RADIATOR_COPPER = BLOCKS.register("radiator_copper",
-            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(2.0f).sound(SoundType.COPPER), () -> ModBlocks.RADIATOR_COPPER_ENTITY.get()));
+            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(2.0f).sound(SoundType.COPPER).noOcclusion(), () -> ModBlocks.RADIATOR_COPPER_ENTITY.get()));
     public static final DeferredHolder<Item, BlockItem> RADIATOR_COPPER_ITEM = ModItems.ITEMS.register("radiator_copper",
             () -> new BlockItem(RADIATOR_COPPER.get(), new Item.Properties()));
 
     public static final DeferredHolder<Block, Block> RADIATOR_GOLD = BLOCKS.register("radiator_gold",
-            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(2.5f).sound(SoundType.NETHER_GOLD_ORE), () -> ModBlocks.RADIATOR_GOLD_ENTITY.get()));
+            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(2.5f).sound(SoundType.NETHER_GOLD_ORE).noOcclusion(), () -> ModBlocks.RADIATOR_GOLD_ENTITY.get()));
     public static final DeferredHolder<Item, BlockItem> RADIATOR_GOLD_ITEM = ModItems.ITEMS.register("radiator_gold",
             () -> new BlockItem(RADIATOR_GOLD.get(), new Item.Properties()));
 
     public static final DeferredHolder<Block, Block> RADIATOR_STEEL = BLOCKS.register("radiator_steel",
-            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(4.0f).sound(SoundType.METAL), () -> ModBlocks.RADIATOR_STEEL_ENTITY.get()));
+            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(4.0f).sound(SoundType.METAL).noOcclusion(), () -> ModBlocks.RADIATOR_STEEL_ENTITY.get()));
     public static final DeferredHolder<Item, BlockItem> RADIATOR_STEEL_ITEM = ModItems.ITEMS.register("radiator_steel",
             () -> new BlockItem(RADIATOR_STEEL.get(), new Item.Properties()));
 
     public static final DeferredHolder<Block, Block> RADIATOR_TITANIUM = BLOCKS.register("radiator_titanium",
-            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(6.0f).sound(SoundType.METAL), () -> ModBlocks.RADIATOR_TITANIUM_ENTITY.get()));
+            () -> new BaseRadiatorBlock(BlockBehaviour.Properties.of().strength(6.0f).sound(SoundType.METAL).noOcclusion(), () -> ModBlocks.RADIATOR_TITANIUM_ENTITY.get()));
     public static final DeferredHolder<Item, BlockItem> RADIATOR_TITANIUM_ITEM = ModItems.ITEMS.register("radiator_titanium",
             () -> new BlockItem(RADIATOR_TITANIUM.get(), new Item.Properties()));
 

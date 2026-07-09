@@ -1,4 +1,5 @@
 [
   {"version":2},
-  {"ingredient":{"id":"create:schematic_and_quill"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"create:schematic_and_quill"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:modular_titanium_w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]
