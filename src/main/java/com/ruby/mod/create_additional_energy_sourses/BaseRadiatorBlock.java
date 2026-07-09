@@ -27,7 +27,7 @@ public class BaseRadiatorBlock extends Block implements EntityBlock {
     }
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
     }
 
     // 4. Регистрируем свойство в менеджер состояний Майнкрафта

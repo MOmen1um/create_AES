@@ -130,12 +130,27 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
         net.minecraft.core.Direction facing = state.getValue(V8EngineBlock.HORIZONTAL_FACING);
         net.minecraft.core.BlockPos frontPos = this.worldPosition.relative(facing);
+
+        // 1. Сразу достаем BlockState перед капотом, чтобы узнать, как развернут блок
+        net.minecraft.world.level.block.state.BlockState frontState = this.level.getBlockState(frontPos);
         net.minecraft.world.level.block.entity.BlockEntity neighborBE = this.level.getBlockEntity(frontPos);
 
-        // Возвращает true, если перед капотом реально стоит радиатор и он не пустой
         if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
+            // 2. ПРОВЕРКА НАПРАВЛЕНИЯ РАДИАТОРА:
+            // Проверяем, есть ли у радиатора свойство направления (на случай кастомных блоков)
+            if (frontState.hasProperty(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING)) {
+                net.minecraft.core.Direction radiatorFacing = frontState.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING);
+
+                // Если радиатор развернут НЕ лицом к двигателю (не в противоположную сторону) — возвращаем false!
+                if (radiatorFacing != facing.getOpposite()) {
+                    return false;
+                }
+            }
+
+            // 3. Твоя существующая проверка на воду в баке
             return !radiator.waterTank.isEmpty() && radiator.waterTank.getFluidAmount() > 0;
         }
+
         return false;
     }
 
@@ -155,6 +170,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         if (neighborBE instanceof BaseRadiatorBlockEntity radiator) {
             // Если бак пустой — радиатор физически не охлаждает
             if (!this.level.isClientSide) {
+                if (!this.hasRadiatorConnected()) return 0.0f;
 
                 // 2. ЖОР ВОДЫ НА СЕРВЕРЕ (когда мотор реально заведен и вращается)
                 if (Math.abs(this.currentSpeed) > 1.0f && !this.level.isClientSide) {

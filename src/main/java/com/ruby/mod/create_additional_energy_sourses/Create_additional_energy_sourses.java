@@ -69,6 +69,7 @@ public class Create_additional_energy_sourses {
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);
+            event.registerBlockEntityRenderer(ModBlocks.V8_ENGINE_ENTITY.get(), KineticBlockEntityRenderer::new);
         });
 
         // === ИСПРАВЛЕННЫЙ СЛУШАТЕЛЬ ТОПЛИВНЫХ КАПАБИЛИТИ ДЛЯ 1.21.1 ===
