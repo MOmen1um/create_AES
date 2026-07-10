@@ -4,6 +4,7 @@ import net.createmod.ponder.api.registration.PonderPlugin;
 import net.createmod.ponder.api.registration.PonderSceneRegistrationHelper;
 import net.minecraft.resources.ResourceLocation;
 
+// 1. Добавили <ResourceLocation>, чтобы не ругался @Override на строке 15
 public class ModPonderPlugin implements PonderPlugin {
 
     @Override
@@ -13,59 +14,23 @@ public class ModPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
+        // Сцена 1: Базовая кинетика, вал и интерфейс двигателя
+        // Привязываем к вашему классическому V8 двигателю
+        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
+                .addStoryBoard("scene1", ModPonderStoryboards::baseEngineScene);
 
-        // 🌟 1. РЕГИСТРИРУЕМ СЦЕНЫ НА ВСЕ ТВОИ КОНКРЕТНЫЕ ДВИГАТЕЛИ ТЕКСТОМ
-        // Мы пишем именно те ID, под которыми они регистрируются в твоём ModBlocks.java!
-        // 🌟 1. СТРОГО ТОЧНЫЕ ID ВСЕХ НЕМОДУЛЬНЫХ ДВИГАТЕЛЕЙ
-        helper.forComponents(
-                        // Чугунные (Iron) — без приставки iron_!
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "i4_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "v8_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "w16_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "r32_engine"),
+        // Сцена 2: Смеси радиаторов и правильная стыковка
+        // Привязываем, например, к медному радиатору (или любому другому рабочему)
+        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
+                .addStoryBoard("scene2", ModPonderStoryboards::radiatorSetupScene);
 
-                        // Алюминиевые (Aluminum)
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "aluminum_i4_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "aluminum_v8_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "aluminum_w16_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "aluminum_r32_engine"),
+        // Сцена 3: Немодульные двигатели (Твой эпичный W16!)
+        // Если хочешь показать его, привязываем сцену к IRON_W16
+        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
+                .addStoryBoard("scene3", ModPonderStoryboards::infiniteSpeedScene);
 
-                        // Титановые (Titanium)
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "titanium_i4_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "titanium_v8_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "titanium_w16_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "titanium_r32_engine")
-                )
-                .addStoryBoard("scene1", ModPonderStoryboards::baseEngineScene)
-                .addStoryBoard("scene2", ModPonderStoryboards::radiatorSetupScene)
-                .addStoryBoard("scene3", ModPonderStoryboards::infiniteSpeedScene)
+        // Сцена 4: Термогенератор
+        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
                 .addStoryBoard("scene4", ModPonderStoryboards::coolingAndMeltingScene);
-
-        // 🌟 2. СТРОГО ТОЧНЫЕ ID ВСЕХ МОДУЛЬНЫХ ДВИГАТЕЛЕЙ
-        helper.forComponents(
-                        // Модульные чугунные
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_iron_i4_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_iron_v8_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_iron_w16_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_iron_r32_engine"),
-
-                        // Модульные алюминиевые
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_aluminum_i4_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_aluminum_v8_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_aluminum_w16_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_aluminum_r32_engine"),
-
-                        // Модульные титановые
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_titanium_i4_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_titanium_v8_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_titanium_w16_engine"),
-                        ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", "modular_titanium_r32_engine")
-                )
-                .addStoryBoard("scene1", ModPonderStoryboards::baseEngineScene)
-                .addStoryBoard("scene2", ModPonderStoryboards::radiatorSetupScene)
-                .addStoryBoard("scene3", ModPonderStoryboards::infiniteSpeedScene)
-                .addStoryBoard("scene4", ModPonderStoryboards::coolingAndMeltingScene);
-
     }
 }
-
