@@ -128,4 +128,10 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         // x2: 15, y2: 14, z2: 15 (модель чуть ниже блока по высоте)
         return Block.box(1.0, 0.0, 1.0, 15.0, 16.0, 15.0);
     }
+    // Говорим Create, что при клике или зажатии W на этом блоке нужно открыть Ponder
+    @Override
+    public void onPlace(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level, BlockPos pos, net.minecraft.world.level.block.state.BlockState oldState, boolean isMoving) {
+        super.onPlace(state, level, pos, oldState, isMoving);
+        // Этот метод-маркер автоматически связывает физический блок в мире с подсказкой кнопки W
+    }
 }

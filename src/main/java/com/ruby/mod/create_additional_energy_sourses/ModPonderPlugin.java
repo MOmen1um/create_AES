@@ -14,7 +14,7 @@ public class ModPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper helper) {
-        // Регистрируем ВСЕ сцены для одного титанового W16 красивой цепочкой
+        // Мы передаем ID блока в метод, и Ponder API автоматически привяжет его и к блоку в мире, и к предмету в инвентаре!
         helper.forComponents(new ResourceLocation[]{ ModBlocks.TITANIUM_W16.getId() })
                 .addStoryBoard("scene1", ModPonderStoryboards::baseEngineScene)
                 .addStoryBoard("scene2", ModPonderStoryboards::radiatorSetupScene)
