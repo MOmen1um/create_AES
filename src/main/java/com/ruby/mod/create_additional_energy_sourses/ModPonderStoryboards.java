@@ -38,6 +38,7 @@ public class ModPonderStoryboards {
 
     // ❄️ Сцена 2: Смысл радиаторов и правильная стыковка
     public static void radiatorSetupScene(SceneBuilder scene, SceneBuildingUtil util) {
+        // Изменяем первый аргумент строго на "radiator_setup", так как файл называется radiator_setup.nbt!
         scene.title("radiator_setup", "Анатомия охлаждения: Правильная установка");
         scene.configureBasePlate(0, 0, 8);
         scene.showBasePlate();
