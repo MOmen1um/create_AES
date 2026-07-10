@@ -1,10 +1,6 @@
 {
-  "item.create_additional_energy_sourses.advanced_precision_mechanism": "Продвинутый механизм точности",
-  "block.create_additional_energy_sourses.thermo_generator": "Термогенератор",
-  "itemGroup.create_additional_energy_sourses": "Create: Дополнительная энергия!",
-  "item.create_additional_energy_sourses.advanced_pickaxe": "Продвинутая кирка",
-  "item.create_additional_energy_sourses.heavy_handle":"Тяжёлое рукоять",
-  "item.create_additional_energy_sourses.heavy_tip":"Усиленый наконечник",
-  "item.create_additional_energy_sourses.pickaxe_core":"Основание наконечника"
-
+  "create_additional_energy_sourses.ponder.scene1.title": "Основы ДВС: Мощность и Интерфейс",
+  "create_additional_energy_sourses.ponder.scene2.title": "Анатомия охлаждения: Правильная установка",
+  "create_additional_energy_sourses.ponder.scene3.title": "Концепция безлимитной скорости",
+  "create_additional_energy_sourses.ponder.scene4.title": "Гидравлика и последствия перегрева"
 }
