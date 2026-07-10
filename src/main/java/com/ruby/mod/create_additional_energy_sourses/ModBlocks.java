@@ -113,22 +113,34 @@ public class ModBlocks {
 
     // МОДУЛЬНЫЕ (IRON, ALUMINUM, TITANIUM)
     // Модульные чугунные
-    public static final DeferredHolder<Block, Block> MODULAR_IRON_I4 = registerEngine("modular_iron_i4_engine", "iron", "i4", true);
-    public static final DeferredHolder<Block, Block> MODULAR_IRON_V8 = registerEngine("modular_iron_v8_engine", "iron", "v8", true);
-    public static final DeferredHolder<Block, Block> MODULAR_IRON_W16 = registerEngine("modular_iron_w16_engine", "iron", "w16", true);
-    public static final DeferredHolder<Block, Block> MODULAR_IRON_R32 = registerEngine("modular_iron_r32_engine", "iron", "r32", true);
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_I2 = registerEngine("modular_iron_i2_engine", "iron", "i2", true);
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_I2_CONTROLLER = registerController("modular_iron_i2_controller", "iron", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_V4 = registerEngine("modular_iron_v4_engine", "iron", "v4", true);
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_V4_CONTROLLER = registerController("modular_iron_v4_controller", "iron", "v4");
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_W8 = registerEngine("modular_iron_w8_engine", "iron", "w8", true);
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_W8_CONTROLLER = registerController("modular_iron_w8_controller", "iron", "w8");
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_R16 = registerEngine("modular_iron_r16_engine", "iron", "r16", true);
+    public static final DeferredHolder<Block, Block> MODULAR_IRON_R16_CONTROLLER = registerController("modular_iron_r16_controller", "iron", "r16");
 
     // Модульные алюминиевые
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_I4 = registerEngine("modular_aluminum_i4_engine", "aluminum", "i4", true);
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V8 = registerEngine("modular_aluminum_v8_engine", "aluminum", "v8", true);
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W16 = registerEngine("modular_aluminum_w16_engine", "aluminum", "w16", true);
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R32 = registerEngine("modular_aluminum_r32_engine", "aluminum", "r32", true);
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_I2 = registerEngine("modular_aluminum_i2_engine", "aluminum", "i2", true);
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_I2_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V4 = registerEngine("modular_aluminum_v4_engine", "aluminum", "v4", true);
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V4_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W8 = registerEngine("modular_aluminum_w8_engine", "aluminum", "w8", true);
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W8_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R16 = registerEngine("modular_aluminum_r16_engine", "aluminum", "r16", true);
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R16_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
 
     // Модульные титановые
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I4 = registerEngine("modular_titanium_i4_engine", "titanium", "i4", true);
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V8 = registerEngine("modular_titanium_v8_engine", "titanium", "v8", true);
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W16 = registerEngine("modular_titanium_w16_engine", "titanium", "w16", true);
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R32 = registerEngine("modular_titanium_r32_engine", "titanium", "r32", true);
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I2 = registerEngine("modular_titanium_i2_engine", "titanium", "i2", true);
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I2_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V4 = registerEngine("modular_titanium_v4_engine", "titanium", "v4", true);
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V4_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W8 = registerEngine("modular_titanium_w8_engine", "titanium", "w8", true);
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W8_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16 = registerEngine("modular_titanium_r16_engine", "titanium", "r16", true);
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
 
 
     // ==========================================
@@ -147,15 +159,17 @@ public class ModBlocks {
                     TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get()
             ).build(null));
 
-    // УНИВЕРСАЛЬНЫЙ ТИП ДЛЯ ВСЕХ МОДУЛЬНЫХ ДВИГАТЕЛЕЙ (Чистый и автоматический!)
-    public static final net.minecraft.core.Holder MODULAR_ENGINE_ENTITY =
-            BLOCK_ENTITIES.register("modular_engine_entity", () -> net.minecraft.world.level.block.entity.BlockEntityType.Builder.of(
-                    ModularEnginesBlockEntity::new, // Передаем ссылку на наш автоматический 2-аргументный конструктор
-
-                    // Твоя сетка модульных моторов капсом
-                    MODULAR_IRON_I4.get(), MODULAR_IRON_V8.get(), MODULAR_IRON_W16.get(), MODULAR_IRON_R32.get(),
-                    MODULAR_ALUMINUM_I4.get(), MODULAR_ALUMINUM_V8.get(), MODULAR_ALUMINUM_W16.get(), MODULAR_ALUMINUM_R32.get(),
-                    MODULAR_TITANIUM_I4.get(), MODULAR_TITANIUM_V8.get(), MODULAR_TITANIUM_W16.get(), MODULAR_TITANIUM_R32.get()
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =
+            BLOCK_ENTITIES.register("modular_engine_entity", () -> BlockEntityType.Builder.of(
+                    ModularEnginesBlockEntity::new,
+                    // Обычные модули
+                    MODULAR_IRON_I2.get(), MODULAR_IRON_V4.get(), MODULAR_IRON_W8.get(), MODULAR_IRON_R16.get(),
+                    MODULAR_ALUMINUM_I2.get(), MODULAR_ALUMINUM_V4.get(), MODULAR_ALUMINUM_W8.get(), MODULAR_ALUMINUM_R16.get(),
+                    MODULAR_TITANIUM_I2.get(), MODULAR_TITANIUM_V4.get(),MODULAR_TITANIUM_W8.get(), MODULAR_TITANIUM_R16.get(),
+                    // Контроллеры
+                    MODULAR_IRON_I2_CONTROLLER.get(), MODULAR_IRON_V4_CONTROLLER.get(), MODULAR_IRON_W8_CONTROLLER.get(), MODULAR_IRON_R16_CONTROLLER.get(),
+                    MODULAR_ALUMINUM_I2_CONTROLLER.get(), MODULAR_ALUMINUM_V4_CONTROLLER.get(), MODULAR_IRON_W8_CONTROLLER.get(), MODULAR_ALUMINUM_R16_CONTROLLER.get(),
+                    MODULAR_TITANIUM_I2_CONTROLLER.get(), MODULAR_TITANIUM_V4_CONTROLLER.get(), MODULAR_TITANIUM_W8_CONTROLLER.get(), MODULAR_TITANIUM_R16_CONTROLLER.get()
             ).build(null));
 
 

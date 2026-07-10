@@ -67,6 +67,7 @@ public class Create_additional_energy_sourses {
         CREATIVE_MODE_TABS.register(modEventBus);
 
 
+
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
             event.registerBlockEntityRenderer(ModBlocks.THERMO_GEN_ENTITY.get(), KineticBlockEntityRenderer::new);

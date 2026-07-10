@@ -13,10 +13,11 @@ public class ModPonderPlugin implements PonderPlugin {
 
     @Override
     public void registerScenes(PonderSceneRegistrationHelper helper) {
-        // Оставляем только чистый вызов сцен через правильный .location()
-        ResourceLocation titaniumEngineId = ModBlocks.TITANIUM_W16.getKey().location();
-
-        helper.forComponents(new ResourceLocation[]{ titaniumEngineId })
+        // Силой привязываем сцену ОДНОВРЕМЕННО и к БЛОКУ, и к ПРЕДМЕТУ из инвентаря!
+        helper.forComponents(
+                        ModBlocks.TITANIUM_W16.get(), // Физический блок в мире
+                        ModBlocks.TITANIUM_W16.get().asItem() // Иконка предмета в инвентаре/JEI
+                )
                 .addStoryBoard("engine_base", ModPonderStoryboards::baseEngineScene)
                 .addStoryBoard("radiator_setup", ModPonderStoryboards::radiatorSetupScene)
                 .addStoryBoard("infinite_speed", ModPonderStoryboards::infiniteSpeedScene)
