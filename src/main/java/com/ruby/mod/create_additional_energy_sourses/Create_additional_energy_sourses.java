@@ -7,6 +7,7 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;

@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "create_additional_energy_sourses:block/v8_engine_classic" }
+  }
+}
