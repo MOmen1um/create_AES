@@ -1,3 +1,4 @@
 [
-  {"version":2}
+  {"version":2},
+  {"ingredient":{"id":"create_additional_energy_sourses:modular_iron_v4_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

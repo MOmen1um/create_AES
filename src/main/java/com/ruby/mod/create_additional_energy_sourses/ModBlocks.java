@@ -126,21 +126,21 @@ public class ModBlocks {
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_I2 = registerEngine("modular_aluminum_i2_engine", "aluminum", "i2", true);
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_I2_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V4 = registerEngine("modular_aluminum_v4_engine", "aluminum", "v4", true);
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V4_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V4_CONTROLLER = registerController("modular_aluminum_v4_controller", "aluminum", "i2");
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W8 = registerEngine("modular_aluminum_w8_engine", "aluminum", "w8", true);
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W8_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W8_CONTROLLER = registerController("modular_aluminum_w8_controller", "aluminum", "i2");
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R16 = registerEngine("modular_aluminum_r16_engine", "aluminum", "r16", true);
-    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R16_CONTROLLER = registerController("modular_aluminum_i2_controller", "aluminum", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R16_CONTROLLER = registerController("modular_aluminum_r16_controller", "aluminum", "i2");
 
     // Модульные титановые
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I2 = registerEngine("modular_titanium_i2_engine", "titanium", "i2", true);
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I2_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V4 = registerEngine("modular_titanium_v4_engine", "titanium", "v4", true);
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V4_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V4_CONTROLLER = registerController("modular_titanium_v4_controller", "titanium", "i2");
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W8 = registerEngine("modular_titanium_w8_engine", "titanium", "w8", true);
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W8_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W8_CONTROLLER = registerController("modular_titanium_w8_controller", "titanium", "i2");
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16 = registerEngine("modular_titanium_r16_engine", "titanium", "r16", true);
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16_CONTROLLER = registerController("modular_titanium_i2_controller", "titanium", "i2");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16_CONTROLLER = registerController("modular_titanium_r16_controller", "titanium", "i2");
 
 
     // ==========================================
@@ -160,17 +160,27 @@ public class ModBlocks {
             ).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =
-            BLOCK_ENTITIES.register("modular_engine_entity", () -> BlockEntityType.Builder.of(
-                    ModularEnginesBlockEntity::new,
-                    // Обычные модули
-                    MODULAR_IRON_I2.get(), MODULAR_IRON_V4.get(), MODULAR_IRON_W8.get(), MODULAR_IRON_R16.get(),
-                    MODULAR_ALUMINUM_I2.get(), MODULAR_ALUMINUM_V4.get(), MODULAR_ALUMINUM_W8.get(), MODULAR_ALUMINUM_R16.get(),
-                    MODULAR_TITANIUM_I2.get(), MODULAR_TITANIUM_V4.get(),MODULAR_TITANIUM_W8.get(), MODULAR_TITANIUM_R16.get(),
-                    // Контроллеры
-                    MODULAR_IRON_I2_CONTROLLER.get(), MODULAR_IRON_V4_CONTROLLER.get(), MODULAR_IRON_W8_CONTROLLER.get(), MODULAR_IRON_R16_CONTROLLER.get(),
-                    MODULAR_ALUMINUM_I2_CONTROLLER.get(), MODULAR_ALUMINUM_V4_CONTROLLER.get(), MODULAR_IRON_W8_CONTROLLER.get(), MODULAR_ALUMINUM_R16_CONTROLLER.get(),
-                    MODULAR_TITANIUM_I2_CONTROLLER.get(), MODULAR_TITANIUM_V4_CONTROLLER.get(), MODULAR_TITANIUM_W8_CONTROLLER.get(), MODULAR_TITANIUM_R16_CONTROLLER.get()
-            ).build(null));
+            BLOCK_ENTITIES.register("modular_engine_entity", () -> {
+                return BlockEntityType.Builder.of(
+                        (pos, state) -> {
+                            if (state.getBlock() instanceof ModularEnginesBlock modularBlock) {
+                                return new ModularEnginesBlockEntity(pos, state, modularBlock.isController());
+                            }
+                            return new ModularEnginesBlockEntity(pos, state, false);
+                        },
+
+                        // === 1. REGULAR ENGINES (12 blocks) ===
+                        MODULAR_IRON_I2.get(), MODULAR_IRON_V4.get(), MODULAR_IRON_W8.get(), MODULAR_IRON_R16.get(),
+                        MODULAR_ALUMINUM_I2.get(), MODULAR_ALUMINUM_V4.get(), MODULAR_ALUMINUM_W8.get(), MODULAR_ALUMINUM_R16.get(),
+                        MODULAR_TITANIUM_I2.get(), MODULAR_TITANIUM_V4.get(), MODULAR_TITANIUM_W8.get(), MODULAR_TITANIUM_R16.get(),
+
+                        // === 2. CONTROLLERS (12 blocks) ===
+                        MODULAR_IRON_I2_CONTROLLER.get(), MODULAR_IRON_V4_CONTROLLER.get(), MODULAR_IRON_W8_CONTROLLER.get(), MODULAR_IRON_R16_CONTROLLER.get(),
+                        MODULAR_ALUMINUM_I2_CONTROLLER.get(), MODULAR_ALUMINUM_V4_CONTROLLER.get(), MODULAR_ALUMINUM_W8_CONTROLLER.get(), MODULAR_ALUMINUM_R16_CONTROLLER.get(),
+                        MODULAR_TITANIUM_I2_CONTROLLER.get(), MODULAR_TITANIUM_V4_CONTROLLER.get(), MODULAR_TITANIUM_W8_CONTROLLER.get(), MODULAR_TITANIUM_R16_CONTROLLER.get()
+
+                ).build(null);
+            }); // <-- ЗАКРЫВАЕМ регистратор
 
 
     // ==========================================
@@ -191,6 +201,26 @@ public class ModBlocks {
         });
 
         ModItems.ITEMS.register(id, () -> new BlockItem(registeredBlock.get(), new Item.Properties()));
+        return registeredBlock;
+    }
+    private static DeferredHolder<Block, Block> registerController(String id, String material, String type) {
+        // 1. Считаем прочность от материала точно так же, как в твоем методе
+        float weightStrength = material.equals("titanium") ? 8.0f : (material.equals("aluminum") ? 3.0f : 4.0f);
+
+        DeferredHolder<Block, Block> registeredBlock = BLOCKS.register(id, () -> {
+            BlockBehaviour.Properties props = BlockBehaviour.Properties.of()
+                    .strength(weightStrength)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion();
+
+            // 2. ВАЖНО: передаем в конструктор ModularEnginesBlock свойства И флаг true (что это контроллер!)
+            return new ModularEnginesBlock(props, true);
+        });
+
+        // 3. Автоматически регистрируем предмет для инвентаря
+        ModItems.ITEMS.register(id, () -> new BlockItem(registeredBlock.get(), new Item.Properties()));
+
         return registeredBlock;
     }
 

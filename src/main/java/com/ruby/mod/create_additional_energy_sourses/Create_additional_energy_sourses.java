@@ -77,11 +77,30 @@ public class Create_additional_energy_sourses {
         // === ИСПРАВЛЕННЫЙ СЛУШАТЕЛЬ ТОПЛИВНЫХ КАПАБИЛИТИ ДЛЯ 1.21.1 ===
         modEventBus.addListener(net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent.class, event -> {
 
-            // 1. Открываем бак для жидкостей у всех НЕМОДУЛЬНЫХ двигателей мода
+            // 1. Fluid capability for NON-MODULAR engines (Strictly from the bottom!)
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
                     ModBlocks.NON_MODULAR_ENGINE_ENTITY.get(),
-                    (blockEntity, side) -> ((NonModularEnginesBlockEntity) blockEntity).getFluidTank()
+                    (blockEntity, side) -> {
+                        // Only allow fluid interaction from the bottom side!
+                        if (side == net.minecraft.core.Direction.DOWN) {
+                            return ((NonModularEnginesBlockEntity) blockEntity).getFluidTank();
+                        }
+                        return null; // Block access from all other sides
+                    }
+            );
+
+            // 2. Fluid capability for NEW MODULAR engines (Strictly from the bottom!)
+            event.registerBlockEntity(
+                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
+                    ModBlocks.MODULAR_ENGINE_ENTITY.get(),
+                    (blockEntity, side) -> {
+                        // Only allow fuel input from the bottom side of the block!
+                        if (side == net.minecraft.core.Direction.DOWN) {
+                            return ((ModularEnginesBlockEntity) blockEntity).getFluidTank();
+                        }
+                        return null;
+                    }
             );
 
 
@@ -116,7 +135,12 @@ public class Create_additional_energy_sourses {
             event.registerBlockEntity(
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
                     ModBlocks.V8_ENGINE_ENTITY.get(),
-                    (blockEntity, side) -> blockEntity.fuelTank
+                    (blockEntity, side) -> {
+                        if (side == net.minecraft.core.Direction.DOWN) {
+                            return ((ModularEnginesBlockEntity) blockEntity).getFluidTank();
+                        }
+                        return null;
+                    }
             );
         });
 

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "minecraft:block/cube_all" },
+    "facing=east":  { "model": "minecraft:block/cube_all", "y": 90 },
+    "facing=south": { "model": "minecraft:block/cube_all", "y": 180 },
+    "facing=west":  { "model": "minecraft:block/cube_all", "y": 270 }
+  }
+}
