@@ -16,7 +16,9 @@ public class ModPonderStoryboards {
         scene.idle(10);
 
         BlockPos enginePos = util.grid().at(4, 1, 4);
-        scene.world().showSection(util.select().position(enginePos), Direction.DOWN);
+        // Вместо одного блока мы выбираем всю область схемы от (0,0,0) до (8,5,8)
+        scene.world().showSection(util.select().cuboid(new BlockPos(0, 0, 0), new BlockPos(8, 5, 8)), Direction.DOWN);
+
         scene.idle(20);
 
         scene.overlay().showText(60)
@@ -40,12 +42,9 @@ public class ModPonderStoryboards {
         scene.configureBasePlate(0, 0, 8);
         scene.showBasePlate();
 
-        BlockPos enginePos = util.grid().at(4, 1, 3);
-        BlockPos radiatorPos = util.grid().at(4, 1, 4);
-        scene.world().showSection(util.select().position(enginePos), Direction.DOWN);
+// Показываем всю схему радиатора и двигателя сразу
+        scene.world().showSection(util.select().cuboid(new BlockPos(0, 0, 0), new BlockPos(8, 5, 8)), Direction.DOWN);
         scene.idle(15);
-
-        scene.world().showSection(util.select().position(radiatorPos), Direction.DOWN);
         scene.overlay().showText(60)
                 .text("Радиатор ОБЯЗАН быть направлен строго лицевой стороной к моторному отсеку.");
         scene.idle(70);
@@ -64,7 +63,8 @@ public class ModPonderStoryboards {
         scene.showBasePlate();
 
         BlockPos enginePos = util.grid().at(4, 1, 4);
-        scene.world().showSection(util.select().position(enginePos), Direction.DOWN);
+        // Показываем всю постройку концепции скорости
+        scene.world().showSection(util.select().cuboid(new BlockPos(0, 0, 0), new BlockPos(8, 5, 8)), Direction.DOWN);
         scene.idle(15);
 
         scene.overlay().showText(80)
@@ -85,7 +85,8 @@ public class ModPonderStoryboards {
         scene.configureBasePlate(0, 0, 8);
         scene.showBasePlate();
 
-        scene.world().showSection(util.select().layers(1, 1), Direction.DOWN);
+        // Показываем всю постройку целиком, чтобы трубы и ядро выкатились вместе
+        scene.world().showSection(util.select().cuboid(new BlockPos(0, 0, 0), new BlockPos(8, 5, 8)), Direction.DOWN);
         scene.idle(20);
 
         BlockPos radiatorPos = util.grid().at(4, 1, 4);

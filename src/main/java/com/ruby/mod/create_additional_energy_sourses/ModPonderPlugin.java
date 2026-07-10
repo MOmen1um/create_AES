@@ -13,24 +13,12 @@ public class ModPonderPlugin implements PonderPlugin {
     }
 
     @Override
-    public void registerScenes(PonderSceneRegistrationHelper<ResourceLocation> helper) {
-        // Сцена 1: Базовая кинетика, вал и интерфейс двигателя
-        // Привязываем к вашему классическому V8 двигателю
-        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
-                .addStoryBoard("scene1", ModPonderStoryboards::baseEngineScene);
-
-        // Сцена 2: Смеси радиаторов и правильная стыковка
-        // Привязываем, например, к медному радиатору (или любому другому рабочему)
-        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
-                .addStoryBoard("scene2", ModPonderStoryboards::radiatorSetupScene);
-
-        // Сцена 3: Немодульные двигатели (Твой эпичный W16!)
-        // Если хочешь показать его, привязываем сцену к IRON_W16
-        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
-                .addStoryBoard("scene3", ModPonderStoryboards::infiniteSpeedScene);
-
-        // Сцена 4: Термогенератор
-        helper.forComponents(new ResourceLocation[]{ ModBlocks.IRON_W16.getId() })
+    public void registerScenes(PonderSceneRegistrationHelper helper) {
+        // Регистрируем ВСЕ сцены для одного титанового W16 красивой цепочкой
+        helper.forComponents(new ResourceLocation[]{ ModBlocks.TITANIUM_W16.getId() })
+                .addStoryBoard("scene1", ModPonderStoryboards::baseEngineScene)
+                .addStoryBoard("scene2", ModPonderStoryboards::radiatorSetupScene)
+                .addStoryBoard("scene3", ModPonderStoryboards::infiniteSpeedScene)
                 .addStoryBoard("scene4", ModPonderStoryboards::coolingAndMeltingScene);
     }
 }
