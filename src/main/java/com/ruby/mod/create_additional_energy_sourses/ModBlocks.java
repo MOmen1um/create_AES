@@ -162,25 +162,21 @@ public class ModBlocks {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =
             BLOCK_ENTITIES.register("modular_engine_entity", () -> {
                 return BlockEntityType.Builder.of(
-                        (pos, state) -> {
-                            if (state.getBlock() instanceof ModularEnginesBlock modularBlock) {
-                                return new ModularEnginesBlockEntity(pos, state, modularBlock.isController());
-                            }
-                            return new ModularEnginesBlockEntity(pos, state, false);
-                        },
+                        // Самая чистая и безопасная фабрика в мире:
+                        (pos, state) -> new ModularEnginesBlockEntity(pos, state, false),
 
-                        // === 1. REGULAR ENGINES (12 blocks) ===
+                        // === 1. REGULAR ENGINES ===
                         MODULAR_IRON_I2.get(), MODULAR_IRON_V4.get(), MODULAR_IRON_W8.get(), MODULAR_IRON_R16.get(),
                         MODULAR_ALUMINUM_I2.get(), MODULAR_ALUMINUM_V4.get(), MODULAR_ALUMINUM_W8.get(), MODULAR_ALUMINUM_R16.get(),
                         MODULAR_TITANIUM_I2.get(), MODULAR_TITANIUM_V4.get(), MODULAR_TITANIUM_W8.get(), MODULAR_TITANIUM_R16.get(),
 
-                        // === 2. CONTROLLERS (12 blocks) ===
+                        // === 2. CONTROLLERS ===
                         MODULAR_IRON_I2_CONTROLLER.get(), MODULAR_IRON_V4_CONTROLLER.get(), MODULAR_IRON_W8_CONTROLLER.get(), MODULAR_IRON_R16_CONTROLLER.get(),
                         MODULAR_ALUMINUM_I2_CONTROLLER.get(), MODULAR_ALUMINUM_V4_CONTROLLER.get(), MODULAR_ALUMINUM_W8_CONTROLLER.get(), MODULAR_ALUMINUM_R16_CONTROLLER.get(),
                         MODULAR_TITANIUM_I2_CONTROLLER.get(), MODULAR_TITANIUM_V4_CONTROLLER.get(), MODULAR_TITANIUM_W8_CONTROLLER.get(), MODULAR_TITANIUM_R16_CONTROLLER.get()
-
                 ).build(null);
-            }); // <-- ЗАКРЫВАЕМ регистратор
+            });
+    // <-- ЗАКРЫВАЕМ регистратор
 
 
     // ==========================================
