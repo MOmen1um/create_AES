@@ -1,10 +1,16 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
 // Наследуемся напрямую от твоего идеального работающего эталона!
 public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
+
+    // НОВЫЙ КОНСТРУКТОР: Позволяет модульным наследникам передавать свой тип сущности!
+    public NonModularEnginesBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        super(type, pos, state);
+    }
 
     public NonModularEnginesBlockEntity(BlockPos pos, BlockState state) {
         // Прокидываем наверх в эталон ПРАВИЛЬНЫЙ общий тип сущности, позицию и стейт!
