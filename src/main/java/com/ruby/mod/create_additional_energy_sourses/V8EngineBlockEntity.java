@@ -154,7 +154,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         return false;
     }
 
-    private float getRadiatorCoolingEffect() {
+    protected float getRadiatorCoolingEffect() {
         if (this.level == null) return 0.0f;
 
         net.minecraft.world.level.block.state.BlockState state = this.getBlockState();

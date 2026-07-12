@@ -8,10 +8,31 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
     // Store the controller status inside the brain of our block
     private boolean isController = true;
 
-    // Fixed constructor that accepts 3 arguments from the block class
+    // Fixed constructor that accepts 3 arguments from the Block class
     public ModularEnginesBlockEntity(BlockPos pos, BlockState state, boolean isController) {
         super(pos, state);
         this.isController = isController;
+
+        // =====================================================================
+        // ВСТАВЛЯЙ СЮДА — СЕТАПИМ МОДУЛЬНЫЕ ТИПЫ ДВИГАТЕЛЕЙ:
+        // =====================================================================
+        String blockId = state.getBlock().toString().toLowerCase();
+
+        if (blockId.contains("inline2") || blockId.contains("i2")) {
+            this.engineType = "I";
+            this.pistonCount = 2;
+        } else if (blockId.contains("w8")) {
+            this.engineType = "W";
+            this.pistonCount = 8;
+        } else if (blockId.contains("radial16") || blockId.contains("r16")) {
+            this.engineType = "Radial";
+            this.pistonCount = 16;
+        } else {
+            // Default configuration for a standard modular block is V4!
+            this.engineType = "V";
+            this.pistonCount = 4;
+        }
+        // =====================================================================
     }
 
     // Getter to check if this block can open GUI and hold fuel
@@ -261,14 +282,38 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
         if (controller != this) {
             return controller.addToGoggleTooltip(tooltip, isPlayerSneaking);
         }
-
-        // 1. Базовая инфа дедушки и очистка старых строк
         super.addToGoggleTooltip(tooltip, isPlayerSneaking);
         for (int i = tooltip.size() - 1; i >= 0; i--) {
             String lineText = tooltip.get(i).getString();
-            if (lineText.contains("Спецификация ДВС")) {
+
+            // Перехватываем любую строчку, которая содержит слово спецификация у отца
+            if (lineText.toLowerCase().contains("спецификация")) {
+                String modularType = "Модульный ДВС";
+
+                if (this.engineType != null) {
+                    switch (this.engineType) {
+                        case "I" -> modularType = "Inline-2 (Рядный)";
+                        case "V" -> modularType = "V-4 Engine (V-образный)";
+                        case "W" -> modularType = "W-8 Engine (W-образный)";
+                        case "Radial" -> modularType = "Radial-16 (Авиационный монстр)";
+                    }
+                }
+
+                tooltip.set(i, net.minecraft.network.chat.Component.literal("§6⚙ Спецификация: §7МОДУЛЬНЫЙ " + modularType));
+            }
+
+            if (lineText.contains("НЕТ РАДИАТОРА") || lineText.contains("ИЛИ ОН НЕПРАВИЛЬНО ПОДКЛЮЧЕН")) {
+                tooltip.remove(i);
+            }
+        }
+        for (int i = tooltip.size() - 1; i >= 0; i--) {
+            String lineText = tooltip.get(i).getString();
+
+            // УМНАЯ ЗАМЕНА ЗАГОЛОВКА: Ищем только слово "спецификация"
+            if (lineText.toLowerCase().contains("спецификация")) {
                 tooltip.set(i, net.minecraft.network.chat.Component.literal("§6Спецификация МОДУЛЬНОГО ДВС:"));
             }
+
             if (lineText.contains("НЕТ РАДИАТОРА") || lineText.contains("ИЛИ ОН НЕПРАВИЛЬНО ПОДКЛЮЧЕН")) {
                 tooltip.remove(i);
             }
@@ -276,7 +321,7 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
 
         this.updateEngineStructure(); // Обновляем данные о длине
 
-        tooltip.add(net.minecraft.network.chat.Component.literal("§7--- СТРУКТУРА МОДУЛЕЙ ---"));
+        tooltip.add(net.minecraft.network.chat.Component.literal("📦 §7СТРУКТУРА МОДУЛЕЙ ---"));
 
         if (this.currentEngineLength == 1) {
             tooltip.add(net.minecraft.network.chat.Component.literal(" • Конфигурация: §eОдиночный блок (Не определена)"));
@@ -286,7 +331,7 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
             tooltip.add(net.minecraft.network.chat.Component.literal(" • Длина структуры: §c" + this.currentEngineLength + " / 4 §c(КРИТИЧЕСКОЕ ПРЕВЫШЕНИЕ)"));
             tooltip.add(net.minecraft.network.chat.Component.literal(" §c⚠ Двигатель слишком длинный! Мощность заблокирована."));
         }
-        tooltip.add(net.minecraft.network.chat.Component.literal(""));
+        tooltip.add(net.minecraft.network.chat.Component.literal("§8----------------------------------------------"));
 
         // --- ПОЛУЧАЕМ НАПРАВЛЕНИЯ И КООРДИНАТЫ СНАЧАЛА ---
         net.minecraft.world.level.block.state.BlockState state = this.getBlockState();
@@ -342,8 +387,6 @@ public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
                 tooltip.add(net.minecraft.network.chat.Component.literal(" • Правый радиатор: §cНЕ НАЙДЕН"));
             }
 
-            // Add a small empty space or separator line to make it look clean
-            tooltip.add(net.minecraft.network.chat.Component.literal(""));
 
             // 2. YOUR SMART EFFICIENCY LOGIC (Fully intact):
             if (waterFilledRadiatorsCount == 1) {

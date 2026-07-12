@@ -34,6 +34,36 @@ public class ModularEnginesBlock extends V8EngineBlock {
         return this.isController;
     }
     @Override
+    public void onRemove(net.minecraft.world.level.block.state.BlockState state, net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState newState, boolean isMoving) {
+        // Если блок просто меняет стейт (например, меняется свойство направления), не ломаем логику
+        if (state.getBlock() != newState.getBlock()) {
+            if (!level.isClientSide() && state.hasProperty(HORIZONTAL_FACING)) {
+                net.minecraft.core.Direction facing = state.getValue(HORIZONTAL_FACING);
+
+                // Находим позицию сзади разрушенного блока
+                net.minecraft.core.BlockPos behindPos = pos.relative(facing.getOpposite());
+
+                // Если сзади стоял другой наш модуль, даем ему команду обновиться
+                if (level.getBlockEntity(behindPos) instanceof ModularEnginesBlockEntity neighborBE) {
+                    // Если мы ушли, сосед сзади теперь может сам стать контроллером!
+                    neighborBE.setController(true);
+                    neighborBE.updateEngineStructure();
+                }
+
+                // Также находим позицию спереди разрушенного блока, чтобы обновить всю цепочку
+                net.minecraft.core.BlockPos frontPos = pos.relative(facing);
+                if (level.getBlockEntity(frontPos) instanceof ModularEnginesBlockEntity frontBE) {
+                    ModularEnginesBlockEntity controller = frontBE.getController();
+                    if (controller != null) {
+                        controller.updateEngineStructure();
+                    }
+                }
+            }
+        }
+        // Обязательно вызываем супер-метод, чтобы Майнкрафт удалил тайл из мира!
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+    @Override
     public void setPlacedBy(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos, net.minecraft.world.level.block.state.BlockState state, @org.jetbrains.annotations.Nullable net.minecraft.world.entity.LivingEntity placer, net.minecraft.world.item.ItemStack stack) {
         super.setPlacedBy(level, pos, state, placer, stack);
 
