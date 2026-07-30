@@ -20,6 +20,11 @@ public class ModBlocks {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Create_additional_energy_sourses.MODID);
 
+
+    public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.Block> IRON_V8_CARTER = BLOCKS.register("iron_v8_carter",
+            () -> new NonModularEnginesBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(3.0f).noOcclusion())
+    );
+
     // Оставлены блоки Термогенераторов и Радиаторов
     // 1. Блок Термогенератора
     public static final DeferredHolder<Block, ThermoGeneratorBlock> THERMO_GENERATOR =
@@ -157,7 +162,8 @@ public class ModBlocks {
                     // Твоя сетка моторов капсом
                     IRON_I4.get(), IRON_V8.get(), IRON_W16.get(), IRON_R32.get(),
                     ALUMINUM_I4.get(), ALUMINUM_V8.get(), ALUMINUM_W16.get(), ALUMINUM_R32.get(),
-                    TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get()
+                    TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get(),
+                    ModBlocks.IRON_V8_CARTER.get()
             ).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "create_additional_energy_sourses:block/iron_v8_carter", "y": 180 },
+    "facing=south": { "model": "create_additional_energy_sourses:block/iron_v8_carter", "y": 0 },
+    "facing=east":  { "model": "create_additional_energy_sourses:block/iron_v8_carter" },
+    "facing=west":  { "model": "create_additional_energy_sourses:block/iron_v8_carter", "y": 90 }
+  }
+}

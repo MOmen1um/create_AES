@@ -14,6 +14,10 @@ public class ModItems {
     // Твой правильный регистратор предметов
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, Create_additional_energy_sourses.MODID);
 
+    public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.item.Item, net.minecraft.world.item.Item> IRON_V8_CARTER_ITEM = ITEMS.register("iron_v8_carter",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.IRON_V8_CARTER.get(), new net.minecraft.world.item.Item.Properties())
+    );
+
 
     // Твои старые предметы (инструменты)
     public static final Supplier<Item> ADVANCED_PICKAXE = ITEMS.register("advanced_pickaxe",

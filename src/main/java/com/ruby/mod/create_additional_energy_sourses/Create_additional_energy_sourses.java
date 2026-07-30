@@ -26,6 +26,7 @@ public class Create_additional_energy_sourses {
                     .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
                     .displayItems((parameters, output) -> {
                         // 1. Стандартные предметы мода (Используем _ITEM.get() для чистых предметов!)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_V8_CARTER_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PICKAXE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_HANDLE.get()));

@@ -4,12 +4,16 @@ import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
 public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8EngineBlockEntity> {
 
@@ -62,45 +66,21 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         return ModBlocks.V8_ENGINE_ENTITY.get();
     }
 
-    @Override
-    protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state, net.minecraft.world.level.Level level, BlockPos pos, net.minecraft.world.entity.player.Player player, net.minecraft.world.phys.BlockHitResult hitResult) {
-        if (!level.isClientSide) {
-            if (level.getBlockEntity(pos) instanceof V8EngineBlockEntity v8) {
+    protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (level.isClientSide) return net.minecraft.world.InteractionResult.SUCCESS;
 
-                // Получаем предмет в главной руке игрока
-                net.minecraft.world.item.ItemStack heldItem = player.getItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND);
+        if (level.getBlockEntity(pos) instanceof V8EngineBlockEntity be) {
+            // Передаем управление менеджеру сборки, который теперь знает про оригинальный турбокомпрессор!
+            return be.assembly.handleInteraction(state, level, pos, player, hand, () -> {
+                be.setChanged();
 
-                // --- СВЯЗКА С CREATE DIESEL GENERATORS ---
-                // Динамически ищем ID турбонаддува в глобальном реестре Майнкрафта
-                net.minecraft.resources.ResourceLocation turbochargerId = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("createdieselgenerators", "engine_turbocharger");
-                net.minecraft.world.item.Item turbochargerItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(turbochargerId);
+                // Вызываем твой старый метод обновления вращения, чтобы сеть Create реагировала на изменения!
+                be.updateGeneratedRotation();
 
-                // Проверяем: если предмет существует в сборке, игрок держит именно его и турбина ещё не установлена
-                if (turbochargerItem != null && heldItem.is(turbochargerItem) && !v8.isTurboCharged) {
-                    // Активируем турбонаддув!
-                    v8.isTurboCharged = true;
-
-                    v8.updateGeneratedRotation();
-
-                    // Забираем 1 турбокомпрессор из руки (если игрок не в креативе)
-                    if (!player.isCreative()) {
-                        heldItem.shrink(1);
-                    }
-
-                    // Проигрываем сочный звук шестерёнок Create при успешной установке
-                    level.playSound(null, pos, net.minecraft.sounds.SoundEvents.IRON_TRAPDOOR_CLOSE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.2f);
-
-                    // Мгновенно синхронизируем данные, чтобы меню и очки инженера обновились!
-                    v8.setChanged();
-                    v8.sendData();
-                    level.sendBlockUpdated(pos, state, state, 3);
-
-                    return net.minecraft.world.InteractionResult.SUCCESS;
-                }
-                // -----------------------------------------
-            }
+                level.sendBlockUpdated(pos, state, state, 3);
+            });
         }
-        return super.useWithoutItem(state, level, pos, player, hitResult);
+        return net.minecraft.world.InteractionResult.PASS;
     }
     // 1. ОТКЛЮЧАЕМ ЭФФЕКТ РЕНТГЕНА (Говорим игре честно рендерить соседние блоки)
     @Override
@@ -117,8 +97,16 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     // 2. Указываем правильный тип рендера для кастомных 3D-моделей
     @Override
     public net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
-        // Передаем управление динамическому рендеру кода!
-        return RenderShape.MODEL;
+        // Вытаскиваем имя блока в нижнем регистре
+        String name = state.getBlock().toString().toLowerCase();
+
+        // Если игрок поставил КАРТЕР — скрываем корпус и включаем анимацию вала/поршней из ModClientSetup!
+        if (name.contains("carter")) {
+            return net.minecraft.world.level.block.RenderShape.ENTITYBLOCK_ANIMATED;
+        }
+
+        // Если это уже готовый двигатель — рисуем стандартную Blockbench модель корпуса
+        return net.minecraft.world.level.block.RenderShape.MODEL;
     }
 
     // 2. КАСТОМНАЯ СЕТКА ХИТБОКСА (VoxelShape)

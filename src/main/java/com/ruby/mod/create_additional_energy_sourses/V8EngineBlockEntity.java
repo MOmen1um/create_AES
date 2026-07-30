@@ -60,9 +60,20 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         super(type, pos, state);
         this.engineMaterial = material;
 
-        // УБРАЛИ РАНДОМ: Теперь при создании у всех двигателей базовые 100% параметров
+        // УПРАВЛЕНИЕ РЕМЕНЕМ: Узнаем при создании всех двигателей базовую 100% термостойкость
         this.maxMeltingTemp = getMaterialMeltingPoint();
+
+        // ВСТАВЛЯЙ СЮДА: Создаем наш менеджер сборки, когда все переменные уже применились!
+        this.assembly = new EngineAssemblyManager(this);
+
+        // ПРИНУДИТЕЛЬНЫЙ СБРОС ДЛЯ КАРТЕРОВ:
+        this.assembly.hasCrankshaft = false;
+        this.assembly.installedPistons = 0;
+        this.assembly.installedGBC = 0;
+        this.assembly.hasForgottenPart = false;
     }
+
+    public EngineAssemblyManager assembly;
 
     public float getAmbientTemperature() {
         if (level == null) return 20.0f;
@@ -73,6 +84,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     public float getSafeEngineSpeed() {
+        if (this.assembly == null || !this.assembly.hasForgottenPart) {
+            return 0.0f;
+        }
         // === 1. ВОССТАНОВЛЕННАЯ ЛОГИКА МАТЕРИАЛОВ И ТУРБИНЫ ===
         float baseLimit = 1024f;
         if (this.engineMaterial != null) {
@@ -591,6 +605,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     @Override
     public float calculateAddedStressCapacity() {
+        if (this.assembly == null || !this.assembly.hasForgottenPart) {
+            return 0.0f;
+        }
         if (currentSpeed <= 0) return 0;
         float materialMultiplier = engineMaterial.equals("iron") ? 15.0f : 10.0f;
         return currentSpeed * materialMultiplier;
