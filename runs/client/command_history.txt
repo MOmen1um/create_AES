@@ -1,18 +1,4 @@
 /reload
-/datapack list
-/reload
-/locate structure minecraft:village_plains
-/datapack list
-/reload
-/give Dev create_
-/give Dev create_additional_energy_sourses:heavy_handle
-/give Dev create_additional_energy_sourses:heavy_tip
-/give Dev create_additional_energy_sourses:advanced_pickaxe
-/give Dev create_additional_energy_sourses:pickaxe_core
-/reload
-/enchant Dev minecraft:efficiency 5
-/enchant Dev minecraft:efficiency 10
-/reload
 /flywheel backend off
 /give Dev create_additional_energy_sourses:heavy_handle
 /time set day
@@ -48,3 +34,17 @@
 /playsound createdieselgenerators:engine_normal ambient
 /playsound createdieselgenerators:engine_normal ambientе
 /time set day
+/tick rate 10
+/tick rate 1
+/tick rate 10
+/tick rate 1
+/tick rate 20
+/tick rate 1
+/tick rate 20
+/tick rate 1
+/tick rate 20
+/tick rate 100
+/tick rate 1
+/tick rate 20
+/tick rate 1
+/tick rate 20

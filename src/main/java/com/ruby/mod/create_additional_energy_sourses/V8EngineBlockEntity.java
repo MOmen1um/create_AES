@@ -1,6 +1,8 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
+import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -9,6 +11,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -385,11 +388,11 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                         String blockName = this.getBlockState().getBlock().toString().toLowerCase();
 
                         if (blockName.contains("i4") || blockName.contains("inline")) {
-                            typeMultiplier = 0.5f;   // Рядный — в 2 раза слабее
+                            typeMultiplier = 2f;   // Рядный — в 2 раза слабее
                         } else if (blockName.contains("w16")) {
-                            typeMultiplier = 2.0f;   // W16 — в 2 раза сильнее!
+                            typeMultiplier = 4.0f;   // W16 — в 2 раза сильнее!
                         } else if (blockName.contains("radial") || blockName.contains("r32")) {
-                            typeMultiplier = 4.0f;   // Радиальный (звездообразный) — в 4 раза сильнее! 🌋
+                            typeMultiplier = 8.0f;   // Радиальный (звездообразный) — в 4 раза сильнее! 🌋
                         }
 
                         // Применяем множитель типа к базовой силе
@@ -400,16 +403,60 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                             explosionPower += ((float) this.fuelTank.getFluidAmount() / 100.0f);
                         }
 
-                        // 4. Твой стабильный ванильный метод взрыва
-                        this.level.explode(null,
-                                this.worldPosition.getX() + 0.5,
-                                this.worldPosition.getY() + 0.5,
-                                this.worldPosition.getZ() + 0.5,
-                                explosionPower,
-                                true,
-                                net.minecraft.world.level.Level.ExplosionInteraction.TNT
-                        );
+                        int radius = (int) explosionPower;
+                        int epiX = this.worldPosition.getX();
+                        int epiY = this.worldPosition.getY();
+                        int epiZ = this.worldPosition.getZ();
+                        int radiusSq = radius * radius;
+                        java.util.Random rnd = new java.util.Random(this.worldPosition.hashCode());
+                        float phase1 = rnd.nextFloat() * 100f;
+                        float phase2 = rnd.nextFloat() * 100f;
 
+// Сила рваности. Для твоего масштаба ставим побольше!
+// Кратер будет «гулять» внутрь и наружу примерно на 15-20 блоков.
+                        float roughness = 18.0f;
+
+
+                        for (int x = -radius; x <= radius; x++) {
+                            for (int y = -radius; y <= radius; y++) {
+                                for (int z = -radius; z <= radius; z++) {
+
+                                    int distanceSq = x * x + y * y + z * z;
+
+                                    float dist = (float) Math.sqrt(distanceSq);
+                                    if (dist < 0.1f) dist = 0.1f;
+
+// Направление вектора
+                                    float nx = x / dist;
+                                    float ny = y / dist;
+                                    float nz = z / dist;
+
+// Крупные, размашистые волны для гигантского радиуса
+                                    float noise = (float) (Math.sin(nx * 1.5f + phase1) *
+                                            Math.cos(ny * 1.2f + phase2) *
+                                            Math.sin(nz * 1.7f));
+
+// Добавляем мелкую текстуру краев поверх крупных волн
+                                    float detailNoise = (float) (Math.cos(nx * 8.0f) * Math.sin(nz * 8.0f)) * 0.2f;
+
+// Итоговый измененный радиус
+                                    float modifiedRadius = (float) radius + ((noise + detailNoise) * roughness);
+                                    float modifiedRadiusSq = modifiedRadius * modifiedRadius;
+
+                                    if (distanceSq <= modifiedRadiusSq) {
+                                        net.minecraft.core.BlockPos targetPos = new net.minecraft.core.BlockPos(epiX + x, epiY + y, epiZ + z);
+
+                                        if (this.level.isInWorldBounds(targetPos)) {
+                                            if (!this.level.isEmptyBlock(targetPos)) {
+                                                this.level.setBlock(targetPos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2 | 16);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        this.level.explode(null, epiX + 0.5, epiY + 0.5, epiZ + 0.5, 1.0f, Level.ExplosionInteraction.NONE);
                         // Удаляем останки ДВС
                         this.level.removeBlock(this.worldPosition, false);
                     }

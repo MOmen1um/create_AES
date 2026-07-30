@@ -21,6 +21,21 @@ versionRange = "[1.21.1,1.22)"
 ordering = "NONE"
 side = "BOTH"
 
+# --- ЗАВИСИМОСТЬ ОТ CREATE ---
+[[dependencies.create_additional_energy_sourses]]
+modId = "create"
+type = "required" # Мод НЕ запустится без Create
+ordering = "NONE"
+side = "BOTH"
+
+# Стало (Точное совпадение с внутренним ID мода из папки):
+[[dependencies.create_additional_energy_sourses]]
+modId = "createdieselgenerators"
+type = "required"
+ordering = "NONE"
+side = "BOTH"
+
+
 [[ponder.plugins]]
 modId="create_additional_energy_sourses"
 pluginClass="com.ruby.mod.create_additional_energy_sourses.ModPonderPlugin"

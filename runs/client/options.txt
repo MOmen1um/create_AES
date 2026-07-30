@@ -12,7 +12,7 @@ darknessEffectScale:1.0
 glintSpeed:0.5
 glintStrength:0.75
 prioritizeChunkUpdates:0
-fullscreen:false
+fullscreen:true
 gamma:1.0
 graphicsMode:1
 guiScale:2
@@ -22,8 +22,8 @@ narrator:0
 particles:0
 reducedDebugInfo:false
 renderClouds:"true"
-renderDistance:11
-simulationDistance:11
+renderDistance:15
+simulationDistance:18
 screenEffectScale:1.0
 soundDevice:""
 autoJump:false

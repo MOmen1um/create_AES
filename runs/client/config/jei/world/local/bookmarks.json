@@ -32,7 +32,6 @@
   {"ingredient":{"id":"create_additional_energy_sourses:v8_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:speedometer"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:mechanical_press"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:radiator_ultimate"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:mechanical_pump"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:rope_pulley"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:secondary_linear_chassis"},"type":"item_stack","bookmarkType":"INGREDIENT"},
@@ -43,5 +42,16 @@
   {"ingredient":{"id":"create:redstone_contact"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:sticky_mechanical_piston"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create:smart_chute"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create:fluid_pipe"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"create:fluid_pipe"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:advanced_pickaxe"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:heavy_handle"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:heavy_tip"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:pickaxe_core"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:advanced_precision_mechanism"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:radiator_copper"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:radiator_steel"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:radiator_gold"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:aluminum_r32_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_r32_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

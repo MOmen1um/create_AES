@@ -1,0 +1,268 @@
+---- Minecraft Crash Report ----
+
+// dude... thats so mossed up...
+Please make sure this issue is not caused by Sable before reporting it to other mod authors.
+If you cannot reproduce it without Sable, file a report on the issue tracker
+https://github.com/ryanhcode/sable/issues
+
+// Who set us up the TNT?
+
+Time: 2026-07-12 13:43:38
+Description: Rendering overlay
+
+java.lang.IllegalStateException: Image is not allocated.
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage.checkAllocated(NativeImage.java:180) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage._upload(NativeImage.java:458) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage.upload(NativeImage.java:439) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage.upload(NativeImage.java:418) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.providers.BitmapProvider$Glyph$1.upload(BitmapProvider.java:217) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontTexture.add(FontTexture.java:47) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontSet.stitch(FontSet.java:170) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.providers.BitmapProvider$Glyph.bake(BitmapProvider.java:194) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontSet.computeBakedGlyph(FontSet.java:143) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.CodepointMap.computeIfAbsent(CodepointMap.java:70) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontSet.getGlyph(FontSet.java:151) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font$StringRenderOutput.accept(Font.java:392) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.StringDecomposer.feedChar(StringDecomposer.java:13) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.StringDecomposer.iterate(StringDecomposer.java:39) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.FormattedCharSequence.lambda$forward$2(FormattedCharSequence.java:19) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font.renderText(Font.java:261) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.FontAccessor from mod create,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font.drawInternal(Font.java:219) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.FontAccessor from mod create,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font.drawInBatch(Font.java:128) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.FontAccessor from mod create,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawString(GuiGraphics.java:307) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawString(GuiGraphics.java:302) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawString(GuiGraphics.java:298) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawCenteredString(GuiGraphics.java:259) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.renderScrollingString(AbstractWidget.java:116) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.renderScrollingString(AbstractWidget.java:96) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.renderScrollingString(AbstractWidget.java:123) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractButton.renderString(AbstractButton.java:42) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractButton.renderWidget(AbstractButton.java:38) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.render(AbstractWidget.java:65) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.render(Screen.java:125) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:computing_frames,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder-common.mixins.json:client.accessor.ScreenAccessor from mod ponder,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.LoadingOverlay.render(LoadingOverlay.java:82) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:1081) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:accessor.DebugGameRendererAccessor from mod veil,pl:mixin:APP:veil.debug.mixins.json:client.profiler.GameRendererMixin from mod veil,pl:mixin:APP:veil.dynamicbuffer.mixins.json:accessor.DynamicBufferGameRendererAccessor from mod veil,pl:mixin:APP:veil.dynamicbuffer.mixins.json:client.DynamicBufferGameRendererMixin from mod veil,pl:mixin:APP:veil.perspective.mixins.json:accessor.GameRendererAccessor from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineGameRendererMixin from mod veil,pl:mixin:APP:veil.shader.mixins.json:client.ShaderGameRendererMixin from mod veil,pl:mixin:APP:simulated.mixins.json:throttle_lever.GameRendererMixin from mod simulated,pl:mixin:APP:ponder-common.mixins.json:client.accessor.GameRendererAccessor from mod ponder,pl:mixin:APP:create.mixins.json:client.GameRendererMixin from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.GameRendererMixin from mod sable,pl:mixin:APP:sable.mixins.json:clip_overwrite.GameRendererMixin from mod sable,pl:mixin:APP:sable.mixins.json:config.GameRendererAccessor from mod sable,pl:mixin:APP:sable.mixins.json:entity.entities_turn_with_sub_levels.GameRendererMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.GameRendererMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1195) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.debug.mixins.json:client.DebugMainMixin from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage.checkAllocated(NativeImage.java:180) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage._upload(NativeImage.java:458) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage.upload(NativeImage.java:439) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/com.mojang.blaze3d.platform.NativeImage.upload(NativeImage.java:418) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.fix.mixins.json:NativeImageMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:accessor.PipelineNativeImageAccessor from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.providers.BitmapProvider$Glyph$1.upload(BitmapProvider.java:217) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontTexture.add(FontTexture.java:47) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontSet.stitch(FontSet.java:170) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.providers.BitmapProvider$Glyph.bake(BitmapProvider.java:194) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontSet.computeBakedGlyph(FontSet.java:143) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.CodepointMap.computeIfAbsent(CodepointMap.java:70) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.font.FontSet.getGlyph(FontSet.java:151) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font$StringRenderOutput.accept(Font.java:392) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.StringDecomposer.feedChar(StringDecomposer.java:13) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.StringDecomposer.iterate(StringDecomposer.java:39) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.util.FormattedCharSequence.lambda$forward$2(FormattedCharSequence.java:19) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font.renderText(Font.java:261) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.FontAccessor from mod create,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font.drawInternal(Font.java:219) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.FontAccessor from mod create,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.Font.drawInBatch(Font.java:128) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:accessor.FontAccessor from mod create,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawString(GuiGraphics.java:307) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawString(GuiGraphics.java:302) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawString(GuiGraphics.java:298) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.GuiGraphics.drawCenteredString(GuiGraphics.java:259) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:simulated.mixins.json:physics_staff.GuiGraphicsMixin from mod simulated,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.renderScrollingString(AbstractWidget.java:116) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.renderScrollingString(AbstractWidget.java:96) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.renderScrollingString(AbstractWidget.java:123) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractButton.renderString(AbstractButton.java:42) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractButton.renderWidget(AbstractButton.java:38) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.components.AbstractWidget.render(AbstractWidget.java:65) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:accesstransformer:B,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.Screen.render(Screen.java:125) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:computing_frames,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:ponder-common.mixins.json:client.accessor.ScreenAccessor from mod ponder,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.gui.screens.LoadingOverlay.render(LoadingOverlay.java:82) ~[neoforge-21.1.227.jar%23196!/:?] {re:classloading,pl:runtimedistcleaner:A}
+-- Overlay render details --
+Details:
+	Overlay name: net.minecraft.client.gui.screens.LoadingOverlay
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.renderer.GameRenderer.render(GameRenderer.java:1081) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:accessor.DebugGameRendererAccessor from mod veil,pl:mixin:APP:veil.debug.mixins.json:client.profiler.GameRendererMixin from mod veil,pl:mixin:APP:veil.dynamicbuffer.mixins.json:accessor.DynamicBufferGameRendererAccessor from mod veil,pl:mixin:APP:veil.dynamicbuffer.mixins.json:client.DynamicBufferGameRendererMixin from mod veil,pl:mixin:APP:veil.perspective.mixins.json:accessor.GameRendererAccessor from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineGameRendererMixin from mod veil,pl:mixin:APP:veil.shader.mixins.json:client.ShaderGameRendererMixin from mod veil,pl:mixin:APP:simulated.mixins.json:throttle_lever.GameRendererMixin from mod simulated,pl:mixin:APP:ponder-common.mixins.json:client.accessor.GameRendererAccessor from mod ponder,pl:mixin:APP:create.mixins.json:client.GameRendererMixin from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.GameRendererMixin from mod sable,pl:mixin:APP:sable.mixins.json:clip_overwrite.GameRendererMixin from mod sable,pl:mixin:APP:sable.mixins.json:config.GameRendererAccessor from mod sable,pl:mixin:APP:sable.mixins.json:entity.entities_turn_with_sub_levels.GameRendererMixin from mod sable,pl:mixin:APP:sable.mixins.json:water_occlusion.GameRendererMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1195) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.debug.mixins.json:client.DebugMainMixin from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+
+
+-- Uptime --
+Details:
+	JVM uptime: 39.378s
+	Wall uptime: 32.119s
+	High-res time: 38.105s
+	Client ticks: 529 ticks / 26.450s
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.fillReport(Minecraft.java:2394) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.emergencySaveAndCrash(Minecraft.java:868) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:825) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:accesstransformer:B,pl:runtimedistcleaner:A,re:classloading,pl:accesstransformer:B,pl:mixin:APP:veil.debug.mixins.json:client.DebugMinecraftMixin from mod veil,pl:mixin:APP:veil.pipeline.mixins.json:client.PipelineMinecraftMixin from mod veil,pl:mixin:APP:veil.neoforge.mixins.json:client.MinecraftMixin from mod veil,pl:mixin:APP:simulated.mixins.json:handle.MinecraftMixin from mod simulated,pl:mixin:APP:aeronautics.mixins.json:custom_situational_music.MinecraftMixin from mod aeronautics,pl:mixin:APP:flywheel.impl.mixins.json:MinecraftMixin from mod flywheel,pl:mixin:APP:ponder-common.mixins.json:client.WindowResizeMixin from mod ponder,pl:mixin:APP:create.mixins.json:accessor.MinecraftAccessor from mod create,pl:mixin:APP:sable.mixins.json:camera.new_camera_types.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:plot.MinecraftMixin from mod sable,pl:mixin:APP:sable.mixins.json:punching.MinecraftMixin from mod sable,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.227.jar%23196!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:APP:veil.debug.mixins.json:client.DebugMainMixin from mod veil,pl:mixin:A,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.42/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.42.jar%23150!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23132!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+
+
+-- Affected level --
+Details:
+	All players: 1 total; [LocalPlayer['Dev'/1, l='ClientLevel', x=9.59, y=-58.00, z=-8.87]]
+	Chunk stats: 841, 533
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (0,-58,0), Section: (at 0,6,0 in 0,-4,0; chunk contains blocks 0,-64,0 to 15,319,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 4489 game time, 4489 day time
+	Server brand: neoforge
+	Server type: Integrated singleplayer server
+	Tracked entity count: 1
+
+-- Last reload --
+Details:
+	Reload number: 2
+	Reload reason: manual
+	Finished: Yes
+	Packs: vanilla, mod_resources, mod/veil, mod/simulated, mod/createdieselgenerators, mod/jei, mod/aeronautics, mod/aeronautics_bundled, mod/create_additional_energy_sourses, mod/sablecompanion, mod/flywheel, mod/ponder, mod/create, mod/sable, mod/offroad, mod/neoforge, file/Mini Items (4).zip
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Windows 11 (amd64) version 10.0
+	Java Version: 21.0.3, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 677442888 bytes (646 MiB) / 2994733056 bytes (2856 MiB) up to 8552185856 bytes (8156 MiB)
+	CPUs: 20
+	Processor Vendor: GenuineIntel
+	Processor Name: Intel(R) Core(TM) i5-14600KF
+	Identifier: Intel64 Family 6 Model 183 Stepping 1
+	Microarchitecture: Raptor Lake
+	Frequency (GHz): 3.49
+	Number of physical packages: 1
+	Number of physical CPUs: 14
+	Number of logical CPUs: 20
+	Graphics card #0 name: NVIDIA GeForce RTX 4060
+	Graphics card #0 vendor: NVIDIA
+	Graphics card #0 VRAM (MiB): 8188.00
+	Graphics card #0 deviceId: VideoController1
+	Graphics card #0 versionInfo: 32.0.15.9186
+	Memory slot #0 capacity (MiB): 16384.00
+	Memory slot #0 clockSpeed (GHz): 3.20
+	Memory slot #0 type: DDR4
+	Memory slot #1 capacity (MiB): 16384.00
+	Memory slot #1 clockSpeed (GHz): 3.20
+	Memory slot #1 type: DDR4
+	Virtual memory max (MiB): 34656.29
+	Virtual memory used (MiB): 22680.06
+	Swap memory total (MiB): 2048.00
+	Swap memory used (MiB): 52.95
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 16447.82, total: 122132.00
+	Space in storage for workdir (MiB): available: 16447.82, total: 122132.00
+	JVM Flags: 1 total; -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump
+	Launched Version: 21.1.227
+	Backend library: LWJGL version 3.3.3+5
+	Backend API: NVIDIA GeForce RTX 4060/PCIe/SSE2 GL version 4.6.0 NVIDIA 591.86, NVIDIA Corporation
+	Window size: 854x480
+	GFLW Platform: win32
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Is Modded: Definitely; Client brand changed to 'neoforge'; Server brand changed to 'neoforge'
+	Universe: 400921fb54442d18
+	Type: Integrated Server (map_client.txt)
+	Graphics mode: fancy
+	Render Distance: 11/11 chunks
+	Resource Packs: vanilla, mod_resources, mod/veil (incompatible), mod/simulated (incompatible), mod/createdieselgenerators (incompatible), mod/jei (incompatible), mod/aeronautics (incompatible), mod/aeronautics_bundled, mod/create_additional_energy_sourses, mod/sablecompanion, mod/flywheel, mod/ponder (incompatible), mod/create (incompatible), mod/sable, mod/offroad (incompatible), mod/neoforge, file/Mini Items (4).zip
+	Current Language: en_us
+	Locale: ru_RU
+	System encoding: Cp1251
+	File encoding: UTF-8
+	CPU: 20x Intel(R) Core(TM) i5-14600KF
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Dev'/1, l='ServerLevel[Новый мир]', x=9.59, y=-58.00, z=-8.87]]
+	Active Data Packs: create:dynamic_data, vanilla, mod_data, mod/veil (incompatible), mod/simulated (incompatible), mod/createdieselgenerators (incompatible), mod/jei (incompatible), mod/aeronautics (incompatible), mod/aeronautics_bundled, mod/create_additional_energy_sourses (incompatible), mod/sablecompanion, mod/flywheel (incompatible), mod/ponder (incompatible), mod/create (incompatible), mod/sable, mod/offroad (incompatible), mod/neoforge
+	Available Data Packs: bundle, trade_rebalance, vanilla, mod/aeronautics (incompatible), mod/aeronautics_bundled, mod/create (incompatible), mod/create_additional_energy_sourses (incompatible), mod/createdieselgenerators (incompatible), mod/flywheel (incompatible), mod/jei (incompatible), mod/neoforge, mod/offroad (incompatible), mod/ponder (incompatible), mod/sable, mod/sablecompanion, mod/simulated (incompatible), mod/veil (incompatible), mod_data, create:dynamic_data
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	World Seed: -2930598427406024587
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeclientdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.42.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.42.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.42.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		create-1.21.1-6.0.10 (1).jar                      |Create                        |create                        |6.0.10              |Manifest: NOSIGNATURE
+		dev.eriksonn.aeronautics.aeronautics-neoforge-1.21|Create Aeronautics            |aeronautics                   |1.2.1               |Manifest: NOSIGNATURE
+		create-aeronautics-bundled-1.21.1-1.2.1 (1).jar   |Create Aeronautics            |aeronautics_bundled           |1.2.1               |Manifest: NOSIGNATURE
+		createdieselgenerators-1.21.1-1.3.13.jar          |Create Diesel Generators      |createdieselgenerators        |1.21.1-1.3.13       |Manifest: NOSIGNATURE
+		dev.ryanhcode.offroad.offroad-neoforge-1.21.1-1.2.|Create Offroad                |offroad                       |1.2.1               |Manifest: NOSIGNATURE
+		dev.simulated_team.simulated.simulated-neoforge-1.|Create Simulated              |simulated                     |1.2.1               |Manifest: NOSIGNATURE
+		main                                              |Create: Additional Energy Sour|create_additional_energy_sours|1.0.0               |Manifest: NOSIGNATURE
+		flywheel-neoforge-1.21.1-1.0.6.jar                |Flywheel                      |flywheel                      |1.0.6               |Manifest: NOSIGNATURE
+		jei-1.21.1-neoforge-19.27.0.340.jar               |Just Enough Items             |jei                           |19.27.0.340         |Manifest: NOSIGNATURE
+		neoforge-21.1.227.jar                             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.227.jar                             |NeoForge                      |neoforge                      |21.1.227            |Manifest: NOSIGNATURE
+		ponder-neoforge-1.0.82+mc1.21.1.jar               |Ponder                        |ponder                        |1.0.82+mc1.21.1     |Manifest: NOSIGNATURE
+		sable-neoforge-1.21.1-1.2.2 (1).jar               |Sable                         |sable                         |1.2.2               |Manifest: NOSIGNATURE
+		sable-companion-common-1.21.1-1.6.0.jar           |Sable Companion               |sablecompanion                |1.6.0               |Manifest: NOSIGNATURE
+		veil-neoforge-1.21.1-4.0.0.jar                    |Veil                          |veil                          |4.0.0               |Manifest: NOSIGNATURE
+	Crash Report UUID: 3d43f032-3b48-4460-b8e7-c616041232ae
+	FML: 4.0.42
+	NeoForge: 21.1.227
+	Flywheel Backend: flywheel:indirect

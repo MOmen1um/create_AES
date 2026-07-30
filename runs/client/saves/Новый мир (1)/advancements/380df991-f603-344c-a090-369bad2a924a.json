@@ -1,0 +1,340 @@
+{
+  "minecraft:recipes/decorations/crafting_table": {
+    "criteria": {
+      "unlock_right_away": "2026-07-12 15:16:09 +0500"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:desert": "2026-07-12 15:16:10 +0500"
+    },
+    "done": false
+  },
+  "create:root": {
+    "criteria": {
+      "0": "2026-07-12 15:16:15 +0500"
+    },
+    "done": true
+  },
+  "simulated:root": {
+    "criteria": {
+      "0": "2026-07-12 15:16:15 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:root": {
+    "criteria": {
+      "0": "2026-07-12 15:16:15 +0500"
+    },
+    "done": true
+  },
+  "create:mechanical_pump_0": {
+    "criteria": {
+      "0": "2026-07-12 15:16:32 +0500"
+    },
+    "done": true
+  },
+  "create:wrench_goggles": {
+    "criteria": {
+      "0": "2026-07-12 21:44:39 +0500",
+      "1": "2026-07-12 15:16:37 +0500"
+    },
+    "done": true
+  },
+  "aeronautics:recipes/misc/aviators_goggles": {
+    "criteria": {
+      "has_ingredient": "2026-07-12 15:16:37 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/misc/green_dye": {
+    "criteria": {
+      "has_cactus": "2026-07-12 20:55:53 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/speedometer_from_conversion": {
+    "criteria": {
+      "has_item": "2026-07-12 20:58:40 +0500"
+    },
+    "done": true
+  },
+  "create:stressometer": {
+    "criteria": {
+      "0": "2026-07-12 20:58:41 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/decorations/chest": {
+    "criteria": {
+      "has_lots_of_items": "2026-07-12 20:59:04 +0500"
+    },
+    "done": true
+  },
+  "minecraft:recipes/brewing/cauldron": {
+    "criteria": {
+      "has_water_bucket": "2026-07-12 20:59:25 +0500"
+    },
+    "done": true
+  },
+  "create:water_supply": {
+    "criteria": {
+      "0": "2026-07-12 20:59:27 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gearbox": {
+    "criteria": {
+      "has_item": "2026-07-12 21:44:10 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
+    "criteria": {
+      "has_item": "2026-07-12 21:44:10 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/portable_fluid_interface": {
+    "criteria": {
+      "has_item": "2026-07-30 17:55:07 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/spout": {
+    "criteria": {
+      "has_item": "2026-07-30 17:55:07 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/item_drain": {
+    "criteria": {
+      "has_item": "2026-07-30 17:55:07 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/copper_door": {
+    "criteria": {
+      "has_item": "2026-07-30 17:55:07 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/large_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 18:16:19 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/steering_wheel": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 18:16:19 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/monstrous_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 18:16:19 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 18:16:19 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/small_tire": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 18:16:19 +0500"
+    },
+    "done": true
+  },
+  "create:shifting_gears": {
+    "criteria": {
+      "0": "2026-07-30 20:37:06 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_saw": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/torsion_spring": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/logistics/redstone_link": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/logistics/desk_bell": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_press": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_roller": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/physics_assembler": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/andesite_door": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/directional_gearshift": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/portable_storage_interface": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_bearing": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/velocity_sensor": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/laser_pointer": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gantry_carriage": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/weighted_ejector": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "offroad:recipes/misc/wheel_mount": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/laser_sensor": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/millstone": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_plough": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/chain_conveyor": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_harvester": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/encased_chain_drive_from_zinc": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/clutch": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/depot": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/encased_chain_drive": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_drill": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/altitude_sensor": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/mechanical_piston": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gearshift": {
+    "criteria": {
+      "has_item": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "simulated:recipes/misc/swivel_bearing": {
+    "criteria": {
+      "has_ingredient": "2026-07-30 20:37:13 +0500"
+    },
+    "done": true
+  },
+  "DataVersion": 3955
+}

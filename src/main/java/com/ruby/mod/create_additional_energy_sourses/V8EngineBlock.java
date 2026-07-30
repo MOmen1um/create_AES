@@ -7,6 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -116,7 +117,8 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     // 2. Указываем правильный тип рендера для кастомных 3D-моделей
     @Override
     public net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
-        return net.minecraft.world.level.block.RenderShape.MODEL;
+        // Передаем управление динамическому рендеру кода!
+        return RenderShape.MODEL;
     }
 
     // 2. КАСТОМНАЯ СЕТКА ХИТБОКСА (VoxelShape)

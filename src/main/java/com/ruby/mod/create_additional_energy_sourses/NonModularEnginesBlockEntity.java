@@ -1,6 +1,7 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -91,22 +92,41 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
         else if (currentType.equals("R")) typeMultiplier = 32.0f;
         else typeMultiplier = 4.0f; // Для рядного "I" (I4)
 
-        targetFixedSU *= typeMultiplier;
-
         // 3. Честное умножение х2 от турбины (теперь работает для всех типов!)
         if (this.isTurboCharged) {
             targetFixedSU *= 2.0f;
         }
 
+        targetFixedSU *= typeMultiplier;
+
+        float maxRPM = 16384;
+        float calculatedTotalSU;
+        if (speed >= maxRPM) {
+            calculatedTotalSU = targetFixedSU * (speed / maxRPM);
+        } else {
+            float rpmRatio = speed / maxRPM;
+
+            float balancaModifier = 1.0f + 0.10f * (1.0f - rpmRatio);
+
+            calculatedTotalSU = targetFixedSU * rpmRatio * balancaModifier;
+        }
+
+
         if (hasRadiatorConnected()) {
-            return targetFixedSU / (speed / 2.0f);
+            return calculatedTotalSU / (speed / 2.0f);
         }
 
         // Если радиатора нет, возвращаем стандартное деление
-        return targetFixedSU / speed;
+        return calculatedTotalSU / speed;
     }
     @Override
     public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        int createMaxSpeed = com.simibubi.create.infrastructure.config.AllConfigs.server().kinetics.maxRotationSpeed.get();
+        if (createMaxSpeed < 32768) {
+            tooltip.add(Component.literal("§c⚠ АВАРИЙНАЯ БЛОКИРОВКА!"));
+            tooltip.add(Component.literal("§7Повысьте 'maxRotationSpeed' в конфиге Create до 32768!"));
+            return true;
+        }
         // Убираем super.addToGoggleTooltip, чтобы на экране не дублировался старый текст!
         tooltip.add(net.minecraft.network.chat.Component.literal("§8----------------------------------------------"));
 
@@ -178,20 +198,6 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
             tooltip.add(net.minecraft.network.chat.Component.literal("§8 • Топливо в ДВС: §c✖ БАК НЕ ИНИЦИАЛИЗИРОВАН"));
         }
 
-        // Вместо вызова calculateAddedStressCapacity() считаем чистые SU для вывода на экран:
-        float currentSU = 0;
-
-        if (Math.abs(getSpeed()) >= 8.0f) {
-            float powerPerPiston = "titanium".equals(this.engineMaterial) ? 6400f*8 : ("aluminum".equals(this.engineMaterial) ? 3840f*4 : 1920f*4);
-            currentSU = powerPerPiston * this.pistonCount;
-
-            if (this.isTurboCharged) currentSU *= 2.0f;
-            if (hasRadiatorConnected()) currentSU *= 2.0f;
-        }
-
-// Теперь выводим эту переменную в строчку:
-        tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Мощность генератора: §e" + String.format("%.0f", currentSU) + " SU"));
-
 
 // === 🌊 НОВЫЙ БЛОК: СТАТУС ОХЛАЖДЕНИЯ И ОБЪЕМ ВОДЫ ===
         if (this.level != null) {
@@ -213,8 +219,8 @@ public class NonModularEnginesBlockEntity extends V8EngineBlockEntity {
                         tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ Охлаждение: §4НЕТ ВОДЫ!"));
                     }
                 } else {
-                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪§4НЕТ РАДИАТОРА"));
-                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪§4ИЛИ ОН НЕПРАВИЛЬНО ПОДКЛЮЧЕН"));
+                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ §4НЕТ РАДИАТОРА"));
+                    tooltip.add(net.minecraft.network.chat.Component.literal(" ▪ §4ИЛИ ОН НЕПРАВИЛЬНО ПОДКЛЮЧЕН"));
                 }
             }
         }

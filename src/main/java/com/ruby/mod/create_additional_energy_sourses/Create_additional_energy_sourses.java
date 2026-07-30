@@ -22,7 +22,7 @@ public class Create_additional_energy_sourses {
 
     public static final net.neoforged.neoforge.registries.DeferredHolder<CreativeModeTab, CreativeModeTab> CREATIVE_TAB =
             CREATIVE_MODE_TABS.register("create_aes_tab", () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModBlocks.THERMO_GENERATOR.get()))
+                    .icon(() -> new ItemStack(ModBlocks.TITANIUM_W16.get()))
                     .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
                     .displayItems((parameters, output) -> {
                         // 1. Стандартные предметы мода (Используем _ITEM.get() для чистых предметов!)
@@ -50,7 +50,8 @@ public class Create_additional_energy_sourses {
                         ModBlocks.BLOCKS.getEntries().forEach(holder -> {
                             net.minecraft.resources.ResourceLocation id = holder.getId();
                             // Пропускаем термогенератор, радиаторы и классический эталон, так как положили их руками выше
-                            if (!id.getPath().contains("thermo_generator") && !id.getPath().contains("radiator") && !id.getPath().contains("classic")) {
+                            // Стало (Временно отсекаем модульные двигатели от попадания в креатив-вкладку):
+                            if (! id. getPath(). contains("thermo_generator") && ! id. getPath(). contains("radiator") && ! id. getPath(). contains("classic") && ! id. getPath(). contains("modular")) {
                                 // Достаем зарегистрированный BlockItem из ванильного реестра предметов по точному ID блока
                                 net.minecraft.world.item.Item blockItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id);
                                 if (blockItem != null && blockItem != net.minecraft.world.item.Items.AIR) {

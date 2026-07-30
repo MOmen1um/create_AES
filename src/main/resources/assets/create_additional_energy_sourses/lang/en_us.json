@@ -1,6 +1,50 @@
 {
-  "create_additional_energy_sourses.ponder.scene1.title": "Основы ДВС: Мощность и Интерфейс",
-  "create_additional_energy_sourses.ponder.scene2.title": "Анатомия охлаждения: Правильная установка",
-  "create_additional_energy_sourses.ponder.scene3.title": "Концепция безлимитной скорости",
-  "create_additional_energy_sourses.ponder.scene4.title": "Гидравлика и последствия перегрева"
+  "block.create_additional_energy_sourses.thermo_generator": "Thermo Generator",
+  "block.create_additional_energy_sourses.v8_engine_classic": "Classic ICE V8",
+  "block.create_additional_energy_sourses.radiator_copper": "Copper Radiator",
+  "block.create_additional_energy_sourses.radiator_steel": "Steel Radiator",
+  "block.create_additional_energy_sourses.radiator_gold": "Brass Radiator",
+  "block.create_additional_energy_sourses.radiator_titanium": "Titanium Radiator",
+  "block.create_additional_energy_sourses.i4_engine": "Cast Iron I4",
+  "block.create_additional_energy_sourses.v8_engine": "Cast Iron V8",
+  "block.create_additional_energy_sourses.w16_engine": "Cast Iron W16",
+  "block.create_additional_energy_sourses.r32_engine": "Cast Iron R32",
+
+  "block.create_additional_energy_sourses.aluminum_i4_engine": "Aluminium I4",
+  "block.create_additional_energy_sourses.aluminum_v8_engine": "Aluminium V8",
+  "block.create_additional_energy_sourses.aluminum_w16_engine": "Aluminium W16",
+  "block.create_additional_energy_sourses.aluminum_r32_engine": "Aluminium R32",
+  "block.create_additional_energy_sourses.titanium_i4_engine": "Titanium I4",
+  "block.create_additional_energy_sourses.titanium_v8_engine": "Titanium V8",
+  "block.create_additional_energy_sourses.titanium_w16_engine": "Titanium W16",
+  "block.create_additional_energy_sourses.titanium_r32_engine": "Titanium R32",
+  "item.create_additional_energy_sourses.advanced_pickaxe": "Advanced Pickaxe",
+  "item.create_additional_energy_sourses.advanced_precision_mechanism": "Advanced Precision Mechanism",
+  "item.create_additional_energy_sourses.heavy_handle": "Heavy Handle",
+  "item.create_additional_energy_sourses.heavy_tip": "Heavy Tip",
+  "item.create_additional_energy_sourses.pickaxe_core": "Pickaxe Core",
+
+
+  "itemGroup.create_aes_tab": "Create: Additional Energy Sources",
+
+  "create_aes.goggles.title.modular": "§6⚙ Specification: §7MODULAR ",
+  "create_aes.goggles.material": "§6   Material: §7",
+  "create_aes.goggles.turbo": "§6⚡ Turbocharger: ",
+  "create_aes.goggles.turbo.present": "§aPRESENT",
+  "create_aes.goggles.turbo.absent": "§cABSENT",
+  "create_aes.goggles.telemetry": "§b📊 CORE TELEMETRY:",
+  "create_aes.goggles.temperature": " • Temperature: §e%s°C / 1200.0°C",
+  "create_aes.goggles.rpm": " • Shaft Speed: §a%s RPM",
+  "create_aes.goggles.su": " • Generator Capacity: §a%s SU",
+
+  "create_aes.goggles.struct.title": "§7--- MODULE STRUCTURE ---",
+  "create_aes.goggles.struct.single": " • Configuration: §eSingle Block",
+  "create_aes.goggles.struct.length": " • Structure Length: §a%s / 4 blocks",
+  "create_aes.goggles.struct.overflow": " • Structure Length: §c%s / 4 (OVERFLOW)",
+  "create_aes.goggles.struct.warning": " §c⚠ Multiblock length limit exceeded!",
+
+  "create_aes.engine.inline2": "Inline-2 (Straight)",
+  "create_aes.engine.v4": "V-4 Engine (V-type)",
+  "create_aes.engine.w8": "W-8 Engine (W-type)",
+  "create_aes.engine.radial16": "Radial-16 (Aviation Monster)"
 }
