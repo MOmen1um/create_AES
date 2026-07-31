@@ -25,41 +25,71 @@ public class Create_additional_energy_sourses {
                     .icon(() -> new ItemStack(ModBlocks.TITANIUM_W16.get()))
                     .title(net.minecraft.network.chat.Component.literal("Create: Additional Energy Sources"))
                     .displayItems((parameters, output) -> {
-                        // 1. Стандартные предметы мода (Используем _ITEM.get() для чистых предметов!)
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_V8_CARTER_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PICKAXE.get()));
+                        // 1. ИНСТРУМЕНТЫ И РАСХОДНИКИ (Основа разработки)
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_HANDLE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.HEAVY_TIP.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PICKAXE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.PICKAXE_CORE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
 
-                        // 2. Радиаторы
+                        // 2. БЛОКИ ЦИЛИНДРОВ / КАРТЕРЫ (Выстраиваем строго от I4 до R32 по металлам)
+                        // Чугун (Iron)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_I4_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_V8_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_R32_CARTER_ITEM.get()));
+                        // Алюминий (Aluminum)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_I4_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_V8_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_R32_CARTER_ITEM.get()));
+                        // Титан (Titanium)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_I4_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_V8_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_W16_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_R32_CARTER_ITEM.get()));
+
+                        // 3. ГОТОВЫЕ ДВИГАТЕЛИ ДВC (В таком же строгом порядке!)
+                        // Чугунные (По твоей логике дефолтных имен без приставки iron)
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "i4_engine"))));
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "v8_engine"))));
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "w16_engine"))));
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "r32_engine"))));
+                        // Алюминиевые
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "aluminum_i4_engine"))));
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "aluminum_v8_engine"))));
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "aluminum_w16_engine"))));
+                        output.accept(new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "aluminum_r32_engine"))));
+                        // Титановые
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_I4.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_V8.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_W16.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_R32.get()));
+
+                        // 4. СИСТЕМА ОХЛАЖДЕНИЯ (Радиаторы и генераторы)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.THERMO_GENERATOR_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_COPPER_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_STEEL_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_GOLD_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_TITANIUM_ITEM.get()));
-                        // 3. ДОБАВЛЯЕМ СТАБИЛЬНЫЙ КЛАССИЧЕСКИЙ ЭТАЛОН НАПРЯМУЮ ЧЕРЕЗ РЕЕСТР ПРЕДМЕТОВ
-                        net.minecraft.world.item.Item classicItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
-                                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, "v8_engine_classic")
-                        );
-                        if (classicItem != null && classicItem != net.minecraft.world.item.Items.AIR) {
-                            output.accept(new net.minecraft.world.item.ItemStack(classicItem));
-                        }
+                        // РАЗДЕЛ РАСХОДНИКОВ ДЛЯ СБОРКИ (Добавляем наши новые детали!)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_PISTON.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_PISTON.get()));
 
-                        // 4. ГЕНИАЛЬНЫЙ ЦИКЛ: Автоматически превращаем новые 24 блока в ItemStack предметов!
-                        ModBlocks.BLOCKS.getEntries().forEach(holder -> {
-                            net.minecraft.resources.ResourceLocation id = holder.getId();
-                            // Пропускаем термогенератор, радиаторы и классический эталон, так как положили их руками выше
-                            // Стало (Временно отсекаем модульные двигатели от попадания в креатив-вкладку):
-                            if (! id. getPath(). contains("thermo_generator") && ! id. getPath(). contains("radiator") && ! id. getPath(). contains("classic") && ! id. getPath(). contains("modular")) {
-                                // Достаем зарегистрированный BlockItem из ванильного реестра предметов по точному ID блока
-                                net.minecraft.world.item.Item blockItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(id);
-                                if (blockItem != null && blockItem != net.minecraft.world.item.Items.AIR) {
-                                    output.accept(new net.minecraft.world.item.ItemStack(blockItem));
-                                }
-                            }
-                        });
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_GBC.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_R16_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_R16_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_R16_GBC.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_BRAIN_GBC.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_R16_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_R16_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_R16_BRAIN_GBC.get()));
                     })
                     .build());
 

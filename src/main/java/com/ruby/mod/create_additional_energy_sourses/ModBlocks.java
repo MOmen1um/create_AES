@@ -21,10 +21,6 @@ public class ModBlocks {
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Create_additional_energy_sourses.MODID);
 
 
-    public static final net.neoforged.neoforge.registries.DeferredHolder<net.minecraft.world.level.block.Block, net.minecraft.world.level.block.Block> IRON_V8_CARTER = BLOCKS.register("iron_v8_carter",
-            () -> new NonModularEnginesBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties.of().mapColor(net.minecraft.world.level.material.MapColor.METAL).strength(3.0f).noOcclusion())
-    );
-
     // Оставлены блоки Термогенераторов и Радиаторов
     // 1. Блок Термогенератора
     public static final DeferredHolder<Block, ThermoGeneratorBlock> THERMO_GENERATOR =
@@ -148,6 +144,24 @@ public class ModBlocks {
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16 = registerEngine("modular_titanium_r16_engine", "titanium", "r16", true);
     public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R16_CONTROLLER = registerController("modular_titanium_r16_controller", "titanium", "i2");
 
+    // Чугунные картеры (Iron)
+    public static final DeferredHolder<Block, Block> IRON_I4_CARTER  = registerCarter("iron_i4_carter");
+    public static final DeferredHolder<Block, Block> IRON_V8_CARTER  = registerCarter("iron_v8_carter");
+    public static final DeferredHolder<Block, Block> IRON_W16_CARTER = registerCarter("iron_w16_carter");
+    public static final DeferredHolder<Block, Block> IRON_R32_CARTER = registerCarter("iron_r32_carter");
+
+    // Алюминиевые картеры (Aluminum)
+    public static final DeferredHolder<Block, Block> ALUMINUM_I4_CARTER  = registerCarter("aluminum_i4_carter");
+    public static final DeferredHolder<Block, Block> ALUMINUM_V8_CARTER  = registerCarter("aluminum_v8_carter");
+    public static final DeferredHolder<Block, Block> ALUMINUM_W16_CARTER = registerCarter("aluminum_w16_carter");
+    public static final DeferredHolder<Block, Block> ALUMINUM_R32_CARTER = registerCarter("aluminum_r32_carter");
+
+    // Титановые картеры (Titanium)
+    public static final DeferredHolder<Block, Block> TITANIUM_I4_CARTER  = registerCarter("titanium_i4_carter");
+    public static final DeferredHolder<Block, Block> TITANIUM_V8_CARTER  = registerCarter("titanium_v8_carter");
+    public static final DeferredHolder<Block, Block> TITANIUM_W16_CARTER = registerCarter("titanium_w16_carter");
+    public static final DeferredHolder<Block, Block> TITANIUM_R32_CARTER = registerCarter("titanium_r32_carter");
+
 
     // ==========================================
     // 4. РЕГИСТРАЦИЯ СУЩНОСТЕЙ (BLOCK ENTITIES)
@@ -162,8 +176,7 @@ public class ModBlocks {
                     // Твоя сетка моторов капсом
                     IRON_I4.get(), IRON_V8.get(), IRON_W16.get(), IRON_R32.get(),
                     ALUMINUM_I4.get(), ALUMINUM_V8.get(), ALUMINUM_W16.get(), ALUMINUM_R32.get(),
-                    TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get(),
-                    ModBlocks.IRON_V8_CARTER.get()
+                    TITANIUM_I4.get(), TITANIUM_V8.get(), TITANIUM_W16.get(), TITANIUM_R32.get()
             ).build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ModularEnginesBlockEntity>> MODULAR_ENGINE_ENTITY =
@@ -184,6 +197,32 @@ public class ModBlocks {
                 ).build(null);
             });
     // <-- ЗАКРЫВАЕМ регистратор
+
+    // УНИВЕРСАЛЬНЫЙ ТИП СУЩНОСТИ ДЛЯ ВСЕХ НАШИХ КАРТЕРОВ (Через Стрим-Фабрику!)
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EngineCarterBlockEntity>> ENGINE_CARTER_ENTITY =
+            BLOCK_ENTITIES.register("engine_carter_entity", () -> BlockEntityType.Builder.of(
+                    EngineCarterBlockEntity::new,
+                    // Собираем все 12 картеров в один массив силами Java ООП!
+                    java.util.stream.Stream.of(
+                            IRON_I4_CARTER, IRON_V8_CARTER, IRON_W16_CARTER, IRON_R32_CARTER,
+                            ALUMINUM_I4_CARTER, ALUMINUM_V8_CARTER, ALUMINUM_W16_CARTER, ALUMINUM_R32_CARTER,
+                            TITANIUM_I4_CARTER, TITANIUM_V8_CARTER, TITANIUM_W16_CARTER, TITANIUM_R32_CARTER
+                    ).map(DeferredHolder::get).toArray(Block[]::new)
+            ).build(null));
+
+    // ==========================================
+// ФАБРИКА АВТОМАТИЧЕСКОЙ РЕГИСТРАЦИИ КАРТЕРОВ
+// ==========================================
+    private static DeferredHolder<Block, Block> registerCarter(String id) {
+        return BLOCKS.register(id, () ->
+                new EngineCarterBlock(BlockBehaviour.Properties.of()
+                        .mapColor(net.minecraft.world.level.material.MapColor.METAL)
+                        .strength(3.0f)
+                        .requiresCorrectToolForDrops()
+                        .noOcclusion())
+        );
+    }
+
 
 
     // ==========================================

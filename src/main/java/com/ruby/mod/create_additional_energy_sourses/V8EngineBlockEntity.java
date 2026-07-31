@@ -63,17 +63,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         // УПРАВЛЕНИЕ РЕМЕНЕМ: Узнаем при создании всех двигателей базовую 100% термостойкость
         this.maxMeltingTemp = getMaterialMeltingPoint();
 
-        // ВСТАВЛЯЙ СЮДА: Создаем наш менеджер сборки, когда все переменные уже применились!
-        this.assembly = new EngineAssemblyManager(this);
-
-        // ПРИНУДИТЕЛЬНЫЙ СБРОС ДЛЯ КАРТЕРОВ:
-        this.assembly.hasCrankshaft = false;
-        this.assembly.installedPistons = 0;
-        this.assembly.installedGBC = 0;
-        this.assembly.hasForgottenPart = false;
     }
-
-    public EngineAssemblyManager assembly;
 
     public float getAmbientTemperature() {
         if (level == null) return 20.0f;
@@ -84,9 +74,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     }
 
     public float getSafeEngineSpeed() {
-        if (this.assembly == null || !this.assembly.hasForgottenPart) {
-            return 0.0f;
-        }
         // === 1. ВОССТАНОВЛЕННАЯ ЛОГИКА МАТЕРИАЛОВ И ТУРБИНЫ ===
         float baseLimit = 1024f;
         if (this.engineMaterial != null) {
@@ -605,9 +592,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
 
     @Override
     public float calculateAddedStressCapacity() {
-        if (this.assembly == null || !this.assembly.hasForgottenPart) {
-            return 0.0f;
-        }
         if (currentSpeed <= 0) return 0;
         float materialMultiplier = engineMaterial.equals("iron") ? 15.0f : 10.0f;
         return currentSpeed * materialMultiplier;
@@ -694,56 +678,23 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     protected void read(net.minecraft.nbt.CompoundTag tag, net.minecraft.core.HolderLookup.Provider registries, boolean clientPacket) {
         super.read(tag, registries, clientPacket);
 
-        // ГЕОМЕТРИЧЕСКОЕ ИСПРАВЛЕНИЕ: Считываем градусы из NBT ТОЛЬКО если они там реально были сохранены!
+        // ТВОЙ ОРИГИНАЛЬНЫЙ КОД ТЕМПЕРАТУРЫ:
         if (tag.contains("EngineTemperature")) {
             this.engineTemperature = tag.getFloat("EngineTemperature");
         } else {
-            // Если блок только что поставили и тега на диске нет — принудительно оставляем климат биома (20°C)!
             this.engineTemperature = getAmbientTemperature();
         }
 
-
+        // ТВОЙ ОРИГИНАЛЬНЫЙ КОД СЛАЙДЕРОВ И ТУРБО:
         this.isTurboCharged = tag.getBoolean("IsTurboCharged");
-        //this.currentSpeed = tag.getFloat("CurrentSpeed");
         this.targetSliderSpeed = tag.getFloat("TargetSliderSpeed");
 
+        // ТВОЙ ОРИГИНАЛЬНЫЙ КОД БАКА:
         if (tag.contains("FuelTank")) {
             this.fuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
         }
 
-        String blockPath = net.minecraft.core.registries.BuiltInRegistries.BLOCK
-                .getKey(this.getBlockState().getBlock()).getPath().toLowerCase();
-
-        if (blockPath.contains("carter")) {
-            // ЛОГИКА ДЛЯ БЛОКА ЦИЛИНДРОВ (КАРТЕРА):
-            if (tag.contains("HasCrankshaft")) {
-                // Если игрок его уже строил — загружаем точные стадии поршней
-                this.assembly.readNBT(tag);
-            } else {
-                // Если блок только что поставили на землю — он ГАРАНТИРОВАННО пустой
-                this.assembly.hasCrankshaft = false;
-                this.assembly.installedPistons = 0;
-                this.assembly.installedGBC = 0;
-                this.assembly.hasForgottenPart = false;
-                this.assembly.hasTurbo = false;
-
-                // ПРИНУДИТЕЛЬНО ОБНУЛЯЕМ ТЕЛЕМЕТРИЮ ДЛЯ НОВОГО КАРТЕРА:
-                // Чтобы пустая железка на земле не имела топлива и была комнатной температуры!
-                this.engineTemperature = getAmbientTemperature();
-                this.isTurboCharged = false;
-                this.targetSliderSpeed = 0.0f;
-                // Очищаем бак через встроенный метод Create (или просто обнуляем жидкость, если у тебя кастомный класс)
-                this.fuelTank.setFluid(net.neoforged.neoforge.fluids.FluidStack.EMPTY);
-            }
-        } else {
-            // ЛОГИКА ДЛЯ ТВОИХ ОРИГИНАЛЬНЫХ 16 ДВИГАТЕЛЕЙ ИЗ КРЕАТИВА:
-            // Говорим менеджеру, что они изначально на 100% собраны.
-            // Все считанные выше баки, настройки ползунков скорости и температуры ОСТАЮТСЯ ЦЕЛЫМИ!
-            this.assembly.hasForgottenPart = true;
-            this.assembly.hasCrankshaft = true;
-            this.assembly.installedPistons = this.pistonCount;
-            this.assembly.installedGBC = this.pistonCount == 32 ? 1 : 2;
-        }
+        // ВСЁ! Фигурная скобка закрывается, больше здесь ничего лишнего нет!
     }
 
 

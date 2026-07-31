@@ -66,21 +66,45 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
         return ModBlocks.V8_ENGINE_ENTITY.get();
     }
 
-    protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (level.isClientSide) return net.minecraft.world.InteractionResult.SUCCESS;
+    @Override
+    protected net.minecraft.world.InteractionResult useWithoutItem(BlockState state, net.minecraft.world.level.Level level, BlockPos pos, net.minecraft.world.entity.player.Player player, net.minecraft.world.phys.BlockHitResult hitResult) {
+        if (!level.isClientSide) {
+            if (level.getBlockEntity(pos) instanceof V8EngineBlockEntity v8) {
 
-        if (level.getBlockEntity(pos) instanceof V8EngineBlockEntity be) {
-            // Передаем управление менеджеру сборки, который теперь знает про оригинальный турбокомпрессор!
-            return be.assembly.handleInteraction(state, level, pos, player, hand, () -> {
-                be.setChanged();
+                // Получаем предмет в главной руке игрока
+                net.minecraft.world.item.ItemStack heldItem = player.getItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND);
 
-                // Вызываем твой старый метод обновления вращения, чтобы сеть Create реагировала на изменения!
-                be.updateGeneratedRotation();
+                // --- СВЯЗКА С CREATE DIESEL GENERATORS ---
+                // Динамически ищем ID турбонаддува в глобальном реестре Майнкрафта
+                net.minecraft.resources.ResourceLocation turbochargerId = net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("createdieselgenerators", "engine_turbocharger");
+                net.minecraft.world.item.Item turbochargerItem = net.minecraft.core.registries.BuiltInRegistries.ITEM.get(turbochargerId);
 
-                level.sendBlockUpdated(pos, state, state, 3);
-            });
+                // Проверяем: если предмет существует в сборке, игрок держит именно его и турбина ещё не установлена
+                if (turbochargerItem != null && heldItem.is(turbochargerItem) && !v8.isTurboCharged) {
+                    // Активируем турбонаддув!
+                    v8.isTurboCharged = true;
+
+                    v8.updateGeneratedRotation();
+
+                    // Забираем 1 турбокомпрессор из руки (если игрок не в креативе)
+                    if (!player.isCreative()) {
+                        heldItem.shrink(1);
+                    }
+
+                    // Проигрываем сочный звук шестерёнок Create при успешной установке
+                    level.playSound(null, pos, net.minecraft.sounds.SoundEvents.IRON_TRAPDOOR_CLOSE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.2f);
+
+                    // Мгновенно синхронизируем данные, чтобы меню и очки инженера обновились!
+                    v8.setChanged();
+                    v8.sendData();
+                    level.sendBlockUpdated(pos, state, state, 3);
+
+                    return net.minecraft.world.InteractionResult.SUCCESS;
+                }
+                // -----------------------------------------
+            }
         }
-        return net.minecraft.world.InteractionResult.PASS;
+        return super.useWithoutItem(state, level, pos, player, hitResult);
     }
     // 1. ОТКЛЮЧАЕМ ЭФФЕКТ РЕНТГЕНА (Говорим игре честно рендерить соседние блоки)
     @Override
@@ -94,18 +118,9 @@ public class V8EngineBlock extends HorizontalKineticBlock implements IBE<V8Engin
     }
 
 
-    // 2. Указываем правильный тип рендера для кастомных 3D-моделей
     @Override
     public net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
-        // Вытаскиваем имя блока в нижнем регистре
-        String name = state.getBlock().toString().toLowerCase();
-
-        // Если игрок поставил КАРТЕР — скрываем корпус и включаем анимацию вала/поршней из ModClientSetup!
-        if (name.contains("carter")) {
-            return net.minecraft.world.level.block.RenderShape.ENTITYBLOCK_ANIMATED;
-        }
-
-        // Если это уже готовый двигатель — рисуем стандартную Blockbench модель корпуса
+        // Ваши готовые 16 двигателей из креатива ВСЕГДА рендерят свою красивую Blockbench-модель корпуса!
         return net.minecraft.world.level.block.RenderShape.MODEL;
     }
 
