@@ -4,6 +4,7 @@ import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -14,14 +15,40 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-// ... (импорты и логика класса)
 
 public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<EngineCarterBlockEntity> {
 
+    // Правильный конструктор для блоков Create
     public EngineCarterBlock(Properties properties) {
         super(properties);
+    }
+
+    // Связываем BlockEntity с нашим классом
+    @Override
+    public Class<EngineCarterBlockEntity> getBlockEntityClass() {
+        return EngineCarterBlockEntity.class;
+    }
+
+    // Регистрируем тип нашей сущности
+    @Override
+    public BlockEntityType<? extends EngineCarterBlockEntity> getBlockEntityType() {
+        return ModBlocks.ENGINE_CARTER_ENTITY.get(); // Убедись, что это имя совпадает с твоим регистратором
+    }
+
+    // Вспомогательный метод для успешного завершения шага (тратит предмет и обновляет блок)
+    private InteractionResult finishStep(Player player, ItemStack heldItem, Level level, BlockPos pos, SoundEvent sound, EngineCarterBlockEntity be) {
+        level.playSound(null, pos, sound, SoundSource.BLOCKS, 0.5f, 1.0f);
+
+        if (!player.isCreative()) {
+            heldItem.shrink(1);
+        }
+
+        be.setChanged();
+        level.sendBlockUpdated(pos, level.getBlockState(pos), level.getBlockState(pos), 3);
+        return InteractionResult.CONSUME;
     }
 
     @Override
