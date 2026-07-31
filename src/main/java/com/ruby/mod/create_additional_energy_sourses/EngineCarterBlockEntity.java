@@ -19,8 +19,8 @@ public class EngineCarterBlockEntity extends BlockEntity {
     public int maxGBC = 2;
     public String engineMaterial = "iron";
     public String engineType = "v8";
-    public boolean requiredBrain;
     public boolean installedBrain = false;
+    public boolean HasUnitedController = false;
 
     public EngineCarterBlockEntity(BlockPos pos, BlockState state) {
         // Привязываем сущность к нашему общему регистратору картеров в ModBlocks
@@ -37,20 +37,25 @@ public class EngineCarterBlockEntity extends BlockEntity {
             this.engineType = parts[1];     // Вытаскиваем компоновку: i4, v8, w16, r32
 
             // Динамически выставляем лимиты поршней и голов на основе компоновки!
-            if (this.engineType.equals("r32")) {
-                this.maxPistons = 32;
-                this.maxGBC = 1; // 1 общая голова-контроллер на радиальный монстр
-            } else if (this.engineType.equals("w16")) {
-                this.maxPistons = 16;
-                this.maxGBC = 2;
-                this.requiredBrain = true;
-            } else if (this.engineType.equals("v8")) {
-                this.maxPistons = 8;
-                this.maxGBC = 2;
-                this.requiredBrain = true;
-            } else if (this.engineType.equals("i4")) {
-                this.maxPistons = 4;
-                this.maxGBC = 2;
+            switch (this.engineType) {
+                case "r32" -> {
+                    this.maxPistons = 32;
+                    this.maxGBC = 8;
+                    this.HasUnitedController = true;
+                }
+                case "w16" -> {
+                    this.maxPistons = 16;
+                    this.maxGBC = 2;
+                }
+                case "v8" -> {
+                    this.maxPistons = 8;
+                    this.maxGBC = 2;
+                }
+                case "i4" -> {
+                    this.maxPistons = 4;
+                    this.maxGBC = 1;
+                    this.HasUnitedController = true;
+                }
             }
         }
     }
