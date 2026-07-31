@@ -133,44 +133,58 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // ЦЕПОЧКА СБОРКИ ДВИГАТЕЛЯ
             // =========================================================================
 
-            // 1. НАСТРОЙКА ПОРШНЕЙ ПО МАТЕРИАЛАМ (БЭКЭНД ГОТОВ)
-            net.minecraft.world.item.Item requiredPiston = net.minecraft.world.item.Items.PISTON; // Дефолт (Чугун)
-            String pistonName = "§7Поршень";
-
-            if (be.engineMaterial.equals("titanium")) {
-                requiredPiston = ModItems.TITANIUM_PISTON.get(); // СТЕРЛИ net.minecraft.world.item.Item
-                pistonName = "§bТитановый поршень";               // СТЕРЛИ String
-            } else if (be.engineMaterial.equals("aluminum")) {
-                requiredPiston = ModItems.ALUMINUM_PISTON.get(); // СТЕРЛИ net.minecraft.world.item.Item
-                pistonName = "§fАлюминиевый поршень";             // СТЕРЛИ String
+            // Шаг 1: Коленвал
+            if (!be.hasCrankshaft && heldItem.is(net.minecraft.world.item.Items.IRON_INGOT)) {
+                be.hasCrankshaft = true;
+                player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §aКоленчатый вал успешно установлен!"), true);
+                return finishStep(player, heldItem, level, pos, net.minecraft.sounds.SoundEvents.ANVIL_PLACE, be);
             }
 
-            // 2. НАСТРОЙКА ГБЦ ПО МАТЕРИАЛАМ И КОМПОНОВКАМ
-            net.minecraft.world.item.Item requiredGBC = net.minecraft.world.item.Item.byBlock(net.minecraft.world.level.block.Blocks.IRON_BLOCK); // Дефолт (Чугун)
-            String gbcName = be.engineType.equals("r16") ? "§6Сдвоенную ГБЦ" : "§7ГБЦ (Железный блок)";
+            // Шаг 2: Поршни (Автоматически подставит нужный металл!)
+            if (be.hasCrankshaft && be.installedPistons < be.maxPistons && heldItem.is(requiredPiston)) {
+                be.installedPistons++;
+                player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §eУстановлено поршней: §a" + be.installedPistons + "§7/§a" + be.maxPistons), true);
+                return finishStep(player, heldItem, level, pos, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_IRON.value(), be);
+            }
 
-            if (be.engineMaterial.equals("titanium")) {
-                requiredGBC = be.engineType.equals("r16") ? ModItems.TITANIUM_R16_GBC.get() : ModItems.TITANIUM_GBC.get();
-                gbcName = be.engineType.equals("r16") ? "§bТитановую сдвоенную ГБЦ" : "§bТитановую ГБЦ";
-            } else if (be.engineMaterial.equals("aluminum")) {
-                requiredGBC = be.engineType.equals("r16") ? ModItems.ALUMINUM_R16_GBC.get() : ModItems.ALUMINUM_GBC.get();
-                gbcName = be.engineType.equals("r16") ? "§fАлюминиевую сдвоенную ГБЦ" : "§fАлюминиевую ГБЦ";
-            } else if (be.engineMaterial.equals("iron")) {
-                if (be.engineType.equals("r16")) {
-                    requiredGBC = ModItems.IRON_R16_GBC.get();
+            // Шаг 3: ГБЦ и Контроллеры
+            if (be.installedPistons == be.maxPistons && be.installedGBC < be.maxGBC) {
+
+                // Проверяем, является ли клик финальным для этой компоновки
+                boolean isFinalClick = (be.installedGBC == be.maxGBC - 1);
+
+                // УСЛОВИЕ ДЛЯ МОЗГОВ: Требуем контроллер на финальном шаге для R32, R16 или V8!
+                boolean needsBrain = isFinalClick && (be.engineType.equals("r32") || be.engineType.equals("r16") || be.engineType.equals("v8"));
+
+                net.minecraft.world.item.Item targetItemForThisStep = needsBrain ? requiredBrainGBC : requiredGBC;
+
+                if (heldItem.is(targetItemForThisStep)) {
+                    be.installedGBC++;
+
+                    // ЕСЛИ ВСЕ ГБЦ И КОНТРОЛЛЕРЫ НА МЕСТЕ — ПРОИЗВОДИМ ПОДМЕНУ БЛОКА!
+                    if (be.installedGBC == be.maxGBC) {
+                        net.minecraft.core.Direction currentFacing = state.getValue(HORIZONTAL_FACING);
+
+                        String materialPrefix = be.engineMaterial.equals("iron") ? "" : be.engineMaterial + "_";
+                        String finalEngineName = materialPrefix + be.engineType + "_engine";
+
+                        net.minecraft.world.level.block.Block finalEngineBlock = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(
+                                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, finalEngineName)
+                        );
+
+                        if (finalEngineBlock != null && finalEngineBlock != net.minecraft.world.level.block.Blocks.AIR) {
+                            level.setBlock(pos, finalEngineBlock.defaultBlockState().setValue(HORIZONTAL_FACING, currentFacing), 3);
+                            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.COPPER_TRAPDOOR_CLOSE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
+                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §⚡ Двигатель " + finalEngineName.toUpperCase() + " успешно собран!"), true);
+                            return net.minecraft.world.InteractionResult.CONSUME;
+                        } else {
+                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§c⚠ Не найден готовый блок двигателя '" + finalEngineName + "'!"), true);
+                        }
+                    }
+
+                    player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §eУстановлено ГБЦ: §a" + be.installedGBC + "§7/§a" + be.maxGBC), true);
+                    return finishStep(player, heldItem, level, pos, net.minecraft.sounds.SoundEvents.COPPER_PLACE, be);
                 }
-            }
-
-            // 3. НАСТРОЙКА КОНТРОЛЛЕРОВ / ГБЦ С МОЗГАМИ
-            net.minecraft.world.item.Item requiredBrainGBC = ModItems.IRON_BRAIN_GBC.get(); // Дефолт (Чугун)
-            String brainGbcName = be.engineType.equals("r16") ? "§6Чугунную сдвоенную ГБЦ с контроллером" : "§eЧугунную ГБЦ с контроллером";
-
-            if (be.engineMaterial.equals("titanium")) {
-                requiredBrainGBC = be.engineType.equals("r16") ? ModItems.TITANIUM_R16_BRAIN_GBC.get() : ModItems.TITANIUM_BRAIN_GBC.get();
-                brainGbcName = be.engineType.equals("r16") ? "§dTитановую сдвоенную ГБЦ с контроллером" : "§dТитановую ГБЦ с контроллером";
-            } else if (be.engineMaterial.equals("aluminum")) {
-                requiredBrainGBC = be.engineType.equals("r16") ? ModItems.ALUMINUM_R16_BRAIN_GBC.get() : ModItems.ALUMINUM_BRAIN_GBC.get();
-                brainGbcName = be.engineType.equals("r16") ? "§7Алюминиевую сдвоенную ГБЦ с контроллером" : "§7Алюминиевую ГБЦ с контроллером";
             }
 
             // =========================================================================
