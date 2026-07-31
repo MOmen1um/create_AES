@@ -19,6 +19,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
     public int maxGBC = 2;
     public String engineMaterial = "iron";
     public String engineType = "v8";
+    public boolean requiredBrain;
 
     public EngineCarterBlockEntity(BlockPos pos, BlockState state) {
         // Привязываем сущность к нашему общему регистратору картеров в ModBlocks
@@ -41,9 +42,11 @@ public class EngineCarterBlockEntity extends BlockEntity {
             } else if (this.engineType.equals("w16")) {
                 this.maxPistons = 16;
                 this.maxGBC = 2;
+                this.requiredBrain = true;
             } else if (this.engineType.equals("v8")) {
                 this.maxPistons = 8;
                 this.maxGBC = 2;
+                this.requiredBrain = true;
             } else if (this.engineType.equals("i4")) {
                 this.maxPistons = 4;
                 this.maxGBC = 2;

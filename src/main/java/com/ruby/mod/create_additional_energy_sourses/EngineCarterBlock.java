@@ -4,25 +4,19 @@ import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import com.ruby.mod.create_additional_energy_sourses.EngineCarterBlockEntity;
 
 public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<EngineCarterBlockEntity> {
 
@@ -84,48 +78,40 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // СИСТЕМА ДИНАМИЧЕСКОГО РЕБАЛАНСА МАТЕРИАЛОВ (С ЗАГЛУШКАМИ)
             // =========================================================================
 
-            // 1. НАСТРОЙКА ПОРШНЕЙ ПО МАТЕРИАЛАМ
-            net.minecraft.world.item.Item requiredPiston = net.minecraft.world.item.Items.PISTON; // Дефолт (Чугун/Железо)
-            String pistonName = "§7Поршень";
-
-            if (be.engineMaterial.equals("titanium")) {
-                // Измени на свой предмет, когда зарегистрируешь:
-                // requiredPiston = ModItems.TITANIUM_PISTON.get();
-                pistonName = "§bТитановый поршень";
-            } else if (be.engineMaterial.equals("aluminum")) {
-                // Измени на свой предмет, когда зарегистрируешь:
-                // requiredPiston = ModItems.ALUMINUM_PISTON.get();
-                pistonName = "§fАлюминиевый поршень";
-            }
+            // 1. НАСТРОЙКА ПОРШНЕЙ (titanium/aluminum)
+            net.minecraft.world.item.Item requiredPiston = be.engineMaterial.equals("titanium") ? ModItems.TITANIUM_PISTON.get() :
+                    (be.engineMaterial.equals("aluminum") ? ModItems.ALUMINUM_PISTON.get() : net.minecraft.world.item.Items.PISTON);
+            String pistonName = be.engineMaterial.equals("titanium") ? "§bТитановый поршень" :
+                    (be.engineMaterial.equals("aluminum") ? "§fАлюминиевый поршень" : "§7Поршень");
 
             // 2. НАСТРОЙКА ГБЦ ПО МАТЕРИАЛАМ И КОМПОНОВКАМ
             net.minecraft.world.item.Item requiredGBC = net.minecraft.world.item.Item.byBlock(net.minecraft.world.level.block.Blocks.IRON_BLOCK); // Дефолт
-            // Проверяем, не R16 ли это, чтобы динамически изменить текст подсказки
-            String gbcName = be.engineType.equals("r16") ? "§6Сдвоенную ГБЦ" : "§7ГБЦ (Железный блок)";
+            // Проверяем, не w16 ли это, чтобы динамически изменить текст подсказки
+            String gbcName = be.engineType.equals("w16") ? "§6Сдвоенную ГБЦ" : "§7ГБЦ (Железный блок)";
 
             if (be.engineMaterial.equals("titanium")) {
-                // requiredGBC = be.engineType.equals("r16") ? ModItems.TITANIUM_R16_GBC.get() : ModItems.TITANIUM_GBC.get();
-                gbcName = be.engineType.equals("r16") ? "§bТитановую сдвоенную ГБЦ" : "§bТитановую ГБЦ";
+                requiredGBC = be.engineType.equals("w16") ? ModItems.TITANIUM_W16_GBC.get() : ModItems.TITANIUM_GBC.get();
+                gbcName = be.engineType.equals("w16") ? "§bТитановую сдвоенную ГБЦ" : "§bТитановую ГБЦ";
             } else if (be.engineMaterial.equals("aluminum")) {
-                // requiredGBC = be.engineType.equals("r16") ? ModItems.ALUMINUM_R16_GBC.get() : ModItems.ALUMINUM_GBC.get();
-                gbcName = be.engineType.equals("r16") ? "§fАлюминиевую сдвоенную ГБЦ" : "§fАлюминиевую ГБЦ";
+                requiredGBC = be.engineType.equals("w16") ? ModItems.ALUMINUM_W16_GBC.get() : ModItems.ALUMINUM_GBC.get();
+                gbcName = be.engineType.equals("w16") ? "§fАлюминиевую сдвоенную ГБЦ" : "§fАлюминиевую ГБЦ";
             } else if (be.engineMaterial.equals("iron")) {
-                // requiredGBC = be.engineType.equals("r16") ? ModItems.IRON_R16_GBC.get() : ...
+                //requiredGBC = be.engineType.equals("w16") ? ModItems.IRON_W16_GBC.get() : ...
             }
 
             // 3. НАСТРОЙКА КОНТРОЛЛЕРОВ / ГБЦ С МОЗГАМИ
             net.minecraft.world.item.Item requiredBrainGBC = net.minecraft.world.item.Items.GOLD_INGOT; // Временная заглушка (Золото)
-            String brainGbcName = be.engineType.equals("r16") ? "§eСдвоенную ГБЦ с контроллером" : "§eКонтроллер двигателя";
+            String brainGbcName = be.engineType.equals("w16") ? "§eСдвоенную ГБЦ с контроллером" : "§eКонтроллер двигателя";
 
             if (be.engineMaterial.equals("titanium")) {
-                // requiredBrainGBC = be.engineType.equals("r16") ? ModItems.TITANIUM_R16_BRAIN_GBC.get() : ModItems.TITANIUM_BRAIN_GBC.get();
-                brainGbcName = be.engineType.equals("r16") ? "§dТитановую сдвоенную ГБЦ с контроллером" : "§dТитановую ГБЦ с контроллером";
+                requiredBrainGBC = be.engineType.equals("w16") ? ModItems.TITANIUM_W16_BRAIN_GBC.get() : ModItems.TITANIUM_BRAIN_GBC.get();
+                brainGbcName = be.engineType.equals("w16") ? "§dТитановую сдвоенную ГБЦ с контроллером" : "§dТитановую ГБЦ с контроллером";
             } else if (be.engineMaterial.equals("iron")) {
-                // requiredBrainGBC = be.engineType.equals("r16") ? ModItems.IRON_R16_BRAIN_GBC.get() : ModItems.IRON_BRAIN_GBC.get();
-                brainGbcName = be.engineType.equals("r16") ? "§6Чугунную sдвоенную ГБЦ с контроллером" : "§eЧугунную ГБЦ с контроллером";
+                requiredBrainGBC = be.engineType.equals("w16") ? ModItems.IRON_W16_BRAIN_GBC.get() : ModItems.IRON_BRAIN_GBC.get();
+                brainGbcName = be.engineType.equals("w16") ? "§6Чугунную cдвоенную ГБЦ с контроллером" : "§eЧугунную ГБЦ с контроллером";
             } else if (be.engineMaterial.equals("aluminum")) {
-                // requiredBrainGBC = be.engineType.equals("r16") ? ModItems.ALUMINUM_R16_BRAIN_GBC.get() : ModItems.ALUMINUM_BRAIN_GBC.get();
-                brainGbcName = be.engineType.equals("r16") ? "§7Алюминиевую сдвоенную ГБЦ с контроллером" : "§7Алюминиевую ГБЦ с контроллером";
+                requiredBrainGBC = be.engineType.equals("w16") ? ModItems.ALUMINUM_W16_BRAIN_GBC.get() : ModItems.ALUMINUM_BRAIN_GBC.get();
+                brainGbcName = be.engineType.equals("w16") ? "§7Алюминиевую сдвоенную ГБЦ с контроллером" : "§7Алюминиевую ГБЦ с контроллером";
             }
 
 
@@ -152,11 +138,10 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
 
                 // Проверяем, является ли клик финальным для этой компоновки
                 boolean isFinalClick = (be.installedGBC == be.maxGBC - 1);
+                // УСЛОВИЕ ДЛЯ МОЗГОВ: Требуем контроллер на финальном шаге для R32, I4!
+                boolean needsGBCWithBrain = isFinalClick && (be.engineType.equals("r32") || be.engineType.equals("i4"));
 
-                // УСЛОВИЕ ДЛЯ МОЗГОВ: Требуем контроллер на финальном шаге для R32, R16 или V8!
-                boolean needsBrain = isFinalClick && (be.engineType.equals("r32") || be.engineType.equals("r16") || be.engineType.equals("v8"));
-
-                net.minecraft.world.item.Item targetItemForThisStep = needsBrain ? requiredBrainGBC : requiredGBC;
+                net.minecraft.world.item.Item targetItemForThisStep = needsGBCWithBrain ? requiredBrainGBC : requiredGBC;
 
                 if (heldItem.is(targetItemForThisStep)) {
                     be.installedGBC++;
@@ -197,7 +182,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             } else if (be.installedPistons < be.maxPistons) {
                 player.displayClientMessage(net.minecraft.network.chat.Component.literal("§c⚠ Требуется: " + pistonName + " §7(" + be.installedPistons + "/" + be.maxPistons + ")"), true);
             } else if (be.installedGBC < be.maxGBC) {
-                boolean isFinalBrainStep = (be.installedGBC == be.maxGBC - 1) && (be.engineType.equals("r32") || be.engineType.equals("r16") || be.engineType.equals("v8"));
+                boolean isFinalBrainStep = (be.installedGBC == be.maxGBC - 1) && (be.engineType.equals("r32") || be.engineType.equals("w16") || be.engineType.equals("v8"));
                 String expectedGbc = isFinalBrainStep ? brainGbcName : gbcName;
 
                 player.displayClientMessage(net.minecraft.network.chat.Component.literal("§c⚠ Требуется: " + expectedGbc + " §7(" + be.installedGBC + "/" + be.maxGBC + ")"), true);

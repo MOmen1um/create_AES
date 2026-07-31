@@ -6,10 +6,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 
 @Mod(Create_additional_energy_sourses.MODID)
@@ -79,17 +76,17 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_GBC.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_R16_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_R16_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_R16_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_W16_GBC.get()));
 
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_BRAIN_GBC.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_R16_BRAIN_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_R16_BRAIN_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_R16_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_W16_BRAIN_GBC.get()));
                     })
                     .build());
 
