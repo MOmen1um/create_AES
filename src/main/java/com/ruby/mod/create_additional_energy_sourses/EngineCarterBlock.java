@@ -104,13 +104,13 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             String brainGbcName = be.engineType.equals("w16") ? "§eСдвоенную ГБЦ с контроллером" : "§eКонтроллер двигателя";
 
             if (be.engineMaterial.equals("titanium")) {
-                requiredBrainGBC = be.engineType.equals("w16") ? ModItems.TITANIUM_W16_BRAIN_GBC.get() : ModItems.TITANIUM_BRAIN_GBC.get();
+                requiredBrainGBC = ModItems.TITANIUM_BRAIN_GBC.get();
                 brainGbcName = be.engineType.equals("w16") ? "§dТитановую сдвоенную ГБЦ с контроллером" : "§dТитановую ГБЦ с контроллером";
             } else if (be.engineMaterial.equals("iron")) {
-                requiredBrainGBC = be.engineType.equals("w16") ? ModItems.IRON_W16_BRAIN_GBC.get() : ModItems.IRON_BRAIN_GBC.get();
+                requiredBrainGBC = ModItems.IRON_BRAIN_GBC.get();
                 brainGbcName = be.engineType.equals("w16") ? "§6Чугунную cдвоенную ГБЦ с контроллером" : "§eЧугунную ГБЦ с контроллером";
             } else if (be.engineMaterial.equals("aluminum")) {
-                requiredBrainGBC = be.engineType.equals("w16") ? ModItems.ALUMINUM_W16_BRAIN_GBC.get() : ModItems.ALUMINUM_BRAIN_GBC.get();
+                requiredBrainGBC = ModItems.ALUMINUM_BRAIN_GBC.get();
                 brainGbcName = be.engineType.equals("w16") ? "§7Алюминиевую сдвоенную ГБЦ с контроллером" : "§7Алюминиевую ГБЦ с контроллером";
             }
 
@@ -130,46 +130,96 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             if (be.hasCrankshaft && be.installedPistons < be.maxPistons && heldItem.is(requiredPiston)) {
                 be.installedPistons++;
                 player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §eУстановлено поршней: §a" + be.installedPistons + "§7/§a" + be.maxPistons), true);
-                return finishStep(player, heldItem, level, pos, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_IRON.value(), be);
+                return finishStep(player, heldItem, level, pos, net.minecraft.sounds.SoundEvents.ANVIL_PLACE, be);
             }
 
-            // Шаг 3: ГБЦ и Контроллеры
-            if (be.installedPistons == be.maxPistons && be.installedGBC < be.maxGBC) {
+            // --- Шаг 3: ГБЦ и Контроллеры ---
+            if (be.installedPistons == be.maxPistons) {
 
-                // Проверяем, является ли клик финальным для этой компоновки
-                boolean isFinalClick = (be.installedGBC == be.maxGBC - 1);
-                // УСЛОВИЕ ДЛЯ МОЗГОВ: Требуем контроллер на финальном шаге для R32, I4!
-                boolean needsGBCWithBrain = isFinalClick && (be.engineType.equals("r32") || be.engineType.equals("i4"));
+                // Ветка для многоцилиндровых двигателей (W16 и V8)
+                if (be.engineType.equals("w16") || be.engineType.equals("v8")) {
 
-                net.minecraft.world.item.Item targetItemForThisStep = needsGBCWithBrain ? requiredBrainGBC : requiredGBC;
+                    // Этап А: Сначала устанавливаем ГБЦ до максимума
+                    if (be.installedGBC < be.maxGBC) {
+                        if (heldItem.is(requiredGBC)) {
+                            be.installedGBC++;
+                            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ANVIL_PLACE, net.minecraft.sounds.SoundSource.BLOCKS, 0.5f, 1.0f);
+                            if (!player.isCreative()) heldItem.shrink(1);
+                            be.setChanged();
+                            level.sendBlockUpdated(pos, state, state, 3);
 
-                if (heldItem.is(targetItemForThisStep)) {
-                    be.installedGBC++;
-
-                    // ЕСЛИ ВСЕ ГБЦ И КОНТРОЛЛЕРЫ НА МЕСТЕ — ПРОИЗВОДИМ ПОДМЕНУ БЛОКА!
-                    if (be.installedGBC == be.maxGBC) {
-                        net.minecraft.core.Direction currentFacing = state.getValue(HORIZONTAL_FACING);
-
-                        String materialPrefix = be.engineMaterial.equals("iron") ? "" : be.engineMaterial + "_";
-                        String finalEngineName = materialPrefix + be.engineType + "_engine";
-
-                        net.minecraft.world.level.block.Block finalEngineBlock = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(
-                                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(Create_additional_energy_sourses.MODID, finalEngineName)
-                        );
-
-                        if (finalEngineBlock != null && finalEngineBlock != net.minecraft.world.level.block.Blocks.AIR) {
-                            level.setBlock(pos, finalEngineBlock.defaultBlockState().setValue(HORIZONTAL_FACING, currentFacing), 3);
-                            level.playSound(null, pos, net.minecraft.sounds.SoundEvents.COPPER_TRAPDOOR_CLOSE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
-                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §⚡ Двигатель " + finalEngineName.toUpperCase() + " успешно собран!"), true);
-                            return net.minecraft.world.InteractionResult.CONSUME;
+                            // Сразу показываем прогресс после успешной установки
+                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §eГБЦ установлена! Прогресс: §a(" + be.installedGBC + "/" + be.maxGBC + ")"), true);
                         } else {
-                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§c⚠ Не найден готовый блок двигателя '" + finalEngineName + "'!"), true);
+                            // Подсказка, если игрок тыкает не тем предметом
+                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §eТребуется ГБЦ, Установлено: §a(" + be.installedGBC + "/" + be.maxGBC + ")"), true);
+                            level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
                         }
                     }
+                    // Этап Б: Все ГБЦ на месте, теперь ставим контроллер (мозги)
+                    else if (!be.installedBrain) {
+                        // Временный технологичный предмет вместо золота
+                        net.minecraft.world.item.Item temporaryBrainItem = ModItems.CONTROLLER.get();
 
-                    player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §eУстановлено ГБЦ: §a" + be.installedGBC + "§7/§a" + be.maxGBC), true);
-                    return finishStep(player, heldItem, level, pos, net.minecraft.sounds.SoundEvents.COPPER_PLACE, be);
+                        if (heldItem.is(temporaryBrainItem)) {
+                            be.installedBrain = true;
+                            if (!player.isCreative()) heldItem.shrink(1);
+
+                            // Финал сборки
+                            String finalEngineName = be.engineMaterial + "_" + be.engineType + "_engine";
+                            net.minecraft.world.level.block.Block finalEngineBlock = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(
+                                    net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", finalEngineName)
+                            );
+
+                            if (finalEngineBlock != net.minecraft.world.level.block.Blocks.AIR) {
+                                level.setBlock(pos, finalEngineBlock.defaultBlockState(), 3);
+                                level.playSound(null, pos, net.minecraft.sounds.SoundEvents.NETHERITE_BLOCK_PLACE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
+                                player.displayClientMessage(net.minecraft.network.chat.Component.literal("§aДвигатель " + be.engineType.toUpperCase() + " успешно собран!"), true);
+                            } else {
+                                player.displayClientMessage(net.minecraft.network.chat.Component.literal("§cОшибка: Блок " + finalEngineName + " не зарегистрирован!"), true);
+                            }
+                        } else {
+                            // Подсказка о том, что ГБЦ уже готовы и нужен контроллер
+                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§6[ДВС] §aТребуется контролер!"), true);
+                            level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
+                        }
+                    }
                 }
+                // Старая ветка для I4 и R32
+                else {
+                    if (be.installedGBC < be.maxGBC) {
+                        boolean isFinalClick = (be.installedGBC == be.maxGBC - 1);
+                        boolean needsBrain = isFinalClick && be.requiredBrain;
+
+                        net.minecraft.world.item.Item targetItemForThisStep = needsBrain ? requiredBrainGBC : requiredGBC;
+
+                        if (heldItem.is(targetItemForThisStep)) {
+                            be.installedGBC++;
+                            if (!player.isCreative()) heldItem.shrink(1);
+
+                            if (be.installedGBC == be.maxGBC) {
+                                String finalEngineName = be.engineMaterial + "_" + be.engineType + "_engine";
+                                net.minecraft.world.level.block.Block finalEngineBlock = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(
+                                        net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", finalEngineName)
+                                );
+                                if (finalEngineBlock != net.minecraft.world.level.block.Blocks.AIR) {
+                                    level.setBlock(pos, finalEngineBlock.defaultBlockState(), 3);
+                                    level.playSound(null, pos, net.minecraft.sounds.SoundEvents.ANVIL_PLACE, net.minecraft.sounds.SoundSource.BLOCKS, 0.5f, 1.0f);
+                                    player.displayClientMessage(net.minecraft.network.chat.Component.literal("§aДвигатель " + be.engineType.toUpperCase() + " успешно собран!"), true);
+                                }
+                            } else {
+                                player.displayClientMessage(net.minecraft.network.chat.Component.literal("§aГБЦ установлена! Прогресс: (" + be.installedGBC + "/" + be.maxGBC + ")"), true);
+                            }
+                            be.setChanged();
+                            level.sendBlockUpdated(pos, state, state, 3);
+                        } else {
+                            String missingItemName = needsBrain ? "ГБЦ с контроллером" : "ГБЦ";
+                            player.displayClientMessage(net.minecraft.network.chat.Component.literal("§cТребуется " + missingItemName + "! Прогресс: (" + be.installedGBC + "/" + be.maxGBC + ")"), true);
+                        }
+                    }
+                }
+
+                return net.minecraft.world.InteractionResult.CONSUME;
             }
 
             // =========================================================================

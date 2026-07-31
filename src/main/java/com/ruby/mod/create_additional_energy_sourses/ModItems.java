@@ -52,20 +52,17 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> ALUMINUM_GBC = ITEMS.register("aluminum_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_GBC = ITEMS.register("titanium_gbc", () -> new Item(new Item.Properties()));
 
-    // Сдвоенные ГБЦ для твоего будущего радиального монстра W16
+    // Сдвоенные ГБЦ для W16
     public static final DeferredHolder<Item, Item> IRON_W16_GBC = ITEMS.register("iron_w16_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_W16_GBC = ITEMS.register("aluminum_w16_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_W16_GBC = ITEMS.register("titanium_w16_gbc", () -> new Item(new Item.Properties()));
 
-    // ГБЦ с контроллерами (Мозги для финального шага V8, W16, R32)
+    // ГБЦ с контроллерами (Мозги для финального шага i4 R32)
     public static final DeferredHolder<Item, Item> IRON_BRAIN_GBC = ITEMS.register("iron_brain_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_BRAIN_GBC = ITEMS.register("aluminum_brain_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_BRAIN_GBC = ITEMS.register("titanium_brain_gbc", () -> new Item(new Item.Properties()));
 
-    // Сдвоенные ГБЦ с контроллерами (Спецом под финал W16!)
-    public static final DeferredHolder<Item, Item> IRON_W16_BRAIN_GBC = ITEMS.register("iron_w16_brain_gbc", () -> new Item(new Item.Properties()));
-    public static final DeferredHolder<Item, Item> ALUMINUM_W16_BRAIN_GBC = ITEMS.register("aluminum_w16_brain_gbc", () -> new Item(new Item.Properties()));
-    public static final DeferredHolder<Item, Item> TITANIUM_W16_BRAIN_GBC = ITEMS.register("titanium_w16_brain_gbc", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CONTROLLER = ITEMS.register("controller", () -> new Item(new Item.Properties()));
     // Официальный предмет для термогенератора блока
     public static final java.util.function.Supplier<net.minecraft.world.item.Item> THERMO_GENERATOR_ITEM = ITEMS.register("thermo_generator",
             () -> new net.minecraft.world.item.BlockItem(ModBlocks.THERMO_GENERATOR.get(), new net.minecraft.world.item.Item.Properties()));

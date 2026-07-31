@@ -83,10 +83,7 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_BRAIN_GBC.get()));
-
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_BRAIN_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_BRAIN_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_W16_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CONTROLLER.get()));
                     })
                     .build());
 

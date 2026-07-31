@@ -20,6 +20,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
     public String engineMaterial = "iron";
     public String engineType = "v8";
     public boolean requiredBrain;
+    public boolean installedBrain = false;
 
     public EngineCarterBlockEntity(BlockPos pos, BlockState state) {
         // Привязываем сущность к нашему общему регистратору картеров в ModBlocks
@@ -63,6 +64,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
         tag.putInt("InstalledGBC", this.installedGBC);
         tag.putString("EngineMaterial", this.engineMaterial);
         tag.putString("EngineType", this.engineType);
+        tag.putBoolean("InstalledBrain", this.installedBrain);
     }
 
     // Загрузка данных сборки при чтении чанка (NBT)
@@ -74,6 +76,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
         this.hasCrankshaft = tag.getBoolean("HasCrankshaft");
         this.installedPistons = tag.getInt("InstalledPistons");
         this.installedGBC = tag.getInt("InstalledGBC");
+        this.installedBrain = tag.getBoolean("InstalledBrain");
 
         // Читаем строки компоновки, если они сохранились
         if (tag.contains("EngineMaterial")) this.engineMaterial = tag.getString("EngineMaterial");
@@ -87,6 +90,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
         tag.putBoolean("HasCrankshaft", this.hasCrankshaft);
         tag.putInt("InstalledPistons", this.installedPistons);
         tag.putInt("InstalledGBC", this.installedGBC);
+        tag.putBoolean("InstalledBrain", this.installedBrain);
         return tag;
     }
 
