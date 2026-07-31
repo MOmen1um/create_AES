@@ -47,10 +47,12 @@ public class ModItems {
     // Поршни по металлам
     public static final DeferredHolder<Item, Item> ALUMINUM_PISTON = ITEMS.register("aluminum_piston", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_PISTON = ITEMS.register("titanium_piston", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> IRON_PISTON = ITEMS.register("iron_piston", () -> new Item(new Item.Properties()));
 
     // Стандартные ГБЦ (Головки блока цилиндров)
     public static final DeferredHolder<Item, Item> ALUMINUM_GBC = ITEMS.register("aluminum_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_GBC = ITEMS.register("titanium_gbc", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> IRON_GBC = ITEMS.register("iron_gbc", () -> new Item(new Item.Properties()));
 
     // Сдвоенные ГБЦ для W16
     public static final DeferredHolder<Item, Item> IRON_W16_GBC = ITEMS.register("iron_w16_gbc", () -> new Item(new Item.Properties()));

@@ -72,9 +72,11 @@ public class Create_additional_energy_sourses {
                         // РАЗДЕЛ РАСХОДНИКОВ ДЛЯ СБОРКИ (Добавляем наши новые детали!)
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_PISTON.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_PISTON.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_PISTON.get()));
 
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_GBC.get()));
 
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_GBC.get()));

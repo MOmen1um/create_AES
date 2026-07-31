@@ -20,7 +20,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
     public String engineMaterial = "iron";
     public String engineType = "v8";
     public boolean installedBrain = false;
-    public boolean HasUnitedController = false;
+    public boolean hasUnitedController = false;
 
     public EngineCarterBlockEntity(BlockPos pos, BlockState state) {
         // Привязываем сущность к нашему общему регистратору картеров в ModBlocks
@@ -41,7 +41,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
                 case "r32" -> {
                     this.maxPistons = 32;
                     this.maxGBC = 8;
-                    this.HasUnitedController = true;
+                    this.hasUnitedController = true;
                 }
                 case "w16" -> {
                     this.maxPistons = 16;
@@ -54,7 +54,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
                 case "i4" -> {
                     this.maxPistons = 4;
                     this.maxGBC = 1;
-                    this.HasUnitedController = true;
+                    this.hasUnitedController = true;
                 }
             }
         }

@@ -26,6 +26,25 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
         super(properties);
     }
 
+    @Override
+    public net.minecraft.world.level.block.entity.BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return IBE.super.newBlockEntity(pos, state);
+    }
+
+    @Override
+    public net.minecraft.core.Direction.Axis getRotationAxis(BlockState state) {
+        return state.getValue(HORIZONTAL_FACING).getAxis();
+    }
+
+    // 3. Передаем логику открытия/удаления блока нашей сущности
+    @Override
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (state.getBlock() != newState.getBlock()) {
+            level.removeBlockEntity(pos);
+        }
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
+
     // Связываем BlockEntity с нашим классом
     @Override
     public Class<EngineCarterBlockEntity> getBlockEntityClass() {
@@ -78,14 +97,14 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // =================================================================
             if (be.installedPistons < be.maxPistons) {
                 Item requiredPiston = be.engineMaterial.equals("titanium") ? ModItems.TITANIUM_PISTON.get() :
-                        (be.engineMaterial.equals("aluminum") ? ModItems.ALUMINUM_PISTON.get() : Items.PISTON);
+                        (be.engineMaterial.equals("aluminum") ? ModItems.ALUMINUM_PISTON.get() : ModItems.IRON_PISTON.get());
 
                 if (heldItem.is(requiredPiston)) {
                     be.installedPistons++;
                     player.displayClientMessage(Component.literal("§6[ДВС] Установлено поршней: §a" + be.installedPistons + "/" + be.maxPistons), true);
                     return finishStep(player, heldItem, level, pos, SoundEvents.ANVIL_PLACE, be);
                 } else {
-                    String pistonName = be.engineMaterial.equals("titanium") ? "Титановый поршень" : (be.engineMaterial.equals("aluminum") ? "Алюминиевый поршень" : "Поршень");
+                    String pistonName = be.engineMaterial.equals("titanium") ? "Титановый поршень" : (be.engineMaterial.equals("aluminum") ? "Алюминиевый поршень" : "Чугунный  Поршень");
                     player.displayClientMessage(Component.literal("§c[ДВС] Требуется " + pistonName + "! Прогресс: (" + be.installedPistons + "/" + be.maxPistons + ")"), true);
                     level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.CONSUME;
@@ -147,6 +166,28 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
         }
         return net.minecraft.world.InteractionResult.PASS;
     }
+    @Override
+    public net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
+        return net.minecraft.world.level.block.RenderShape.ENTITYBLOCK_ANIMATED;
+    }
+
+    // Логика подключения валов Create к нашему картеру
+    @Override
+    public boolean hasShaftTowards(net.minecraft.world.level.LevelReader world, BlockPos pos, BlockState state, net.minecraft.core.Direction face) {
+        // 1. Ищем наш BlockEntity
+        if (world.getBlockEntity(pos) instanceof EngineCarterBlockEntity be) {
+            // 2. Если коленвала еще нет внутри — подключать кинетику Create ЗАПРЕЩЕНО
+            if (!be.hasCrankshaft) return false;
+
+            // 3. Получаем направление, куда смотрит сам картер
+            net.minecraft.core.Direction blockFacing = state.getValue(HORIZONTAL_FACING);
+
+            // 4. Разрешаем подключение только сзади (блок смотрит вперед, значит зад — это Opposite)
+            // Если твоя моделька сместилась, и вал должен быть спереди, просто замени blockFacing.getOpposite() на blockFacing
+            return face == blockFacing.getOpposite();
+        }
+        return false;
+    }
     private void buildFinalEngine(EngineCarterBlockEntity be, Level level, BlockPos pos, BlockState state, Player player) {
         // Автоматическая генерация имени: например "titanium_w16_engine" или "iron_i4_engine" (для чугуна префикса нет)
         String prefix = be.engineMaterial.equals("iron") ? "" : be.engineMaterial + "_";
@@ -158,7 +199,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
 
         if (finalEngineBlock != net.minecraft.world.level.block.Blocks.AIR) {
             // Меняем блок с сохранением поворота!
-            level.setBlock(pos, finalEngineBlock.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING)), 3);
+            level.setBlock(pos, finalEngineBlock.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING).getOpposite()), 3);
             level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
             player.displayClientMessage(Component.literal("§a§l[ДВС] Двигатель " + finalEngineName.toUpperCase() + " успешно собран!"), true);
         } else {
@@ -170,7 +211,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
         boolean isW16 = be.engineType.equals("w16");
         if (be.engineMaterial.equals("titanium")) return isW16 ? ModItems.TITANIUM_W16_GBC.get() : ModItems.TITANIUM_GBC.get();
         if (be.engineMaterial.equals("aluminum")) return isW16 ? ModItems.ALUMINUM_W16_GBC.get() : ModItems.ALUMINUM_GBC.get();
-        return Items.IRON_BLOCK; // Дефолт для чугуна
+        return ModItems.IRON_GBC.get(); // Дефолт для чугуна
     }
 
     private Item getBrainGbcItem(EngineCarterBlockEntity be) {
