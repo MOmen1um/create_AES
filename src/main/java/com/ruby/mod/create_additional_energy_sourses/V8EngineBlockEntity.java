@@ -711,7 +711,39 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             this.fuelTank.readFromNBT(registries, tag.getCompound("FuelTank"));
         }
 
-        // Обновляем тировые свойства на основе загруженного металла
+        String blockPath = net.minecraft.core.registries.BuiltInRegistries.BLOCK
+                .getKey(this.getBlockState().getBlock()).getPath().toLowerCase();
+
+        if (blockPath.contains("carter")) {
+            // ЛОГИКА ДЛЯ БЛОКА ЦИЛИНДРОВ (КАРТЕРА):
+            if (tag.contains("HasCrankshaft")) {
+                // Если игрок его уже строил — загружаем точные стадии поршней
+                this.assembly.readNBT(tag);
+            } else {
+                // Если блок только что поставили на землю — он ГАРАНТИРОВАННО пустой
+                this.assembly.hasCrankshaft = false;
+                this.assembly.installedPistons = 0;
+                this.assembly.installedGBC = 0;
+                this.assembly.hasForgottenPart = false;
+                this.assembly.hasTurbo = false;
+
+                // ПРИНУДИТЕЛЬНО ОБНУЛЯЕМ ТЕЛЕМЕТРИЮ ДЛЯ НОВОГО КАРТЕРА:
+                // Чтобы пустая железка на земле не имела топлива и была комнатной температуры!
+                this.engineTemperature = getAmbientTemperature();
+                this.isTurboCharged = false;
+                this.targetSliderSpeed = 0.0f;
+                // Очищаем бак через встроенный метод Create (или просто обнуляем жидкость, если у тебя кастомный класс)
+                this.fuelTank.setFluid(net.neoforged.neoforge.fluids.FluidStack.EMPTY);
+            }
+        } else {
+            // ЛОГИКА ДЛЯ ТВОИХ ОРИГИНАЛЬНЫХ 16 ДВИГАТЕЛЕЙ ИЗ КРЕАТИВА:
+            // Говорим менеджеру, что они изначально на 100% собраны.
+            // Все считанные выше баки, настройки ползунков скорости и температуры ОСТАЮТСЯ ЦЕЛЫМИ!
+            this.assembly.hasForgottenPart = true;
+            this.assembly.hasCrankshaft = true;
+            this.assembly.installedPistons = this.pistonCount;
+            this.assembly.installedGBC = this.pistonCount == 32 ? 1 : 2;
+        }
     }
 
 
