@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "create_additional_energy_sourses:item/raw_aluminum"
+  }
+}

@@ -1,16 +1,3 @@
-/flywheel backend off
-/give Dev create_additional_energy_sourses:heavy_handle
-/time set day
-/give Dev create_additional_energy_sourses:aluminum_v8_engine
-/give Dev create_additional_energy_sourses:titanium_v8_engine_v8_engine
-/give Dev create_additional_energy_sourses:titanium_v8_engine
-/weather clear
-/give Dev create_additional_energy_sourses:radiator_brass
-/give Dev create_additional_energy_sourses:radiator_copper
-/give Dev create_additional_energy_sourses:radiator_steel
-/give Dev create_additional_energy_sourses:radiator_ultimate
-/time set day\
-/time set day
 /weather clear
 /time set day
 /kill @e[type=!minecraft:player]
@@ -48,3 +35,16 @@
 /tick rate 1
 /tick rate 20
 /give Dev create_additional_energy_sourses:iron_brain_gbc
+/tick rate 1
+/tick rate 1000
+/tick rate 10000
+/tick rate 9999
+/tick rate 1
+/tick rate 20
+/time set day
+/loot give Dev mine 62 73 399
+/loot give Dev mine 63 73 398
+/reload
+/effect give Dev minecraft:night_vision infinite
+/enchant Dev minecraft:efficiency 5
+/enchant Dev minecraft:silk_touch 1

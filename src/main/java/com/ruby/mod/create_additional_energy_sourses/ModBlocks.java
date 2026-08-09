@@ -3,13 +3,20 @@ package com.ruby.mod.create_additional_energy_sourses;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
 
 
 public class ModBlocks {
@@ -161,6 +168,61 @@ public class ModBlocks {
     public static final DeferredHolder<Block, Block> TITANIUM_V8_CARTER  = registerCarter("titanium_v8_carter");
     public static final DeferredHolder<Block, Block> TITANIUM_W16_CARTER = registerCarter("titanium_w16_carter");
     public static final DeferredHolder<Block, Block> TITANIUM_R32_CARTER = registerCarter("titanium_r32_carter");
+
+    // Регистрация Алюминия (Каменная кирка и выше)
+    public static final DeferredHolder<Block, Block> ALUMINUM_ORE = BLOCKS.register("aluminum_ore", () ->
+            new Block(BlockBehaviour.Properties.of().strength(3.0f)) {
+                @Override
+                public java.util.List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+                    java.util.List<ItemStack> drops = new java.util.ArrayList<>();
+                    ItemStack tool = params.getOptionalParameter(LootContextParams.TOOL);
+
+                    // 1. Проверяем, что в руках вообще КИРКА (через тег)
+                    if (tool == null || !tool.is(net.minecraft.tags.ItemTags.PICKAXES)) {
+                        return drops; // Если рука, топор или лопата — дропа нет
+                    }
+
+                    // 2. Убираем дерево и золото по названию предмета
+                    String itemName = tool.getItem().toString();
+                    if (itemName.contains("wooden_pickaxe") || itemName.contains("golden_pickaxe")) {
+                        return drops; // Каменная, железная, алмазная и незеритовая сработают!
+                    }
+
+                    int fortuneLevel = tool.getEnchantmentLevel(params.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE));
+                    int count = 1 + (fortuneLevel > 0 ? new java.util.Random().nextInt(fortuneLevel + 1) : 0);
+                    drops.add(new ItemStack(ModItems.RAW_ALUMINUM, count));
+                    return drops;
+                }
+            }
+    );
+
+    // Регистрация Титана (Только Незеритовая и модовые кирки)
+    public static final DeferredHolder<Block, Block> TITANIUM_ORE = BLOCKS.register("titanium_ore", () ->
+            new Block(BlockBehaviour.Properties.of().strength(5.0f)) {
+                @Override
+                public java.util.List<ItemStack> getDrops(BlockState state, LootParams.Builder params) {
+                    java.util.List<ItemStack> drops = new java.util.ArrayList<>();
+                    ItemStack tool = params.getOptionalParameter(LootContextParams.TOOL);
+
+                    // 2. Разрешаем только незеритовую кирку.
+                    // Если у тебя появится кастомная кирка из твоего мода, допиши её сюда через ИЛИ (|| itemName.contains("имя_твоей_кирки"))
+                    String itemName = tool.getItem().toString();
+                    if (!itemName.contains("netherite_pickaxe") || itemName.contains("advanced_pickaxe")) {
+                        return drops; // Все остальные ванильные кирки (алмазная, железная) выдадут 0
+                    }
+
+                    // Логика Шелкового касания и Удачи
+                    if (tool.getEnchantmentLevel(params.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.SILK_TOUCH)) > 0) {
+                        drops.add(new ItemStack(this));
+                        return drops;
+                    }
+                    int fortuneLevel = tool.getEnchantmentLevel(params.getLevel().registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.FORTUNE));
+                    int count = 1 + (fortuneLevel > 0 ? new java.util.Random().nextInt(fortuneLevel + 1) : 0);
+                    drops.add(new ItemStack(ModItems.RAW_TITANIUM, count));
+                    return drops;
+                }
+            }
+    );
 
 
     // ==========================================

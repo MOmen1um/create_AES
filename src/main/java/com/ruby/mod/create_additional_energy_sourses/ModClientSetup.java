@@ -48,37 +48,31 @@ public class ModClientSetup {
             ms.pushPose();
 
             // 1. Сдвигаем матрицу в центр блока
-            ms.translate(0.5, 0.5, 0.5);
+            ms.translate(0.49, 0.5, 0.5);
 
-            // 2. Разворачиваем вал по направлению двигателя
+            // 2. Разворачиваем саму модель вала по направлению двигателя
+            // Используем встроенный метод Direction для точного поворота без путаницы в осях
+            ms.mulPose(facing.getRotation());
             if (axis == Direction.Axis.X) {
                 ms.mulPose(Axis.YP.rotationDegrees(90));
             }
 
-            // Получаем угол в радианах из Create
+            // 3. Получаем угол вращения из Create
             float angleInRadians = com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer.getAngleForBe(be, be.getBlockPos(), axis);
-
-// Переводим радианы в градусы Майнкрафта!
             float angleInDegrees = (float) Math.toDegrees(angleInRadians);
 
-// Поворачиваем матрицу на правильный градус
-            ms.mulPose(Axis.ZP.rotationDegrees(angleInDegrees));
+            // 4. Поворачиваем строго вокруг продольной оси вала (в моделях Create это ось Z)
+            ms.mulPose(Axis.YP.rotationDegrees(angleInDegrees));
 
-
+            // Возвращаем центр на место
             ms.translate(-0.5, -0.5, -0.5);
 
-            ResourceLocation shaftPath = ResourceLocation.fromNamespaceAndPath(
-                    "create_additional_energy_sourses",
-                    "block/custom_shaft"
-            );
+            ResourceLocation shaftPath = ResourceLocation.fromNamespaceAndPath("create", "block/shaft");
 
-            // Получаем BakedModel вала через менеджер моделей текущего кадра
             BakedModel shaftModel = Minecraft.getInstance().getModelManager().getModel(
                     new ModelResourceLocation(shaftPath, "standalone")
             );
 
-            // 5. Отрисовываем ТОЛЬКО ВАЛ. Он крутится со скоростью 0.2f.
-            // А уникальный корпус двигателя остаётся неподвижным на своём месте!
             context.getBlockRenderDispatcher().getModelRenderer().renderModel(
                     ms.last(),
                     buffer.getBuffer(RenderType.solid()),

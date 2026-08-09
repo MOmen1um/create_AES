@@ -15,5 +15,14 @@
   {"ingredient":{"id":"create_additional_energy_sourses:iron_gbc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:aluminum_gbc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:iron_piston"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:controller"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"create_additional_energy_sourses:controller"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:r32_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:iron_w16_gbc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_gbc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_r32_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"minecraft:stripped_birch_wood"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_i4_carter"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:titanium_v8_carter"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"create_additional_energy_sourses:aluminum_w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

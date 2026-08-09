@@ -5,6 +5,7 @@
   "block.create_additional_energy_sourses.radiator_steel": "Стальной радиатор",
   "block.create_additional_energy_sourses.radiator_gold": "Латунный радиатор",
   "block.create_additional_energy_sourses.radiator_titanium": "Титановый радиатор",
+
   "block.create_additional_energy_sourses.i4_engine": "Чугунный I4",
   "block.create_additional_energy_sourses.v8_engine": "Чугунный V8",
   "block.create_additional_energy_sourses.w16_engine": "Чугунный W16",
@@ -14,36 +15,81 @@
   "block.create_additional_energy_sourses.aluminum_v8_engine": "Алюминиевый V8",
   "block.create_additional_energy_sourses.aluminum_w16_engine": "Алюминиевый W16",
   "block.create_additional_energy_sourses.aluminum_r32_engine": "Алюминиевый R32",
+
   "block.create_additional_energy_sourses.titanium_i4_engine": "Титановый I4",
   "block.create_additional_energy_sourses.titanium_v8_engine": "Титановый V8",
   "block.create_additional_energy_sourses.titanium_w16_engine": "Титановый W16",
   "block.create_additional_energy_sourses.titanium_r32_engine": "Титановый R32",
+
+  "block.create_additional_energy_sourses.aluminum_ore": "Алюминиевая руда",
+  "block.create_additional_energy_sourses.titanium_ore": "Титановая руда",
+
   "item.create_additional_energy_sourses.advanced_pickaxe": "Продвинутая кирка",
   "item.create_additional_energy_sourses.advanced_precision_mechanism": "Продвинутый точный механизм",
   "item.create_additional_energy_sourses.heavy_handle": "Тяжелая рукоятка",
   "item.create_additional_energy_sourses.heavy_tip": "Тяжелый наконечник",
   "item.create_additional_energy_sourses.pickaxe_core": "Ядро кирки",
+  "item.create_additional_energy_sourses.controller": "Контроллер",
 
+  "item.create_additional_energy_sourses.iron_piston": "Чугунный поршень",
+  "item.create_additional_energy_sourses.aluminum_piston": "Алюминиевый поршень",
+  "item.create_additional_energy_sourses.titanium_piston": "Титановый поршень",
 
+  "item.create_additional_energy_sourses.iron_gbc": "Чугунный ГБЦ",
+  "item.create_additional_energy_sourses.aluminum_gbc": "Алюминиевая ГБЦ",
+  "item.create_additional_energy_sourses.titanium_gbc": "Титановая ГБЦ",
 
+  "item.create_additional_energy_sourses.iron_w16_gbc": "Чугунный ГБЦ W16",
+  "item.create_additional_energy_sourses.aluminum_w16_gbc": "Алюминиевая ГБЦ W16",
+  "item.create_additional_energy_sourses.titanium_w16_gbc": "Титановая ГБЦ W16",
+
+  "item.create_additional_energy_sourses.iron_brain_gbc": "Чугунный блок управления ГБЦ",
+  "item.create_additional_energy_sourses.aluminum_brain_gbc": "Алюминиевый блок управления ГБЦ",
+  "item.create_additional_energy_sourses.titanium_brain_gbc": "Титановый блок управления ГБЦ",
+
+  "item.create_additional_energy_sourses.iron_crankshaft": "Чугунный коленвал",
+  "item.create_additional_energy_sourses.aluminum_crankshaft": "Алюминиевый коленвал",
+  "item.create_additional_energy_sourses.titanium_crankshaft": "Титановый коленвал",
+
+  "item.create_additional_energy_sourses.iron_ingot": "Чугунный слиток",
+  "item.create_additional_energy_sourses.aluminum_ingot": "Алюминиевый слиток",
+  "item.create_additional_energy_sourses.titanium_ingot": "Титановый слиток",
+
+  "block.create_additional_energy_sourses.aluminum_ore": "Алюминиевая руда",
+  "block.create_additional_energy_sourses.titanium_ore": "Титановая руда",
+
+  "block.create_additional_energy_sourses.iron_i4_carter": "Чугунный картер I4",
+  "block.create_additional_energy_sourses.iron_v8_carter": "Чугунный картер V8",
+  "block.create_additional_energy_sourses.iron_w16_carter": "Чугунный картер W16",
+  "block.create_additional_energy_sourses.iron_r32_carter": "Чугунный картер R32",
+
+  "block.create_additional_energy_sourses.aluminum_i4_carter": "Алюминиевый картер I4",
+  "block.create_additional_energy_sourses.aluminum_v8_carter": "Алюминиевый картер V8",
+  "block.create_additional_energy_sourses.aluminum_w16_carter": "Алюминиевый картер W16",
+  "block.create_additional_energy_sourses.aluminum_r32_carter": "Алюминиевый картер R32",
+
+  "block.create_additional_energy_sourses.titanium_i4_carter": "Титановый картер I4",
+  "block.create_additional_energy_sourses.titanium_v8_carter": "Титановый картер V8",
+  "block.create_additional_energy_sourses.titanium_w16_carter": "Титановый картер W16",
+  "block.create_additional_energy_sourses.titanium_r32_carter": "Титановый картер R32",
 
   "itemGroup.create_aes_tab": "Create: Дополнительные источники энергии",
 
   "create_aes.goggles.title.modular": "§6⚙ Спецификация: §7МОДУЛЬНЫЙ ",
-  "create_aes.goggles.material": "§6   Материал: §7",
+  "create_aes.goggles.material": "§6 Материал: §7",
   "create_aes.goggles.turbo": "§6⚡ Турбонаддув: ",
-  "create_aes.goggles.turbo.present": "§aПРИСУТСТВУЕТ",
-  "create_aes.goggles.turbo.absent": "§cОТСУТСТВУЕТ",
-  "create_aes.goggles.telemetry": "§b📊 ТЕЛЕМЕТРИЯ ЯДРА:",
-  "create_aes.goggles.temperature": " • Температура: §e%s°C / 1200.0°C",
+  "create_aes.goggles.turbo.present": "§аПРИСУТСТВУЕТ",
+  "create_aes.goggles.turbo.absent": "§сОТСУТСТВУЕТ",
+  "create_aes.goggles.telemetry": "§b📊 ТЕЛЕМЕТРИЯ ЯДРА: ",
+  "create_aes.goggles.temperature": " • Температура:  §e%s°C / 1200.0°C",
   "create_aes.goggles.rpm": " • Обороты вала: §a%s RPM",
   "create_aes.goggles.su": " • Мощность генератора: §a%s SU",
 
   "create_aes.goggles.struct.title": "§7--- СТРУКТУРА МОДУЛЕЙ ---",
-  "create_aes.goggles.struct.single": " • Конфигурация: §eОдиночный блок",
+  "create_aes.goggles.struct.single": " • Конфигурация: §еОдиночный блок",
   "create_aes.goggles.struct.length": " • Длина структуры: §a%s / 4 блоков",
   "create_aes.goggles.struct.overflow": " • Длина структуры: §c%s / 4 (ПРЕВЫШЕНИЕ)",
-  "create_aes.goggles.struct.warning": " §c⚠ Превышен лимит длины мультиблока!",
+  "create_aes.goggles.struct.warning": " §с▲ Превышен лимит длины мультиблока!",
 
   "create_aes.engine.inline2": "Inline-2 (Рядный)",
   "create_aes.engine.v4": "V-4 Engine (V-образный)",

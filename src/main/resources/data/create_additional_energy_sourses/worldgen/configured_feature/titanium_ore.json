@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "size": 4,
+    "discard_chance_on_air_exposure": 0.0,
+    "targets": [
+      {
+        "target": { "predicate_type": "tag_match", "tag": "stone_ore_replaceables" },
+        "state": { "Name": "create_additional_energy_sourses:titanium_ore" }
+      },
+      {
+        "target": { "predicate_type": "tag_match", "tag": "deepslate_ore_replaceables" },
+        "state": { "Name": "create_additional_energy_sourses:titanium_ore" }
+      }
+    ]
+  }
+}

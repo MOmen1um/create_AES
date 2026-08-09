@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "create_additional_energy_sourses:aluminum_ore",
+    "create_additional_energy_sourses:titanium_ore"
+  ],
+  "step": "underground_ores"
+}

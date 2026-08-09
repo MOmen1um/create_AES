@@ -30,6 +30,18 @@ runs {
     }
 }
 
+subprojects { // или внутри вашего основного блока neoforge/minecraft
+    runs {
+        data {
+            data()
+            programArguments.addAll '--mod', 'create_additional_energy_sourses',
+                    '--all',
+                    '--output', file('src/generated/resources/').getAbsolutePath(),
+                    '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+    }
+}
+
 
 sourceSets {
     main {

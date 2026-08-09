@@ -29,6 +29,17 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.PICKAXE_CORE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ADVANCED_PRECISION_MECHANISM.get()));
 
+                        // Руды
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_ORE.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_ORE.get()));
+
+
+                        // Слитки
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_INGOT.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_INGOT.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_INGOT.get()));
+
+
                         // 2. БЛОКИ ЦИЛИНДРОВ / КАРТЕРЫ (Выстраиваем строго от I4 до R32 по металлам)
                         // Чугун (Iron)
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_I4_CARTER_ITEM.get()));
@@ -70,13 +81,13 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_GOLD_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_TITANIUM_ITEM.get()));
                         // РАЗДЕЛ РАСХОДНИКОВ ДЛЯ СБОРКИ (Добавляем наши новые детали!)
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_PISTON.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_PISTON.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_PISTON.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_PISTON.get()));
 
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_GBC.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_GBC.get()));
 
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_GBC.get()));
@@ -85,6 +96,11 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_BRAIN_GBC.get()));
+
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_CRANKSHAFT.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_CRANKSHAFT.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_CRANKSHAFT.get()));
+
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.CONTROLLER.get()));
                     })
                     .build());
@@ -93,8 +109,6 @@ public class Create_additional_energy_sourses {
         ModBlocks.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
-
-
 
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {

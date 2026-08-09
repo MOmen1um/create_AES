@@ -15,9 +15,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.fml.common.Mod;
 
 public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<EngineCarterBlockEntity> {
 
@@ -81,12 +83,13 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // ЭТАП 1: КОЛЕНВАЛ (Для всех движков одинаково)
             // =================================================================
             if (!be.hasCrankshaft) {
-                if (heldItem.is(Items.IRON_INGOT)) {
+                if (heldItem.is(getRightCrackshaft(be))) {
                     be.hasCrankshaft = true;
                     player.displayClientMessage(Component.literal("§6[ДВС] Коленчатый вал успешно установлен!"), true);
                     return finishStep(player, heldItem, level, pos, SoundEvents.ANVIL_PLACE, be);
                 } else {
-                    player.displayClientMessage(Component.literal("§c[ДВС] Сначала установите коленчатый вал (Железный слиток)!"), true);
+                    String crankshaftName = be.engineMaterial.equals("titanium") ? "§dТитановый коленчатый вал" : (be.engineMaterial.equals("aluminum") ? "§dАлюминиевый коленчатый вал" : "§dКоленчатый вал");
+                    player.displayClientMessage(Component.literal("§c[ДВС] Сначала установите " + crankshaftName), true);
                     level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.CONSUME;
                 }
@@ -104,7 +107,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
                     player.displayClientMessage(Component.literal("§6[ДВС] Установлено поршней: §a" + be.installedPistons + "/" + be.maxPistons), true);
                     return finishStep(player, heldItem, level, pos, SoundEvents.ANVIL_PLACE, be);
                 } else {
-                    String pistonName = be.engineMaterial.equals("titanium") ? "Титановый поршень" : (be.engineMaterial.equals("aluminum") ? "Алюминиевый поршень" : "Чугунный  Поршень");
+                    String pistonName = be.engineMaterial.equals("titanium") ? "Титановый поршень" : (be.engineMaterial.equals("aluminum") ? "Алюминиевый поршень" : "Поршень");
                     player.displayClientMessage(Component.literal("§c[ДВС] Требуется " + pistonName + "! Прогресс: (" + be.installedPistons + "/" + be.maxPistons + ")"), true);
                     level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), SoundSource.BLOCKS, 1.0f, 1.0f);
                     return InteractionResult.CONSUME;
@@ -168,7 +171,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
     }
     @Override
     public net.minecraft.world.level.block.RenderShape getRenderShape(BlockState state) {
-        return net.minecraft.world.level.block.RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
     }
 
     // Логика подключения валов Create к нашему картеру
@@ -205,6 +208,12 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
         } else {
             player.displayClientMessage(Component.literal("§c[ДВС] Ошибка регистрации: блок " + finalEngineName + " не найден в игре!"), true);
         }
+    }
+
+    private Item getRightCrackshaft(EngineCarterBlockEntity be) {
+        if (be.engineMaterial.equals("titanium")) return ModItems.TITANIUM_CRANKSHAFT.get();
+        if (be.engineMaterial.equals("aluminum")) return ModItems.ALUMINUM_CRANKSHAFT.get();
+        return ModItems.IRON_CRANKSHAFT.get();
     }
 
     private Item getNormalGbcItem(EngineCarterBlockEntity be) {
