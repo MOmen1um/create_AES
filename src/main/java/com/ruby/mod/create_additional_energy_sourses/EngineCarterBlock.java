@@ -10,16 +10,15 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.fml.common.Mod;
 
 public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<EngineCarterBlockEntity> {
 
@@ -74,7 +73,6 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
 
         if (level.getBlockEntity(pos) instanceof EngineCarterBlockEntity be) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
@@ -84,7 +82,9 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // =================================================================
             if (!be.hasCrankshaft) {
                 if (heldItem.is(getRightCrackshaft(be))) {
-                    be.hasCrankshaft = true;
+                    if (!level.isClientSide) {
+                        be.hasCrankshaft = true;
+                    }
                     player.displayClientMessage(Component.literal("§6[ДВС] Коленчатый вал успешно установлен!"), true);
                     return finishStep(player, heldItem, level, pos, SoundEvents.ANVIL_PLACE, be);
                 } else {
@@ -100,10 +100,12 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // =================================================================
             if (be.installedPistons < be.maxPistons) {
                 Item requiredPiston = be.engineMaterial.equals("titanium") ? ModItems.TITANIUM_PISTON.get() :
-                        (be.engineMaterial.equals("aluminum") ? ModItems.ALUMINUM_PISTON.get() : ModItems.IRON_PISTON.get());
+                        (be.engineMaterial.equals("aluminum") ? ModItems.ALUMINUM_PISTON.get() : ModItems.CAST_IRON_PISTON.get());
 
                 if (heldItem.is(requiredPiston)) {
-                    be.installedPistons++;
+                    if (!level.isClientSide) {
+                        be.installedPistons++;
+                    }
                     player.displayClientMessage(Component.literal("§6[ДВС] Установлено поршней: §a" + be.installedPistons + "/" + be.maxPistons), true);
                     return finishStep(player, heldItem, level, pos, SoundEvents.ANVIL_PLACE, be);
                 } else {
@@ -119,6 +121,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // =================================================================
             if (be.installedGBC < be.maxGBC) {
                 // Определяем предметы ГБЦ в зависимости от материала и типа
+
                 Item normalGBC = getNormalGbcItem(be);
                 Item brainGBC = getBrainGbcItem(be);
 
@@ -129,11 +132,13 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
                 Item targetGBC = (be.hasUnitedController && isFinalGbcClick) ? brainGBC : normalGBC;
 
                 if (heldItem.is(targetGBC)) {
-                    be.installedGBC++;
-                    be.setChanged();
-                    level.sendBlockUpdated(pos, state, state, 3);
-                    if (!player.isCreative()) heldItem.shrink(1);
-                    level.playSound(null, pos, SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 0.5f, 1.0f);
+                    if (!level.isClientSide) {
+                        be.installedGBC++;
+                        be.setChanged();
+                        level.sendBlockUpdated(pos, state, state, 3);
+                        if (!player.isCreative()) heldItem.shrink(1);
+                        level.playSound(null, pos, SoundEvents.ANVIL_PLACE, SoundSource.BLOCKS, 0.5f, 1.0f);
+                    }
 
                     // Если это был совмещенный движок (I4, R32) и это последний клик — сразу собираем!
                     if (be.hasUnitedController && be.installedGBC == be.maxGBC) {
@@ -144,10 +149,11 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
                     player.displayClientMessage(Component.literal("§a[ДВС] ГБЦ установлена! Прогресс: (" + be.installedGBC + "/" + be.maxGBC + ")"), true);
                     return InteractionResult.CONSUME;
                 } else {
-                    String missingName = (be.hasUnitedController && isFinalGbcClick) ? "ГБЦ с контроллером" : "Обычную ГБЦ";
+                    boolean isW16 = be.engineType.equals("w16");
+                    String missingName = (be.hasUnitedController && isFinalGbcClick) ? "ГБЦ с контроллером" : (isW16 ? "Гбц W16" : "Обычную ГБЦ");
                     player.displayClientMessage(Component.literal("§c[ДВС] Требуется " + missingName + "! Прогресс ГБЦ: (" + be.installedGBC + "/" + be.maxGBC + ")"), true);
                     level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                    return InteractionResult.CONSUME;
+                    return InteractionResult.CONSUME.sidedSuccess(level.isClientSide);
                 }
             }
 
@@ -155,16 +161,34 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
             // ЭТАП 4: ОТДЕЛЬНЫЙ КОНТРОЛЛЕР (Для W16 и V8, у которых нет совмещенной ГБЦ)
             // =================================================================
             if (!be.hasUnitedController && !be.installedBrain) {
-                if (heldItem.is(ModItems.CONTROLLER.get())) { // Твой кастомный контроллер!
-                    be.installedBrain = true;
-                    if (!player.isCreative()) heldItem.shrink(1);
-                    buildFinalEngine(be, level, pos, state, player);
-                    return InteractionResult.CONSUME;
+                // Логика разветвляется в зависимости от типа двигателя
+                if (be.isModular) {
+                    // МОДУЛЬНЫЙ: Контроллер или Ключ Create
+                    if (heldItem.is(ModItems.CONTROLLER.get())) {
+                        be.installedBrain = true;
+                        if (!player.isCreative()) heldItem.shrink(1);
+                        buildModularEngine(be, level, pos, state, player, true);
+                        return InteractionResult.CONSUME;
+                    } else if (heldItem.is(net.minecraft.world.item.Items.IRON_INGOT)) {
+                        buildModularEngine(be, level, pos, state, player, false);
+                        return InteractionResult.CONSUME;
+                    } else {
+                        player.displayClientMessage(Component.literal("§eУстановите Контроллер или §bнажмите Ключом"), true);
+                        return InteractionResult.CONSUME;
+                    }
                 } else {
-                    player.displayClientMessage(Component.literal("§6[ДВС] Все ГБЦ на месте! Установите Контроллер двигателя для запуска!"), true);
-                    level.playSound(null, pos, com.simibubi.create.AllSoundEvents.DENY.getMainEvent(), SoundSource.BLOCKS, 1.0f, 1.0f);
-                    return InteractionResult.CONSUME;
+                    // КЛАССИЧЕСКИЙ: Только контроллер
+                    if (heldItem.is(ModItems.CONTROLLER.get())) {
+                        be.installedBrain = true;
+                        if (!player.isCreative()) heldItem.shrink(1);
+                        buildFinalEngine(be, level, pos, state, player);
+                        return InteractionResult.CONSUME;
+                    } else {
+                        player.displayClientMessage(Component.literal("§6Установите Контроллер!"), true);
+                        return InteractionResult.CONSUME;
+                    }
                 }
+
             }
         }
         return net.minecraft.world.InteractionResult.PASS;
@@ -210,22 +234,63 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
         }
     }
 
+    private void buildModularEngine(EngineCarterBlockEntity be, Level level, BlockPos pos, BlockState state, Player player, boolean isMainController) {
+        // 1. Формируем префикс материала (для чугуна префикса нет)
+        String materialPrefix = be.engineMaterial.equals("iron") ? "" : be.engineMaterial + "_";
+
+        // 2. Выбираем суффикс в зависимости от выбора игрока (Контроллер или Модуль)
+        String suffix = isMainController ? "_controlling_engine" : "_modular_engine";
+
+        // 3. Собираем полный ID блока
+        String finalBlockName = materialPrefix + be.engineType + suffix;
+
+        Block finalEngineBlock = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(
+                net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("create_additional_energy_sourses", finalBlockName)
+        );
+
+        if (finalEngineBlock != net.minecraft.world.level.block.Blocks.AIR) {
+            // 4. Подменяем блок в мире с сохранением направления [index:0.1.2]
+            level.setBlock(pos, finalEngineBlock.defaultBlockState().setValue(HORIZONTAL_FACING, state.getValue(HORIZONTAL_FACING)), 3);
+            level.playSound(null, pos, SoundEvents.NETHERITE_BLOCK_PLACE, SoundSource.BLOCKS, 1.0f, 1.0f);
+
+            // 5. Выводим красивое сообщение в зависимости от сборки [index:0.1.2]
+            String msg = isMainController ? "§a§l[ДВС] Главный двигатель собран!" : "§b§l[ДВС] Дополнительный модуль добавлен!";
+            player.displayClientMessage(Component.literal(msg), true);
+
+            // 6. МГНОВЕННЫЙ ПЕРЕРАСЧЕТ СЕТИ ПОСЛЕ КЛИКА
+            // Если поставили контроллер — заставляем его сразу просканировать линию картеров сзади
+            if (level.getBlockEntity(pos) instanceof ControllingModularEnginesBlockEntity cmebe) {
+                cmebe.calculateConfiguration();
+            }
+            // If поставили модуль — ищем главный контроллер впереди и заставляем его пересчитать SU
+            else if (level.getBlockEntity(pos) instanceof ModularEnginesBlockEntity mebe) {
+                ControllingModularEnginesBlockEntity master = mebe.findMasterController();
+                if (master != null) {
+                    master.calculateConfiguration();
+                }
+            }
+        } else {
+            player.displayClientMessage(Component.literal("§c[ДВС] Ошибка: блок " + finalBlockName + " не зарегистрирован!"), true);
+        }
+    }
+
+
     private Item getRightCrackshaft(EngineCarterBlockEntity be) {
         if (be.engineMaterial.equals("titanium")) return ModItems.TITANIUM_CRANKSHAFT.get();
         if (be.engineMaterial.equals("aluminum")) return ModItems.ALUMINUM_CRANKSHAFT.get();
-        return ModItems.IRON_CRANKSHAFT.get();
+        return ModItems.CAST_IRON_CRANKSHAFT.get();
     }
 
     private Item getNormalGbcItem(EngineCarterBlockEntity be) {
         boolean isW16 = be.engineType.equals("w16");
         if (be.engineMaterial.equals("titanium")) return isW16 ? ModItems.TITANIUM_W16_GBC.get() : ModItems.TITANIUM_GBC.get();
         if (be.engineMaterial.equals("aluminum")) return isW16 ? ModItems.ALUMINUM_W16_GBC.get() : ModItems.ALUMINUM_GBC.get();
-        return ModItems.IRON_GBC.get(); // Дефолт для чугуна
+        return isW16 ? ModItems.CAST_IRON_W16_GBC.get() : ModItems.CAST_IRON_GBC.get();
     }
 
     private Item getBrainGbcItem(EngineCarterBlockEntity be) {
         if (be.engineMaterial.equals("titanium")) return ModItems.TITANIUM_BRAIN_GBC.get();
         if (be.engineMaterial.equals("aluminum")) return ModItems.ALUMINUM_BRAIN_GBC.get();
-        return ModItems.IRON_BRAIN_GBC.get();
+        return ModItems.CAST_IRON_BRAIN_GBC.get();
     }
 }

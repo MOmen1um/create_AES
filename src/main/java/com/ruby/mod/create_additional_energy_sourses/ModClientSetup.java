@@ -48,7 +48,7 @@ public class ModClientSetup {
             ms.pushPose();
 
             // 1. Сдвигаем матрицу в центр блока
-            ms.translate(0.49, 0.5, 0.5);
+            ms.translate(0.5, 0.5, 0.5);
 
             // 2. Разворачиваем саму модель вала по направлению двигателя
             // Используем встроенный метод Direction для точного поворота без путаницы в осях
@@ -65,7 +65,9 @@ public class ModClientSetup {
             ms.mulPose(Axis.YP.rotationDegrees(angleInDegrees));
 
             // Возвращаем центр на место
-            ms.translate(-0.5, -0.5, -0.5);
+            ms.scale(1,0.75f,1);
+            ms.translate(-0.5, -0.68, -0.5);
+
 
             ResourceLocation shaftPath = ResourceLocation.fromNamespaceAndPath("create", "block/shaft");
 

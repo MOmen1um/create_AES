@@ -1,3 +1,5 @@
+import java.nio.file.Paths
+
 plugins {
     id 'java-library'
     id 'eclipse'
@@ -21,16 +23,21 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+// === НАСТРОЙКИ ЗАПУСКА ИГРЫ (NeoForge 7.x) ===
 runs {
     configureEach {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
         systemProperty 'forge.logging.console.level', 'debug'
 
+        // ⚙️ Безопасный способ передачи пути к нативной библиотеке в NeoForge Gradle
+        systemProperty 'java.library.path', file('native').absolutePath
+        jvmArguments.add("-Djava.library.path=${file('native').absolutePath}")
+
         modSource project.sourceSets.main
     }
 }
 
-subprojects { // или внутри вашего основного блока neoforge/minecraft
+subprojects {
     runs {
         data {
             data()
@@ -41,7 +48,6 @@ subprojects { // или внутри вашего основного блока 
         }
     }
 }
-
 
 sourceSets {
     main {
@@ -90,7 +96,47 @@ idea {
         downloadJavadoc = true
     }
 }
+
 compileJava {
     options.compilerArgs << "-Atokens=neoforge=true"
 }
+
 processResources.outputs.upToDateWhen { false }
+
+// === ТАСКА СБОРКИ НА ТВОЁМ CACHYOS (C++ СЛОЙ) ===
+tasks.register('compileNativeCpp') {
+    description = 'Компиляция нативного C++ кода для оптимизации взрывов ДВС'
+    group = 'build'
+
+    // Gradle следит за изменениями исходников: если файл не трогали, шаг пропустится автоматически
+    inputs.file(file("native/crater_calculator.cpp"))
+    outputs.file(file("native/libcreate_aes_native.so"))
+
+    doLast {
+        def javaHome = System.getProperty("java.home")
+        def jniInclude = Paths.get(javaHome, "include").toString()
+        def jniLinuxInclude = Paths.get(javaHome, "include", "linux").toString()
+
+        def outputLib = file("native/libcreate_aes_native.so").absolutePath
+        def sourceFile = file("native/crater_calculator.cpp").absolutePath
+
+        println "=== Компиляция C++ через g++ (CachyOS Оптимизация) ==="
+
+        exec {
+            commandLine 'g++', '-O3', '-shared', '-fPIC',
+                    "-I${jniInclude}",
+                    "-I${jniLinuxInclude}",
+                    '-o', outputLib, sourceFile
+        }
+
+        println "=== Нативная библиотека успешно собрана: libcreate_aes_native.so ==="
+    }
+}
+
+// Связываем запуск компиляции нативов с фазами сборки Java
+tasks.named('compileJava') {
+    dependsOn compileNativeCpp
+}
+tasks.named('processResources') {
+    dependsOn compileNativeCpp
+}

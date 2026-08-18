@@ -5,7 +5,7 @@ forgejunitdev
 --assetIndex
 asset-index
 --assetsDir
-C:\Users\Kostya\.gradle\caches\minecraft\assets
+/home/admin/.gradle/caches/minecraft/assets
 --gameDir
 .
 --fml.fmlVersion

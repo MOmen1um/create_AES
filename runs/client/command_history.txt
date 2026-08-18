@@ -1,16 +1,3 @@
-/weather clear
-/time set day
-/kill @e[type=!minecraft:player]
-/gamerule doMobSpawning false
-/give Dev create_additional_energy_sourses:v8_engine
-/weather clear
-/time set adya
-/time set day
-/tp ~ ~-100 ~
-/kill
-/playsound createdieselgenerators:engine_normal
-/playsound createdieselgenerators:engine_normal record
-/playsound createdieselgenerators:engine_normal voice
 /playsound createdieselgenerators:engine_normal neutral
 /playsound createdieselgenerators:engine_normal master Dev 272.82 -7.19 139.56
 /playsound createdieselgenerators:engine_normal ambient
@@ -48,3 +35,16 @@
 /effect give Dev minecraft:night_vision infinite
 /enchant Dev minecraft:efficiency 5
 /enchant Dev minecraft:silk_touch 1
+/reload
+/recipe give Dev create_additional_energy_sourses:cast_iron
+/reload
+/enchant Dev minecraft:efficiency 5
+/give Dev create_additional_energy_sourses:raw_aluminum
+/effect give Dev minecraft:night_vision infinite
+/reload
+/enchant Dev minecraft:efficiency 5
+/reload
+/loot give Dev mine ~ ~ ~ create_additional_energy_sourses:aluminum_i4_carter
+/loot give Dev mine ~ ~ ~ create_additional_energy_sourses:aluminum_brain_gbc
+/loot give Dev mine ~ ~ ~ create_additional_energy_sourses:aluminum_ore
+/loot give Dev loot create_additional_energy_sourses:blocks/aluminum_ore

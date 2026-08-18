@@ -358,8 +358,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         }
 
 
-        // --- 💥 МЕХАНИКА АВАРИЙНОГО ВЗРЫВА ПРИ ПЕРЕГРЕВЕ ---
-        // Убираем старое ограничение "2-х" от скорости — пусть Ньютоновский нагрев летит на максимум!
+        // --- 💥 МЕХАНИКА АВАРИЙНОГО ВЗРЫВА ПРИ ПЕРЕГРЕВЕ (ОПТИМИЗИРОВАНО ЧЕРЕЗ C++) ---
+// Убираем старое ограничение "2-х" от скорости — пусть Ньютоновский нагрев летит на максимум!
         if (this.engineTemperature >= this.maxMeltingTemp) {
             this.engineTemperature = this.maxMeltingTemp; // Удерживаем шкалу на пике
 
@@ -406,62 +406,65 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                             explosionPower += ((float) this.fuelTank.getFluidAmount() / 100.0f);
                         }
 
+                        // Сохраняем исходную точку взрыва для последующей коррекции смещения
+                        final net.minecraft.core.BlockPos explosionEpicenter = this.worldPosition;
                         int radius = (int) explosionPower;
-                        int epiX = this.worldPosition.getX();
-                        int epiY = this.worldPosition.getY();
-                        int epiZ = this.worldPosition.getZ();
-                        int radiusSq = radius * radius;
-                        java.util.Random rnd = new java.util.Random(this.worldPosition.hashCode());
+
+                        java.util.Random rnd = new java.util.Random(explosionEpicenter.hashCode());
                         float phase1 = rnd.nextFloat() * 100f;
                         float phase2 = rnd.nextFloat() * 100f;
-
-// Сила рваности. Для твоего масштаба ставим побольше!
-// Кратер будет «гулять» внутрь и наружу примерно на 15-20 блоков.
                         float roughness = 18.0f;
+                        int seed = explosionEpicenter.hashCode();
 
+                        // 4. Уходим в глубокий асинхрон (отдельный C++ поток в CachyOS)
+                        java.util.concurrent.CompletableFuture.supplyAsync(() ->
+                                NativeExplosionJNI.calculateExplosionCrater(radius, roughness, phase1, phase2, seed)
+                        ).thenAcceptAsync(coords -> {
 
-                        for (int x = -radius; x <= radius; x++) {
-                            for (int y = -radius; y <= radius; y++) {
-                                for (int z = -radius; z <= radius; z++) {
+                            // 5. Возвращаемся в главный поток сервера, когда C++ закончил расчёт
+                            if (this.level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                                serverLevel.getServer().execute(() -> {
 
-                                    int distanceSq = x * x + y * y + z * z;
+                                    // Проверяем текущую позицию блока (вдруг его сдвинули поршнем из Create)
+                                    net.minecraft.core.BlockPos currentPos = this.worldPosition;
+                                    int deltaX = currentPos.getX() - explosionEpicenter.getX();
+                                    int deltaY = currentPos.getY() - explosionEpicenter.getY();
+                                    int deltaZ = currentPos.getZ() - explosionEpicenter.getZ();
 
-                                    float dist = (float) Math.sqrt(distanceSq);
-                                    if (dist < 0.1f) dist = 0.1f;
+                                    // Коррекция: Если смещение критическое (> 2 блоков) или блок сломали — отменяем взрыв кратера
+                                    if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2 || Math.abs(deltaZ) > 2) {
+                                        return;
+                                    }
 
-// Направление вектора
-                                    float nx = x / dist;
-                                    float ny = y / dist;
-                                    float nz = z / dist;
+                                    // 6. Применяем заготовленный C++ массив блоков AIR пачкой в один тик
+                                    for (int i = 0; i < coords.length; i += 3) {
+                                        // Применяем дельту смещения к относительным координатам из C++
+                                        int targetX = currentPos.getX() + coords[i];
+                                        int targetY = currentPos.getY() + coords[i + 1];
+                                        int targetZ = currentPos.getZ() + coords[i + 2];
 
-// Крупные, размашистые волны для гигантского радиуса
-                                    float noise = (float) (Math.sin(nx * 1.5f + phase1) *
-                                            Math.cos(ny * 1.2f + phase2) *
-                                            Math.sin(nz * 1.7f));
+                                        net.minecraft.core.BlockPos targetPos = new net.minecraft.core.BlockPos(targetX, targetY, targetZ);
 
-// Добавляем мелкую текстуру краев поверх крупных волн
-                                    float detailNoise = (float) (Math.cos(nx * 8.0f) * Math.sin(nz * 8.0f)) * 0.2f;
-
-// Итоговый измененный радиус
-                                    float modifiedRadius = (float) radius + ((noise + detailNoise) * roughness);
-                                    float modifiedRadiusSq = modifiedRadius * modifiedRadius;
-
-                                    if (distanceSq <= modifiedRadiusSq) {
-                                        net.minecraft.core.BlockPos targetPos = new net.minecraft.core.BlockPos(epiX + x, epiY + y, epiZ + z);
-
-                                        if (this.level.isInWorldBounds(targetPos)) {
-                                            if (!this.level.isEmptyBlock(targetPos)) {
-                                                this.level.setBlock(targetPos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2 | 16);
-                                            }
+                                        if (serverLevel.isInWorldBounds(targetPos) && !serverLevel.isEmptyBlock(targetPos)) {
+                                            serverLevel.setBlock(targetPos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2 | 16);
                                         }
                                     }
-                                }
-                            }
-                        }
 
-                        this.level.explode(null, epiX + 0.5, epiY + 0.5, epiZ + 0.5, 1.0f, Level.ExplosionInteraction.NONE);
-                        // Удаляем останки ДВС
-                        this.level.removeBlock(this.worldPosition, false);
+                                    // 7. Финальный бабах для звука, частиц и отбрасывания сущностей
+                                    serverLevel.explode(
+                                            null,
+                                            currentPos.getX() + 0.5,
+                                            currentPos.getY() + 0.5,
+                                            currentPos.getZ() + 0.5,
+                                            1.0f,
+                                            net.minecraft.world.level.Level.ExplosionInteraction.NONE
+                                    );
+
+                                    // Удаляем останки ДВС
+                                    serverLevel.removeBlock(currentPos, false);
+                                });
+                            }
+                        });
                     }
                     return;
                 }

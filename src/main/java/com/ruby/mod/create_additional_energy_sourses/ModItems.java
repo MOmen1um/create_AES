@@ -9,7 +9,6 @@ import net.minecraft.world.item.PickaxeItem;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public class ModItems {
@@ -17,10 +16,10 @@ public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, Create_additional_energy_sourses.MODID);
 
     // Чугунные предметы (Iron)
-    public static final DeferredHolder<Item, Item> IRON_I4_CARTER_ITEM = ITEMS.register("iron_i4_carter", () -> new BlockItem(ModBlocks.IRON_I4_CARTER.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, Item> IRON_V8_CARTER_ITEM = ITEMS.register("iron_v8_carter", () -> new BlockItem(ModBlocks.IRON_V8_CARTER.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, Item> IRON_W16_CARTER_ITEM = ITEMS.register("iron_w16_carter", () -> new BlockItem(ModBlocks.IRON_W16_CARTER.get(), new Item.Properties()));
-    public static final DeferredHolder<Item, Item> IRON_R32_CARTER_ITEM = ITEMS.register("iron_r32_carter", () -> new BlockItem(ModBlocks.IRON_R32_CARTER.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_I4_CARTER_ITEM = ITEMS.register("cast_iron_i4_carter", () -> new BlockItem(ModBlocks.IRON_I4_CARTER.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_V8_CARTER_ITEM = ITEMS.register("cast_iron_v8_carter", () -> new BlockItem(ModBlocks.IRON_V8_CARTER.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_W16_CARTER_ITEM = ITEMS.register("cast_iron_w16_carter", () -> new BlockItem(ModBlocks.IRON_W16_CARTER.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_R32_CARTER_ITEM = ITEMS.register("cast_iron_r32_carter", () -> new BlockItem(ModBlocks.IRON_R32_CARTER.get(), new Item.Properties()));
 
     // Алюминиевые предметы (Aluminum)
     public static final DeferredHolder<Item, Item> ALUMINUM_I4_CARTER_ITEM = ITEMS.register("aluminum_i4_carter", () -> new BlockItem(ModBlocks.ALUMINUM_I4_CARTER.get(), new Item.Properties()));
@@ -49,7 +48,12 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> AlUMINUM_ORE = ITEMS.register("aluminum_ore", () -> new BlockItem(ModBlocks.ALUMINUM_ORE.get(), new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_ORE = ITEMS.register("titanium_ore", () -> new BlockItem(ModBlocks.TITANIUM_ORE.get(), new Item.Properties()));
 
-    public static final DeferredHolder<Item, Item> IRON_INGOT = ITEMS.register("iron_ingot", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_BLOCK = ITEMS.register("cast_iron_block", () -> new BlockItem(ModBlocks.CAST_IRON_BLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> AlUMINUM_BLOCK = ITEMS.register("aluminum_block", () -> new BlockItem(ModBlocks.ALUMINUM_BLOCK.get(), new Item.Properties()));
+    public static final DeferredHolder<Item, Item> TITANIUM_BLOCK = ITEMS.register("titanium_block", () -> new BlockItem(ModBlocks.TITANIUM_BLOCK.get(), new Item.Properties()));
+
+
+    public static final DeferredHolder<Item, Item> CAST_IRON_INGOT = ITEMS.register("cast_iron_ingot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_INGOT = ITEMS.register("aluminum_ingot", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_INGOT = ITEMS.register("titanium_ingot", () -> new Item(new Item.Properties()));
 
@@ -57,27 +61,27 @@ public class ModItems {
     public static final DeferredHolder<Item, Item> RAW_TITANIUM = ITEMS.register("raw_titanium", () -> new Item(new Item.Properties()));
 
     // Коленвалы
-    public static final DeferredHolder<Item, Item> IRON_CRANKSHAFT = ITEMS.register("iron_crankshaft", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_CRANKSHAFT = ITEMS.register("cast_iron_crankshaft", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_CRANKSHAFT = ITEMS.register("aluminum_crankshaft", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_CRANKSHAFT = ITEMS.register("titanium_crankshaft", () -> new Item(new Item.Properties()));
 
     // Поршни по металлам
-    public static final DeferredHolder<Item, Item> IRON_PISTON = ITEMS.register("iron_piston", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_PISTON = ITEMS.register("cast_iron_piston", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_PISTON = ITEMS.register("aluminum_piston", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_PISTON = ITEMS.register("titanium_piston", () -> new Item(new Item.Properties()));
 
     // Стандартные ГБЦ (Головки блока цилиндров)
-    public static final DeferredHolder<Item, Item> IRON_GBC = ITEMS.register("iron_gbc", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_GBC = ITEMS.register("cast_iron_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_GBC = ITEMS.register("aluminum_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_GBC = ITEMS.register("titanium_gbc", () -> new Item(new Item.Properties()));
 
     // Сдвоенные ГБЦ для W16
-    public static final DeferredHolder<Item, Item> IRON_W16_GBC = ITEMS.register("iron_w16_gbc", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_W16_GBC = ITEMS.register("cast_iron_w16_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_W16_GBC = ITEMS.register("aluminum_w16_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_W16_GBC = ITEMS.register("titanium_w16_gbc", () -> new Item(new Item.Properties()));
 
     // ГБЦ с контроллерами (Мозги для финального шага i4 R32)
-    public static final DeferredHolder<Item, Item> IRON_BRAIN_GBC = ITEMS.register("iron_brain_gbc", () -> new Item(new Item.Properties()));
+    public static final DeferredHolder<Item, Item> CAST_IRON_BRAIN_GBC = ITEMS.register("cast_iron_brain_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> ALUMINUM_BRAIN_GBC = ITEMS.register("aluminum_brain_gbc", () -> new Item(new Item.Properties()));
     public static final DeferredHolder<Item, Item> TITANIUM_BRAIN_GBC = ITEMS.register("titanium_brain_gbc", () -> new Item(new Item.Properties()));
 

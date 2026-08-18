@@ -2,125 +2,76 @@ package com.ruby.mod.create_additional_energy_sourses;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.fluids.FluidStack;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction;
-import java.util.List;
+import com.simibubi.create.content.kinetics.base.HorizontalKineticBlock;
 
-public class ModularEnginesBlockEntity extends NonModularEnginesBlockEntity {
+public class ModularEnginesBlockEntity extends BlockEntity {
 
-    private boolean isController = true;
-    private int currentEngineLength = 1;
+    // Классические полноразмерные параметры секций
+    public int pistonCount = 8;
+    public String engineMaterial = "iron";
+    public String engineType = "v8";
 
-    // 1. SMART CONSTRUCTOR
-    public ModularEnginesBlockEntity(BlockPos pos, BlockState state, boolean isController) {
+    public ModularEnginesBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlocks.MODULAR_ENGINE_ENTITY.get(), pos, state);
-        this.isController = isController;
+        parseModularConfiguration();
+    }
 
-        // Automatically determine the exact engine configurations from its block ID name
-        String blockId = state.getBlock().toString().toLowerCase();
+    private void parseModularConfiguration() {
+        String blockId = net.minecraft.core.registries.BuiltInRegistries.BLOCK.getKey(this.getBlockState().getBlock()).getPath().toLowerCase();
 
-        if (blockId.contains("inline2") || blockId.contains("i2")) {
-            this.engineType = "I";
-            this.pistonCount = 2;
-        } else if (blockId.contains("w8")) {
-            this.engineType = "W";
-            this.pistonCount = 8;
-        } else if (blockId.contains("radial16") || blockId.contains("r16")) {
-            this.engineType = "Radial";
-            this.pistonCount = 16;
-        } else {
-            // Default configuration for a standard modular block is a V4!
-            this.engineType = "V";
+        // Полноразмерная фабрика парсинга (i4, v8, w16, r32)
+        if (blockId.contains("inline4") || blockId.contains("i4")) {
+            this.engineType = "i4";
             this.pistonCount = 4;
-        }
-    }
-
-    // 2. STANDARD GETTERS AND SETTERS
-    public boolean isController() {
-        return this.isController;
-    }
-
-    public void setController(boolean controller) {
-        this.isController = controller;
-        this.setChanged();
-    }
-
-    public int getCurrentEngineLength() {
-        return this.currentEngineLength;
-    }
-
-    // 3. MULTI-BLOCK STRUCTURAL LINKS
-    public ModularEnginesBlockEntity getController() {
-        if (this.isController()) {
-            return this;
+        } else if (blockId.contains("w16")) {
+            this.engineType = "w16";
+            this.pistonCount = 16;
+        } else if (blockId.contains("radial32") || blockId.contains("r32")) {
+            this.engineType = "r32";
+            this.pistonCount = 32;
+        } else {
+            // Конфигурация по умолчанию — классический V8
+            this.engineType = "v8";
+            this.pistonCount = 8;
         }
 
+        // Парсинг материала секции
+        if (blockId.contains("titanium")) this.engineMaterial = "titanium";
+        else if (blockId.contains("aluminum")) this.engineMaterial = "aluminum";
+        else this.engineMaterial = "iron";
+    }
+
+    /**
+     * Поиск Главного Управляющего Контроллера (CMEBE) по соосной линии вала (вперед).
+     * Модули ищутся только вплотную по цепочке.
+     */
+    public ControllingModularEnginesBlockEntity findMasterController() {
+        if (this.level == null) return null;
         BlockState state = this.getBlockState();
-        if (!state.hasProperty(ModularEnginesBlock.HORIZONTAL_FACING)) {
-            return this;
-        }
+        if (!state.hasProperty(HorizontalKineticBlock.HORIZONTAL_FACING)) return null;
 
-        Direction facing = state.getValue(ModularEnginesBlock.HORIZONTAL_FACING);
-        BlockPos behindPos = this.worldPosition.relative(facing.getOpposite());
+        Direction facing = state.getValue(HorizontalKineticBlock.HORIZONTAL_FACING);
 
-        if (this.level != null && this.level.getBlockEntity(behindPos) instanceof ModularEnginesBlockEntity neighbor) {
-            return neighbor.getController(); // Recursively trace back to the front block
-        }
+        // Идем строго ВПЕРЕД по направлению вала блока секции
+        for (int i = 1; i <= 16; i++) {
+            BlockPos checkPos = this.worldPosition.relative(facing, i);
+            BlockEntity be = this.level.getBlockEntity(checkPos);
 
-        this.setController(true); // Secure fallback
-        return this;
-    }
-
-    public void updateEngineStructure() {
-        if (!this.isController()) return;
-
-        BlockState state = this.getBlockState();
-        if (this.level == null || !state.hasProperty(ModularEnginesBlock.HORIZONTAL_FACING)) return;
-
-        Direction facing = state.getValue(ModularEnginesBlock.HORIZONTAL_FACING);
-        int length = 1;
-
-        // Scan backwards to trace out the total connected module size
-        for (int i = 1; i < 10; i++) {
-            BlockPos checkPos = this.worldPosition.relative(facing.getOpposite(), i);
-
-            if (this.level.getBlockEntity(checkPos) instanceof ModularEnginesBlockEntity neighbor) {
-                if (neighbor.getBlockState().getValue(ModularEnginesBlock.HORIZONTAL_FACING) == facing) {
-                    length++;
-                } else {
-                    break;
+            // Если нашли контроллер и он соосен с нами — возвращаем его
+            if (be instanceof ControllingModularEnginesBlockEntity controller) {
+                if (controller.getBlockState().getValue(HorizontalKineticBlock.HORIZONTAL_FACING) == facing) {
+                    return controller;
                 }
-            } else {
+            }
+
+            // Если цепь прервалась чем-то, кроме другой соосной секции поршней, прекращаем поиск
+            if (!(be instanceof ModularEnginesBlockEntity neighbor &&
+                    neighbor.getBlockState().getValue(HorizontalKineticBlock.HORIZONTAL_FACING) == facing)) {
                 break;
             }
         }
-
-        this.currentEngineLength = length;
-    }
-
-    // Helper method to scan radiator pipes
-    private int getRadiatorRowWaterAndCount(BlockPos startPos, Direction scanDir, boolean checkWater) {
-        if (this.level == null) return 0;
-
-        int connectedInRow = 0;
-        int totalWaterInRow = 0;
-
-        for (int i = 0; i < 4; i++) {
-            BlockPos currentPos = startPos.relative(scanDir, i);
-
-            if (this.level.getBlockEntity(currentPos) instanceof BaseRadiatorBlockEntity radiator) {
-                connectedInRow++;
-                if (checkWater && radiator.waterTank != null) {
-                    totalWaterInRow += radiator.waterTank.getFluidAmount();
-                }
-            } else {
-                break; // Pipe row broke down
-            }
-        }
-
-        return checkWater ? totalWaterInRow : connectedInRow;
+        return null;
     }
 }

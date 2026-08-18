@@ -3,7 +3,7 @@
   "block.create_additional_energy_sourses.v8_engine_classic": "Классический ДВС V8",
   "block.create_additional_energy_sourses.radiator_copper": "Медный радиатор",
   "block.create_additional_energy_sourses.radiator_steel": "Стальной радиатор",
-  "block.create_additional_energy_sourses.radiator_gold": "Латунный радиатор",
+  "block.create_additional_energy_sourses.radiator_gold": "Золотой радиатор",
   "block.create_additional_energy_sourses.radiator_titanium": "Титановый радиатор",
 
   "block.create_additional_energy_sourses.i4_engine": "Чугунный I4",
@@ -31,27 +31,27 @@
   "item.create_additional_energy_sourses.pickaxe_core": "Ядро кирки",
   "item.create_additional_energy_sourses.controller": "Контроллер",
 
-  "item.create_additional_energy_sourses.iron_piston": "Чугунный поршень",
+  "item.create_additional_energy_sourses.cast_iron_piston": "Чугунный поршень",
   "item.create_additional_energy_sourses.aluminum_piston": "Алюминиевый поршень",
   "item.create_additional_energy_sourses.titanium_piston": "Титановый поршень",
 
-  "item.create_additional_energy_sourses.iron_gbc": "Чугунный ГБЦ",
+  "item.create_additional_energy_sourses.cast_iron_gbc": "Чугунный ГБЦ",
   "item.create_additional_energy_sourses.aluminum_gbc": "Алюминиевая ГБЦ",
   "item.create_additional_energy_sourses.titanium_gbc": "Титановая ГБЦ",
 
-  "item.create_additional_energy_sourses.iron_w16_gbc": "Чугунный ГБЦ W16",
+  "item.create_additional_energy_sourses.cast_iron_w16_gbc": "Чугунный ГБЦ W16",
   "item.create_additional_energy_sourses.aluminum_w16_gbc": "Алюминиевая ГБЦ W16",
   "item.create_additional_energy_sourses.titanium_w16_gbc": "Титановая ГБЦ W16",
 
-  "item.create_additional_energy_sourses.iron_brain_gbc": "Чугунный блок управления ГБЦ",
+  "item.create_additional_energy_sourses.cast_iron_brain_gbc": "Чугунный блок управления ГБЦ",
   "item.create_additional_energy_sourses.aluminum_brain_gbc": "Алюминиевый блок управления ГБЦ",
   "item.create_additional_energy_sourses.titanium_brain_gbc": "Титановый блок управления ГБЦ",
 
-  "item.create_additional_energy_sourses.iron_crankshaft": "Чугунный коленвал",
+  "item.create_additional_energy_sourses.cast_iron_crankshaft": "Чугунный коленвал",
   "item.create_additional_energy_sourses.aluminum_crankshaft": "Алюминиевый коленвал",
   "item.create_additional_energy_sourses.titanium_crankshaft": "Титановый коленвал",
 
-  "item.create_additional_energy_sourses.iron_ingot": "Чугунный слиток",
+  "item.create_additional_energy_sourses.cast_iron_ingot": "Чугунный слиток",
   "item.create_additional_energy_sourses.aluminum_ingot": "Алюминиевый слиток",
   "item.create_additional_energy_sourses.titanium_ingot": "Титановый слиток",
 
@@ -72,6 +72,10 @@
   "block.create_additional_energy_sourses.titanium_v8_carter": "Титановый картер V8",
   "block.create_additional_energy_sourses.titanium_w16_carter": "Титановый картер W16",
   "block.create_additional_energy_sourses.titanium_r32_carter": "Титановый картер R32",
+
+  "block.create_additional_energy_sourses.aluminum_block": "Алюминиевый блок",
+  "block.create_additional_energy_sourses.titanium_block": "Титановый блок",
+  "block.create_additional_energy_sourses.cast_iron_block": "Чугунный блок",
 
   "itemGroup.create_aes_tab": "Create: Дополнительные источники энергии",
 

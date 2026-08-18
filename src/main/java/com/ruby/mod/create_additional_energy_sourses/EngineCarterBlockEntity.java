@@ -21,6 +21,7 @@ public class EngineCarterBlockEntity extends BlockEntity {
     public String engineType = "v8";
     public boolean installedBrain = false;
     public boolean hasUnitedController = false;
+    public boolean isModular;
 
     public EngineCarterBlockEntity(BlockPos pos, BlockState state) {
         // Привязываем сущность к нашему общему регистратору картеров в ModBlocks
@@ -56,6 +57,10 @@ public class EngineCarterBlockEntity extends BlockEntity {
                     this.maxGBC = 1;
                     this.hasUnitedController = true;
                 }
+            }
+            // Внутри конструктора EngineCarterBlockEntity
+            if (blockId.contains("modular")) {
+                this.isModular = true;
             }
         }
     }

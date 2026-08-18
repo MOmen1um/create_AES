@@ -33,19 +33,24 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_ORE.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_ORE.get()));
 
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.CAST_IRON_BLOCK.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.ALUMINUM_BLOCK.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.TITANIUM_BLOCK.get()));
+
+
 
                         // Слитки
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_INGOT.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_INGOT.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_INGOT.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_INGOT.get()));
 
 
                         // 2. БЛОКИ ЦИЛИНДРОВ / КАРТЕРЫ (Выстраиваем строго от I4 до R32 по металлам)
                         // Чугун (Iron)
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_I4_CARTER_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_V8_CARTER_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_CARTER_ITEM.get()));
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_R32_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_I4_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_V8_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_W16_CARTER_ITEM.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_R32_CARTER_ITEM.get()));
                         // Алюминий (Aluminum)
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_I4_CARTER_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_V8_CARTER_ITEM.get()));
@@ -81,23 +86,23 @@ public class Create_additional_energy_sourses {
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_GOLD_ITEM.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModBlocks.RADIATOR_TITANIUM_ITEM.get()));
                         // РАЗДЕЛ РАСХОДНИКОВ ДЛЯ СБОРКИ (Добавляем наши новые детали!)
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_PISTON.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_PISTON.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_PISTON.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_PISTON.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_GBC.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_W16_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_W16_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_W16_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_W16_GBC.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_BRAIN_GBC.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_BRAIN_GBC.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_BRAIN_GBC.get()));
 
-                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.IRON_CRANKSHAFT.get()));
+                        output.accept(new net.minecraft.world.item.ItemStack(ModItems.CAST_IRON_CRANKSHAFT.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.ALUMINUM_CRANKSHAFT.get()));
                         output.accept(new net.minecraft.world.item.ItemStack(ModItems.TITANIUM_CRANKSHAFT.get()));
 
@@ -109,6 +114,7 @@ public class Create_additional_energy_sourses {
         ModBlocks.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
+
 
         // Слушатель рендереров валов для ОБОИХ блоков
         modEventBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
@@ -129,19 +135,6 @@ public class Create_additional_energy_sourses {
                             return ((NonModularEnginesBlockEntity) blockEntity).getFluidTank();
                         }
                         return null; // Block access from all other sides
-                    }
-            );
-
-            // 2. Fluid capability for NEW MODULAR engines (Strictly from the bottom!)
-            event.registerBlockEntity(
-                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    ModBlocks.MODULAR_ENGINE_ENTITY.get(),
-                    (blockEntity, side) -> {
-                        // Only allow fuel input from the bottom side of the block!
-                        if (side == net.minecraft.core.Direction.DOWN) {
-                            return ((ModularEnginesBlockEntity) blockEntity).getFluidTank();
-                        }
-                        return null;
                     }
             );
 
@@ -173,16 +166,6 @@ public class Create_additional_energy_sourses {
                     net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
                     (net.minecraft.world.level.block.entity.BlockEntityType) ModBlocks.RADIATOR_TITANIUM_ENTITY.get(),
                     (be, side) -> be instanceof BaseRadiatorBlockEntity radiator ? radiator.waterTank : null
-            );
-            event.registerBlockEntity(
-                    net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK,
-                    ModBlocks.V8_ENGINE_ENTITY.get(),
-                    (blockEntity, side) -> {
-                        if (side == net.minecraft.core.Direction.DOWN) {
-                            return ((ModularEnginesBlockEntity) blockEntity).getFluidTank();
-                        }
-                        return null;
-                    }
             );
         });
 

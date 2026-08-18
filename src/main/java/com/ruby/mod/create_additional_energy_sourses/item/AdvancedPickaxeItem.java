@@ -47,7 +47,7 @@ public class AdvancedPickaxeItem extends PickaxeItem {
 
                         if (this.isCorrectToolForDrops(stack, extraState) || isBedrock) {
                             // 1. Сначала ломаем сам блок в мире
-                            level.destroyBlock(extraPos, false, player); // Ставим false, чтобы игра не пыталась безуспешно искать стандартный лут
+                            level.destroyBlock(extraPos, true, player); // Ставим false, чтобы игра не пыталась безуспешно искать стандартный лут
 
                             // 2. Если это был бедрок — принудительно спавним предмет бедрока на его координатах!
                             if (isBedrock) {
