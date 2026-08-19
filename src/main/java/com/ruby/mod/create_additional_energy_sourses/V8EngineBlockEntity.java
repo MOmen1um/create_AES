@@ -14,6 +14,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -409,15 +410,12 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                     float roughness = 18.0f;
                     int seed = explosionEpicenter.hashCode();
 
-                    // Жёсткий лимит: сносим по 90 000 блоков из C++ массива за один единственный тик сервера!
-                    final int blocksPerTick = 22500;
-
                     java.util.concurrent.CompletableFuture.supplyAsync(() ->
                             NativeExplosionJNI.calculateExplosionCrater(radius, roughness, phase1, phase2, seed)
                     ).thenAcceptAsync(coords -> {
-                        if (this.level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                        if (this.level instanceof ServerLevel serverLevel) {
                             serverLevel.getServer().execute(() -> {
-                                net.minecraft.core.BlockPos currentPos = this.worldPosition;
+                                BlockPos currentPos = this.worldPosition;
                                 int deltaX = currentPos.getX() - explosionEpicenter.getX();
                                 int deltaY = currentPos.getY() - explosionEpicenter.getY();
                                 int deltaZ = currentPos.getZ() - explosionEpicenter.getZ();
@@ -426,59 +424,49 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                                     return;
                                 }
 
+                                final int blocksPerTick;
+                                if (blockName.contains("radial") || blockName.contains("r32")) {
+                                    blocksPerTick = 400;
+                                } else {
+                                    blocksPerTick = 1500;
+                                }
+
                                 new Object() {
-                                    // Переносим массив внутрь объекта, чтобы им можно было управлять
-                                    private int[] activeCoords = coords;
-                                    private final int blocksPerTick = 22500;
-
+                                    private int currentOffset = 0;
                                     void runNextSlice() {
-                                        int totalCoords = activeCoords.length;
-                                        if (totalCoords == 0) {
-                                            finishExplosion();
-                                            return;
-                                        }
+                                        new Object() {
+                                            int curremtOffset = 0;
+                                            final int step = blocksPerTick;
 
-                                        int endCoordIndex = Math.min(blocksPerTick * 3, totalCoords);
-                                        net.minecraft.world.level.block.state.BlockState airState = net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
-                                        net.minecraft.core.BlockPos.MutableBlockPos mutablePos = new net.minecraft.core.BlockPos.MutableBlockPos();
+                                            void runNextSlice() {
+                                                // 1. Проверяем, не закончили ли мы
+                                                if (currentOffset >= coords.length) { finishExplosion(); return; }
 
-                                        // 1. Отрабатываем ПЕРВУЮ порцию блоков (они всегда самые близкие к центру благодаря сортировке C++)
-                                        for (int i = 0; i < endCoordIndex; i += 3) {
-                                            int targetX = currentPos.getX() + activeCoords[i];
-                                            int targetY = currentPos.getY() + activeCoords[i + 1];
-                                            int targetZ = currentPos.getZ() + activeCoords[i + 2];
+                                                // 2. Вычисляем порцию блоков на этот тик
+                                                int end = Math.min(currentOffset + (blocksPerTick * 3), coords.length);
+                                                BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
 
-                                            mutablePos.set(targetX, targetY, targetZ);
+                                                // 3. Цикл удаления (по 3 координаты: x, y, z)
+                                                for (int i = currentOffset; i < end; i += 3) {
+                                                    mutablePos.set(currentPos.getX() + coords[i], currentPos.getY() + coords[i+1], currentPos.getZ() + coords[i+2]);
+                                                    serverLevel.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 18);
+                                                }
+                                                currentOffset = end;
 
-                                            if (serverLevel.isInWorldBounds(mutablePos) && !serverLevel.isEmptyBlock(mutablePos)) {
-                                                serverLevel.setBlock(mutablePos, airState, 2 | 16);
+                                                // 4. Планируем следующий тик, если еще не всё удалили
+                                                if (currentOffset < coords.length) {
+                                                    serverLevel.getServer().tell(new net.minecraft.server.TickTask(serverLevel.getServer().getTickCount() + 1, this::runNextSlice));
+                                                } else {
+                                                    finishExplosion();
+                                                }
                                             }
-                                        }
 
-                                        // 2. ✂️ МАГИЯ ОЧИСТКИ ПАМЯТИ: Если это был последний кусок — завершаем
-                                        if (endCoordIndex >= totalCoords) {
-                                            activeCoords = new int[0]; // Мгновенно освобождаем старый массив
-                                            finishExplosion();
-                                        } else {
-                                            // Отрезаем выполненную часть! Создаем новый массив только для ОСТАВШИХСЯ блоков
-                                            int remainingCoordsSize = totalCoords - endCoordIndex;
-                                            int[] nextCoords = new int[remainingCoordsSize];
-                                            System.arraycopy(activeCoords, endCoordIndex, nextCoords, 0, remainingCoordsSize);
-
-                                            // Старый массив activeCoords больше никем не удерживается!
-                                            // Java сотрет его из памяти при следующем же микро-сборе мусора.
-                                            activeCoords = nextCoords;
-
-                                            // Планируем следующий тик
-                                            int nextTick = serverLevel.getServer().getTickCount() + 1;
-                                            serverLevel.getServer().tell(new net.minecraft.server.TickTask(nextTick, this::runNextSlice));
-                                        }
-                                    }
-
-                                    // Вынесли финал в отдельный метод для чистоты кода
-                                    void finishExplosion() {
-                                        serverLevel.explode(null, currentPos.getX() + 0.5, currentPos.getY() + 0.5, currentPos.getZ() + 0.5, 1.0f, net.minecraft.world.level.Level.ExplosionInteraction.NONE);
-                                        serverLevel.removeBlock(currentPos, false);
+                                            // Вспомогательный метод для завершения
+                                            void finishExplosion() {
+                                                serverLevel.explode(null, currentPos.getX(), currentPos.getY(), currentPos.getZ(), 1.0f, Level.ExplosionInteraction.NONE);
+                                                serverLevel.removeBlock(currentPos, false);
+                                            }
+                                        };
                                     }
                                 }.runNextSlice();
                             });
