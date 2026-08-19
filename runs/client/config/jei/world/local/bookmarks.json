@@ -84,5 +84,8 @@
   {"ingredient":{"id":"create_additional_energy_sourses:w16_engine"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:titanium_gbc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
   {"ingredient":{"id":"create_additional_energy_sourses:aluminum_gbc"},"type":"item_stack","bookmarkType":"INGREDIENT"},
-  {"ingredient":{"id":"create_additional_energy_sourses:thermo_generator_item"},"type":"item_stack","bookmarkType":"INGREDIENT"}
+  {"ingredient":{"id":"create_additional_energy_sourses:thermo_generator_item"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"createdieselgenerators:engine_turbocharger"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"createdieselgenerators:asphalt_stairs"},"type":"item_stack","bookmarkType":"INGREDIENT"},
+  {"ingredient":{"id":"createdieselgenerators:mold","components":{"createdieselgenerators:mold_type":"createdieselgenerators:lines"}},"type":"item_stack","bookmarkType":"INGREDIENT"}
 ]

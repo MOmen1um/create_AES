@@ -29,7 +29,9 @@ runs {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
         systemProperty 'forge.logging.console.level', 'debug'
 
-        // ⚙️ Безопасный способ передачи пути к нативной библиотеке в NeoForge Gradle
+        // 🚫 СИЛОЙ ВЫКЛЮЧАЕМ ДИКТОР НА СТАРТЕ ДЛЯ LINUX (убирает UnsatisfiedLinkError)
+        systemProperty 'minecraft.client.narrator', 'false'
+
         systemProperty 'java.library.path', file('native').absolutePath
         jvmArguments.add("-Djava.library.path=${file('native').absolutePath}")
 

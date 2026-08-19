@@ -361,7 +361,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         // --- 💥 МЕХАНИКА АВАРИЙНОГО ВЗРЫВА ПРИ ПЕРЕГРЕВЕ (ОПТИМИЗИРОВАНО ЧЕРЕЗ C++) ---
 // Убираем старое ограничение "2-х" от скорости — пусть Ньютоновский нагрев летит на максимум!
         if (this.engineTemperature >= this.maxMeltingTemp) {
-            this.engineTemperature = this.maxMeltingTemp; // Удерживаем шкалу на пике
 
             // Если мотор работает на пределе плавления, запускаем таймер уничтожения
             if (this.currentSpeed > 0) {
@@ -374,100 +373,119 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                     this.level.playSound(null, this.worldPosition, net.minecraft.sounds.SoundEvents.CAMPFIRE_CRACKLE, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 1.0f);
                 }
 
-                // 200 тиков = 10 секунд на максимальном жаре без воды. Время вышло — БАБАХ!
-                if (this.overheatMeltingTimer >= 200) {
-                    if (!this.level.isClientSide) {
-                        // 1. Вычисляем базовую силу от материала
-                        float basePower = switch (this.engineMaterial != null ? this.engineMaterial : "iron") {
-                            case "aluminum" -> 12.0f;
-                            case "titanium" -> 25.0f;
-                            default -> 5.0f;
-                        };
+                // ─── 🌋 ВОЗВРАЩАЕМ ЖЁСТКИЙ ПРЕСЕТ И МАКСИМАЛЬНУЮ СКОРОСТЬ ВОЛНЫ ───
+                String explosionMode = "default"; // Убираем light-заглушки, летим на максимум!
 
-                        // 2. ОПРЕДЕЛЯЕМ ТИП ДВИГАТЕЛЯ И КРАТНО ВЫРАЩИВАЕМ СИЛУ ВЗРЫВА
-                        float typeMultiplier = 1.0f; // По умолчанию для V8 оставляем х1
+                if (this.overheatMeltingTimer >= 200 && !this.level.isClientSide) {
+                    final net.minecraft.core.BlockPos explosionEpicenter = this.worldPosition;
 
-                        // Берем имя блока для точного определения конфигурации цилиндров
-                        String blockName = this.getBlockState().getBlock().toString().toLowerCase();
+                    // 1. Вычисляем базовую силу от материала
+                    float basePower = switch (this.engineMaterial != null ? this.engineMaterial : "iron") {
+                        case "aluminum" -> 12.0f;
+                        case "titanium" -> 25.0f;
+                        default -> 5.0f;
+                    };
 
-                        if (blockName.contains("i4") || blockName.contains("inline")) {
-                            typeMultiplier = 2f;   // Рядный — в 2 раза слабее
-                        } else if (blockName.contains("w16")) {
-                            typeMultiplier = 4.0f;   // W16 — в 2 раза сильнее!
-                        } else if (blockName.contains("radial") || blockName.contains("r32")) {
-                            typeMultiplier = 8.0f;   // Радиальный (звездообразный) — в 4 раза сильнее! 🌋
-                        }
+                    // 2. Множитель от конфигурации двигателя
+                    String blockName = this.getBlockState().getBlock().toString().toLowerCase();
+                    float typeMultiplier = 1.0f;
+                    if (blockName.contains("i4") || blockName.contains("inline")) typeMultiplier = 2f;
+                    else if (blockName.contains("w16")) typeMultiplier = 4.0f;
+                    else if (blockName.contains("radial") || blockName.contains("r32")) typeMultiplier = 8.0f;
 
-                        // Применяем множитель типа к базовой силе
-                        float explosionPower = basePower * typeMultiplier;
+                    float explosionPower = basePower * typeMultiplier;
 
-                        // 3. Добавляем бонус от остатков топлива
-                        if (!this.fuelTank.isEmpty()) {
-                            explosionPower += ((float) this.fuelTank.getFluidAmount() / 100.0f);
-                        }
+                    // 3. Бонус от остатков топлива
+                    if (!this.fuelTank.isEmpty()) {
+                        explosionPower += ((float) this.fuelTank.getFluidAmount() / 100.0f);
+                    }
 
-                        // Сохраняем исходную точку взрыва для последующей коррекции смещения
-                        final net.minecraft.core.BlockPos explosionEpicenter = this.worldPosition;
-                        int radius = (int) explosionPower;
+                    // В режиме DEFAULT радиус не режется — получаем честное гигантское сфероподобное чудо
+                    int radius = (int) explosionPower;
 
-                        java.util.Random rnd = new java.util.Random(explosionEpicenter.hashCode());
-                        float phase1 = rnd.nextFloat() * 100f;
-                        float phase2 = rnd.nextFloat() * 100f;
-                        float roughness = 18.0f;
-                        int seed = explosionEpicenter.hashCode();
+                    java.util.Random rnd = new java.util.Random(explosionEpicenter.hashCode());
+                    float phase1 = rnd.nextFloat() * 100f;
+                    float phase2 = rnd.nextFloat() * 100f;
+                    float roughness = 18.0f;
+                    int seed = explosionEpicenter.hashCode();
 
-                        // 4. Уходим в глубокий асинхрон (отдельный C++ поток в CachyOS)
-                        java.util.concurrent.CompletableFuture.supplyAsync(() ->
-                                NativeExplosionJNI.calculateExplosionCrater(radius, roughness, phase1, phase2, seed)
-                        ).thenAcceptAsync(coords -> {
+                    // Жёсткий лимит: сносим по 90 000 блоков из C++ массива за один единственный тик сервера!
+                    final int blocksPerTick = 22500;
 
-                            // 5. Возвращаемся в главный поток сервера, когда C++ закончил расчёт
-                            if (this.level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
-                                serverLevel.getServer().execute(() -> {
+                    java.util.concurrent.CompletableFuture.supplyAsync(() ->
+                            NativeExplosionJNI.calculateExplosionCrater(radius, roughness, phase1, phase2, seed)
+                    ).thenAcceptAsync(coords -> {
+                        if (this.level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                            serverLevel.getServer().execute(() -> {
+                                net.minecraft.core.BlockPos currentPos = this.worldPosition;
+                                int deltaX = currentPos.getX() - explosionEpicenter.getX();
+                                int deltaY = currentPos.getY() - explosionEpicenter.getY();
+                                int deltaZ = currentPos.getZ() - explosionEpicenter.getZ();
 
-                                    // Проверяем текущую позицию блока (вдруг его сдвинули поршнем из Create)
-                                    net.minecraft.core.BlockPos currentPos = this.worldPosition;
-                                    int deltaX = currentPos.getX() - explosionEpicenter.getX();
-                                    int deltaY = currentPos.getY() - explosionEpicenter.getY();
-                                    int deltaZ = currentPos.getZ() - explosionEpicenter.getZ();
+                                if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2 || Math.abs(deltaZ) > 2) {
+                                    return;
+                                }
 
-                                    // Коррекция: Если смещение критическое (> 2 блоков) или блок сломали — отменяем взрыв кратера
-                                    if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2 || Math.abs(deltaZ) > 2) {
-                                        return;
-                                    }
+                                new Object() {
+                                    // Переносим массив внутрь объекта, чтобы им можно было управлять
+                                    private int[] activeCoords = coords;
+                                    private final int blocksPerTick = 22500;
 
-                                    // 6. Применяем заготовленный C++ массив блоков AIR пачкой в один тик
-                                    for (int i = 0; i < coords.length; i += 3) {
-                                        // Применяем дельту смещения к относительным координатам из C++
-                                        int targetX = currentPos.getX() + coords[i];
-                                        int targetY = currentPos.getY() + coords[i + 1];
-                                        int targetZ = currentPos.getZ() + coords[i + 2];
+                                    void runNextSlice() {
+                                        int totalCoords = activeCoords.length;
+                                        if (totalCoords == 0) {
+                                            finishExplosion();
+                                            return;
+                                        }
 
-                                        net.minecraft.core.BlockPos targetPos = new net.minecraft.core.BlockPos(targetX, targetY, targetZ);
+                                        int endCoordIndex = Math.min(blocksPerTick * 3, totalCoords);
+                                        net.minecraft.world.level.block.state.BlockState airState = net.minecraft.world.level.block.Blocks.AIR.defaultBlockState();
+                                        net.minecraft.core.BlockPos.MutableBlockPos mutablePos = new net.minecraft.core.BlockPos.MutableBlockPos();
 
-                                        if (serverLevel.isInWorldBounds(targetPos) && !serverLevel.isEmptyBlock(targetPos)) {
-                                            serverLevel.setBlock(targetPos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 2 | 16);
+                                        // 1. Отрабатываем ПЕРВУЮ порцию блоков (они всегда самые близкие к центру благодаря сортировке C++)
+                                        for (int i = 0; i < endCoordIndex; i += 3) {
+                                            int targetX = currentPos.getX() + activeCoords[i];
+                                            int targetY = currentPos.getY() + activeCoords[i + 1];
+                                            int targetZ = currentPos.getZ() + activeCoords[i + 2];
+
+                                            mutablePos.set(targetX, targetY, targetZ);
+
+                                            if (serverLevel.isInWorldBounds(mutablePos) && !serverLevel.isEmptyBlock(mutablePos)) {
+                                                serverLevel.setBlock(mutablePos, airState, 2 | 16);
+                                            }
+                                        }
+
+                                        // 2. ✂️ МАГИЯ ОЧИСТКИ ПАМЯТИ: Если это был последний кусок — завершаем
+                                        if (endCoordIndex >= totalCoords) {
+                                            activeCoords = new int[0]; // Мгновенно освобождаем старый массив
+                                            finishExplosion();
+                                        } else {
+                                            // Отрезаем выполненную часть! Создаем новый массив только для ОСТАВШИХСЯ блоков
+                                            int remainingCoordsSize = totalCoords - endCoordIndex;
+                                            int[] nextCoords = new int[remainingCoordsSize];
+                                            System.arraycopy(activeCoords, endCoordIndex, nextCoords, 0, remainingCoordsSize);
+
+                                            // Старый массив activeCoords больше никем не удерживается!
+                                            // Java сотрет его из памяти при следующем же микро-сборе мусора.
+                                            activeCoords = nextCoords;
+
+                                            // Планируем следующий тик
+                                            int nextTick = serverLevel.getServer().getTickCount() + 1;
+                                            serverLevel.getServer().tell(new net.minecraft.server.TickTask(nextTick, this::runNextSlice));
                                         }
                                     }
 
-                                    // 7. Финальный бабах для звука, частиц и отбрасывания сущностей
-                                    serverLevel.explode(
-                                            null,
-                                            currentPos.getX() + 0.5,
-                                            currentPos.getY() + 0.5,
-                                            currentPos.getZ() + 0.5,
-                                            1.0f,
-                                            net.minecraft.world.level.Level.ExplosionInteraction.NONE
-                                    );
-
-                                    // Удаляем останки ДВС
-                                    serverLevel.removeBlock(currentPos, false);
-                                });
-                            }
-                        });
-                    }
-                    return;
+                                    // Вынесли финал в отдельный метод для чистоты кода
+                                    void finishExplosion() {
+                                        serverLevel.explode(null, currentPos.getX() + 0.5, currentPos.getY() + 0.5, currentPos.getZ() + 0.5, 1.0f, net.minecraft.world.level.Level.ExplosionInteraction.NONE);
+                                        serverLevel.removeBlock(currentPos, false);
+                                    }
+                                }.runNextSlice();
+                            });
+                        }
+                    });
                 }
+
             }
         } else {
             // Если игрок вовремя успел сбросить газ или залить воду — мотор начинает остывать, таймер сбрасывается

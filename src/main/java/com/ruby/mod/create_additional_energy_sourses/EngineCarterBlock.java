@@ -259,6 +259,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
 
             // 6. МГНОВЕННЫЙ ПЕРЕРАСЧЕТ СЕТИ ПОСЛЕ КЛИКА
             // Если поставили контроллер — заставляем его сразу просканировать линию картеров сзади
+            /*
             if (level.getBlockEntity(pos) instanceof ControllingModularEnginesBlockEntity cmebe) {
                 cmebe.calculateConfiguration();
             }
@@ -269,6 +270,7 @@ public class EngineCarterBlock extends HorizontalKineticBlock implements IBE<Eng
                     master.calculateConfiguration();
                 }
             }
+             */
         } else {
             player.displayClientMessage(Component.literal("§c[ДВС] Ошибка: блок " + finalBlockName + " не зарегистрирован!"), true);
         }

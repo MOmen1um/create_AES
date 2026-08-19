@@ -1,6 +1,3 @@
-/playsound createdieselgenerators:engine_normal neutral
-/playsound createdieselgenerators:engine_normal master Dev 272.82 -7.19 139.56
-/playsound createdieselgenerators:engine_normal ambient
 /playsound createdieselgenerators:engine_normal master Dev 272.82 -7.19 139.56
 /playsound createdieselgenerators:engine_normal ambient
 /playsound createdieselgenerators:engine_normal master Dev 272.82 -7.19 139.56
@@ -48,3 +45,6 @@
 /loot give Dev mine ~ ~ ~ create_additional_energy_sourses:aluminum_brain_gbc
 /loot give Dev mine ~ ~ ~ create_additional_energy_sourses:aluminum_ore
 /loot give Dev loot create_additional_energy_sourses:blocks/aluminum_ore
+/flywheel backend flywheel:instancing
+/effect give Dev minecraft:night_vision infinite
+/setblock ~ ~ ~ aeronautics:adjustable_burner

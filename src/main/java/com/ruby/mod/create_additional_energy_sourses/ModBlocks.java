@@ -152,10 +152,10 @@ public class ModBlocks {
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_V8_CARTER = registerCarter("modular_aluminum_v8_carter");
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_W16_CARTER = registerCarter("modular_aluminum_w16_carter");
     public static final DeferredHolder<Block, Block> MODULAR_ALUMINUM_R32_CARTER = registerCarter("modular_aluminum_r32_carter");
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I4_CARTER = registerCarter("modular_iron_i4_carter");
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V8_CARTER = registerCarter("modular_iron_v8_carter");
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W16_CARTER = registerCarter("modular_iron_w16_carter");
-    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R32_CARTER = registerCarter("modular_iron_r32_carter");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_I4_CARTER = registerCarter("modular_titanium_i4_carter");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_V8_CARTER = registerCarter("modular_titanium_v8_carter");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_W16_CARTER = registerCarter("modular_titanium_w16_carter");
+    public static final DeferredHolder<Block, Block> MODULAR_TITANIUM_R32_CARTER = registerCarter("modular_titanium_r32_carter");
 
     // Чугунные картеры (Iron)
     public static final DeferredHolder<Block, Block> IRON_I4_CARTER  = registerCarter("iron_i4_carter");

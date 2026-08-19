@@ -1,31 +1,69 @@
 {
   "minecraft:recipes/decorations/crafting_table": {
     "criteria": {
-      "unlock_right_away": "2026-08-13 19:09:43 +0500"
+      "unlock_right_away": "2026-08-19 23:42:32 +0500"
     },
     "done": true
   },
   "minecraft:adventure/adventuring_time": {
     "criteria": {
-      "minecraft:plains": "2026-08-13 19:09:44 +0500"
+      "minecraft:cold_ocean": "2026-08-19 23:44:26 +0500",
+      "minecraft:beach": "2026-08-19 23:45:43 +0500",
+      "minecraft:forest": "2026-08-19 23:45:41 +0500",
+      "minecraft:taiga": "2026-08-19 23:50:13 +0500",
+      "minecraft:river": "2026-08-19 23:45:39 +0500",
+      "minecraft:meadow": "2026-08-19 23:43:59 +0500",
+      "minecraft:stony_shore": "2026-08-19 23:42:43 +0500",
+      "minecraft:lush_caves": "2026-08-19 23:50:12 +0500",
+      "minecraft:plains": "2026-08-19 23:42:32 +0500"
     },
     "done": false
   },
   "create:root": {
     "criteria": {
-      "0": "2026-08-13 19:09:48 +0500"
+      "0": "2026-08-19 23:43:11 +0500"
     },
     "done": true
   },
   "simulated:root": {
     "criteria": {
-      "0": "2026-08-13 19:09:48 +0500"
+      "0": "2026-08-19 23:43:11 +0500"
     },
     "done": true
   },
   "aeronautics:root": {
     "criteria": {
-      "0": "2026-08-13 19:09:48 +0500"
+      "0": "2026-08-19 23:43:11 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/gearbox": {
+    "criteria": {
+      "has_item": "2026-08-19 23:43:22 +0500"
+    },
+    "done": true
+  },
+  "create:recipes/misc/crafting/kinetics/vertical_gearbox": {
+    "criteria": {
+      "has_item": "2026-08-19 23:43:22 +0500"
+    },
+    "done": true
+  },
+  "create:mechanical_pump_0": {
+    "criteria": {
+      "0": "2026-08-19 23:43:32 +0500"
+    },
+    "done": true
+  },
+  "create:wrench_goggles": {
+    "criteria": {
+      "1": "2026-08-19 23:43:41 +0500"
+    },
+    "done": false
+  },
+  "aeronautics:recipes/misc/aviators_goggles": {
+    "criteria": {
+      "has_ingredient": "2026-08-19 23:43:41 +0500"
     },
     "done": true
   },
