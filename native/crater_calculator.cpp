@@ -4,19 +4,24 @@
 #include <algorithm>
 #include <cstdint>
 
-// Структура для хранения точки и её расстояния от эпицентра
 struct ExplosionBlock {
     jint x, y, z;
     int32_t distSq;
 };
 
+// Глобальный вектор, который будет временно хранить результат в памяти C++
+// Благодаря std::vector, память очистится автоматически, когда мы его принудительно очистим
+std::vector<ExplosionBlock> global_valid_blocks;
+
 extern "C" {
-JNIEXPORT jintArray JNICALL
-Java_com_ruby_mod_create_1additional_1energy_1sourses_NativeExplosionJNI_calculateExplosionCrater(
+
+// 1. Метод инициализации: считает, сортирует и возвращает ОБЩЕЕ число блоков
+JNIEXPORT jint JNICALL
+Java_com_ruby_mod_create_1additional_1energy_1sourses_NativeExplosionJNI_initializeExplosion(
     JNIEnv *env, jclass clazz, jint radius, jfloat roughness, jfloat phase1, jfloat phase2, jint seed
 ) {
-    std::vector<ExplosionBlock> valid_blocks;
-    valid_blocks.reserve((radius * 2 + 1) * (radius * 2 + 1) * (radius * 2 + 1) / 4);
+    global_valid_blocks.clear(); // Очищаем старые данные на всякий случай
+    global_valid_blocks.reserve((radius * 2 + 1) * (radius * 2 + 1) * (radius * 2 + 1) / 4);
 
     for (int32_t x = -radius; x <= radius; x++) {
         for (int32_t y = -radius; y <= radius; y++) {
@@ -33,33 +38,63 @@ Java_com_ruby_mod_create_1additional_1energy_1sourses_NativeExplosionJNI_calcula
                 float modifiedRadius = static_cast<float>(radius) + (noise * roughness);
 
                 if (distSq <= modifiedRadius * modifiedRadius) {
-                    valid_blocks.push_back({x, y, z, distSq});
+                    global_valid_blocks.push_back({x, y, z, distSq});
                 }
             }
         }
     }
 
-    // ─── МАГИЯ СОРТИРОВКИ ───
-    // Сортируем блоки: те, что ближе к центру (distSq меньше), будут в начале массива!
-    std::sort(valid_blocks.begin(), valid_blocks.end(), [](const ExplosionBlock& a, const ExplosionBlock& b) {
+    // Сортировка от центра
+    std::sort(global_valid_blocks.begin(), global_valid_blocks.end(), [](const ExplosionBlock& a, const ExplosionBlock& b) {
         return a.distSq < b.distSq;
     });
 
-    // Переносим отсортированные данные в плоский массив для Java
-    jintArray result = env->NewIntArray(valid_blocks.size() * 3);
-    if (result != nullptr) {
-        std::vector<jint> flat_coords;
-        flat_coords.reserve(valid_blocks.size() * 3);
+    return static_cast<jint>(global_valid_blocks.size());
+}
 
-        for (const auto& block : valid_blocks) {
+JNIEXPORT jint JNICALL
+Java_com_ruby_mod_create_1additional_1energy_1sourses_NativeExplosionJNI_fillExplosionBatch(
+    JNIEnv *env, jclass clazz, jint startOffset, jint batchSize, jintArray outArray
+) {
+    jint totalSize = static_cast<jint>(global_valid_blocks.size());
+    if (startOffset < 0 || startOffset >= totalSize || batchSize <= 0 || outArray == nullptr) {
+        return 0;
+    }
+
+    jint actualBlocks = batchSize;
+    if (startOffset + batchSize > totalSize) {
+        actualBlocks = totalSize - startOffset;
+    }
+
+    // Заполняем временный вектор данными
+    std::vector<jint> flat_coords;
+    flat_coords.reserve(actualBlocks * 3);
+
+    for (jint i = 0; i < actualBlocks; i++) {
+        size_t vectorIndex = static_cast<size_t>(startOffset + i);
+        if (vectorIndex < global_valid_blocks.size()) {
+            const auto& block = global_valid_blocks[vectorIndex];
             flat_coords.push_back(block.x);
             flat_coords.push_back(block.y);
             flat_coords.push_back(block.z);
         }
-
-        env->SetIntArrayRegion(result, 0, flat_coords.size(), flat_coords.data());
     }
 
-    return result;
+    // ВНИМАНИЕ: Мы НЕ создаем NewIntArray. Мы пишем поверх старого массива Java!
+    env->SetIntArrayRegion(outArray, 0, static_cast<jsize>(flat_coords.size()), flat_coords.data());
+
+    // Возвращаем количество РЕАЛЬНО записанных координат (чисел, а не блоков, то есть блоков * 3)
+    return static_cast<jint>(flat_coords.size());
 }
+
+
+// 3. Метод очистки: освобождает память C++ после завершения взрыва
+JNIEXPORT void JNICALL
+Java_com_ruby_mod_create_1additional_1energy_1sourses_NativeExplosionJNI_clearExplosionMemory(
+    JNIEnv *env, jclass clazz
+) {
+    global_valid_blocks.clear();
+    global_valid_blocks.shrink_to_fit(); // Намертво вычищает ОЗУ на стороне C++
+}
+
 }

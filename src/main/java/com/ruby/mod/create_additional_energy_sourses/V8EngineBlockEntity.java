@@ -1,8 +1,6 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
-import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
-import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -11,10 +9,6 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -41,12 +35,13 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public float engineTemperature = 20.0f;
     public boolean isTurboCharged = false;
 
-    private int accelerationTicks = 0;
     private int overheatMeltingTimer = 0;
     protected float maxMeltingTemp;
     protected int pistonCount = 8;
     protected String engineType = "V";
     private boolean wasWaterEmpty;
+    private int stepperCoeficent = 0;
+    private boolean setterForSC = false;
 
     // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
@@ -324,12 +319,25 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             int ticksToBurn = 1;
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
 
+            if (targetSpeed == currentSpeed) {
+                stepperCoeficent = 0;
+                setterForSC = false;
+            }
+
+            if (targetSpeed > currentSpeed) {
+                if (stepperCoeficent < 40) { stepperCoeficent++; }
+                float coefficientOfAcceleration = (targetSpeed - currentSpeed) / 820;
+                currentSpeed = currentSpeed + (coefficientOfAcceleration * stepperCoeficent);
+            }
+
             if (currentSpeed < targetSpeed) {
-                if (accelerationTicks < 40) accelerationTicks++;
-                float progress = (float) accelerationTicks / 40;
-                currentSpeed = targetSpeed * (progress * progress);
-            } else {
-                currentSpeed = targetSpeed;
+                if (stepperCoeficent != 40 && !setterForSC) {
+                    stepperCoeficent = 40;
+                    setterForSC = true;
+                }
+                stepperCoeficent--;
+                float coefficientOfAcceleration = targetSpeed / 820;
+                currentSpeed = currentSpeed - (coefficientOfAcceleration * stepperCoeficent);
             }
 
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
@@ -348,13 +356,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 this.setChanged();
                 this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             } else {
-                if (accelerationTicks > 0) {
-                    accelerationTicks--;
-                    float progress = (float) accelerationTicks / 40;
-                    currentSpeed = targetSpeed * (progress * progress);
-                } else {
-                    currentSpeed = 0;
-                }
+
             }
         }
 
@@ -410,68 +412,222 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                     float roughness = 18.0f;
                     int seed = explosionEpicenter.hashCode();
 
-                    java.util.concurrent.CompletableFuture.supplyAsync(() ->
-                            NativeExplosionJNI.calculateExplosionCrater(radius, roughness, phase1, phase2, seed)
-                    ).thenAcceptAsync(coords -> {
+                    // Функция-помощник для отправки сообщений всем игрокам рядом (чтобы работало и из фонового потока)
+                    java.util.function.Consumer<String> sendToChat = (text) -> {
                         if (this.level instanceof ServerLevel serverLevel) {
                             serverLevel.getServer().execute(() -> {
-                                BlockPos currentPos = this.worldPosition;
-                                int deltaX = currentPos.getX() - explosionEpicenter.getX();
-                                int deltaY = currentPos.getY() - explosionEpicenter.getY();
-                                int deltaZ = currentPos.getZ() - explosionEpicenter.getZ();
-
-                                if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2 || Math.abs(deltaZ) > 2) {
-                                    return;
-                                }
-
-                                final int blocksPerTick;
-                                if (blockName.contains("radial") || blockName.contains("r32")) {
-                                    blocksPerTick = 400;
-                                } else {
-                                    blocksPerTick = 1500;
-                                }
-
-                                new Object() {
-                                    private int currentOffset = 0;
-                                    void runNextSlice() {
-                                        new Object() {
-                                            int curremtOffset = 0;
-                                            final int step = blocksPerTick;
-
-                                            void runNextSlice() {
-                                                // 1. Проверяем, не закончили ли мы
-                                                if (currentOffset >= coords.length) { finishExplosion(); return; }
-
-                                                // 2. Вычисляем порцию блоков на этот тик
-                                                int end = Math.min(currentOffset + (blocksPerTick * 3), coords.length);
-                                                BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
-
-                                                // 3. Цикл удаления (по 3 координаты: x, y, z)
-                                                for (int i = currentOffset; i < end; i += 3) {
-                                                    mutablePos.set(currentPos.getX() + coords[i], currentPos.getY() + coords[i+1], currentPos.getZ() + coords[i+2]);
-                                                    serverLevel.setBlock(mutablePos, Blocks.AIR.defaultBlockState(), 18);
-                                                }
-                                                currentOffset = end;
-
-                                                // 4. Планируем следующий тик, если еще не всё удалили
-                                                if (currentOffset < coords.length) {
-                                                    serverLevel.getServer().tell(new net.minecraft.server.TickTask(serverLevel.getServer().getTickCount() + 1, this::runNextSlice));
-                                                } else {
-                                                    finishExplosion();
-                                                }
-                                            }
-
-                                            // Вспомогательный метод для завершения
-                                            void finishExplosion() {
-                                                serverLevel.explode(null, currentPos.getX(), currentPos.getY(), currentPos.getZ(), 1.0f, Level.ExplosionInteraction.NONE);
-                                                serverLevel.removeBlock(currentPos, false);
-                                            }
-                                        };
-                                    }
-                                }.runNextSlice();
+                                serverLevel.players().forEach(p ->
+                                        p.sendSystemMessage(net.minecraft.network.chat.Component.literal("§e[Explosion] §r" + text))
+                                );
                             });
                         }
-                    });
+                    };
+
+                    sendToChat.accept("§c[Старт] §7Отправляем задачу в C++...");
+
+                    java.util.concurrent.CompletableFuture.supplyAsync(() -> {
+                        // Убираем try-catch полностью!
+                        // Пусть Java выбросит в консоль Настоящее исключение, если не может найти метод
+                        return NativeExplosionJNI.initializeExplosion(radius, roughness, phase1, phase2, seed);
+                    }).thenAcceptAsync(totalBlocks -> {
+
+                        sendToChat.accept("§b[Фон] §7C++ вернул результат. Всего блоков: §a" + totalBlocks);
+
+                        if (totalBlocks == -1) return;
+
+                        if (totalBlocks <= 0) {
+                            sendToChat.accept("§6[Стоп] §cВзрыв отменен: C++ вернул 0 блоков.");
+                            NativeExplosionJNI.clearExplosionMemory();
+                            return;
+                        }
+
+                        BlockPos currentPos = this.worldPosition;
+                        int deltaX = currentPos.getX() - explosionEpicenter.getX();
+                        int deltaY = currentPos.getY() - explosionEpicenter.getY();
+                        int deltaZ = currentPos.getZ() - explosionEpicenter.getZ();
+
+                        if (Math.abs(deltaX) > 2 || Math.abs(deltaY) > 2 || Math.abs(deltaZ) > 2) {
+                            sendToChat.accept("§6[Стоп] §cВзрыв отменен: двигатель сместился! ΔX=" + deltaX);
+                            NativeExplosionJNI.clearExplosionMemory();
+                            return;
+                        }
+
+                        final int blocksPerTick = (blockName.contains("radial") || blockName.contains("r32")) ? 400 : 1500;
+
+                        if (this.level instanceof ServerLevel serverLevel) {
+                            serverLevel.getServer().execute(() -> {
+
+                                class ExplosionBatchScheduler implements Runnable {
+                                    private int currentBlockOffset = 0;
+                                    private final BlockPos.MutableBlockPos mutablePos = new BlockPos.MutableBlockPos();
+                                    private final int[] sharedBuffer = new int[blocksPerTick * 3];
+
+                                    // ПЕРЕМЕННЫЕ ДЛЯ СУПЕР-МАТЕРИАЛА
+                                    private int brokenBedrockCount = 0;
+                                    private int lastLowestX = 0;
+                                    private int lastLowestZ = 0;
+
+                                    @Override
+                                    public void run() {
+                                        int coordinatesFilled = NativeExplosionJNI.fillExplosionBatch(currentBlockOffset, blocksPerTick, sharedBuffer);
+
+                                        if (coordinatesFilled <= 0) {
+                                            finish();
+                                            return;
+                                        }
+
+                                        for (int i = 0; i < coordinatesFilled; i += 3) {
+                                            int targetX = currentPos.getX() + sharedBuffer[i];
+                                            int targetY = currentPos.getY() + sharedBuffer[i + 1];
+                                            int targetZ = currentPos.getZ() + sharedBuffer[i + 2];
+
+                                            mutablePos.set(targetX, targetY, targetZ);
+
+                                            if (serverLevel.isInWorldBounds(mutablePos)) {
+                                                // ХИТРОСТЬ: Считаем бедрок прямо в процессе удаления!
+                                                // Начиная с версии 1.18+, бедрок генерируется на Y от -64 до -59
+                                                if (targetY <= -59) {
+                                                    brokenBedrockCount++;
+                                                    // Запоминаем последние координаты самой низкой точки для спавна руды
+                                                    lastLowestX = targetX;
+                                                    lastLowestZ = targetZ;
+                                                }
+
+                                                serverLevel.setBlock(mutablePos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 146);
+                                            }
+                                        }
+
+                                        currentBlockOffset += (coordinatesFilled / 3);
+
+                                        if (currentBlockOffset < totalBlocks) {
+                                            serverLevel.getServer().tell(new net.minecraft.server.TickTask(
+                                                    serverLevel.getServer().getTickCount() + 1,
+                                                    this
+                                            ));
+                                        } else {
+                                            finish();
+                                        }
+                                    }
+
+                                    private void finish() {
+                                        System.out.println("[CREATE_AES] Все блоки стерты. Разбито бедрока: " + brokenBedrockCount);
+                                        NativeExplosionJNI.clearExplosionMemory();
+
+                                        // === УНИВЕРСАЛЬНЫЙ БЛОК УДАРНОЙ ВОЛНЫ БЕЗ КОНФЛИКТОВ ТИПОВ ===
+                                        if (blockName.contains("radial") || blockName.contains("r32")) {
+                                            double damageRadius = 480.0; // 30 чанков * 16 блоков
+
+                                            net.minecraft.world.phys.AABB waveZone = new net.minecraft.world.phys.AABB(
+                                                    currentPos.getX() - damageRadius, currentPos.getY() - 64, currentPos.getZ() - damageRadius,
+                                                    currentPos.getX() + damageRadius, currentPos.getY() + 128, currentPos.getZ() + damageRadius
+                                            );
+
+                                            // Запрашиваем абсолютно любые Entity (это базовый класс, Java его точно примет)
+                                            java.util.List entities = serverLevel.getEntitiesOfClass(
+                                                    net.minecraft.world.entity.Entity.class,
+                                                    waveZone
+                                            );
+
+                                            // Заранее создаем источник урона от взрыва (без поджигания, чистая кинетика)
+                                            net.minecraft.world.damagesource.DamageSource explosionSource = serverLevel.damageSources().explosion(null, null);
+
+                                            // Меняем net.minecraft.world.entity.Entity на java.lang.Object в цикле!
+                                            for (java.lang.Object obj : entities) {
+                                                // Безопасно превращаем Object в Entity Майнкрафта
+                                                if (obj instanceof net.minecraft.world.entity.Entity entity) {
+
+                                                    // А теперь проверяем, живое ли это существо (игрок или моб)
+                                                    if (entity instanceof net.minecraft.world.entity.LivingEntity victim) {
+
+                                                        double distance = victim.distanceToSqr(currentPos.getX(), currentPos.getY(), currentPos.getZ());
+                                                        double maxDistanceSq = damageRadius * damageRadius;
+
+                                                        if (distance <= maxDistanceSq) {
+                                                            double distanceRatio = 1.0 - (Math.sqrt(distance) / damageRadius);
+                                                            float finalDamage = (float) (100.0 * distanceRatio);
+
+                                                            if (finalDamage > 0.5f) {
+                                                                victim.hurt(explosionSource, finalDamage);
+
+                                                                double deltaX = victim.getX() - currentPos.getX();
+                                                                double deltaZ = victim.getZ() - currentPos.getZ();
+                                                                double length = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+                                                                if (length > 0.1) {
+                                                                    double pushForce = 3.0 * distanceRatio;
+                                                                    victim.push((deltaX / length) * pushForce, 0.5 * distanceRatio, (deltaZ / length) * pushForce);
+                                                                    victim.hurtMarked = true;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        // === ГЕНЕРАЦИЯ СУПЕР-МАТЕРИАЛА (Строгий индастриал) ===
+                                        if (blockName.contains("r32") && brokenBedrockCount >= 9) {
+                                            // Вычисляем, сколько блоков супер-материала заспавнить (например, 1 блок за каждые 9 разрушенных блоков бедрока)
+                                            int oreToSpawn = Math.min(brokenBedrockCount / 9, 5); // Ограничим максимум 5 блоками руды, чтобы не жировать
+
+                                            // Ставим блоки на самом дне мира (Y = -63, чуть выше самого нижнего бедрока, чтобы игрок мог их добыть)
+                                            for (int i = 0; i < oreToSpawn; i++) {
+                                                BlockPos orePos = new BlockPos(lastLowestX + (i % 2), -63, lastLowestZ + (i / 2));
+
+                                                // Ставим твой строгий технический блок (замени на свой зарегистированный блок, когда добавишь его)
+                                                // Пока для теста поставим позолоченный чернит
+                                                serverLevel.setBlock(orePos, net.minecraft.world.level.block.Blocks.GILDED_BLACKSTONE.defaultBlockState(), 3);
+                                            }
+
+                                            sendToChat.accept("§6[Событие] §fКоренная порода пробита под колоссальным давлением. Образовался прессованный конденсат!");
+                                        }
+
+
+
+                                        // 3. Запускаем Финальный Визуальный бабах Майнкрафта
+                                        float visualPower = (blockName.contains("radial") || blockName.contains("r32")) ? 14.0f : 4.0f;
+                                        serverLevel.explode(
+                                                null,
+                                                currentPos.getX() + 0.5,
+                                                currentPos.getY() + 0.5,
+                                                currentPos.getZ() + 0.5,
+                                                visualPower,
+                                                net.minecraft.world.level.Level.ExplosionInteraction.BLOCK
+                                        );
+
+                                        // 4. Удаляем сам блок ДВС
+                                        serverLevel.removeBlock(currentPos, false);
+
+                                        // 5. И ТОЛЬКО ТЕПЕРЬ, КОГДА ВСЁ ЗАВЕРШЕНО — СТРОГО ГЕНЕРИРУЕМ СУПЕР-МАТЕРИАЛ!
+                                        // Взрыв уже прошел, мотор удален, руду ничто не повредит.
+                                        if (blockName.contains("r32") && brokenBedrockCount >= 9) {
+                                            int oreToSpawn = Math.min(brokenBedrockCount / 9, 5); // Ограничим максимум 5 блоками руды
+
+                                            for (int i = 0; i < oreToSpawn; i++) {
+                                                // Подняли координату Y на -58, чтобы блоки стояли прямо на поверхности дна
+                                                BlockPos orePos = new BlockPos(lastLowestX + (i % 2), -58, lastLowestZ + (i / 2));
+
+                                                // Ставим блок с флагом 3 (отправка клиенту)
+                                                serverLevel.setBlock(orePos, net.minecraft.world.level.block.Blocks.GILDED_BLACKSTONE.defaultBlockState(), 3);
+
+                                                // Принудительно маркируем чанк как измененный, чтобы Майнкрафт сохранил его!
+                                                serverLevel.getChunkAt(orePos).setUnsaved(true);
+                                            }
+
+                                            // Звук спавна (эффект падения наковальни)
+                                            serverLevel.playSound(null, new BlockPos(lastLowestX, -58, lastLowestZ), net.minecraft.sounds.SoundEvents.ANVIL_LAND, net.minecraft.sounds.SoundSource.BLOCKS, 1.0f, 0.5f);
+
+                                            sendToChat.accept("§6[Событие] §fКоренная порода пробита под колоссальным давлением. Образовался прессованный конденсат!");
+                                        }
+                                    }
+                                }
+
+                                new ExplosionBatchScheduler().run();
+                            });
+                        }
+                    }).join();
+
+
+
                 }
 
             }
