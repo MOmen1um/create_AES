@@ -1,5 +1,3 @@
-/playsound createdieselgenerators:engine_normal ambientе
-/time set day
 /tick rate 10
 /tick rate 1
 /tick rate 10
@@ -48,3 +46,5 @@
 /effect give Dev minecraft:night_vision infinite
 /setblock ~ ~ ~ aeronautics:adjustable_burner
 /effect give Dev minecraft:night_vision infinite
+/enchant Dev minecraft:efficiency 5
+/time set day

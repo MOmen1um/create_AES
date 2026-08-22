@@ -40,7 +40,7 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     protected int pistonCount = 8;
     protected String engineType = "V";
     private boolean wasWaterEmpty;
-    private int stepperCoeficent = 0;
+    private int stepperCoefficent = 0;
     private boolean setterForSC = false;
 
     // Конструктор по умолчанию
@@ -313,31 +313,60 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float meltingPoint = getMaterialMeltingPoint();
         float safeSpeed = getSafeEngineSpeed();
         float maxSpeed = getMaxEngineSpeed();
-        float targetSpeed = Math.min(Math.abs(this.targetSliderSpeed * 64f), getMaxEngineSpeed());
+        float targetSpeed = this.targetSliderSpeed * 64f;
 
-        if (this.burnTimeRemaining > 0 && targetSpeed > 0) {
+        if (this.burnTimeRemaining > 0) {
             int ticksToBurn = 1;
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
 
             if (targetSpeed == currentSpeed) {
-                stepperCoeficent = 0;
+                stepperCoefficent = 0;
                 setterForSC = false;
             }
 
             if (targetSpeed > currentSpeed) {
-                if (stepperCoeficent < 40) { stepperCoeficent++; }
-                float coefficientOfAcceleration = (targetSpeed - currentSpeed) / 820;
-                currentSpeed = currentSpeed + (coefficientOfAcceleration * stepperCoeficent);
+                if (stepperCoefficent < 40) { stepperCoefficent++; }
+
+                // Используем фиксированный шаг разгона
+                float baseStep = targetSpeed / 820f;
+
+                // Квадратичное увеличение: чем больше stepperCoefficent, тем сильнее пинок
+                currentSpeed = Math.min(targetSpeed, currentSpeed + (baseStep * stepperCoefficent));
             }
 
-            if (currentSpeed < targetSpeed) {
-                if (stepperCoeficent != 40 && !setterForSC) {
-                    stepperCoeficent = 40;
+            if (currentSpeed > targetSpeed) {
+                // 1. Если это самый первый тик торможения, инициализируем счетчик на максимум
+                if (!setterForSC) {
+                    stepperCoefficent = 40;
                     setterForSC = true;
                 }
-                stepperCoeficent--;
-                float coefficientOfAcceleration = targetSpeed / 820;
-                currentSpeed = currentSpeed - (coefficientOfAcceleration * stepperCoeficent);
+
+                // 2. Шаг времени плавно уменьшается от 40 до 0
+                if (stepperCoefficent > 0) {
+                    stepperCoefficent--;
+                }
+
+                // 3. Вычисляем базовый шаг торможения, деля ТЕКУЩУЮ (или стартовую) скорость,
+                // чтобы даже при targetSpeed = 0 мотор мог полностью остановиться.
+                float baseDecelerationStep = currentSpeed / 820f;
+
+                // 4. Формула "перевернутого" квадрата:
+                // Нам нужно, чтобы при stepperCoefficent = 40 вычиталось МАЛО, а при 0 — МНОГО.
+                // Для этого используем рычаг: (40 - stepperCoefficent)
+                int inverseStep = 40 - stepperCoefficent;
+
+                // Вычитаем квадратично увеличивающийся кусок
+                currentSpeed = Math.max(targetSpeed, currentSpeed - (baseDecelerationStep * inverseStep));
+
+                if (stepperCoefficent == 0) {
+                    currentSpeed = 0;
+                }
+
+                // Если полностью затормозили, сбрасываем триггер
+                if (currentSpeed <= targetSpeed) {
+                    setterForSC = false;
+                    stepperCoefficent = 0;
+                }
             }
 
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
@@ -356,7 +385,6 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 this.setChanged();
                 this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             } else {
-
             }
         }
 
