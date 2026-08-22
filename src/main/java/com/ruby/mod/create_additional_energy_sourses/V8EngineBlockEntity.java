@@ -41,7 +41,8 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     protected String engineType = "V";
     private boolean wasWaterEmpty;
     private int stepperCoefficent = 0;
-    private boolean setterForSC = false;
+    private float speedAtTransitionStart = 0f; // Переменная-якорь
+
 
     // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
@@ -319,54 +320,36 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
             int ticksToBurn = 1;
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
 
-            if (targetSpeed == currentSpeed) {
-                stepperCoefficent = 0;
-                setterForSC = false;
-            }
-
-            if (targetSpeed > currentSpeed) {
-                if (stepperCoefficent < 40) { stepperCoefficent++; }
-
-                // Используем фиксированный шаг разгона
-                float baseStep = targetSpeed / 820f;
-
-                // Квадратичное увеличение: чем больше stepperCoefficent, тем сильнее пинок
-                currentSpeed = Math.min(targetSpeed, currentSpeed + (baseStep * stepperCoefficent));
-            }
-
-            if (currentSpeed > targetSpeed) {
-                // 1. Если это самый первый тик торможения, инициализируем счетчик на максимум
-                if (!setterForSC) {
-                    stepperCoefficent = 40;
-                    setterForSC = true;
+            if (targetSpeed != currentSpeed) {
+                // 1. Инициализация: если якорь сброшен (-1), фиксируем стартовую скорость
+                if (speedAtTransitionStart == -1f) {
+                    speedAtTransitionStart = currentSpeed;
+                    stepperCoefficent = 0; // Всегда начинаем отсчет времени с 0 тиков
                 }
 
-                // 2. Шаг времени плавно уменьшается от 40 до 0
-                if (stepperCoefficent > 0) {
-                    stepperCoefficent--;
+                // 2. Время всегда идет только вперед: от 0 до 40 тиков
+                if (stepperCoefficent < 40) {
+                    stepperCoefficent++;
                 }
 
-                // 3. Вычисляем базовый шаг торможения, деля ТЕКУЩУЮ (или стартовую) скорость,
-                // чтобы даже при targetSpeed = 0 мотор мог полностью остановиться.
-                float baseDecelerationStep = currentSpeed / 820f;
+                // 3. Считаем общую дельту (она будет плюсовой при разгоне и минусовой при торможении)
+                float totalDelta = targetSpeed - speedAtTransitionStart;
+                float baseStep = totalDelta / 820f;
 
-                // 4. Формула "перевернутого" квадрата:
-                // Нам нужно, чтобы при stepperCoefficent = 40 вычиталось МАЛО, а при 0 — МНОГО.
-                // Для этого используем рычаг: (40 - stepperCoefficent)
-                int inverseStep = 40 - stepperCoefficent;
+                // 4. Магия Гаусса: плавно прибавляем (или вычитаем) квадратичный шаг
+                int progressSum = (stepperCoefficent * (stepperCoefficent + 1)) / 2;
+                currentSpeed = speedAtTransitionStart + (baseStep * progressSum);
 
-                // Вычитаем квадратично увеличивающийся кусок
-                currentSpeed = Math.max(targetSpeed, currentSpeed - (baseDecelerationStep * inverseStep));
-
-                if (stepperCoefficent == 0) {
-                    currentSpeed = 0;
-                }
-
-                // Если полностью затормозили, сбрасываем триггер
-                if (currentSpeed <= targetSpeed) {
-                    setterForSC = false;
+                // 5. Фиксация: если 40 тиков прошло или мы подошли вплотную
+                if (stepperCoefficent >= 40 || Math.abs(targetSpeed - currentSpeed) < 0.1f) {
+                    currentSpeed = targetSpeed;
                     stepperCoefficent = 0;
+                    speedAtTransitionStart = -1f; // Сбрасываем якорь для следующего маневра!
                 }
+            } else {
+                // Если скорость уже равна целевой, убеждаемся, что всё сброшено
+                stepperCoefficent = 0;
+                speedAtTransitionStart = -1f;
             }
 
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
