@@ -14,14 +14,18 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 
 public class AdvancedPickaxeItem extends PickaxeItem {
+
     public AdvancedPickaxeItem(Tier tier, Properties properties) {
-        super(tier, properties);
+        // 1. Фиксим урон: регистрируем свойства через новые дата-компоненты NeoForge 1.21.1.
+        // 4.0F — урон, который плюсуется к урону тира. -2.8F — скорость атаки инструментом.
+        super(tier, properties.attributes(PickaxeItem.createAttributes(tier, 4.0F, -2.8F)));
     }
 
     @Override
     public boolean mineBlock(ItemStack stack, Level level, BlockState state, BlockPos pos, LivingEntity entity) {
         if (!level.isClientSide && entity instanceof ServerPlayer player) {
 
+            // Если игрок копает сидя — работает как обычная кирка 1х1
             if (!player.isCrouching()) {
                 return super.mineBlock(stack, level, state, pos, entity);
             }
@@ -30,32 +34,45 @@ public class AdvancedPickaxeItem extends PickaxeItem {
             if (rayTrace.getType() == HitResult.Type.BLOCK) {
                 Direction side = ((BlockHitResult) rayTrace).getDirection();
 
-                for (int a = -2; a <= 2; a++) {
-                    for (int b = -1; b <= 3; b++) {
-                        if (a == 0 && b == 0) continue;
+                // 2. Делаем трехмерный куб 5х5х5.
+                // Цикл 'depth' отвечает за продвижение на 5 блоков ВГЛУБЬ (от 0 до 4) относительно стороны блока
+                for (int depth = -4; depth < 1; depth++) {
+                    for (int a = -2; a <= 2; a++) {
+                        for (int b = -1; b <= 3; b++) {
+                            // Пропускаем самый первый блок, так как его игра ломает сама
+                            if (depth == 1 && a == 0 && b == 0) continue;
 
-                        BlockPos extraPos;
-                        if (side == Direction.UP || side == Direction.DOWN) {
-                            extraPos = pos.offset(a, 0, b);
-                        } else if (side == Direction.NORTH || side == Direction.SOUTH) {
-                            extraPos = pos.offset(a, b, 0);
-                        } else {
-                            extraPos = pos.offset(0, b, a);
-                        }
-                        BlockState extraState = level.getBlockState(extraPos);
-                        boolean isBedrock = extraState.getBlock() == Blocks.BEDROCK;
+                            BlockPos extraPos;
 
-                        if (this.isCorrectToolForDrops(stack, extraState) || isBedrock) {
-                            // 1. Сначала ломаем сам блок в мире
-                            level.destroyBlock(extraPos, true, player); // Ставим false, чтобы игра не пыталась безуспешно искать стандартный лут
+                            // Вычисляем смещение с учетом взгляда на плоскость и глубины погружения
+                            if (side == Direction.UP || side == Direction.DOWN) {
+                                // Если смотрим в пол/потолок: 'depth' идет по оси Y (внутрь), 'a' и 'b' по X и Z
+                                int yOffset = (side == Direction.DOWN) ? depth : -depth;
+                                extraPos = pos.offset(a, yOffset, b);
+                            } else if (side == Direction.NORTH || side == Direction.SOUTH) {
+                                // Если смотрим на север/юг: 'depth' идет по оси Z, 'a' и 'b' по X и Y
+                                int zOffset = (side == Direction.SOUTH) ? depth : -depth;
+                                extraPos = pos.offset(a, b, zOffset);
+                            } else {
+                                // Если смотрим на восток/запад: 'depth' идет по оси X, 'a' и 'b' по Z и Y
+                                int xOffset = (side == Direction.EAST) ? depth : -depth;
+                                extraPos = pos.offset(xOffset, b, a);
+                            }
 
-                            // 2. Если это был бедрок — принудительно спавним предмет бедрока на его координатах!
-                            if (isBedrock) {
-                                ItemStack bedrockDrop = new ItemStack(Blocks.BEDROCK, 1);
-                                net.minecraft.world.level.block.Block.popResource(level, extraPos, bedrockDrop);
+                            BlockState extraState = level.getBlockState(extraPos);
+                            boolean isBedrock = extraState.getBlock() == Blocks.BEDROCK;
+
+                            if (this.isCorrectToolForDrops(stack, extraState) || isBedrock) {
+                                // Ломаем блок с полноценным выпадением лута
+                                level.destroyBlock(extraPos, true, player);
+
+                                // Если это был бедрок — принудительно спавним предмет бедрока
+                                if (isBedrock) {
+                                    ItemStack bedrockDrop = new ItemStack(Blocks.BEDROCK, 1);
+                                    net.minecraft.world.level.block.Block.popResource(level, extraPos, bedrockDrop);
+                                }
                             }
                         }
-
                     }
                 }
             }

@@ -1,6 +1,8 @@
 package com.ruby.mod.create_additional_energy_sourses;
 
+import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import net.createmod.catnip.render.SuperByteBuffer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -9,6 +11,10 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -35,14 +41,12 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
     public float engineTemperature = 20.0f;
     public boolean isTurboCharged = false;
 
+    private int accelerationTicks = 0;
     private int overheatMeltingTimer = 0;
     protected float maxMeltingTemp;
     protected int pistonCount = 8;
     protected String engineType = "V";
     private boolean wasWaterEmpty;
-    private int stepperCoefficent = 0;
-    private float speedAtTransitionStart = 0f; // Переменная-якорь
-
 
     // Конструктор по умолчанию
     public V8EngineBlockEntity(BlockPos pos, BlockState state) {
@@ -316,40 +320,16 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
         float maxSpeed = getMaxEngineSpeed();
         float targetSpeed = this.targetSliderSpeed * 64f;
 
-        if (this.burnTimeRemaining > 0) {
+        if (this.burnTimeRemaining > 0 && targetSpeed > 0) {
             int ticksToBurn = 1;
             this.burnTimeRemaining = Math.max(0, this.burnTimeRemaining - ticksToBurn);
 
-            if (targetSpeed != currentSpeed) {
-                // 1. Инициализация: если якорь сброшен (-1), фиксируем стартовую скорость
-                if (speedAtTransitionStart == -1f) {
-                    speedAtTransitionStart = currentSpeed;
-                    stepperCoefficent = 0; // Всегда начинаем отсчет времени с 0 тиков
-                }
-
-                // 2. Время всегда идет только вперед: от 0 до 40 тиков
-                if (stepperCoefficent < 40) {
-                    stepperCoefficent++;
-                }
-
-                // 3. Считаем общую дельту (она будет плюсовой при разгоне и минусовой при торможении)
-                float totalDelta = targetSpeed - speedAtTransitionStart;
-                float baseStep = totalDelta / 820f;
-
-                // 4. Магия Гаусса: плавно прибавляем (или вычитаем) квадратичный шаг
-                int progressSum = (stepperCoefficent * (stepperCoefficent + 1)) / 2;
-                currentSpeed = speedAtTransitionStart + (baseStep * progressSum);
-
-                // 5. Фиксация: если 40 тиков прошло или мы подошли вплотную
-                if (stepperCoefficent >= 40 || Math.abs(targetSpeed - currentSpeed) < 0.1f) {
-                    currentSpeed = targetSpeed;
-                    stepperCoefficent = 0;
-                    speedAtTransitionStart = -1f; // Сбрасываем якорь для следующего маневра!
-                }
+            if (currentSpeed < targetSpeed) {
+                if (accelerationTicks < 40) accelerationTicks++;
+                float progress = (float) accelerationTicks / 40;
+                currentSpeed = targetSpeed * (progress * progress);
             } else {
-                // Если скорость уже равна целевой, убеждаемся, что всё сброшено
-                stepperCoefficent = 0;
-                speedAtTransitionStart = -1f;
+                currentSpeed = targetSpeed;
             }
 
             Fluid fluidInTank = fuelTank.getFluid().getFluid();
@@ -368,6 +348,13 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                 this.setChanged();
                 this.sendData(); // Это заставит Create посылать точный объем топлива с сервера на твой экран!
             } else {
+                if (accelerationTicks > 0) {
+                    accelerationTicks--;
+                    float progress = (float) accelerationTicks / 40;
+                    currentSpeed = targetSpeed * (progress * progress);
+                } else {
+                    currentSpeed = 0;
+                }
             }
         }
 
@@ -403,9 +390,9 @@ public class V8EngineBlockEntity extends GeneratingKineticBlockEntity {
                     // 2. Множитель от конфигурации двигателя
                     String blockName = this.getBlockState().getBlock().toString().toLowerCase();
                     float typeMultiplier = 1.0f;
-                    if (blockName.contains("i4") || blockName.contains("inline")) typeMultiplier = 2f;
-                    else if (blockName.contains("w16")) typeMultiplier = 4.0f;
-                    else if (blockName.contains("radial") || blockName.contains("r32")) typeMultiplier = 8.0f;
+                    if (blockName.contains("i4") || blockName.contains("inline")) typeMultiplier = 4f;
+                    else if (blockName.contains("w16")) typeMultiplier = 8.0f;
+                    else if (blockName.contains("radial") || blockName.contains("r32")) typeMultiplier = 12.0f;
 
                     float explosionPower = basePower * typeMultiplier;
 
